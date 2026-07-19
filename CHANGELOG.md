@@ -3,6 +3,27 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [6] — Italian translation + EN/IT language switcher
+
+**Date:** 2026-07-19
+**Status:** Delivered (pending review)
+
+- Added a compact **EN / IT** language switcher to the header, next to the
+  Contact button. English remains the default language; the visitor's choice
+  is remembered in the browser (localStorage) for future visits.
+- Full Italian translation of every visible text (hero, problem, services,
+  why, contact, footer, disclaimer) plus the page title and meta description.
+  Implemented as a JavaScript i18n dictionary inside the same single file —
+  no new files, no structural changes. English stays written in the markup
+  (single source of truth); Italian strings live in the dictionary.
+- Mobile refinements so the header fits comfortably on small screens:
+  header bar 84px → 64px, logo 60px → 42px, smaller Contact button and
+  switcher padding. The switcher stays visible at every screen size.
+- Verified via automated DOM tests: EN → IT → EN round-trip restores the
+  original English exactly; all 65 translatable elements switch; partner
+  link icons and the hero accent survive the swap; language preference
+  persists.
+
 ## [5] — Revert hero keyhole to original
 
 **Date:** 2026-06-29

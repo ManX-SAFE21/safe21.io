@@ -7,7 +7,9 @@
   <!-- ============================================================
        SAFE21 — Homepage
        Single self-contained file (HTML + CSS + minimal JS).
-       Language of all content: English (project rule R1).
+       Languages: English (default, written in the markup — project rule R1)
+       and Italian (translated at runtime via the i18n dictionary at the
+       bottom of this file; toggled with the EN/IT switcher in the header).
        Brand: SAFE21 (umbrella brand for Bitcoin security).
        Palette: dark "vault" base, teal primary accent, small orange
        Bitcoin touches. Logo: "Cyber Teal" minimal wordmark.
@@ -126,8 +128,35 @@
     }
     .nav-links a:hover { color: var(--light); }
     .nav .cta { display: flex; align-items: center; gap: 16px; }
-    /* On small screens the in-page links collapse; the Contact button stays. */
+    /* On small screens the in-page links collapse; the language switcher
+       and the Contact button stay visible. */
     @media (max-width: 760px) { .nav-links { display: none; } }
+
+    /* ---------- Language switcher (EN / IT) ----------
+       A compact two-button toggle. Mono font echoes the small labels used
+       elsewhere; the active language gets the solid teal treatment. */
+    .lang-switch {
+      display: inline-flex; flex: none;
+      border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    }
+    .lang-btn {
+      font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 1px;
+      background: transparent; color: var(--muted); border: 0;
+      padding: 8px 12px; cursor: pointer;
+      transition: color .15s ease, background-color .15s ease;
+    }
+    .lang-btn:hover { color: var(--light); }
+    .lang-btn[aria-pressed="true"] { background: var(--teal); color: #04201C; font-weight: 700; }
+
+    /* Compact header on small screens so logo + language switcher + Contact
+       button fit comfortably on one line without crowding. */
+    @media (max-width: 760px) {
+      .nav { height: 64px; }
+      .nav .logo svg { height: 42px; }
+      .nav .cta { gap: 10px; }
+      .nav .cta .btn { padding: 9px 14px; font-size: 13px; }
+      .lang-btn { padding: 7px 10px; }
+    }
 
     /* ---------- Hero ---------- */
     .hero { position: relative; overflow: hidden; padding: 96px 0 88px; }
@@ -273,14 +302,20 @@
       </a>
 
       <nav class="nav-links" aria-label="Primary">
-        <a href="#services">Services</a>
-        <a href="#inheritance">Inheritance</a>
-        <a href="#payments">Payments</a>
-        <a href="#why">Why SAFE21</a>
+        <a href="#services" data-i18n="nav.services">Services</a>
+        <a href="#inheritance" data-i18n="nav.inheritance">Inheritance</a>
+        <a href="#payments" data-i18n="nav.payments">Payments</a>
+        <a href="#why" data-i18n="nav.why">Why SAFE21</a>
       </nav>
 
       <div class="cta">
-        <a class="btn btn-primary" href="mailto:info@safe21.io">Contact us</a>
+        <!-- EN / IT switcher. English is the default; the visitor's choice
+             is remembered in localStorage (see i18n script at the bottom). -->
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
+          <button type="button" class="lang-btn" data-lang="it" aria-pressed="false" aria-label="Italiano">IT</button>
+        </div>
+        <a class="btn btn-primary" href="mailto:info@safe21.io" data-i18n="nav.contact">Contact us</a>
       </div>
     </div>
   </header>
@@ -296,22 +331,24 @@
     </svg>
 
     <div class="wrap hero-inner">
-      <p class="eyebrow">Bitcoin security · self-custody · inheritance</p>
-      <h1>Own your Bitcoin.<br/>Keep it safe.<br/><span class="accent">Pass it on.</span></h1>
-      <p class="lede">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Bitcoin security · self-custody · inheritance</p>
+      <h1 data-i18n="hero.title">Own your Bitcoin.<br/>Keep it safe.<br/><span class="accent">Pass it on.</span></h1>
+      <p class="lede" data-i18n="hero.lede">
         SAFE21 helps you secure your wallets, protect your private keys, and plan a
         Bitcoin inheritance your family can actually claim — without ever handing
         your coins to a custodian or a third party.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:info@safe21.io">Talk to us</a>
-        <a class="btn btn-ghost" href="#services">Explore services</a>
+        <a class="btn btn-primary" href="mailto:info@safe21.io" data-i18n="hero.cta1">Talk to us</a>
+        <a class="btn btn-ghost" href="#services" data-i18n="hero.cta2">Explore services</a>
       </div>
 
+      <!-- Trust items: only the text span is translatable, so the teal dot
+           markup stays out of the i18n dictionary. -->
       <div class="trust">
-        <div class="item"><span class="dot"></span> Non-custodial — your keys stay yours</div>
-        <div class="item"><span class="dot"></span> Built on open-source tools</div>
-        <div class="item"><span class="dot"></span> In-person &amp; online support</div>
+        <div class="item"><span class="dot"></span> <span data-i18n="hero.trust1">Non-custodial — your keys stay yours</span></div>
+        <div class="item"><span class="dot"></span> <span data-i18n="hero.trust2">Built on open-source tools</span></div>
+        <div class="item"><span class="dot"></span> <span data-i18n="hero.trust3">In-person &amp; online support</span></div>
       </div>
     </div>
   </section>
@@ -320,9 +357,9 @@
   <section class="block alt">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">The problem</p>
-        <h2>Self-custody is freedom — and responsibility.</h2>
-        <p>Holding your own keys means no bank can freeze or lose your Bitcoin. It also means two risks sit squarely on you. SAFE21 closes both.</p>
+        <p class="eyebrow" data-i18n="problem.eyebrow">The problem</p>
+        <h2 data-i18n="problem.title">Self-custody is freedom — and responsibility.</h2>
+        <p data-i18n="problem.lede">Holding your own keys means no bank can freeze or lose your Bitcoin. It also means two risks sit squarely on you. SAFE21 closes both.</p>
       </div>
 
       <div class="two-col">
@@ -334,8 +371,8 @@
               <circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 20 3"/><path d="m16 5 3 3 2.5-2.5L18.5 2.5"/>
             </svg>
           </div>
-          <h3>Lose the keys, lose the coins</h3>
-          <p>A misplaced seed phrase, a broken device, a forgotten backup — and your Bitcoin is gone for good. We help you set up storage that survives real life.</p>
+          <h3 data-i18n="problem.card1.title">Lose the keys, lose the coins</h3>
+          <p data-i18n="problem.card1.text">A misplaced seed phrase, a broken device, a forgotten backup — and your Bitcoin is gone for good. We help you set up storage that survives real life.</p>
         </div>
 
         <div class="problem-card reveal">
@@ -345,8 +382,8 @@
               <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
             </svg>
           </div>
-          <h3>If something happens to you</h3>
-          <p>Your family may never recover coins they can't access. We help you plan a clear, decentralised inheritance — no notary, no custodian, no single point of failure.</p>
+          <h3 data-i18n="problem.card2.title">If something happens to you</h3>
+          <p data-i18n="problem.card2.text">Your family may never recover coins they can't access. We help you plan a clear, decentralised inheritance — no notary, no custodian, no single point of failure.</p>
         </div>
       </div>
     </div>
@@ -356,9 +393,9 @@
   <section class="block" id="services">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">What we do</p>
-        <h2>Five ways SAFE21 keeps your Bitcoin safe.</h2>
-        <p>From your first wallet to passing it on — plus everything in between.</p>
+        <p class="eyebrow" data-i18n="services.eyebrow">What we do</p>
+        <h2 data-i18n="services.title">Five ways SAFE21 keeps your Bitcoin safe.</h2>
+        <p data-i18n="services.lede">From your first wallet to passing it on — plus everything in between.</p>
       </div>
 
       <div class="grid">
@@ -370,8 +407,8 @@
               <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-4-1L3 20l1-5.5a8.5 8.5 0 1 1 16 -3z"/>
             </svg>
           </div>
-          <h3>Bitcoin Assistance</h3>
-          <p>One-to-one help with anything Bitcoin: wallet setup, transactions, security questions, and plain answers when you're unsure.</p>
+          <h3 data-i18n="services.s1.title">Bitcoin Assistance</h3>
+          <p data-i18n="services.s1.text">One-to-one help with anything Bitcoin: wallet setup, transactions, security questions, and plain answers when you're unsure.</p>
           <div class="meta"><span class="tag">SAFE21</span></div>
         </article>
 
@@ -382,9 +419,9 @@
               <path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/>
             </svg>
           </div>
-          <h3>Bitcoin Courses</h3>
-          <p>Learn Bitcoin properly — online or in person. From your first wallet to advanced self-custody, at a pace that fits you.</p>
-          <div class="meta"><span class="tag">Online &amp; in person</span></div>
+          <h3 data-i18n="services.s2.title">Bitcoin Courses</h3>
+          <p data-i18n="services.s2.text">Learn Bitcoin properly — online or in person. From your first wallet to advanced self-custody, at a pace that fits you.</p>
+          <div class="meta"><span class="tag" data-i18n="services.s2.tag">Online &amp; in person</span></div>
         </article>
 
         <!-- 3. Electrum Wallet Security (internal) -->
@@ -394,8 +431,8 @@
               <path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/>
             </svg>
           </div>
-          <h3>Electrum Wallet Security</h3>
-          <p>Set up and harden Electrum the right way: standard wallets, 2FA, hardware keys, and fully offline cold storage.</p>
+          <h3 data-i18n="services.s3.title">Electrum Wallet Security</h3>
+          <p data-i18n="services.s3.text">Set up and harden Electrum the right way: standard wallets, 2FA, hardware keys, and fully offline cold storage.</p>
           <div class="meta"><span class="tag">2FA · Hardware · Cold</span></div>
         </article>
 
@@ -410,12 +447,12 @@
               <path d="M9.6 19h4.8L12 16.4z" fill="currentColor" stroke="none"/>
             </svg>
           </div>
-          <h3>Bitcoin Inheritance</h3>
-          <p>Plan a decentralised inheritance with time-locked transactions, so your coins reach your heirs at the right time — no notary, no custodian.</p>
+          <h3 data-i18n="services.s4.title">Bitcoin Inheritance</h3>
+          <p data-i18n="services.s4.text">Plan a decentralised inheritance with time-locked transactions, so your coins reach your heirs at the right time — no notary, no custodian.</p>
           <div class="meta">
             <span class="tag partner">Partner</span>
             <a class="partner-link" href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">
-              with BAL Protocol
+              <span data-i18n="services.s4.partner">with BAL Protocol</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
             </a>
           </div>
@@ -428,12 +465,12 @@
               <path d="M13 2L4 14h6l-1 8 9-12h-6z"/>
             </svg>
           </div>
-          <h3>Accept Bitcoin Payments</h3>
-          <p>Take Bitcoin and Lightning payments in your shop or online — with setup, staff training and ongoing support for your business.</p>
+          <h3 data-i18n="services.s5.title">Accept Bitcoin Payments</h3>
+          <p data-i18n="services.s5.text">Take Bitcoin and Lightning payments in your shop or online — with setup, staff training and ongoing support for your business.</p>
           <div class="meta">
             <span class="tag partner">Partner</span>
             <a class="partner-link" href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">
-              with Pago in Bitcoin
+              <span data-i18n="services.s5.partner">with Pago in Bitcoin</span>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
             </a>
           </div>
@@ -441,9 +478,9 @@
 
         <!-- Closing card: invitation to ask -->
         <article class="card reveal" style="justify-content:center; background:transparent; border-style:dashed;">
-          <h3 style="margin-bottom:8px;">Not sure where to start?</h3>
-          <p>Tell us what you hold and what worries you. We'll point you to the right service.</p>
-          <a class="partner-link" href="mailto:info@safe21.io">Email us &rarr;</a>
+          <h3 style="margin-bottom:8px;" data-i18n="services.more.title">Not sure where to start?</h3>
+          <p data-i18n="services.more.text">Tell us what you hold and what worries you. We'll point you to the right service.</p>
+          <a class="partner-link" href="mailto:info@safe21.io" data-i18n="services.more.link">Email us &rarr;</a>
         </article>
 
       </div>
@@ -454,30 +491,30 @@
   <section class="block alt" id="why">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">Why SAFE21</p>
-        <h2>Security you can verify, not just trust.</h2>
-        <p>Everything we set up keeps you in control. We never take custody of your funds.</p>
+        <p class="eyebrow" data-i18n="why.eyebrow">Why SAFE21</p>
+        <h2 data-i18n="why.title">Security you can verify, not just trust.</h2>
+        <p data-i18n="why.lede">Everything we set up keeps you in control. We never take custody of your funds.</p>
       </div>
 
       <div class="why-grid">
         <div class="why-item reveal">
           <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-          <div><h3>Your keys never leave your hands</h3><p>Non-custodial by design. We guide and support — you always hold the seed and sign your own transactions.</p></div>
+          <div><h3 data-i18n="why.i1.title">Your keys never leave your hands</h3><p data-i18n="why.i1.text">Non-custodial by design. We guide and support — you always hold the seed and sign your own transactions.</p></div>
         </div>
 
         <div class="why-item reveal">
           <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="12" cy="20" r="2"/><path d="M6 7l4 4M18 7l-4 4M12 15v3"/></svg></div>
-          <div><h3>Decentralised inheritance</h3><p>The inheritance plan runs on time-locked transactions and independent executors — no Big Brother, no single point of failure.</p></div>
+          <div><h3 data-i18n="why.i2.title">Decentralised inheritance</h3><p data-i18n="why.i2.text">The inheritance plan runs on time-locked transactions and independent executors — no Big Brother, no single point of failure.</p></div>
         </div>
 
         <div class="why-item reveal">
           <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6l-6 6 6 6"/><path d="M16 6l6 6-6 6"/></svg></div>
-          <div><h3>Open-source foundations</h3><p>Built on transparent, auditable tools like Electrum and the open BAL protocol — so the security can be checked, not just claimed.</p></div>
+          <div><h3 data-i18n="why.i3.title">Open-source foundations</h3><p data-i18n="why.i3.text">Built on transparent, auditable tools like Electrum and the open BAL protocol — so the security can be checked, not just claimed.</p></div>
         </div>
 
         <div class="why-item reveal">
           <div class="ico" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
-          <div><h3>Real people, plain language</h3><p>No jargon walls. We explain every step before you take it, and stay available after the setup is done.</p></div>
+          <div><h3 data-i18n="why.i4.title">Real people, plain language</h3><p data-i18n="why.i4.text">No jargon walls. We explain every step before you take it, and stay available after the setup is done.</p></div>
         </div>
       </div>
     </div>
@@ -486,10 +523,10 @@
   <!-- ============================ CONTACT ============================ -->
   <section class="block contact" id="contact">
     <div class="wrap reveal">
-      <p class="eyebrow" style="display:inline-block;">Get started</p>
-      <h2>Talk to a human about your Bitcoin.</h2>
-      <p>Email us and we'll help you figure out the right setup — security, courses, inheritance or payments. No pressure, no account required.</p>
-      <a class="btn btn-primary" href="mailto:info@safe21.io">Email SAFE21</a>
+      <p class="eyebrow" style="display:inline-block;" data-i18n="contact.eyebrow">Get started</p>
+      <h2 data-i18n="contact.title">Talk to a human about your Bitcoin.</h2>
+      <p data-i18n="contact.text">Email us and we'll help you figure out the right setup — security, courses, inheritance or payments. No pressure, no account required.</p>
+      <a class="btn btn-primary" href="mailto:info@safe21.io" data-i18n="contact.cta">Email SAFE21</a>
       <p class="email">info@safe21.io</p>
     </div>
   </section>
@@ -506,38 +543,38 @@
               <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="#F5F7FA">SAFE</tspan><tspan fill="#2DD4BF">21</tspan></text>
             </svg>
           </a>
-          <p>Bitcoin security, self-custody and inheritance — with your keys always in your hands.</p>
+          <p data-i18n="footer.brand">Bitcoin security, self-custody and inheritance — with your keys always in your hands.</p>
         </div>
 
         <div class="foot-cols">
           <div class="foot-col">
-            <h4>Services</h4>
-            <a href="#services">Bitcoin Assistance</a>
-            <a href="#services">Bitcoin Courses</a>
-            <a href="#services">Electrum Security</a>
-            <a href="#inheritance">Inheritance</a>
-            <a href="#payments">Payments</a>
+            <h4 data-i18n="footer.services">Services</h4>
+            <a href="#services" data-i18n="footer.s1">Bitcoin Assistance</a>
+            <a href="#services" data-i18n="footer.s2">Bitcoin Courses</a>
+            <a href="#services" data-i18n="footer.s3">Electrum Security</a>
+            <a href="#inheritance" data-i18n="footer.s4">Inheritance</a>
+            <a href="#payments" data-i18n="footer.s5">Payments</a>
           </div>
           <div class="foot-col">
-            <h4>Partners</h4>
+            <h4 data-i18n="footer.partners">Partners</h4>
             <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
             <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
           </div>
           <div class="foot-col">
-            <h4>Contact</h4>
+            <h4 data-i18n="footer.contact">Contact</h4>
             <a href="mailto:info@safe21.io">info@safe21.io</a>
           </div>
         </div>
       </div>
 
       <!-- Disclaimer: important for a site touching inheritance & finance. -->
-      <p class="disclaimer">
+      <p class="disclaimer" data-i18n="footer.disclaimer">
         SAFE21 provides technical guidance and education on Bitcoin self-custody. It is not legal,
         tax or financial advice, and SAFE21 never takes custody of your funds — you always control
         your own keys. Inheritance and tax rules differ from country to country; please consult a
         qualified professional for your own situation. Bitcoin transactions are irreversible.
       </p>
-      <p class="copyright">© 2026 SAFE21 — safe21.io. All rights reserved.</p>
+      <p class="copyright" data-i18n="footer.copyright">&copy; 2026 SAFE21 — safe21.io. All rights reserved.</p>
     </div>
   </footer>
 
@@ -565,6 +602,146 @@
         });
       }, { threshold: 0.12 });
       items.forEach(function (el) { io.observe(el); });
+    })();
+
+    /*
+     * ---------------------------------------------------------------
+     * Bilingual support (EN / IT)
+     * ---------------------------------------------------------------
+     * English is the source language written directly in the markup
+     * (project rule R1), so the HTML stays the single source of truth
+     * for English. The Italian strings live in the IT dictionary below,
+     * keyed by each element's data-i18n attribute.
+     *
+     * How it works:
+     *  1. On load, the English originals are captured from the DOM into
+     *     an EN dictionary (no duplication to maintain by hand).
+     *  2. Clicking EN/IT in the header swaps innerHTML from the chosen
+     *     dictionary, updates <html lang>, the <title> and the meta
+     *     description, and highlights the active button.
+     *  3. The choice is remembered in localStorage ("safe21-lang") so
+     *     returning visitors keep their language. Default: English.
+     */
+    (function () {
+      // Italian translations, keyed by data-i18n attribute values.
+      // Values may contain HTML (e.g. the hero title keeps its <br> and
+      // accent span), so they are applied with innerHTML.
+      var IT = {
+        'nav.services': 'Servizi',
+        'nav.inheritance': 'Eredit\u00e0',
+        'nav.payments': 'Pagamenti',
+        'nav.why': 'Perch\u00e9 SAFE21',
+        'nav.contact': 'Contattaci',
+
+        'hero.eyebrow': 'Sicurezza Bitcoin \u00b7 self-custody \u00b7 eredit\u00e0',
+        'hero.title': 'Possiedi i tuoi Bitcoin.<br/>Proteggili.<br/><span class="accent">Tramandali.</span>',
+        'hero.lede': 'SAFE21 ti aiuta a proteggere i tuoi wallet, custodire le tue chiavi private e pianificare un\u2019eredit\u00e0 Bitcoin che la tua famiglia possa davvero riscuotere \u2014 senza mai consegnare i tuoi bitcoin a un custode o a terzi.',
+        'hero.cta1': 'Parla con noi',
+        'hero.cta2': 'Scopri i servizi',
+        'hero.trust1': 'Non-custodial \u2014 le chiavi restano tue',
+        'hero.trust2': 'Basato su strumenti open-source',
+        'hero.trust3': 'Supporto di persona e online',
+
+        'problem.eyebrow': 'Il problema',
+        'problem.title': 'La self-custody \u00e8 libert\u00e0 \u2014 e responsabilit\u00e0.',
+        'problem.lede': 'Custodire le proprie chiavi significa che nessuna banca pu\u00f2 bloccare o perdere i tuoi Bitcoin. Ma significa anche che due rischi ricadono interamente su di te. SAFE21 li copre entrambi.',
+        'problem.card1.title': 'Perse le chiavi, persi i bitcoin',
+        'problem.card1.text': 'Una seed phrase smarrita, un dispositivo rotto, un backup dimenticato \u2014 e i tuoi Bitcoin sono persi per sempre. Ti aiutiamo a configurare una custodia che resiste alla vita reale.',
+        'problem.card2.title': 'Se ti succede qualcosa',
+        'problem.card2.text': 'La tua famiglia potrebbe non recuperare mai bitcoin a cui non ha accesso. Ti aiutiamo a pianificare un\u2019eredit\u00e0 chiara e decentralizzata \u2014 senza notaio, senza custode, senza un punto unico di rottura.',
+
+        'services.eyebrow': 'Cosa facciamo',
+        'services.title': 'Cinque modi in cui SAFE21 protegge i tuoi Bitcoin.',
+        'services.lede': 'Dal primo wallet fino a tramandarli \u2014 e tutto quello che c\u2019\u00e8 in mezzo.',
+        'services.s1.title': 'Assistenza Bitcoin',
+        'services.s1.text': 'Aiuto individuale su tutto ci\u00f2 che riguarda Bitcoin: configurazione del wallet, transazioni, dubbi sulla sicurezza e risposte chiare quando non sei sicuro.',
+        'services.s2.title': 'Corsi Bitcoin',
+        'services.s2.text': 'Impara Bitcoin come si deve \u2014 online o di persona. Dal primo wallet alla self-custody avanzata, al ritmo giusto per te.',
+        'services.s2.tag': 'Online e di persona',
+        'services.s3.title': 'Sicurezza Wallet Electrum',
+        'services.s3.text': 'Configura e metti in sicurezza Electrum nel modo giusto: wallet standard, 2FA, chiavi hardware e cold storage completamente offline.',
+        'services.s4.title': 'Eredit\u00e0 Bitcoin',
+        'services.s4.text': 'Pianifica un\u2019eredit\u00e0 decentralizzata con transazioni time-locked, cos\u00ec i tuoi bitcoin raggiungono i tuoi eredi al momento giusto \u2014 senza notaio, senza custode.',
+        'services.s4.partner': 'con BAL Protocol',
+        'services.s5.title': 'Accetta pagamenti Bitcoin',
+        'services.s5.text': 'Accetta pagamenti in Bitcoin e Lightning nel tuo negozio o online \u2014 con configurazione, formazione del personale e supporto continuo per la tua attivit\u00e0.',
+        'services.s5.partner': 'con Pago in Bitcoin',
+        'services.more.title': 'Non sai da dove iniziare?',
+        'services.more.text': 'Dicci cosa possiedi e cosa ti preoccupa: ti indicheremo il servizio giusto.',
+        'services.more.link': 'Scrivici &rarr;',
+
+        'why.eyebrow': 'Perch\u00e9 SAFE21',
+        'why.title': 'Sicurezza che puoi verificare, non solo promessa.',
+        'why.lede': 'Tutto ci\u00f2 che configuriamo ti lascia il controllo. Non prendiamo mai in custodia i tuoi fondi.',
+        'why.i1.title': 'Le tue chiavi non lasciano mai le tue mani',
+        'why.i1.text': 'Non-custodial per progettazione. Noi guidiamo e supportiamo \u2014 la seed resta a te e sei sempre tu a firmare le transazioni.',
+        'why.i2.title': 'Eredit\u00e0 decentralizzata',
+        'why.i2.text': 'Il piano di eredit\u00e0 si basa su transazioni time-locked ed esecutori indipendenti \u2014 nessun Grande Fratello, nessun punto unico di rottura.',
+        'why.i3.title': 'Fondamenta open-source',
+        'why.i3.text': 'Costruito su strumenti trasparenti e verificabili come Electrum e il protocollo aperto BAL \u2014 cos\u00ec la sicurezza si pu\u00f2 controllare, non solo dichiarare.',
+        'why.i4.title': 'Persone vere, linguaggio semplice',
+        'why.i4.text': 'Niente muri di gergo tecnico. Ti spieghiamo ogni passo prima di farlo e restiamo disponibili anche dopo la configurazione.',
+
+        'contact.eyebrow': 'Inizia ora',
+        'contact.title': 'Parla dei tuoi Bitcoin con una persona vera.',
+        'contact.text': 'Scrivici una email e ti aiuteremo a trovare la soluzione giusta \u2014 sicurezza, corsi, eredit\u00e0 o pagamenti. Nessuna pressione, nessun account richiesto.',
+        'contact.cta': 'Scrivi a SAFE21',
+
+        'footer.brand': 'Sicurezza Bitcoin, self-custody ed eredit\u00e0 \u2014 con le chiavi sempre nelle tue mani.',
+        'footer.services': 'Servizi',
+        'footer.s1': 'Assistenza Bitcoin',
+        'footer.s2': 'Corsi Bitcoin',
+        'footer.s3': 'Sicurezza Electrum',
+        'footer.s4': 'Eredit\u00e0',
+        'footer.s5': 'Pagamenti',
+        'footer.partners': 'Partner',
+        'footer.contact': 'Contatti',
+        'footer.disclaimer': 'SAFE21 fornisce assistenza tecnica e formazione sulla self-custody di Bitcoin. Non offre consulenza legale, fiscale o finanziaria e non prende mai in custodia i tuoi fondi \u2014 le chiavi restano sempre sotto il tuo controllo. Le regole su successioni e tasse variano da paese a paese: rivolgiti a un professionista qualificato per la tua situazione. Le transazioni Bitcoin sono irreversibili.',
+        'footer.copyright': '\u00a9 2026 SAFE21 \u2014 safe21.io. Tutti i diritti riservati.',
+
+        // Document metadata (title tag + meta description).
+        'meta.title': 'SAFE21 \u2014 Sicurezza Bitcoin, self-custody ed eredit\u00e0',
+        'meta.description': 'SAFE21 ti aiuta a proteggere i tuoi wallet Bitcoin, custodire le tue chiavi private e pianificare un\u2019eredit\u00e0 Bitcoin decentralizzata \u2014 senza mai consegnare i tuoi bitcoin a terzi.'
+      };
+
+      var els = document.querySelectorAll('[data-i18n]');
+      var metaDesc = document.querySelector('meta[name="description"]');
+
+      // Capture the English originals from the DOM so the markup remains
+      // the single source of truth for English (no hand-maintained copy).
+      var EN = {};
+      els.forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+      EN['meta.title'] = document.title;
+      EN['meta.description'] = metaDesc ? metaDesc.getAttribute('content') : '';
+
+      function setLang(lang) {
+        var dict = (lang === 'it') ? IT : EN;
+        els.forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
+        document.title = dict['meta.title'];
+        if (metaDesc) metaDesc.setAttribute('content', dict['meta.description']);
+        document.documentElement.setAttribute('lang', lang);
+        // Highlight the active button (aria-pressed drives the CSS too).
+        document.querySelectorAll('.lang-btn').forEach(function (btn) {
+          btn.setAttribute('aria-pressed', String(btn.getAttribute('data-lang') === lang));
+        });
+        // Remember the choice; ignore failures (e.g. private browsing).
+        try { localStorage.setItem('safe21-lang', lang); } catch (e) {}
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setLang(btn.getAttribute('data-lang'));
+        });
+      });
+
+      // Restore a previously chosen language; English is the default,
+      // so nothing needs to happen unless the visitor picked Italian.
+      var saved = null;
+      try { saved = localStorage.getItem('safe21-lang'); } catch (e) {}
+      if (saved === 'it') setLang('it');
     })();
   </script>
 </body>
