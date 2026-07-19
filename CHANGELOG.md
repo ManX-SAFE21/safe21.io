@@ -3,6 +3,18 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [7] — Contact section cleanup + Italian wording fix
+
+**Date:** 2026-07-19
+**Status:** Delivered (pending review)
+
+- Removed the plain-text `info@safe21.io` line under the "Email SAFE21"
+  button in the Contact section — it duplicated the button (same mailto).
+  The address is still shown in the footer's Contact column. The now-unused
+  `.contact .email` CSS rule was removed as well.
+- Italian copy fix (problem section): "due rischi ricadono" → "i rischi
+  ricadono", as requested.
+
 ## [6] — Italian translation + EN/IT language switcher
 
 **Date:** 2026-07-19
