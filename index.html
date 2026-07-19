@@ -250,10 +250,6 @@
     }
     .contact h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 600; }
     .contact p { color: var(--muted); max-width: 540px; margin: 16px auto 30px; font-size: 16px; }
-    .contact .email {
-      font-family: 'Space Mono', monospace; color: var(--teal);
-      font-size: 15px; margin-top: 18px;
-    }
 
     /* ---------- Footer ---------- */
     footer { border-top: 1px solid var(--line); padding: 54px 0 40px; background: var(--ink); }
@@ -527,7 +523,9 @@
       <h2 data-i18n="contact.title">Talk to a human about your Bitcoin.</h2>
       <p data-i18n="contact.text">Email us and we'll help you figure out the right setup — security, courses, inheritance or payments. No pressure, no account required.</p>
       <a class="btn btn-primary" href="mailto:info@safe21.io" data-i18n="contact.cta">Email SAFE21</a>
-      <p class="email">info@safe21.io</p>
+      <!-- The plain-text email line was removed here: it duplicated the
+           button above (same mailto address). The address remains available
+           in the footer's Contact column. -->
     </div>
   </section>
 
@@ -574,7 +572,7 @@
         your own keys. Inheritance and tax rules differ from country to country; please consult a
         qualified professional for your own situation. Bitcoin transactions are irreversible.
       </p>
-      <p class="copyright" data-i18n="footer.copyright">&copy; 2026 SAFE21 — safe21.io. All rights reserved.</p>
+      <p class="copyright" data-i18n="footer.copyright">© 2026 SAFE21 — safe21.io. All rights reserved.</p>
     </div>
   </footer>
 
@@ -628,80 +626,80 @@
       // accent span), so they are applied with innerHTML.
       var IT = {
         'nav.services': 'Servizi',
-        'nav.inheritance': 'Eredit\u00e0',
+        'nav.inheritance': 'Eredità',
         'nav.payments': 'Pagamenti',
-        'nav.why': 'Perch\u00e9 SAFE21',
+        'nav.why': 'Perché SAFE21',
         'nav.contact': 'Contattaci',
 
-        'hero.eyebrow': 'Sicurezza Bitcoin \u00b7 self-custody \u00b7 eredit\u00e0',
+        'hero.eyebrow': 'Sicurezza Bitcoin · self-custody · eredità',
         'hero.title': 'Possiedi i tuoi Bitcoin.<br/>Proteggili.<br/><span class="accent">Tramandali.</span>',
-        'hero.lede': 'SAFE21 ti aiuta a proteggere i tuoi wallet, custodire le tue chiavi private e pianificare un\u2019eredit\u00e0 Bitcoin che la tua famiglia possa davvero riscuotere \u2014 senza mai consegnare i tuoi bitcoin a un custode o a terzi.',
+        'hero.lede': 'SAFE21 ti aiuta a proteggere i tuoi wallet, custodire le tue chiavi private e pianificare un’eredità Bitcoin che la tua famiglia possa davvero riscuotere — senza mai consegnare i tuoi bitcoin a un custode o a terzi.',
         'hero.cta1': 'Parla con noi',
         'hero.cta2': 'Scopri i servizi',
-        'hero.trust1': 'Non-custodial \u2014 le chiavi restano tue',
+        'hero.trust1': 'Non-custodial — le chiavi restano tue',
         'hero.trust2': 'Basato su strumenti open-source',
         'hero.trust3': 'Supporto di persona e online',
 
         'problem.eyebrow': 'Il problema',
-        'problem.title': 'La self-custody \u00e8 libert\u00e0 \u2014 e responsabilit\u00e0.',
-        'problem.lede': 'Custodire le proprie chiavi significa che nessuna banca pu\u00f2 bloccare o perdere i tuoi Bitcoin. Ma significa anche che due rischi ricadono interamente su di te. SAFE21 li copre entrambi.',
+        'problem.title': 'La self-custody è libertà — e responsabilità.',
+        'problem.lede': 'Custodire le proprie chiavi significa che nessuna banca può bloccare o perdere i tuoi Bitcoin. Ma significa anche che i rischi ricadono interamente su di te. SAFE21 li copre entrambi.',
         'problem.card1.title': 'Perse le chiavi, persi i bitcoin',
-        'problem.card1.text': 'Una seed phrase smarrita, un dispositivo rotto, un backup dimenticato \u2014 e i tuoi Bitcoin sono persi per sempre. Ti aiutiamo a configurare una custodia che resiste alla vita reale.',
+        'problem.card1.text': 'Una seed phrase smarrita, un dispositivo rotto, un backup dimenticato — e i tuoi Bitcoin sono persi per sempre. Ti aiutiamo a configurare una custodia che resiste alla vita reale.',
         'problem.card2.title': 'Se ti succede qualcosa',
-        'problem.card2.text': 'La tua famiglia potrebbe non recuperare mai bitcoin a cui non ha accesso. Ti aiutiamo a pianificare un\u2019eredit\u00e0 chiara e decentralizzata \u2014 senza notaio, senza custode, senza un punto unico di rottura.',
+        'problem.card2.text': 'La tua famiglia potrebbe non recuperare mai bitcoin a cui non ha accesso. Ti aiutiamo a pianificare un’eredità chiara e decentralizzata — senza notaio, senza custode, senza un punto unico di rottura.',
 
         'services.eyebrow': 'Cosa facciamo',
         'services.title': 'Cinque modi in cui SAFE21 protegge i tuoi Bitcoin.',
-        'services.lede': 'Dal primo wallet fino a tramandarli \u2014 e tutto quello che c\u2019\u00e8 in mezzo.',
+        'services.lede': 'Dal primo wallet fino a tramandarli — e tutto quello che c’è in mezzo.',
         'services.s1.title': 'Assistenza Bitcoin',
-        'services.s1.text': 'Aiuto individuale su tutto ci\u00f2 che riguarda Bitcoin: configurazione del wallet, transazioni, dubbi sulla sicurezza e risposte chiare quando non sei sicuro.',
+        'services.s1.text': 'Aiuto individuale su tutto ciò che riguarda Bitcoin: configurazione del wallet, transazioni, dubbi sulla sicurezza e risposte chiare quando non sei sicuro.',
         'services.s2.title': 'Corsi Bitcoin',
-        'services.s2.text': 'Impara Bitcoin come si deve \u2014 online o di persona. Dal primo wallet alla self-custody avanzata, al ritmo giusto per te.',
+        'services.s2.text': 'Impara Bitcoin come si deve — online o di persona. Dal primo wallet alla self-custody avanzata, al ritmo giusto per te.',
         'services.s2.tag': 'Online e di persona',
         'services.s3.title': 'Sicurezza Wallet Electrum',
         'services.s3.text': 'Configura e metti in sicurezza Electrum nel modo giusto: wallet standard, 2FA, chiavi hardware e cold storage completamente offline.',
-        'services.s4.title': 'Eredit\u00e0 Bitcoin',
-        'services.s4.text': 'Pianifica un\u2019eredit\u00e0 decentralizzata con transazioni time-locked, cos\u00ec i tuoi bitcoin raggiungono i tuoi eredi al momento giusto \u2014 senza notaio, senza custode.',
+        'services.s4.title': 'Eredità Bitcoin',
+        'services.s4.text': 'Pianifica un’eredità decentralizzata con transazioni time-locked, così i tuoi bitcoin raggiungono i tuoi eredi al momento giusto — senza notaio, senza custode.',
         'services.s4.partner': 'con BAL Protocol',
         'services.s5.title': 'Accetta pagamenti Bitcoin',
-        'services.s5.text': 'Accetta pagamenti in Bitcoin e Lightning nel tuo negozio o online \u2014 con configurazione, formazione del personale e supporto continuo per la tua attivit\u00e0.',
+        'services.s5.text': 'Accetta pagamenti in Bitcoin e Lightning nel tuo negozio o online — con configurazione, formazione del personale e supporto continuo per la tua attività.',
         'services.s5.partner': 'con Pago in Bitcoin',
         'services.more.title': 'Non sai da dove iniziare?',
         'services.more.text': 'Dicci cosa possiedi e cosa ti preoccupa: ti indicheremo il servizio giusto.',
         'services.more.link': 'Scrivici &rarr;',
 
-        'why.eyebrow': 'Perch\u00e9 SAFE21',
+        'why.eyebrow': 'Perché SAFE21',
         'why.title': 'Sicurezza che puoi verificare, non solo promessa.',
-        'why.lede': 'Tutto ci\u00f2 che configuriamo ti lascia il controllo. Non prendiamo mai in custodia i tuoi fondi.',
+        'why.lede': 'Tutto ciò che configuriamo ti lascia il controllo. Non prendiamo mai in custodia i tuoi fondi.',
         'why.i1.title': 'Le tue chiavi non lasciano mai le tue mani',
-        'why.i1.text': 'Non-custodial per progettazione. Noi guidiamo e supportiamo \u2014 la seed resta a te e sei sempre tu a firmare le transazioni.',
-        'why.i2.title': 'Eredit\u00e0 decentralizzata',
-        'why.i2.text': 'Il piano di eredit\u00e0 si basa su transazioni time-locked ed esecutori indipendenti \u2014 nessun Grande Fratello, nessun punto unico di rottura.',
+        'why.i1.text': 'Non-custodial per progettazione. Noi guidiamo e supportiamo — la seed resta a te e sei sempre tu a firmare le transazioni.',
+        'why.i2.title': 'Eredità decentralizzata',
+        'why.i2.text': 'Il piano di eredità si basa su transazioni time-locked ed esecutori indipendenti — nessun Grande Fratello, nessun punto unico di rottura.',
         'why.i3.title': 'Fondamenta open-source',
-        'why.i3.text': 'Costruito su strumenti trasparenti e verificabili come Electrum e il protocollo aperto BAL \u2014 cos\u00ec la sicurezza si pu\u00f2 controllare, non solo dichiarare.',
+        'why.i3.text': 'Costruito su strumenti trasparenti e verificabili come Electrum e il protocollo aperto BAL — così la sicurezza si può controllare, non solo dichiarare.',
         'why.i4.title': 'Persone vere, linguaggio semplice',
         'why.i4.text': 'Niente muri di gergo tecnico. Ti spieghiamo ogni passo prima di farlo e restiamo disponibili anche dopo la configurazione.',
 
         'contact.eyebrow': 'Inizia ora',
         'contact.title': 'Parla dei tuoi Bitcoin con una persona vera.',
-        'contact.text': 'Scrivici una email e ti aiuteremo a trovare la soluzione giusta \u2014 sicurezza, corsi, eredit\u00e0 o pagamenti. Nessuna pressione, nessun account richiesto.',
+        'contact.text': 'Scrivici una email e ti aiuteremo a trovare la soluzione giusta — sicurezza, corsi, eredità o pagamenti. Nessuna pressione, nessun account richiesto.',
         'contact.cta': 'Scrivi a SAFE21',
 
-        'footer.brand': 'Sicurezza Bitcoin, self-custody ed eredit\u00e0 \u2014 con le chiavi sempre nelle tue mani.',
+        'footer.brand': 'Sicurezza Bitcoin, self-custody ed eredità — con le chiavi sempre nelle tue mani.',
         'footer.services': 'Servizi',
         'footer.s1': 'Assistenza Bitcoin',
         'footer.s2': 'Corsi Bitcoin',
         'footer.s3': 'Sicurezza Electrum',
-        'footer.s4': 'Eredit\u00e0',
+        'footer.s4': 'Eredità',
         'footer.s5': 'Pagamenti',
         'footer.partners': 'Partner',
         'footer.contact': 'Contatti',
-        'footer.disclaimer': 'SAFE21 fornisce assistenza tecnica e formazione sulla self-custody di Bitcoin. Non offre consulenza legale, fiscale o finanziaria e non prende mai in custodia i tuoi fondi \u2014 le chiavi restano sempre sotto il tuo controllo. Le regole su successioni e tasse variano da paese a paese: rivolgiti a un professionista qualificato per la tua situazione. Le transazioni Bitcoin sono irreversibili.',
-        'footer.copyright': '\u00a9 2026 SAFE21 \u2014 safe21.io. Tutti i diritti riservati.',
+        'footer.disclaimer': 'SAFE21 fornisce assistenza tecnica e formazione sulla self-custody di Bitcoin. Non offre consulenza legale, fiscale o finanziaria e non prende mai in custodia i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni e tasse variano da paese a paese: rivolgiti a un professionista qualificato per la tua situazione. Le transazioni Bitcoin sono irreversibili.',
+        'footer.copyright': '© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.',
 
         // Document metadata (title tag + meta description).
-        'meta.title': 'SAFE21 \u2014 Sicurezza Bitcoin, self-custody ed eredit\u00e0',
-        'meta.description': 'SAFE21 ti aiuta a proteggere i tuoi wallet Bitcoin, custodire le tue chiavi private e pianificare un\u2019eredit\u00e0 Bitcoin decentralizzata \u2014 senza mai consegnare i tuoi bitcoin a terzi.'
+        'meta.title': 'SAFE21 — Sicurezza Bitcoin, self-custody ed eredità',
+        'meta.description': 'SAFE21 ti aiuta a proteggere i tuoi wallet Bitcoin, custodire le tue chiavi private e pianificare un’eredità Bitcoin decentralizzata — senza mai consegnare i tuoi bitcoin a terzi.'
       };
 
       var els = document.querySelectorAll('[data-i18n]');
