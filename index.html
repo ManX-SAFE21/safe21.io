@@ -50,6 +50,7 @@
       --teal:   #2DD4BF;   /* primary accent (security) */
       --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
       --orange: #F7931A;   /* Bitcoin accent — used sparingly */
+      --bal:   #2d6cdf;    /* BAL Protocol — used on the inheritance card */
 
       --maxw: 1120px;      /* content max width */
       --radius: 16px;
@@ -231,6 +232,9 @@
       color: var(--teal); font-weight: 600; font-size: 13px;
     }
     .card.bitcoin .partner-link { color: var(--orange); }
+    .card.bal .ico { color: var(--bal); }
+    .card.bal .tag.partner { color: var(--bal); border-color: rgba(45,108,223,.35); }
+    .card.bal .partner-link { color: var(--bal); }
     .card .partner-link:hover { text-decoration: underline; }
 
     /* ---------- Why SAFE21 (feature rows) ---------- */
@@ -433,7 +437,7 @@
         </article>
 
         <!-- 4. Bitcoin Inheritance — Will Executor (partner: BAL) -->
-        <article class="card bitcoin reveal" id="inheritance">
+        <article class="card bal reveal" id="inheritance">
           <div class="ico" aria-hidden="true">
             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <!-- Hourglass (with sand at the bottom): "time-locked" inheritance -->
