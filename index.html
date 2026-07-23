@@ -196,13 +196,19 @@
     .lang-btn:hover { color: var(--light); }
     .lang-btn[aria-pressed="true"] { background: var(--teal); color: #04201C; font-weight: 700; }
 
-    /* Compact header on small screens so logo + language switcher + Contact
-       button fit comfortably on one line without crowding. */
+    /* Compact header on small screens so logo + language switcher + hamburger
+       fit comfortably on one line without crowding.
+       The header's "Contact us" button is hidden here: once the hamburger
+       menu exists, that same link is repeated as the last item in the
+       mobile drawer, so keeping both in the cramped header row caused the
+       button label to wrap onto two lines on narrow phones (~360-390px).
+       Hiding the header copy on mobile removes the crowding; the action
+       stays reachable via the drawer. */
     @media (max-width: 760px) {
       .nav { height: 64px; }
       .nav .logo svg { height: 42px; }
       .nav .cta { gap: 10px; }
-      .nav .cta .btn { padding: 9px 14px; font-size: 13px; }
+      .nav .cta > a.btn-primary { display: none; }
       .lang-btn { padding: 7px 10px; }
     }
 
