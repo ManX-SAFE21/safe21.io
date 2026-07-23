@@ -3,6 +3,24 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [8] — Mobile navigation (hamburger menu)
+
+**Task:** The header nav links were hidden below 760px with no replacement,
+so mobile visitors lost all in-page navigation. Added a mobile menu.
+
+- New hamburger button (`.menu-toggle`) in the header, shown only <=760px;
+  animated hamburger/close icon swap driven by `aria-expanded`.
+- New slide-down drawer (`.mobile-menu`, `#mobile-menu`) repeating the primary
+  links (Services, Inheritance, Payments, Why SAFE21) plus Contact, using the
+  same anchors and `data-i18n` keys as the desktop nav.
+- JS: dependency-free toggle; closes on link tap, on Escape, and auto-resets
+  when the viewport grows past the breakpoint. `aria-controls`/`aria-expanded`
+  for accessibility.
+- i18n: added `nav.menu` ("Apri menu") and `data-i18n-aria` handling so the
+  button's `aria-label` is translated alongside the drawer links.
+- Verified with a jsdom simulation: open/close, link-tap close, Escape close,
+  and EN<->IT translation of the drawer all pass. No changes to desktop layout.
+
 ## [7] — Contact section cleanup + Italian wording fix
 
 **Date:** 2026-07-19

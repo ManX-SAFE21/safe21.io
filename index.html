@@ -129,9 +129,56 @@
     }
     .nav-links a:hover { color: var(--light); }
     .nav .cta { display: flex; align-items: center; gap: 16px; }
-    /* On small screens the in-page links collapse; the language switcher
-       and the Contact button stay visible. */
-    @media (max-width: 760px) { .nav-links { display: none; } }
+
+    /* ---------- Mobile menu (hamburger + slide-down drawer) ----------
+       On small screens the inline .nav-links collapse. Previously there was
+       no replacement, so mobile visitors lost all in-page navigation. The
+       hamburger button below opens a drawer that repeats the same links plus
+       the Contact action. The button is hidden on desktop, shown <=760px. */
+    .menu-toggle {
+      display: none;                 /* shown only in the mobile media query */
+      flex: none; width: 42px; height: 42px;
+      align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+      transition: border-color .15s ease;
+    }
+    .menu-toggle:hover { border-color: var(--teal); }
+    .menu-toggle svg { width: 22px; height: 22px; }
+    /* Swap the hamburger/close icons based on the open state. */
+    .menu-toggle .icon-close { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+    /* The drawer itself: a full-width panel that drops in under the header.
+       Collapsed by default (max-height 0) and expanded via the .open class,
+       which animates height for a smooth reveal without layout jumps. */
+    .mobile-menu {
+      display: none;                 /* switched to block in the media query */
+      overflow: hidden;
+      background: rgba(10, 15, 28, 0.98);
+      border-bottom: 1px solid var(--line);
+      max-height: 0;
+      transition: max-height .28s ease;
+    }
+    .mobile-menu.open { max-height: 340px; }
+    .mobile-menu nav { display: flex; flex-direction: column; padding: 8px 0 16px; }
+    .mobile-menu a {
+      color: var(--light); font-size: 16px; font-weight: 500;
+      padding: 14px 24px; border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu a:last-child { border-bottom: 0; }
+    .mobile-menu a:hover { color: var(--teal); }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }  /* inline links hidden on small screens */
+      .menu-toggle { display: inline-flex; }
+      .mobile-menu { display: block; }
+    }
+    /* Above the breakpoint the drawer is always hidden, even if left "open". */
+    @media (min-width: 761px) {
+      .mobile-menu { display: none !important; }
+    }
 
     /* ---------- Language switcher (EN / IT) ----------
        A compact two-button toggle. Mono font echoes the small labels used
@@ -316,7 +363,35 @@
           <button type="button" class="lang-btn" data-lang="it" aria-pressed="false" aria-label="Italiano">IT</button>
         </div>
         <a class="btn btn-primary" href="mailto:info@safe21.io" data-i18n="nav.contact">Contact us</a>
+
+        <!-- Hamburger: opens the mobile drawer below. Hidden on desktop via
+             CSS. aria-expanded/aria-controls keep it accessible; the label is
+             translated by the i18n script (nav.menu). -->
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Open menu" data-i18n-aria="nav.menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
       </div>
+    </div>
+
+    <!-- Mobile navigation drawer. Repeats the primary links (same anchors and
+         data-i18n keys as the desktop nav) plus the Contact action, so small
+         screens keep full in-page navigation. Closed by default. -->
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="#services" data-i18n="nav.services">Services</a>
+        <a href="#inheritance" data-i18n="nav.inheritance">Inheritance</a>
+        <a href="#payments" data-i18n="nav.payments">Payments</a>
+        <a href="#why" data-i18n="nav.why">Why SAFE21</a>
+        <a href="mailto:info@safe21.io" data-i18n="nav.contact">Contact us</a>
+      </nav>
     </div>
   </header>
 
@@ -608,6 +683,46 @@
 
     /*
      * ---------------------------------------------------------------
+     * Mobile menu toggle
+     * ---------------------------------------------------------------
+     * Opens/closes the hamburger drawer on small screens. Kept dependency-free.
+     *  - Toggles the .open class on the drawer and aria-expanded on the button.
+     *  - Closes when a link inside the drawer is tapped (so anchor navigation
+     *    doesn't leave the menu hanging open).
+     *  - Closes on Escape and when the viewport grows past the breakpoint.
+     */
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        menu.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      // Tapping any link closes the drawer.
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setOpen(false); });
+      });
+
+      // Escape closes the drawer.
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      // If the window is resized to desktop width, reset the state.
+      window.matchMedia('(min-width: 761px)').addEventListener('change', function (e) {
+        if (e.matches) setOpen(false);
+      });
+    })();
+
+    /*
+     * ---------------------------------------------------------------
      * Bilingual support (EN / IT)
      * ---------------------------------------------------------------
      * English is the source language written directly in the markup
@@ -634,6 +749,7 @@
         'nav.payments': 'Pagamenti',
         'nav.why': 'Perché SAFE21',
         'nav.contact': 'Contattaci',
+        'nav.menu': 'Apri menu',
 
         'hero.eyebrow': 'Sicurezza Bitcoin · self-custody · eredità',
         'hero.title': 'Possiedi i tuoi Bitcoin.<br/>Proteggili.<br/><span class="accent">Tramandali.</span>',
@@ -707,12 +823,18 @@
       };
 
       var els = document.querySelectorAll('[data-i18n]');
+      var ariaEls = document.querySelectorAll('[data-i18n-aria]');
       var metaDesc = document.querySelector('meta[name="description"]');
 
       // Capture the English originals from the DOM so the markup remains
       // the single source of truth for English (no hand-maintained copy).
       var EN = {};
       els.forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+      // Also capture aria-label originals (e.g. the hamburger button).
+      ariaEls.forEach(function (el) {
+        var k = el.getAttribute('data-i18n-aria');
+        if (EN[k] === undefined) EN[k] = el.getAttribute('aria-label');
+      });
       EN['meta.title'] = document.title;
       EN['meta.description'] = metaDesc ? metaDesc.getAttribute('content') : '';
 
@@ -721,6 +843,11 @@
         els.forEach(function (el) {
           var key = el.getAttribute('data-i18n');
           if (dict[key] !== undefined) el.innerHTML = dict[key];
+        });
+        // Translate aria-labels (e.g. hamburger button).
+        ariaEls.forEach(function (el) {
+          var key = el.getAttribute('data-i18n-aria');
+          if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
         });
         document.title = dict['meta.title'];
         if (metaDesc) metaDesc.setAttribute('content', dict['meta.description']);
