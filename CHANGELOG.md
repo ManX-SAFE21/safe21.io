@@ -3,6 +3,21 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [9] — Fix: header "Contact us" wrapping on narrow phones
+
+**Bug report:** on real phones (~360-390px wide) the header's "Contact us"
+button wrapped onto two lines ("Contact" / "us"), because the mobile row now
+has to fit language switch + Contact button + hamburger together and ran out
+of horizontal space.
+
+- Hidden the header's "Contact us" button at <=760px (`.nav .cta > a.btn-primary`).
+  It is not removed from the page — only hidden by CSS, so it still shows on
+  desktop — and the same action is already the last item in the hamburger
+  drawer added in [8], so nothing is lost.
+- Verified with jsdom: the media rule is present, the header button stays in
+  the DOM for desktop, and the drawer still lists 5 links ending with
+  "Contact us" -> mailto:info@safe21.io.
+
 ## [8] — Mobile navigation (hamburger menu)
 
 **Task:** The header nav links were hidden below 760px with no replacement,
