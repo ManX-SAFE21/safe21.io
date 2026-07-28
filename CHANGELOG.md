@@ -3,6 +3,35 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [13] — Tidy header menu + session-only theme memory
+
+Two fixes to the blog pages (blog.html and blog-seed-mai-online.html);
+index.html untouched.
+
+- **Header menu wrapping.** The hamburger only appeared below 760px, so
+  between roughly 760px and 1050px the full link row plus the "Contattaci"
+  button no longer fit and "Blog" wrapped under the button (client
+  screenshot). Raised the collapse breakpoint to **1024px**: below that width
+  the inline links and the Contact button move into the existing drawer, and
+  the tidy hamburger takes over. The phone-only tweaks (reduced logo/height,
+  font sizes) stay at 760px, since they are about small screens rather than
+  about when the menu collapses. The theme switch and hamburger remain visible
+  at every width.
+- **Theme starts dark every visit ("Variante A").** Storage moved from
+  `localStorage` (persists for months) to `sessionStorage` (cleared when the
+  tab/browser closes). Result: a fresh visit always starts dark, while a
+  choice made with the switch still carries across pages within the same
+  visit. Both the pre-paint no-flash script and the toggle's write call were
+  updated; the key name (`safe21-blog-theme`) is unchanged, so it still can't
+  collide with the homepage's language key.
+- Verified with jsdom: the 1024px query hides the links / shows the hamburger
+  / hides Contact; the 760px query no longer touches the links; the theme
+  button is never hidden at any width; the theme uses sessionStorage and not
+  localStorage; a fresh session starts dark even when a stale localStorage
+  value from the previous build says "light"; the choice persists across
+  pages within one session; and a new session reverts to dark. index.html has
+  no 1024px query and no theme code. All checks pass on both pages.
+
 ## [12] — Optional light theme for the blog
 
 **Task:** let readers switch the blog to a light background, because long
