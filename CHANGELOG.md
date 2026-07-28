@@ -3,6 +3,34 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [14] — Shorter article
+
+**Task:** the article was too long. Initial brief was −30%; the client then
+asked for a 4-minute read, and after seeing the result settled on the
+intermediate length.
+
+- Rewrote the article body: **1,769 → 1,056 words, a 40% cut.** No topic was
+  removed — the client had specified all of them. What went is repetition and
+  elaboration, so each idea is stated once. Structural changes: "Cosa è
+  successo" and "La lezione" merged into one section; callouts reduced from
+  four to two (the seed rule and the sovereignty trade-off, the two that carry
+  the argument); rule descriptions cut to a single line each; the delayed-theft
+  story condensed from four paragraphs to two; the paper-backup bullets cut
+  from four to three, keeping the most concrete.
+- A second tightening pass took the text to 939 words (4.7 min) but the client
+  preferred the 1,056-word version, so it was restored.
+- **Corrected the read-time label from 7 to 5 minutes**, in the byline and on
+  the blog.html card. The original "7 min" was wrong even before the cut: at
+  ~200 words per minute the old text was a 9-minute read. 1,056 words is
+  ~5.3 minutes, so 5 is the honest figure.
+- Shortened the card summary on blog.html to match the new standfirst.
+- Verified: the image, the X link, the four numbered rules, the six-item
+  checklist, the Bitcoin callout, the sealed-envelope guidance, the open-source
+  section and the SAFE21 section are all still present. The task [13] test
+  suite still passes in full. (The older task [12] suite now reports three
+  failures per page, all on `localStorage` assertions superseded by the
+  sessionStorage change in [13] — expected, not a regression.)
+
 ## [13] — Tidy header menu + session-only theme memory
 
 Two fixes to the blog pages (blog.html and blog-seed-mai-online.html);
