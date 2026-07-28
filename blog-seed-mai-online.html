@@ -515,18 +515,18 @@
   <div class="article-head">
     <div class="read">
       <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
-      <p class="eyebrow">Sicurezza · Seed phrase</p>
+      <p class="eyebrow">Sicurezza &middot; Seed phrase</p>
       <h1>Il tuo SEED non deve mai toccare internet</h1>
       <p class="standfirst">
-        Un malware nascosto dentro app <em>approvate</em> da App Store e Google Play
-        leggeva le foto degli utenti per cercare le seed phrase fotografate.
-        Ecco perché il seed non deve mai diventare uno screenshot — e perché
-        il furto potrebbe arrivare anni dopo l'errore.
+        Un malware nascosto in app approvate da App Store e Google Play cercava
+        le seed phrase nelle foto degli utenti. Perché il seed non deve mai
+        diventare uno screenshot — e perché il furto può arrivare anni dopo
+        l'errore.
       </p>
       <p class="byline">
         <span>SAFE21</span>
         <span>28 luglio 2026</span>
-        <span class="read-time">7 min di lettura</span>
+        <span class="read-time">5 min di lettura</span>
       </p>
     </div>
   </div>
@@ -535,30 +535,22 @@
   <article class="article-body">
     <div class="read">
 
-      <p>
-        Se hai comprato i tuoi primi bitcoin da poco e li tieni in un wallet tuo,
-        questo articolo ti riguarda da vicino. Non serve essere esperti di
-        informatica per capirlo: bastano cinque minuti e un po' di attenzione.
-      </p>
-
       <h2>Cosa è successo</h2>
 
       <p>
-        I ricercatori di sicurezza di Check Point hanno scoperto un malware
-        chiamato <strong>SparkKitty</strong>, nascosto dentro app che si
-        presentavano come strumenti per criptovalute o come piattaforme di
-        messaggistica. Quelle app erano pubblicate <strong>sull'App Store di
-        Apple e su Google Play</strong>, i negozi ufficiali.
+        I ricercatori di Check Point hanno scoperto <strong>SparkKitty</strong>,
+        un malware nascosto dentro app che si presentavano come strumenti per
+        criptovalute o piattaforme di messaggistica. Erano pubblicate
+        <strong>sull'App Store di Apple e su Google Play</strong>, i negozi
+        ufficiali.
       </p>
 
       <p>
-        Il meccanismo era semplice. L'app chiedeva il permesso di accedere alle
-        foto — una richiesta che diamo per scontata ogni giorno. Una volta
-        ottenuto il permesso, il malware scandagliava la galleria fotografica
-        alla ricerca di immagini contenenti <strong>frasi di recupero</strong>
-        (le seed phrase) e le caricava su server controllati dagli attaccanti.
-        Una sola delle app infette è stata scaricata più di
-        <strong>10.000 volte</strong> prima di essere rimossa.
+        Il meccanismo era semplice: l'app chiedeva il permesso di accedere alle
+        foto. Ottenuto il permesso, cercava nella galleria le immagini
+        contenenti frasi di recupero e le inviava ai server degli attaccanti.
+        Una sola app infetta è stata scaricata oltre <strong>10.000 volte</strong>
+        prima di essere rimossa.
       </p>
 
       <figure class="source">
@@ -571,36 +563,25 @@
         </figcaption>
       </figure>
 
-      <h2>La lezione non è "quell'app era cattiva"</h2>
-
       <p>
-        È facile leggere questa notizia e pensare: "basta non scaricare app
-        strane". Ma il punto è un altro, ed è molto più importante.
+        La lezione non è "quell'app era cattiva". È che
+        <strong>non ci si può fidare nemmeno delle app pubblicate sugli store
+        ufficiali</strong>: i controlli sono automatici e imperfetti, e le app
+        malevole restano online per mesi prima di essere rimosse.
       </p>
 
       <p>
-        <strong>Non ci si può fidare nemmeno delle app pubblicate sugli store
-        ufficiali.</strong> Apple e Google fanno dei controlli, ma sono controlli
-        automatici e imperfetti: le app malevole passano, restano online per
-        settimane o mesi, vengono scaricate migliaia di volte e solo dopo
-        vengono rimosse. Il "bollino" dello store non è una garanzia di
-        sicurezza — è solo un filtro, e i filtri si possono aggirare.
-      </p>
-
-      <p>
-        E soprattutto: <strong>il malware ha potuto rubare quei seed solo perché
-        quei seed erano dentro il telefono.</strong> Se la tua frase di recupero
-        non è mai stata fotografata, nessuna app può leggerla dalla tua galleria.
-        Il problema non era l'app. Il problema era lo screenshot.
+        Ma soprattutto: il malware ha potuto rubare quei seed solo perché erano
+        dentro il telefono. Il problema non era l'app. <strong>Era lo
+        screenshot.</strong>
       </p>
 
       <h2>Le quattro regole da non violare mai</h2>
 
       <p>
-        Il seed (chiamato anche frase di recupero o seed phrase) è quella lista
-        di 12 o 24 parole che ti viene mostrata quando crei un wallet.
-        <strong>Chi ha quelle parole ha i tuoi bitcoin.</strong> Non ha bisogno
-        del tuo telefono, della tua password, del tuo PIN. Solo delle parole.
+        Il seed è la lista di 12 o 24 parole che ti viene mostrata quando crei
+        un wallet. <strong>Chi ha quelle parole ha i tuoi bitcoin</strong>: non
+        gli serve il tuo telefono, né la password, né il PIN.
       </p>
 
       <div class="rules">
@@ -608,28 +589,28 @@
           <span class="num">01</span>
           <div>
             <h3>Mai uno screenshot</h3>
-            <p>Lo screenshot finisce nella galleria, e la galleria è leggibile da qualunque app a cui hai dato il permesso di accedere alle foto. Spesso finisce anche nel backup automatico su cloud, senza che tu faccia nulla.</p>
+            <p>Finisce nella galleria, leggibile da ogni app autorizzata, e spesso anche nel backup automatico sul cloud.</p>
           </div>
         </div>
         <div class="rule">
           <span class="num">02</span>
           <div>
             <h3>Mai una fotografia</h3>
-            <p>Fotografare il foglietto con le parole scritte a mano è esattamente lo stesso errore dello screenshot. La foto è un file, e i file viaggiano.</p>
+            <p>Fotografare il foglio scritto a mano è lo stesso errore: una foto è un file, e i file viaggiano.</p>
           </div>
         </div>
         <div class="rule">
           <span class="num">03</span>
           <div>
-            <h3>Mai via email, WhatsApp, Telegram o messaggi</h3>
-            <p>Non importa se cancelli il messaggio dopo. È già passato per dei server che non controlli, ed è già finito nella memoria di due telefoni.</p>
+            <h3>Mai via email o chat</h3>
+            <p>Anche se cancelli il messaggio, è già passato per server che non controlli ed è già su due telefoni.</p>
           </div>
         </div>
         <div class="rule">
           <span class="num">04</span>
           <div>
-            <h3>Mai in un file sul computer o nel cloud</h3>
-            <p>Niente note del telefono, niente documenti Word, niente Google Drive, iCloud o Dropbox, niente gestori di password collegati a internet.</p>
+            <h3>Mai dentro un file</h3>
+            <p>Niente note del telefono, documenti, Google Drive, iCloud o gestori di password collegati a internet.</p>
           </div>
         </div>
       </div>
@@ -637,189 +618,125 @@
       <div class="callout">
         <p class="eyebrow">La regola in una riga</p>
         <p>
-          <strong>Il seed si scrive a mano, su carta o su metallo, e non tocca
-          mai un dispositivo connesso a internet.</strong> Mai. Nemmeno per un
-          secondo, nemmeno "solo per copiarlo", nemmeno su un telefono nuovo
-          appena acquistato.
+          <strong>Il seed si scrive a mano, su carta o metallo, e non tocca mai
+          un dispositivo connesso a internet.</strong> Mai — nemmeno per un
+          secondo, nemmeno "solo per copiarlo".
         </p>
       </div>
 
-      <h2>Il furto che arriva tra cinque anni</h2>
+      <h2>Il furto può arrivare anni dopo</h2>
 
       <p>
-        Questa è la parte che quasi nessuno considera, ed è la più insidiosa.
-      </p>
-
-      <p>
-        Quando qualcuno entra in possesso del tuo seed, <strong>non è affatto
-        detto che svuoti il wallet subito</strong>. Chi ruba seed su larga scala
-        raccoglie migliaia di frasi e può aspettare. Aspettare mesi. Aspettare
-        anni. Aspettare che il saldo cresca. E soprattutto aspettare che tu
+        Chi ruba seed su larga scala non svuota il wallet subito. Raccoglie
+        migliaia di frasi e aspetta: che il saldo cresca, e che tu
         <strong>non riesca più a collegare il furto alla causa</strong>.
       </p>
 
       <p>
-        Immagina: oggi crei il tuo wallet e, per comodità, fai uno screenshot
-        delle 12 parole. Poi lo cancelli dopo due giorni — ma nel frattempo
-        un'app malevola l'ha già letto. Non succede niente. Passano tre anni,
-        cinque anni. Tu hai continuato a comprare, il saldo è cresciuto, ti sei
-        dimenticato completamente di quello screenshot. Un giorno apri il wallet
-        e <strong>il saldo è zero</strong>.
+        Oggi crei il wallet e fai uno screenshot delle 12 parole. Lo cancelli
+        dopo due giorni, ma un'app malevola l'ha già letto. Passano cinque anni,
+        il saldo è cresciuto, dello screenshot non ti ricordi più. Un giorno
+        apri il wallet e <strong>trovi zero</strong> — e non saprai mai perché.
       </p>
 
       <p>
-        Non saprai mai perché. Penserai a un bug, a un attacco sofisticato, a
-        sfortuna. E invece la causa è un gesto di dieci secondi fatto anni prima,
-        quando il wallet era ancora vuoto e "tanto non c'era niente dentro".
+        Un seed compromesso <strong>non dà nessun segnale</strong>: nessun
+        avviso, nessuna notifica. Te ne accorgi solo quando i fondi non ci sono
+        più, e a quel punto non si torna indietro.
       </p>
-
-      <div class="callout">
-        <p class="eyebrow">Da ricordare</p>
-        <p>
-          Un seed compromesso <strong>non dà nessun segnale</strong>. Non ci sono
-          avvisi, non ci sono notifiche, non c'è modo di accorgersene. L'unico
-          momento in cui lo scopri è quando i fondi non ci sono più — e a quel
-          punto non si torna indietro.
-        </p>
-      </div>
 
       <h2>Anche la carta va protetta</h2>
 
       <p>
-        Aver scritto il seed su carta è il primo passo giusto, ma non basta. Lo
-        stesso ragionamento di prima vale per il mondo fisico: <strong>qualcuno
-        potrebbe vedere il tuo seed e aspettare un anno prima di usarlo</strong>.
-        Un trasloco, una visita in casa, un tecnico, un parente curioso, un
-        ladro che fotografa senza rubare nulla.
+        Scrivere il seed su carta è il primo passo giusto, ma non basta:
+        <strong>qualcuno potrebbe vederlo e aspettare un anno prima di
+        usarlo</strong>. Un trasloco, un tecnico, un ospite curioso, un ladro
+        che fotografa senza rubare nulla.
       </p>
 
       <p>
-        Per questo il seed su carta va conservato in modo che tu possa
-        <strong>accorgerti se qualcuno lo ha guardato</strong>. Non basta
-        nasconderlo: bisogna poter verificare che sia rimasto chiuso.
+        Non basta nasconderlo: devi poterti accorgere se qualcuno lo ha
+        guardato.
       </p>
-
-      <h3>Come fare in pratica</h3>
 
       <ul>
         <li>
-          Metti il foglio in una <strong>busta sigillata</strong>, meglio se di
-          quelle a sigillo di sicurezza che si strappano visibilmente
-          all'apertura e non si possono richiudere.
+          <strong>Busta sigillata</strong>, meglio se a sigillo di sicurezza:
+          si strappa visibilmente all'apertura e non si può richiudere.
         </li>
         <li>
-          Verifica che il contenuto <strong>non si legga in trasparenza</strong>:
-          prendi la busta chiusa e mettici dietro una torcia potente, anche
-          quella del telefono. Se si intravedono le parole, la busta non va bene.
-          Aggiungi un foglio di carta scura o usa una busta opaca.
+          <strong>Verifica la trasparenza</strong>: metti una torcia dietro la
+          busta chiusa. Se intravedi le parole, aggiungi un foglio scuro o usa
+          una busta opaca.
         </li>
         <li>
-          Firma sulla chiusura, o mettici del nastro adesivo, e annota la data.
-          Così ogni volta che la controlli sai con certezza se è stata aperta.
-        </li>
-        <li>
-          Conserva la busta in un posto sicuro e asciutto: una cassaforte in
-          casa, una cassetta di sicurezza. Per importi rilevanti, valuta il
-          <strong>metallo</strong> al posto della carta — resiste ad acqua e
-          incendio.
+          <strong>Firma sulla chiusura e annota la data</strong>, così a ogni
+          controllo sai con certezza se è stata aperta.
         </li>
       </ul>
 
       <p>
-        Il principio è semplice: <strong>devi sempre poter sapere se qualcuno ha
-        visto il tuo seed o no.</strong> Se non puoi saperlo, devi assumere che
-        qualcuno lo abbia visto — e in quel caso l'unica cosa da fare è creare un
-        wallet nuovo e spostarci i fondi.
+        Se non puoi sapere se qualcuno l'ha vista, devi assumere di sì: crea un
+        wallet nuovo e sposta i fondi.
       </p>
 
-      <h2>Usa solo software open source e testato nel tempo</h2>
+      <h2>Solo software open source e collaudato</h2>
 
       <p>
-        "Open source" significa che il codice del programma è pubblico: chiunque
-        nel mondo può leggerlo e controllare che faccia davvero quello che dice
-        di fare. Con un programma chiuso, invece, devi solo fidarti — esattamente
-        come ci si fidava delle app di SparkKitty.
+        "Open source" significa che il codice è pubblico e chiunque può
+        controllare cosa fa davvero il programma. Con un software chiuso puoi
+        solo fidarti — come chi aveva installato le app di SparkKitty.
       </p>
 
       <p>
-        Ma open source da solo non basta. Serve anche che sia
-        <strong>testato nel tempo</strong>: usato da molte persone, da molti
-        anni, con una comunità attiva che lo controlla. Un wallet nato tre mesi
-        fa può essere open source e comunque essere una pessima idea per
-        custodire i tuoi risparmi.
+        Ma non basta: serve anche che sia usato da molte persone da diversi
+        anni. Scarica sempre dal <strong>sito ufficiale</strong>, mai da link
+        ricevuti nei messaggi o dalle pubblicità dei motori di ricerca. E
+        diffida di qualsiasi app che ti chieda di <strong>digitare il
+        seed</strong>: nessun software legittimo lo fa.
       </p>
 
-      <ul>
-        <li>Scarica sempre dal <strong>sito ufficiale</strong> del progetto, mai da link ricevuti nei messaggi o trovati nei risultati pubblicitari dei motori di ricerca.</li>
-        <li>Verifica che il progetto esista da <strong>diversi anni</strong> e sia ampiamente usato.</li>
-        <li>Diffida di qualsiasi app che ti chieda di <strong>digitare il seed</strong> per "verificarlo", "sincronizzarlo" o "sbloccare un premio". Nessun software legittimo lo fa.</li>
-      </ul>
-
-      <h2>La sicurezza va proporzionata a quello che custodisci</h2>
+      <h2>Sicurezza proporzionata al valore</h2>
 
       <p>
-        Questo è un punto che spesso viene dimenticato, e che porta a due errori
-        opposti — entrambi dannosi.
-      </p>
-
-      <p>
-        Costruire un sistema di sicurezza complicatissimo — più dispositivi
-        hardware, firme multiple, backup distribuiti in tre città diverse — per
-        custodire l'equivalente di duecento euro <strong>non ha senso</strong>.
-        Anzi, è controproducente: più il sistema è complesso, più è facile
-        sbagliare, dimenticare un passaggio, perdere un pezzo. Il rischio più
-        concreto diventa quello di <strong>perdere tu stesso l'accesso</strong>,
-        non che qualcuno te li rubi.
+        Costruire un sistema complicatissimo — più dispositivi, firme multiple,
+        backup in tre città diverse — per custodire duecento euro
+        <strong>non ha senso</strong>: più il sistema è complesso, più è facile
+        sbagliare, e il rischio vero diventa perdere tu stesso l'accesso.
+        Tenere i risparmi di una vita sul telefono che usi ogni giorno è
+        l'errore opposto.
       </p>
 
       <p>
-        Al contrario, tenere i risparmi di una vita su un wallet installato sul
-        telefono che usi tutti i giorni è altrettanto sbagliato, nella direzione
-        opposta.
+        Chiediti: <strong>quanto mi cambierebbe la vita perdere questa
+        cifra?</strong> La sicurezza giusta è quella proporzionata al valore
+        che protegge.
       </p>
 
-      <div class="callout">
-        <p class="eyebrow">Il criterio giusto</p>
-        <p>
-          Chiediti: <strong>quanto mi cambierebbe la vita perdere questa
-          cifra?</strong> Se la risposta è "poco", un wallet semplice ben
-          configurato è sufficiente. Se la risposta è "molto", allora vale la
-          pena investire tempo e denaro in una configurazione più robusta.
-          La sicurezza giusta è quella proporzionata al valore che protegge.
-        </p>
-      </div>
-
-      <h2>Sovranità significa anche responsabilità</h2>
+      <h2>Sovranità significa responsabilità</h2>
 
       <p>
-        Bitcoin ti dà uno strumento straordinario: <strong>essere la banca di te
-        stesso</strong>. Puoi ricevere e inviare pagamenti senza chiedere il
-        permesso a nessuno. Puoi conservare i tuoi fondi senza che nessuno possa
-        congelarli, limitarli o deciderne l'uso al posto tuo. Nessuna filiale,
-        nessun orario, nessuna autorizzazione, nessun confine.
+        Bitcoin ti permette di essere <strong>la banca di te stesso</strong>:
+        ricevere e inviare pagamenti senza chiedere il permesso a nessuno,
+        conservare fondi che nessuno può congelare o limitare.
       </p>
 
       <div class="callout btc">
         <p class="eyebrow">Il rovescio della medaglia</p>
         <p>
           Se non c'è una banca che può bloccarti i fondi, non c'è nemmeno una
-          banca a cui telefonare quando qualcosa va storto. Nessun numero verde,
-          nessuna procedura di rimborso, nessuna transazione annullabile.
-          <strong>La stessa libertà che ti protegge è la stessa che ti rende
-          l'unico responsabile.</strong>
+          banca a cui telefonare quando qualcosa va storto.
+          <strong>La stessa libertà che ti protegge ti rende l'unico
+          responsabile.</strong>
         </p>
       </div>
 
       <p>
-        Non è un motivo per spaventarsi o per rinunciare alla self-custody. È un
-        motivo per <strong>fare le cose bene fin dall'inizio</strong>, quando
-        ancora gli importi sono piccoli e gli errori costano poco. Le abitudini
-        che prendi adesso saranno quelle che userai quando in gioco ci sarà molto
-        di più.
+        Non è un motivo per rinunciare alla self-custody: è un motivo per
+        <strong>fare le cose bene adesso</strong>, quando gli importi sono
+        piccoli e gli errori costano poco.
       </p>
 
-      <!-- Practical summary, placed before the CTA so the reader leaves with
-           something actionable rather than with a sales pitch. -->
       <div class="checklist">
         <h2>La checklist da tenere a mente</h2>
         <ul>
@@ -837,7 +754,7 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            <span>Solo software <strong>open source</strong>, scaricato dal sito ufficiale.</span>
+            <span>Solo software <strong>open source</strong>, dal sito ufficiale.</span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -845,7 +762,7 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            <span>Se hai il dubbio che il seed sia stato visto: <strong>sposta subito i fondi</strong> su un wallet nuovo.</span>
+            <span>Dubbi che il seed sia stato visto? <strong>Sposta subito i fondi.</strong></span>
           </li>
         </ul>
       </div>
@@ -853,24 +770,20 @@
       <h2>Come ti aiuta SAFE21</h2>
 
       <p>
-        Queste regole sembrano semplici scritte in un articolo, ma nella pratica
-        nascono sempre dei dubbi: quale wallet scegliere, come fare il backup,
-        dove conservarlo, cosa fare se si sospetta un errore, come organizzarsi
-        se i fondi crescono nel tempo.
+        Queste regole sembrano semplici scritte qui, ma nella pratica nascono
+        dubbi: quale wallet scegliere, come fare il backup, dove conservarlo,
+        cosa fare se sospetti un errore.
       </p>
 
       <p>
-        <strong>SAFE21</strong> nasce per questo: aiutarti a gestire i tuoi
-        bitcoin nel modo corretto, con strumenti open source e procedure
-        verificabili. Ti seguiamo nella configurazione del wallet, nella messa in
-        sicurezza delle chiavi e nella scelta del livello di protezione adatto a
-        quello che custodisci davvero — di persona o online, in italiano, senza
-        gergo tecnico.
+        <strong>SAFE21</strong> ti aiuta a gestire i tuoi bitcoin nel modo
+        corretto, con strumenti open source e procedure verificabili — di
+        persona o online, in italiano, senza gergo tecnico.
       </p>
 
       <p>
         <strong>Le tue chiavi restano sempre e solo tue.</strong> SAFE21 non
-        prende mai in custodia i tuoi fondi e non ti chiederà mai il tuo seed:
+        prende mai in custodia i tuoi fondi e non ti chiederà mai il seed:
         nessun consulente serio lo farebbe.
       </p>
 
