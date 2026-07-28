@@ -202,12 +202,18 @@
     }
     .mobile-menu nav a:last-child { border-bottom: none; color: var(--teal); }
 
-    @media (max-width: 760px) {
-      .nav { height: 72px; }
-      .nav .logo svg { height: 44px; }
+    /* Header collapses to the hamburger at 1024px, not 760px: between
+       those widths the full link row + Contact button no longer fits and
+       "Blog" wrapped under "Contattaci". Below 1024px the tidy drawer takes
+       over; the theme switch and hamburger stay visible at every width. */
+    @media (max-width: 1024px) {
       .nav-links { display: none; }
       .menu-toggle { display: inline-flex; }
       .nav .cta > a.btn-primary { display: none; }
+    }
+    @media (max-width: 760px) {
+      .nav { height: 72px; }
+      .nav .logo svg { height: 44px; }
     }
 
     /* ---------- Blog intro ---------- */
@@ -325,13 +331,15 @@
     }
   </style>
 
-  <!-- Applies the saved theme BEFORE first paint. Without this the page
-       would render dark for a frame and then flip, which is very visible
-       on a phone. Kept inline and tiny on purpose. -->
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between blog pages doesn't flash. sessionStorage (not
+       localStorage) is deliberate: it is cleared when the tab/browser
+       closes, so every fresh visit starts dark (client's "Variante A"),
+       while a choice still carries across pages within the same visit. -->
   <script>
     (function () {
       try {
-        if (localStorage.getItem('safe21-blog-theme') === 'light') {
+        if (sessionStorage.getItem('safe21-blog-theme') === 'light') {
           document.documentElement.setAttribute('data-theme', 'light');
         }
       } catch (e) { /* private browsing: fall back to the dark default */ }
@@ -542,8 +550,10 @@
      *
      * The whole theme lives in CSS custom properties, so switching means
      * toggling one attribute on <html>. The choice is stored under
-     * "safe21-blog-theme", a key of its own: the homepage uses
-     * "safe21-lang" for the language, and the two must not collide.
+     * "safe21-blog-theme" in sessionStorage, a key of its own (the homepage
+     * uses "safe21-lang" for the language, and the two must not collide).
+     * sessionStorage means the choice lasts only for the current visit;
+     * every new visit starts dark.
      *
      * The <meta name="theme-color"> tag is updated too, so the browser
      * chrome on mobile matches the page instead of staying navy.
@@ -568,7 +578,9 @@
         btn.setAttribute('aria-pressed', String(isLight));
         btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
         if (meta) meta.setAttribute('content', COLORS[isLight ? 'light' : 'dark']);
-        try { localStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}
+        // sessionStorage, not localStorage: the choice is forgotten when the
+        // browser/tab closes, so the next visit starts dark again.
+        try { sessionStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}
       }
 
       // Sync the button with whatever the pre-paint script already set.
