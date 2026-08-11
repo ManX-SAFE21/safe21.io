@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SAFE21 — Blog article: "Il tuo SEED non deve mai toccare internet"
+       Single self-contained file (HTML + CSS + minimal JS).
+
+       LANGUAGE NOTE (project rule R1):
+       The homepage (index.html) ships in English with a runtime EN/IT
+       switcher. The blog, by client decision, is ITALIAN ONLY — so this
+       page has no language switcher and no i18n dictionary: the Italian
+       copy is written directly in the markup. All code comments and
+       identifiers remain in English, as required by R1.
+
+       Design tokens, header and footer are copied from index.html so the
+       blog is visually indistinguishable from the rest of the site.
+       ============================================================ -->
+
+  <title>Non fidarti ciecamente (nemmeno di noi) — SAFE21</title>
+  <meta name="description" content="Gira la moda di generare il seed Bitcoin lanciando i dadi. Può essere fatto bene, ma è più difficile di quanto sembri: perché per la maggior parte delle persone la via più semplice è anche la più sicura." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="logos/safe21-favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
+
+  <!-- Open Graph (social preview) -->
+  <meta property="og:title" content="Non fidarti ciecamente — nemmeno di noi" />
+  <meta property="og:description" content="La moda del seed coi dadi, perché è più difficile di quanto sembri, e perché la semplicità è la vera sicurezza." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://safe21.io/blog-dadi-semplicita" />
+  <meta property="og:locale" content="it_IT" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- Design tokens (identical to index.html) ---------- */
+    :root {
+      --ink:    #0A0F1C;   /* base background ("vault") */
+      --ink-2:  #0E1525;   /* alternating section background */
+      --panel:  #111B2E;   /* cards / elevated surfaces */
+      --line:   #1F2B44;   /* hairline borders */
+      --light:  #F5F7FA;   /* primary text */
+      --muted:  #95A1B5;   /* secondary text */
+      --teal:   #2DD4BF;   /* primary accent (security) */
+      --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
+      --orange: #F7931A;   /* Bitcoin accent — used sparingly */
+      --danger: #F26D6D;   /* used ONLY for the "never do this" rules */
+
+      --maxw: 1120px;
+      --readw: 720px;      /* narrower measure for long-form reading */
+      --radius: 16px;
+
+      /* --- Tokens added in [12] so the light theme can override them.
+             These values are exactly what the stylesheet used to hardcode,
+             so the dark rendering is byte-for-byte unchanged. --- */
+      --body:         #DDE4EE;                    /* long-form body copy */
+      --header-bg:    rgba(10, 15, 28, 0.72);     /* sticky header (blurred) */
+      --drawer-bg:    rgba(10, 15, 28, 0.96);     /* mobile drawer */
+      --accent-hover: #45e0cd;                    /* button + link hover */
+      --btn-text:     #04201C;                    /* text on the teal button */
+      --tint-teal-bg: rgba(45, 212, 191, 0.07);   /* callout fill */
+      --tint-teal-bd: rgba(45, 212, 191, 0.28);   /* callout border */
+      --tint-btc-bg:  rgba(247, 147, 26, 0.07);   /* Bitcoin callout fill */
+      --tint-btc-bd:  rgba(247, 147, 26, 0.30);   /* Bitcoin callout border */
+      --logo-word:    #F5F7FA;                    /* "SAFE" in the wordmark */
+      --logo-21:      #2DD4BF;                    /* "21" in the wordmark */
+      --card-shadow:  none;
+    }
+
+    /* ---------- Light theme (blog only) ----------
+       Applied by setting data-theme="light" on <html>. Every value is a
+       deliberate counterpart of the dark token, not a generic light
+       palette: the page background is a cool white tinted toward the
+       brand's navy, and the primary text colour IS the dark theme's
+       background (#0A0F1C), so the two modes mirror each other.
+
+       The teal is darkened from #2DD4BF to #0A7568 because the bright
+       teal fails contrast on white (4.31:1 on the alternating section
+       background). #0A7568 clears 4.5:1 everywhere while still reading
+       as the same colour family. The logo keeps the untouched brand teal
+       #0D9488 from logos/safe21-logo-light.svg — it is large display
+       type, held to the 3:1 large-text threshold, which it passes.
+
+       All pairings were checked against WCAG 2.1 AA before being written
+       here; see CHANGELOG entry [12] for the measured ratios. --- */
+    [data-theme="light"] {
+      --ink:          #F4F6F9;
+      --ink-2:        #E8EDF4;
+      --panel:        #FFFFFF;
+      --line:         #D3DBE6;
+      --light:        #0A0F1C;
+      --body:         #1E2735;
+      --muted:        #54637A;
+      --teal:         #0A7568;
+      --teal-d:       #0D9488;
+      --orange:       #9A5B00;
+      --danger:       #B3261E;
+      --header-bg:    rgba(244, 246, 249, 0.82);
+      --drawer-bg:    rgba(244, 246, 249, 0.97);
+      --accent-hover: #0D9488;
+      --btn-text:     #FFFFFF;
+      --tint-teal-bg: rgba(10, 117, 104, 0.06);
+      --tint-teal-bd: rgba(10, 117, 104, 0.30);
+      --tint-btc-bg:  rgba(154, 91, 0, 0.06);
+      --tint-btc-bd:  rgba(154, 91, 0, 0.28);
+      --logo-word:    #0A0F1C;
+      --logo-21:      #0D9488;
+      /* On white, cards need a shadow to separate from the page; on the
+         dark theme the border alone is enough. */
+      --card-shadow:  0 1px 3px rgba(10, 15, 28, 0.06);
+    }
+
+    /* ---------- Reset / base ---------- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--light);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    /* Reading column: long-form text is capped narrower than the site grid
+       so lines stay around 70-80 characters, which is easier to read. */
+    .read { max-width: var(--readw); margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin: 0 0 14px;
+    }
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; margin: 0; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      font-size: 15px; padding: 13px 22px; border-radius: 10px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+    }
+    .btn-primary { background: var(--teal); color: var(--btn-text); }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
+    .btn-ghost { border-color: var(--line); color: var(--light); background: transparent; }
+    .btn-ghost:hover { border-color: var(--teal); transform: translateY(-2px); }
+
+    /* ---------- Header (same structure as index.html) ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+    .nav .logo svg { height: 60px; width: auto; }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-links a { font-size: 14px; color: var(--muted); font-weight: 500; transition: color .15s ease; }
+    .nav-links a:hover { color: var(--light); }
+    .nav-links a.current { color: var(--teal); }
+    .nav .cta { display: flex; align-items: center; gap: 16px; }
+
+    .menu-toggle {
+      display: none;
+      flex: none; width: 42px; height: 42px;
+      align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+    }
+    .menu-toggle svg { width: 22px; height: 22px; }
+    .menu-toggle .icon-close { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: var(--drawer-bg);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu nav { display: flex; flex-direction: column; padding: 8px 24px 18px; }
+    .mobile-menu nav a {
+      padding: 14px 0; font-size: 16px; color: var(--light);
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu nav a:last-child { border-bottom: none; color: var(--teal); }
+
+    /* Header collapses to the hamburger at 1024px, not 760px: between
+       those widths the full link row + Contact button no longer fits and
+       "Blog" wrapped under "Contattaci". Below 1024px the tidy drawer takes
+       over; the theme switch and hamburger stay visible at every width. */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .nav .cta > a.btn-primary { display: none; }
+    }
+    @media (max-width: 760px) {
+      .nav { height: 72px; }
+      .nav .logo svg { height: 44px; }
+    }
+
+    /* ---------- Article layout ---------- */
+    .article-head {
+      padding: 64px 0 8px;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .back-link {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); display: inline-block; margin-bottom: 28px;
+      transition: color .15s ease;
+    }
+    .back-link:hover { color: var(--teal); }
+
+    .article-head h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .article-head .standfirst {
+      font-size: 19px; color: var(--muted); margin: 22px 0 0;
+    }
+    /* Byline: mono, because it is metadata rather than prose. */
+    .byline {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      color: var(--muted); letter-spacing: 1px;
+      margin: 30px 0 0; padding: 16px 0 40px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 8px 18px;
+    }
+    .byline .read-time { color: var(--teal); }
+
+    .article-body { padding: 48px 0 24px; }
+    .article-body h2 {
+      font-size: 27px; font-weight: 600;
+      margin: 52px 0 16px; letter-spacing: -0.2px;
+    }
+    .article-body h3 {
+      font-size: 19px; font-weight: 600; margin: 34px 0 10px;
+    }
+    .article-body p { margin: 0 0 20px; font-size: 17px; color: var(--body); }
+    .article-body strong { color: var(--light); font-weight: 600; }
+    .article-body ul { margin: 0 0 22px; padding-left: 22px; }
+    .article-body li { margin-bottom: 10px; font-size: 17px; color: var(--body); }
+    /* Inline links inside prose are underlined so they are obvious in
+       body copy, where colour alone is not a reliable signal. */
+    .article-body a.inline {
+      color: var(--teal); text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-body a.inline:hover { color: var(--accent-hover); }
+
+    /* ---------- Source figure (the X / Twitter screenshot) ---------- */
+    figure.source {
+      margin: 34px 0 34px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    figure.source img { width: 100%; height: auto; }
+    figure.source figcaption {
+      font-size: 13px; color: var(--muted);
+      padding: 14px 18px; border-top: 1px solid var(--line);
+    }
+    figure.source figcaption a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Rule cards: the "never do this" list ----------
+       Numbered deliberately: these are not decorative markers, the list is
+       a fixed set of rules the reader is meant to be able to refer back to
+       ("regola 2"), so the numbering carries real information. */
+    .rules { margin: 30px 0 36px; display: grid; gap: 14px; }
+    .rule {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--danger);
+      border-radius: 12px; padding: 18px 20px;
+    }
+    .rule .num {
+      font-family: 'Space Mono', monospace; font-size: 13px;
+      color: var(--danger); flex: none; padding-top: 2px;
+    }
+    .rule h3 { font-size: 17px; margin: 0 0 6px; }
+    .rule p { margin: 0; font-size: 15px; color: var(--muted); }
+
+    /* ---------- Callout (neutral highlight) ---------- */
+    .callout {
+      background: var(--tint-teal-bg);
+      border: 1px solid var(--tint-teal-bd);
+      border-radius: var(--radius);
+      padding: 24px 26px; margin: 34px 0;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .eyebrow { margin-bottom: 10px; }
+
+    /* Bitcoin-orange variant, reserved for the "sovereignty" passage —
+       it is the one Bitcoin-native idea in the article, so it gets the
+       Bitcoin accent, consistently with how orange is used site-wide. */
+    .callout.btc {
+      background: var(--tint-btc-bg);
+      border-color: var(--tint-btc-bd);
+    }
+    .callout.btc .eyebrow { color: var(--orange); }
+
+    /* ---------- Checklist ---------- */
+    .checklist {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 28px 30px; margin: 40px 0;
+    }
+    .checklist h2 { margin: 0 0 6px; font-size: 22px; }
+    .checklist ul { list-style: none; margin: 18px 0 0; padding: 0; }
+    .checklist li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 11px 0; border-bottom: 1px solid var(--line);
+      font-size: 16px; color: var(--body);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li svg { flex: none; width: 20px; height: 20px; margin-top: 3px; color: var(--teal); }
+
+    /* ---------- Closing CTA ---------- */
+    .article-cta {
+      background: var(--ink-2); border-top: 1px solid var(--line);
+      margin-top: 56px; padding: 64px 0;
+    }
+    .article-cta h2 { font-size: 30px; margin-bottom: 14px; }
+    .article-cta p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
+    .article-cta .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    /* ---------- Footer (same as index.html) ---------- */
+    footer { background: var(--ink); border-top: 1px solid var(--line); padding: 56px 0 34px; }
+    .foot-top { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+    .foot-brand { max-width: 320px; }
+    .foot-brand .logo svg { height: 54px; width: auto; margin-bottom: 14px; }
+    .foot-brand p { color: var(--muted); font-size: 14px; margin: 0; }
+    .foot-cols { display: flex; flex-wrap: wrap; gap: 48px; }
+    .foot-col { display: flex; flex-direction: column; gap: 10px; }
+    .foot-col h4 {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--light); margin: 0 0 4px;
+    }
+    .foot-col a { font-size: 14px; color: var(--muted); transition: color .15s ease; }
+    .foot-col a:hover { color: var(--teal); }
+    .disclaimer {
+      margin: 44px 0 18px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 12.5px; color: var(--muted); line-height: 1.7;
+    }
+    .copyright { font-size: 12.5px; color: var(--muted); margin: 0; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 760px) {
+      .article-head { padding-top: 40px; }
+      .article-head h1 { font-size: 32px; }
+      .article-head .standfirst { font-size: 17px; }
+      .article-body h2 { font-size: 23px; margin-top: 42px; }
+      .article-body p, .article-body li { font-size: 16.5px; }
+      .checklist { padding: 22px 20px; }
+      .article-cta h2 { font-size: 25px; }
+    }
+
+    /* ---------- Theme toggle button ---------- */
+    /* Unlike the "Contattaci" button, this control stays visible at every
+       width: on a phone the light theme is exactly where it matters most,
+       so hiding the switch on mobile would defeat the purpose. */
+    .theme-toggle {
+      flex: none; width: 42px; height: 42px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
+    .theme-toggle svg { width: 20px; height: 20px; }
+    /* Show the icon of the theme the click will switch TO. */
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* Smooth crossfade between themes. Disabled automatically by the
+       prefers-reduced-motion block above. */
+    body, header, .post-card, .callout, .checklist, .rule, figure.source {
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
+    .post-card, .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
+
+    @media (max-width: 400px) {
+      /* Very narrow phones: tighten the header gap so logo + theme +
+         hamburger never collide. */
+      .nav .cta { gap: 10px; }
+      .theme-toggle, .menu-toggle { width: 38px; height: 38px; }
+    }
+  </style>
+
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between blog pages doesn't flash. sessionStorage (not
+       localStorage) is deliberate: it is cleared when the tab/browser
+       closes, so every fresh visit starts dark (client's "Variante A"),
+       while a choice still carries across pages within the same visit. -->
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('safe21-blog-theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) { /* private browsing: fall back to the dark default */ }
+    })();
+  </script>
+</head>
+
+<body id="top">
+
+  <!-- ================= HEADER ================= -->
+  <!-- Copied from index.html. Differences: links point back to index.html
+       sections (this is a separate page, so bare "#anchors" would not work),
+       the labels are written in Italian because the blog is Italian-only,
+       and there is no EN/IT switcher for the same reason. -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="index.html" aria-label="SAFE21 home">
+        <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+          <defs>
+            <mask id="kh-head">
+              <rect width="34" height="34" rx="8" fill="#fff"/>
+              <circle cx="17" cy="14" r="5" fill="#000"/>
+              <path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-head)"/></g>
+          <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4">
+            <tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan>
+          </text>
+        </svg>
+      </a>
+
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html" class="current">Blog</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
+        <!-- Light/dark switch. Blog-only feature: the homepage stays dark.
+             Deliberately NOT hidden on mobile (see .theme-toggle CSS). -->
+        <button type="button" class="theme-toggle" aria-pressed="false"
+                aria-label="Passa al tema chiaro" title="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+          </svg>
+        </button>
+
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Apri menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html">Blog</a>
+        <a href="mailto:info@safe21.io">Contattaci</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= ARTICLE HEADER ================= -->
+  <div class="article-head">
+    <div class="read">
+      <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
+      <p class="eyebrow">Buone pratiche &middot; Seed phrase</p>
+      <h1>Non fidarti ciecamente — nemmeno di noi</h1>
+      <p class="standfirst">
+        Gira la moda di generare il seed lanciando i dadi. Fatto perfettamente
+        può funzionare, ma è molto più difficile di quanto sembri — e per la
+        maggior parte delle persone la via più semplice è anche la più sicura.
+      </p>
+      <p class="byline">
+        <span>SAFE21</span>
+        <span>11 agosto 2026</span>
+        <span class="read-time">8 min di lettura</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE BODY ================= -->
+  <article class="article-body">
+    <div class="read">
+
+      <p>
+        Questo articolo comincia con un consiglio insolito, soprattutto se a
+        darlo è chi fa consulenza: <strong>non fidatevi ciecamente di
+        nessuno</strong>. Non dei video, non dei gruppi, non degli influencer —
+        e nemmeno di noi. Nel mondo Bitcoin chiunque può dire qualsiasi cosa
+        con grande sicurezza, e un consiglio sbagliato può costare caro.
+      </p>
+
+      <p>
+        Approfondite sempre quello che vi viene detto. Confrontate le fonti,
+        cercate il parere opposto, fate domande scomode. Un consulente serio
+        non si offende se verificate le sue affermazioni: vi incoraggia a
+        farlo, perché è esattamente così che si impara a stare in piedi da
+        soli.
+      </p>
+
+      <p>
+        E oggi mettiamo alla prova questo principio su una moda che gira da un
+        po'.
+      </p>
+
+      <h2>La moda del seed coi dadi</h2>
+
+      <p>
+        Nei gruppi e nei tutorial si vede sempre più spesso questa idea: invece
+        di lasciare che il wallet generi il seed — la lista di 12 o 24 parole
+        che controlla i tuoi bitcoin — lo si crea "a mano", lanciando i dadi e
+        convertendo i risultati in parole.
+      </p>
+
+      <p>
+        Il fascino è comprensibile. Nessun software di cui fidarsi, casualità
+        fisica che puoi toccare, la sensazione di controllo totale fin dal
+        primo istante. Sembra il massimo della sovranità.
+      </p>
+
+      <p>
+        La spinta nasce da un dubbio legittimo: "e se il software che genera il
+        seed fosse difettoso, o manomesso?". La domanda è giusta, e va presa
+        sul serio. Ma proprio perché è seria, la risposta va cercata con
+        metodo — non con l'improvvisazione.
+      </p>
+
+      <p>
+        E diciamolo subito, per onestà: <strong>fatto perfettamente, sapendo
+        esattamente cosa si sta facendo, è un metodo valido</strong>. Il
+        problema sta tutto dentro quella parola: "perfettamente".
+      </p>
+
+      <h2>Perché è più difficile di quanto sembra</h2>
+
+      <p>I problemi sono tre, in ordine crescente di importanza.</p>
+
+      <h3>1. Servono tanti lanci, col metodo giusto</h3>
+
+      <p>
+        Un normale dado a sei facce produce circa due bit e mezzo di casualità
+        ("entropia") per lancio: per un seed da 12 parole servono circa
+        <strong>cinquanta lanci</strong>, per uno da 24 quasi cento — tutti
+        registrati e convertiti senza errori. Chi improvvisa spesso lancia
+        troppo poco, o usa un metodo di conversione che butta via casualità
+        senza accorgersene. Il risultato sembra un seed normale, ma è più
+        debole di quanto dovrebbe — e nessun segnale te lo dice.
+      </p>
+
+      <h3>2. I dadi devono essere davvero bilanciati</h3>
+
+      <p>
+        I dadi da gioco non nascono per la crittografia: piccole imperfezioni
+        di fabbricazione rendono alcune facce più probabili di altre, e ogni
+        sbilanciamento riduce la casualità reale. Esistono dadi da casinò di
+        precisione, ma è un altro dettaglio da conoscere, procurarsi e
+        verificare.
+      </p>
+
+      <h3>3. Alla fine serve comunque un computer</h3>
+
+      <p>
+        Ed è il punto che quasi nessuno dice. Nello standard BIP39, l'ultima
+        parola del seed contiene un <strong>codice di controllo
+        ("checksum")</strong> che va calcolato con una funzione crittografica a
+        partire da tutta la casualità generata. A mano non si fa: serve un
+        computer e un software fidato che esegua il calcolo — e lo stesso vale
+        poi per creare gli indirizzi e usare il wallet.
+      </p>
+
+      <p>
+        Ma allora il punto debole della catena torna a essere proprio quello
+        che coi dadi volevi eliminare: il software e la macchina su cui gira.
+        <strong>Hai aggiunto complessità e fatica, senza eliminare la fiducia
+        nel computer.</strong>
+      </p>
+
+      <h2>La via semplice (e di solito più sicura)</h2>
+
+      <p>
+        Ogni telefono e computer moderno contiene un generatore di numeri
+        casuali progettato apposta per la crittografia. Si chiama
+        <strong>CSPRNG</strong> — generatore pseudo-casuale crittograficamente
+        sicuro — ed è lo stesso meccanismo che protegge le connessioni della
+        tua banca e i tuoi messaggi cifrati. È studiato, testato e attaccato da
+        decenni dalla comunità mondiale della sicurezza: tutto tranne che un
+        componente improvvisato.
+      </p>
+
+      <p>
+        Un wallet serio non fa altro che chiedere la casualità a questo
+        generatore e costruirci sopra il seed, checksum compreso, senza errori
+        di metodo. In un secondo fa, bene, quello che coi dadi richiede un'ora
+        di attenzione assoluta.
+      </p>
+
+      <p>
+        E qui torna il dubbio legittimo di prima: come faccio a sapere che il
+        wallet usa il generatore nel modo giusto? È esattamente il motivo per
+        cui insistiamo sull'<strong>open source</strong>: il codice è pubblico,
+        e il modo in cui il seed viene costruito è verificato da migliaia di
+        occhi indipendenti da anni. Non è fiducia cieca in qualcuno — è
+        fiducia distribuita su una comunità intera.
+      </p>
+
+      <p>
+        Il nostro riferimento è <strong>Electrum</strong>: open source dal
+        2011, tra i wallet più longevi, esaminati e collaudati di tutto
+        l'ecosistema Bitcoin — ed è lo strumento su cui si concentra la
+        specialità di SAFE21. Su telefono, <strong>BlueWallet</strong> è
+        un'alternativa open source e collaudata per iniziare.
+      </p>
+
+      <p>
+        Valgono le solite regole: scaricare solo dal sito ufficiale, mai da
+        link nei messaggi o dalle pubblicità; e il seed appena generato —
+        comunque sia nato — <a class="inline" href="blog-seed-mai-online.html">non
+        deve mai toccare internet</a>.
+      </p>
+
+      <p>
+        C'è di più: il software che consigliamo non va preso sulla fiducia, si
+        può <strong>verificare</strong>. Ogni versione di Electrum viene
+        firmata dai suoi sviluppatori con una <strong>firma digitale
+        GPG</strong> — un sigillo elettronico che conferma chi ha davvero
+        rilasciato quel file (Electrum ne ha più d'una, di persone diverse). E
+        insieme al programma viene pubblicata la sua <strong>impronta
+        crittografica (hash SHA-256)</strong>: una specie di impronta digitale
+        del file. Calcolando l'impronta di ciò che hai scaricato e
+        confrontandola con quella pubblicata, verifichi che il file sia
+        identico <strong>bit per bit</strong> a quello open source esaminato da
+        migliaia di occhi in tutto il mondo — nessuna riga aggiunta, nessuna
+        manomissione. Chi ha competenze tecniche può farlo da solo in pochi
+        minuti; chi non le ha può farsi guidare passo-passo da noi, o anche da
+        una delle IA oggi disponibili. Il punto è che la possibilità di
+        controllare esiste, ed è alla portata di tutti: è questa la differenza
+        tra fidarsi e verificare.
+      </p>
+
+      <div class="callout">
+        <p class="eyebrow">Detto in una riga</p>
+        <p>
+          Per la maggior parte delle persone, <strong>il generatore del proprio
+          dispositivo usato da un wallet open source collaudato è più sicuro
+          dei dadi</strong> — a meno di non fare ogni singolo passaggio alla
+          perfezione.
+        </p>
+      </div>
+
+      <h2>Una storia vera</h2>
+
+      <p>
+        Conosciamo un programmatore che anni fa ha lasciato l'Italia con
+        parecchi bitcoin, sentendosi ricco e libero. Persona tecnica,
+        competente: il seed se l'era generato da solo, a modo suo. A un certo
+        punto ha commesso degli errori nella gestione delle chiavi private e
+        pubbliche.
+      </p>
+
+      <p>
+        Morale: si è ritrovato in un Paese nuovo, <strong>senza i bitcoin che
+        credeva di avere</strong>. Un errore suo, pagato carissimo. Oggi non
+        sbaglia più — ma quella lezione se la porta addosso.
+      </p>
+
+      <p>
+        E parliamo di un programmatore. Se può capitare a chi lo fa di
+        mestiere, l'idea che "a me non succede" è la prima da abbandonare.
+      </p>
+
+      <p>
+        Il dettaglio da notare: a tradirlo non è stata l'ignoranza, ma la
+        complessità che si era costruito da solo. Con una configurazione
+        standard, fatta bene e capita fino in fondo, quei bitcoin sarebbero
+        ancora suoi.
+      </p>
+
+      <h2>Più semplicità, meno errori</h2>
+
+      <p>
+        Diciamolo senza girarci intorno: troppo spesso chi conosce a fondo
+        Bitcoin se la tira. Vuole far vedere quante cose sa, riempie le persone
+        di sigle, distinguo e configurazioni avanzate — e ottiene soltanto
+        confusione. E la confusione produce errori. <strong>Gli errori umani si
+        pagano</strong>: in Bitcoin non c'è un'assistenza clienti a cui
+        chiedere il rimborso.
+      </p>
+
+      <p>
+        Il nostro consiglio va nella direzione opposta. <strong>State nel
+        semplice, state cauti, col giusto grado di serenità.</strong> Un
+        sistema semplice che capite fino in fondo è più sicuro di un sistema
+        sofisticato che capite a metà. Più semplicità significa meno errori
+        umani — e spesso anche più efficacia.
+      </p>
+
+      <p>
+        E restate sempre un po' curiosi: la curiosità fa crescere. È la fretta
+        di strafare che fa i danni.
+      </p>
+
+      <h2>Bitcoin è come guidare un'auto</h2>
+
+      <p>
+        Niente di tutto questo deve fare paura. Per mettere le cose in
+        prospettiva, l'immagine che usiamo più spesso è questa: <strong>usare
+        Bitcoin è come guidare un'auto</strong>.
+      </p>
+
+      <p>
+        Per guidare serve un minimo di teoria e di pratica: senza, l'auto
+        diventa pericolosa. Ma non serve conoscere l'elettronica di bordo, il
+        funzionamento del motore, la chimica della combustione o la fisica
+        delle sospensioni. Serve sapere dove sono i comandi, rispettare poche
+        regole fondamentali e conoscere i propri limiti.
+      </p>
+
+      <p>
+        Con Bitcoin è lo stesso. Serve la patente — le regole di base sulla
+        custodia del seed e un po' di pratica guidata — non la laurea in
+        ingegneria. Chi vuole è libero di studiarsi il motore, che nel nostro
+        caso è la crittografia: è anche un viaggio bellissimo. Ma <strong>non è
+        indispensabile per guidare in sicurezza</strong>.
+      </p>
+
+      <p>
+        E come per la guida, le prime uscite è meglio non farle da soli:
+        qualche ora di pratica accompagnata evita gli errori che si fanno
+        una volta sola.
+      </p>
+
+      <h2>Come ti aiuta SAFE21</h2>
+
+      <p>
+        SAFE21 nasce esattamente per questo: aiutarti a impostare una gestione
+        dei tuoi bitcoin <strong>semplice, corretta e proporzionata</strong> a
+        quello che custodisci — la "scuola guida", per restare nell'esempio.
+        Configurazione del wallet con Electrum, messa in sicurezza del seed, e
+        le buone abitudini che evitano gli errori che si pagano. Di persona o
+        online, in italiano, senza gergo tecnico.
+      </p>
+
+      <p>
+        E se dopo questo articolo ti è venuto un dubbio su come hai generato il
+        tuo seed, è il momento giusto per parlarne — <strong>prima</strong> che
+        i fondi crescano.
+      </p>
+
+      <p>
+        <strong>Le tue chiavi restano sempre e solo tue.</strong> SAFE21 non
+        prende mai in custodia i tuoi fondi e non ti chiederà mai il seed:
+        nessun consulente serio lo farebbe.
+      </p>
+
+    </div>
+  </article>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta">
+    <div class="read">
+      <p class="eyebrow">Un dubbio è meglio di un errore</p>
+      <h2>Non sei sicuro di come stai custodendo i tuoi bitcoin?</h2>
+      <p>
+        Scrivici e raccontaci la tua situazione. Ti diciamo cosa va bene, cosa
+        conviene cambiare e da dove iniziare — senza impegno.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="index.html#services">Scopri i servizi</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <!-- Same structure as index.html, written directly in Italian. -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="index.html" aria-label="SAFE21 home">
+            <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+              <defs><mask id="kh-foot"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="14" r="5" fill="#000"/><path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/></mask></defs>
+              <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-foot)"/></g>
+              <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan></text>
+            </svg>
+          </a>
+          <p>Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.</p>
+        </div>
+
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Servizi</h4>
+            <a href="index.html#services">Assistenza Bitcoin</a>
+            <a href="index.html#services">Corsi Bitcoin</a>
+            <a href="index.html#services">Sicurezza Electrum</a>
+            <a href="index.html#inheritance">Eredità</a>
+            <a href="index.html#payments">Pagamenti</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
+            <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contatti</h4>
+            <a href="mailto:info@safe21.io">info@safe21.io</a>
+            <a href="blog.html">Blog</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si
+        tratta di consulenza legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia
+        i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni
+        e tassazione variano da paese a paese: per la tua situazione specifica rivolgiti a un
+        professionista qualificato. Le transazioni Bitcoin sono irreversibili.
+      </p>
+      <p class="copyright">© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * Mobile menu toggle.
+     *
+     * Same dependency-free behaviour as index.html: the hamburger opens a
+     * slide-down drawer, which closes on link tap, on Escape, and resets
+     * automatically when the viewport grows past the mobile breakpoint.
+     */
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        menu.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        // The label describes the NEXT action, so it flips with the state.
+        toggle.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      // Close after tapping a link, otherwise the drawer would stay open
+      // over the destination content.
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      // Reset when rotating/resizing to desktop, where the drawer is hidden
+      // by CSS but would otherwise keep a stale aria-expanded="true".
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 760) setOpen(false);
+      });
+    })();
+
+    /**
+     * Light/dark theme switch — blog pages only.
+     *
+     * The whole theme lives in CSS custom properties, so switching means
+     * toggling one attribute on <html>. The choice is stored under
+     * "safe21-blog-theme" in sessionStorage, a key of its own (the homepage
+     * uses "safe21-lang" for the language, and the two must not collide).
+     * sessionStorage means the choice lasts only for the current visit;
+     * every new visit starts dark.
+     *
+     * The <meta name="theme-color"> tag is updated too, so the browser
+     * chrome on mobile matches the page instead of staying navy.
+     */
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (!btn) return;
+
+      var COLORS = { dark: '#0A0F1C', light: '#F4F6F9' };
+
+      function apply(theme) {
+        var isLight = theme === 'light';
+        if (isLight) {
+          root.setAttribute('data-theme', 'light');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        // aria-pressed reports the *state*; the label describes the
+        // *next* action, which is what a screen-reader user needs.
+        btn.setAttribute('aria-pressed', String(isLight));
+        btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
+        if (meta) meta.setAttribute('content', COLORS[isLight ? 'light' : 'dark']);
+        // sessionStorage, not localStorage: the choice is forgotten when the
+        // browser/tab closes, so the next visit starts dark again.
+        try { sessionStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}
+      }
+
+      // Sync the button with whatever the pre-paint script already set.
+      apply(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+      btn.addEventListener('click', function () {
+        apply(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+      });
+    })();
+  </script>
+</body>
+</html>

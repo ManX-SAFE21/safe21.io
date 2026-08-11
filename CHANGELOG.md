@@ -3,6 +3,66 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [16] — Verifiability paragraph in the dice article
+
+Client request: after the "solite regole" paragraph, add a short paragraph
+explaining that the recommended open-source software is verifiable bit for
+bit via cryptographic checks and developer signatures.
+
+- Added one paragraph (~150 words): the recommended software isn't taken on
+  trust but can be verified. Explains the developers' **GPG signature** (an
+  electronic seal confirming who released the file — Electrum has several,
+  from different people) and the published **SHA-256 hash** (a fingerprint of
+  the file); recomputing and comparing it confirms the download is identical
+  bit for bit to the open-source code reviewed worldwide. Notes that the
+  technically able can do it themselves, and others can be guided step by step
+  by SAFE21 or by an AI. Framed as "the difference between trusting and
+  verifying", tying back to the article's open-source theme. Plain-language
+  metaphors (seal, fingerprint); no unexplained jargon.
+- **SHA-256 instead of the client's suggested MD5**, agreed beforehand: MD5 is
+  collision-broken and unsuitable for integrity verification; Electrum in
+  practice is verified with GPG signatures and SHA-256. The argument is
+  unchanged and now technically correct.
+- Read-time label raised 7 → 8 min on the article byline and the blog.html
+  card (1,593 words, ~8 min). Verified: SHA-256 present, MD5 absent, GPG and
+  "bit per bit" present, single h1, internal links resolve.
+
+## [15] — Second article: dice-generated seeds vs simplicity
+
+New `blog-dadi-semplicita.html` — *"Non fidarti ciecamente — nemmeno di
+noi"*, developed from the client's own draft into a genuine 7-minute read
+(1,431 words, ~7.2 min at 200 wpm), per the client's explicit choice after
+the length discussion of task [14].
+
+- Structure: don't trust anyone blindly (including SAFE21) → the
+  dice-generated-seed fashion and why it appeals → three reasons it is harder
+  than it looks (≈50 correctly-performed d6 rolls for 12 words, truly balanced
+  dice, and the BIP39 checksum in the last word that requires a trusted
+  computer anyway — so the weak link the dice were meant to remove returns) →
+  the simple path: the device CSPRNG used by a battle-tested open-source
+  wallet → the programmer's true story (kept brief and anonymous, as chosen) →
+  simplicity = fewer human errors (direct tone kept, as chosen) → the
+  car/driving-licence analogy as closer → SAFE21 section.
+- Technical corrections vs the client's draft, agreed beforehand: the last
+  word is not entirely "calculated" (it contains a 4-bit checksum computed
+  cryptographically); the dice problem is the number of rolls and the
+  conversion method rather than the die-face configuration. The deliberate
+  editorial choice NOT to include a step-by-step dice procedure is kept: the
+  article explains why it is hard, not how to do it.
+- Wallet mentions per client instruction: Electrum foregrounded (open source
+  since 2011, SAFE21's speciality), BlueWallet as the mobile alternative,
+  Pocket removed.
+- Built by cloning blog-seed-mai-online.html as the shell, so the light/dark
+  theme (session-only), the 1024px menu breakpoint and the design tokens are
+  inherited verbatim; only <head> metadata and the article region were
+  replaced, and the og:image tag was dropped (no image in this article).
+  Includes an internal link to the first article.
+- blog.html: new card added on top (newest first), old card untouched.
+- Verified: single h1, correct metadata, internal links resolve, Electrum
+  emphasised, no Pocket, no emoji, theme and menu features present, all
+  twelve themes from the client's draft covered, two cards in the right
+  order. All checks pass.
+
 ## [14] — Shorter article
 
 **Task:** the article was too long. Initial brief was −30%; the client then
