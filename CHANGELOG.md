@@ -3,6 +3,37 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [18] — Infographic added to the dice article
+
+**Client request:** add a client-supplied infographic ("Dadi o Software? La
+Verità sulla Generazione del Seed Bitcoin") to blog-dadi-semplicita.html, with
+advice on size/format to keep server weight low.
+
+- **Format kept as PNG, not JPEG.** The infographic is flat-colour with crisp
+  text (unlike the task [11] tweet screenshot, which was photographic and
+  benefited from JPEG). JPEG on flat text/graphics produces visible haloing
+  around letters; PNG does not.
+- **Resized 2752×1536 → 1440×804** (2x the article's 720px content width, so
+  it stays sharp on high-density phone screens without shipping pixels no
+  browser will render) **and quantised to a 256-colour palette** — the
+  effective lever for flat-colour PNGs, since truecolor is unnecessary when
+  the source has a handful of distinct fills. **4.78 MB → 625 KB, a 87%
+  reduction**, with no visible loss on the infographic's text or gradients
+  (checked visually before delivery).
+- Saved as `images/infografica-dadi-vs-software.png`. Inserted as a
+  `<figure>` right after "I problemi sono tre, in ordine crescente di
+  importanza", before the three <h3> subsections it summarises — same
+  pattern as the sourced screenshot in the first article (explicit `width`/
+  `height` to avoid layout shift, `loading="lazy"`, descriptive `alt` text).
+- **Added a short caption** per client request, clarifying that the
+  infographic's rounded "50-100 lanci" figure spans both seed lengths, while
+  the article body gives the precise numbers (~50 for 12 words, ~100 for 24)
+  — so a reader who only skims the image isn't misled into thinking every
+  seed needs 100 rolls.
+- Verified: image reference, dimensions, lazy-loading and alt text all present
+  and correct; caption present; exactly one figure/caption pair for this
+  image.
+
 ## [17] — New title + read-time correction for the dice article
 
 **Context:** the client manually removed the "Come ti aiuta SAFE21" closing
