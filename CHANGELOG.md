@@ -3,6 +3,27 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [17] — New title + read-time correction for the dice article
+
+**Context:** the client manually removed the "Come ti aiuta SAFE21" closing
+section from blog-dadi-semplicita.html directly on GitHub (article now ends
+on the car/driving-licence analogy; the generic "Non sei sicuro di come stai
+custodendo..." CTA still follows, so a path to SAFE21 remains, just shorter).
+This entry covers the follow-up requested in chat: a new title.
+
+- New title, chosen from a shortlist: **"Dadi o software? La verità sul seed
+  generato a mano"** — replaces "Non fidarti ciecamente — nemmeno di noi" in
+  all four places: `<title>`, `og:title` (+ reworded `og:description` to
+  match), the `<h1>`, and the card `<h2>` on blog.html.
+- **Read-time corrected 8 → 7 min**, in the article byline and the blog.html
+  card. The article is now 1,476 words (~7.4 min) after the section removal;
+  8 min was left over from the longer version and no longer matched the text.
+- Card summary on blog.html reworded to drop the reference to "la patente
+  dell'auto" tying into a SAFE21 section that no longer exists in that form.
+- Verified: no trace of the old title anywhere in either file; new title
+  present in all four locations; read-time label matches the actual word
+  count on both pages.
+
 ## [16] — Verifiability paragraph in the dice article
 
 Client request: after the "solite regole" paragraph, add a short paragraph
