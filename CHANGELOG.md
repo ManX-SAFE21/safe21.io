@@ -3,6 +3,33 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [19] — Click-to-zoom lightbox for article images + caption removed
+
+Two changes to both article pages (blog-seed-mai-online.html and
+blog-dadi-semplicita.html); blog.html untouched (no large figures).
+
+- **Click-to-zoom lightbox.** Clicking any article image now opens it in a
+  full-screen overlay at its **natural pixel size (1:1)**, per the client's
+  choice — the infographic (1440px wide) is shown at full resolution and the
+  overlay scrolls if it exceeds the viewport, rather than being scaled to fit.
+  Closes on backdrop click, the X button, or Escape; clicking the image itself
+  does not close, so it can be scrolled/inspected. A `zoom-in` cursor on hover
+  signals the image is clickable, and background scroll is locked while open.
+  Implemented with hand-written CSS + a small vanilla script (a few KB, no
+  external library, nothing to keep updated); the overlay markup and script
+  are identical on both pages and use the existing theme tokens so the
+  backdrop matches light/dark mode.
+- **Removed the infographic caption** ("Il confronto in sintesi…") added in
+  [18], at the client's request. The image and its descriptive alt text
+  remain.
+- Verified with jsdom on both pages: the overlay starts hidden; clicking a
+  figure image opens it with the correct source and aria-hidden=false and
+  locks page scroll; Escape, the X button and a backdrop click all close it
+  and restore scroll; clicking the image itself does not close. Confirmed the
+  1:1 CSS (`max-width:none`) and the zoom-in cursor are present, the caption
+  is gone from the dice article, and the infographic image is still
+  referenced. All checks pass.
+
 ## [18] — Infographic added to the dice article
 
 **Client request:** add a client-supplied infographic ("Dadi o Software? La

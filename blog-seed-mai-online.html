@@ -417,6 +417,33 @@
       .nav .cta { gap: 10px; }
       .theme-toggle, .menu-toggle { width: 38px; height: 38px; }
     }
+  
+    /* ---------- Image lightbox (click to zoom, 1:1) ----------
+       The figure image advertises itself as clickable; the overlay shows the
+       image at natural size and scrolls if it overflows the viewport. */
+    figure.source img { cursor: zoom-in; }
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 200; display: none;
+      background: rgba(4, 8, 16, 0.85);
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      overflow: auto; cursor: zoom-out; padding: 24px; text-align: center;
+    }
+    .lightbox-overlay.open { display: block; }
+    .lightbox-overlay img {
+      /* Natural pixel size (1:1); max-width:none defeats responsive shrink. */
+      display: inline-block; width: auto; height: auto; max-width: none;
+      margin: 0 auto; cursor: default; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed; top: 16px; right: 20px; z-index: 210;
+      width: 44px; height: 44px; display: inline-flex;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); color: #fff;
+      border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; cursor: pointer;
+    }
+    .lightbox-close:hover { background: rgba(0,0,0,0.75); }
+    .lightbox-close svg { width: 22px; height: 22px; }
+
   </style>
 
   <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
@@ -436,6 +463,17 @@
 </head>
 
 <body id="top">
+  <!-- Image lightbox overlay (task [19]). Hidden until a figure image is
+       clicked; shows that image at natural 1:1 size. -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="lightbox-close" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+    <img src="" alt="" />
+  </div>
+
 
   <!-- ================= HEADER ================= -->
   <!-- Copied from index.html. Differences: links point back to index.html
@@ -939,6 +977,50 @@
 
       btn.addEventListener('click', function () {
         apply(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+      });
+    })();
+  </script>
+
+  <script>
+    /**
+     * Image lightbox (task [19]). Clicking a figure image opens it in a
+     * full-screen overlay at natural pixel size (1:1); the overlay scrolls if
+     * the image is larger than the viewport. Closes on backdrop click, the X
+     * button, or Escape. No external library.
+     */
+    (function () {
+      var overlay = document.getElementById('lightbox');
+      if (!overlay) return;
+      var big = overlay.querySelector('img');
+      var closeBtn = overlay.querySelector('.lightbox-close');
+      var lastFocus = null;
+
+      function open(src, alt) {
+        big.src = src; big.alt = alt || '';
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';   // lock background scroll
+        lastFocus = document.activeElement;
+        closeBtn.focus();
+      }
+      function close() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        big.src = '';                              // free the large image
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      document.querySelectorAll('figure.source img').forEach(function (img) {
+        img.addEventListener('click', function () {
+          open(img.currentSrc || img.src, img.alt);
+        });
+      });
+      // Backdrop click closes; clicking the image itself does not.
+      overlay.addEventListener('click', function (e) { if (e.target !== big) close(); });
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) close();
       });
     })();
   </script>
