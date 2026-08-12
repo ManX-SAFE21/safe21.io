@@ -3,6 +3,18 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [20] — Title reworded: "La verità" → "Una riflessione"
+
+Client felt "la verità" ("the truth") was too absolute/presumptuous for a
+piece that invites the reader to reason rather than to believe.
+
+- Title changed from *"Dadi o software? La verità sul seed generato a mano"*
+  to *"Dadi o software? Una riflessione sul seed generato a mano"*, in all
+  four places: `<title>`, `og:title`, the article `<h1>`, and the card `<h2>`
+  on blog.html.
+- Verified: no occurrence of the old wording remains in either file; the new
+  wording is present in all four locations.
+
 ## [19] — Click-to-zoom lightbox for article images + caption removed
 
 Two changes to both article pages (blog-seed-mai-online.html and
