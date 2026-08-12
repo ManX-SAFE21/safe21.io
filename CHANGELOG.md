@@ -330,7 +330,7 @@ once deployed. Two improvements were made off the back of the report.
   while matching the article's title and paragraph count exactly. 10/10 checks
   pass.
 
-## [10] — Blog section (Italian only) + first article
+## [10] — Blog section (Italian only) + first article 
 
 **Task:** add a blog to safe21.io. Client decision: the blog is published in
 **Italian only**, unlike the homepage which ships in English with a runtime
