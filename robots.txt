@@ -1,0 +1,40 @@
+# SAFE21 robots.txt
+#
+# The whole site is public marketing/educational content, so every crawler
+# is allowed everywhere. AI crawlers are listed explicitly (rather than
+# relying on the wildcard) so it's unambiguous that SAFE21 wants its content
+# read and cited by AI assistants, not just indexed by search engines.
+#
+# Maintenance note: update the User-agent list if a major new AI crawler
+# becomes common practice to name explicitly.
+
+User-agent: *
+Allow: /
+
+# Search engines (explicit for clarity; already covered by the wildcard above)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI assistants / crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://safe21.io/sitemap.xml

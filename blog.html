@@ -33,6 +33,38 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://safe21.io/blog" />
   <meta property="og:locale" content="it_IT" />
+  <link rel="canonical" href="https://safe21.io/blog.html" />
+
+  <!-- Structured data (JSON-LD): Blog type listing the current posts, so
+       search engines and AI assistants can see the article list without
+       having to parse the visual page layout. Keep this in sync with the
+       .post-card entries above when a new article is added. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog SAFE21",
+    "url": "https://safe21.io/blog.html",
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "inLanguage": "it",
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Dadi o software? Una riflessione sul seed generato a mano",
+        "url": "https://safe21.io/blog-dadi-semplicita.html",
+        "datePublished": "2026-08-11",
+        "author": { "@type": "Organization", "name": "SAFE21" }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Il tuo SEED non deve mai toccare internet",
+        "url": "https://safe21.io/blog-seed-mai-online.html",
+        "datePublished": "2026-07-28",
+        "author": { "@type": "Organization", "name": "SAFE21" }
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

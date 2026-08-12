@@ -3,6 +3,41 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [21] — SEO / AI-readiness baseline (sitemap, robots, canonical, JSON-LD)
+
+Client asked whether the site is discoverable by Google and by AI assistants.
+Audit of the live site found: no sitemap.xml and no robots.txt (both returned
+the homepage with a 200 because Cloudflare Pages has no 404 for them), no
+structured data, and no canonical tags. Content and meta tags were already
+fine. This task adds the missing technical signals. No visual change.
+
+- **New `sitemap.xml`** listing all four pages (homepage, blog index, both
+  articles) with lastmod dates, so search engines don't have to discover
+  pages purely by crawling links — important for a new site with few inbound
+  links. Comment reminds to add a `<url>` block per future article.
+- **New `robots.txt`** allowing the whole site and pointing to the sitemap.
+  Named AI crawlers (GPTBot, ChatGPT-User, ClaudeBot, Claude-Web,
+  PerplexityBot, Google-Extended) are listed explicitly, so it's unambiguous
+  that SAFE21 wants its content read and cited by AI assistants, not only
+  indexed by search engines.
+- **Canonical tags** (`<link rel="canonical">`) added to all four pages,
+  each pointing to its own https://safe21.io/ URL.
+- **JSON-LD structured data** added to every page: `Organization` on the
+  homepage; `Blog` (with both posts listed) on blog.html; `Article` on each
+  post, with headline, description, datePublished/dateModified, inLanguage,
+  and author/publisher both set to the SAFE21 **organization** (per client
+  choice — brand, not a personal name). This is the part AI assistants use
+  most to identify and cite a page accurately.
+- Verified: sitemap is well-formed XML with the four correct URLs; robots.txt
+  allows all, references the sitemap and names the AI crawlers; every page has
+  exactly one canonical and one JSON-LD block that parses as valid JSON with
+  @context schema.org; the article headline matches between <h1> and JSON-LD;
+  and all prior features survived the edits (image zoom, session theme, 1024px
+  menu on both articles; EN/IT switcher and blog i18n key on the homepage).
+- Note conveyed to the client: these changes remove technical obstacles but
+  don't guarantee ranking; discoverability still takes weeks/months and
+  depends partly on off-site factors (inbound links).
+
 ## [20] — Title reworded: "La verità" → "Una riflessione"
 
 Client felt "la verità" ("the truth") was too absolute/presumptuous for a

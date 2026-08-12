@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SAFE21 sitemap.
+  Tells search engines every page on the site and when each one last
+  changed, so they don't have to discover pages purely by following links —
+  important for a small, newly launched site with few external links yet.
+
+  changefreq/priority are hints, not guarantees: search engines are free to
+  ignore them, but they cost nothing to include and reflect reality (the
+  homepage changes rarely; the blog gains new articles occasionally).
+
+  Maintenance note: add a new <url> block here whenever a new page or
+  article is published, with an accurate <lastmod> date (YYYY-MM-DD).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://safe21.io/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://safe21.io/blog.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://safe21.io/blog-dadi-semplicita.html</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://safe21.io/blog-seed-mai-online.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
