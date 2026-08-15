@@ -3,6 +3,25 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [26] — Add lead infographic to the BAL Easy Heirs article
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client supplied an infographic ("BAL Easy Heirs: l'eredità Bitcoin offline e
+sicura") already cleaned of its generator watermark and converted to WebP, to
+open the article. Wired it in reusing the existing lightbox pattern.
+
+- **`images/infografica-bal-easy-heirs.webp`** — new asset (WebP, 2752×1536,
+  ~138 KB).
+- **`blog-bal-easy-heirs.html`** — added the `figure.source` + lightbox CSS,
+  the lightbox overlay markup, the click-to-zoom JS, and a `<figure>` at the
+  very top of the article body (before the first paragraph) with a descriptive
+  `alt`. Matches the image treatment used in `blog-dadi-semplicita.html`.
+- Verified in the in-app browser: image loads (natural 2752×1536), it is the
+  first element in the article, lightbox opens on click and closes on the X,
+  no console errors.
+
 ## [25] — New blog article: "BAL Easy Heirs: prepara l'eredità dei tuoi bitcoin senza mai andare online"
 
 **Date:** 2026-08-15
