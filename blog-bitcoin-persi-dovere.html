@@ -5,22 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ============================================================
-       SAFE21 — Blog index (article list)
+       SAFE21 — Blog article: "Perdere i propri bitcoin non è solo un
+       danno personale"
        Single self-contained file (HTML + CSS + minimal JS).
 
        LANGUAGE NOTE (project rule R1):
-       The blog is ITALIAN ONLY by client decision, so this page carries
-       no EN/IT switcher and no i18n dictionary — the Italian copy is
-       written straight into the markup. Code comments stay in English.
+       The homepage (index.html) ships in English with a runtime EN/IT
+       switcher. The blog, by client decision, is ITALIAN ONLY — so this
+       page has no language switcher and no i18n dictionary: the Italian
+       copy is written directly in the markup. All code comments and
+       identifiers remain in English, as required by R1.
 
-       ADDING A NEW ARTICLE:
-       duplicate one <article class="post-card"> block below, update the
-       href, eyebrow, title, summary and date, and put the new article at
-       the TOP of the list (newest first).
+       SOURCE NOTE:
+       Content supplied by the client as a ready Markdown draft (with front
+       matter + explicit publishing instructions) in
+       Articolo_4/blog-bitcoin-persi-dovere.md. Built here per those
+       instructions, cloning blog-dadi-semplicita.html's structure.
+
+       Design tokens, header and footer are copied from index.html so the
+       blog is visually indistinguishable from the rest of the site. This
+       article carries no image, so the click-to-zoom lightbox present on
+       image-bearing articles is intentionally omitted here.
        ============================================================ -->
 
-  <title>Blog — SAFE21</title>
-  <meta name="description" content="Articoli in italiano su sicurezza Bitcoin, self-custody, protezione del seed ed eredità. Spiegati in modo semplice, senza gergo tecnico." />
+  <title>Perdere i propri bitcoin non è solo un danno personale — SAFE21</title>
+  <meta name="description" content="I bitcoin persi sembrano un regalo a chi resta. Ma tra computer quantistici e wallet dormienti, non curare backup ed eredità è un rischio per tutti — non solo per te." />
   <meta name="theme-color" content="#0A0F1C" />
 
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -28,55 +37,30 @@
   <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
 
-  <meta property="og:title" content="Blog — SAFE21" />
-  <meta property="og:description" content="Sicurezza Bitcoin spiegata in modo semplice, in italiano." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://safe21.io/blog" />
+  <!-- Open Graph (social preview). No og:image: this article has no
+       artwork, so no image is advertised rather than a broken reference. -->
+  <meta property="og:title" content="Perdere i propri bitcoin non è solo un danno personale" />
+  <meta property="og:description" content="I bitcoin persi sembrano un regalo a chi resta. Ma tra computer quantistici e wallet dormienti, non curare backup ed eredità è un rischio per tutti — non solo per te." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://safe21.io/blog-bitcoin-persi-dovere" />
   <meta property="og:locale" content="it_IT" />
-  <link rel="canonical" href="https://safe21.io/blog.html" />
+  <link rel="canonical" href="https://safe21.io/blog-bitcoin-persi-dovere.html" />
 
-  <!-- Structured data (JSON-LD): Blog type listing the current posts, so
-       search engines and AI assistants can see the article list without
-       having to parse the visual page layout. Keep this in sync with the
-       .post-card entries above when a new article is added. -->
+  <!-- Structured data (JSON-LD): Article type with explicit headline, dates
+       and author, so search engines and AI assistants can cite this piece
+       accurately (title, publisher, date) instead of guessing from prose. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "Blog SAFE21",
-    "url": "https://safe21.io/blog.html",
-    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "@type": "Article",
+    "headline": "Perdere i propri bitcoin non è solo un danno personale",
+    "description": "I bitcoin persi sembrano un regalo a chi resta. Ma tra computer quantistici e wallet dormienti, non curare backup ed eredità è un rischio per tutti — non solo per te.",
+    "url": "https://safe21.io/blog-bitcoin-persi-dovere.html",
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-08-15",
     "inLanguage": "it",
-    "blogPost": [
-      {
-        "@type": "BlogPosting",
-        "headline": "Perdere i propri bitcoin non è solo un danno personale",
-        "url": "https://safe21.io/blog-bitcoin-persi-dovere.html",
-        "datePublished": "2026-08-15",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Cosa succede ai tuoi bitcoin quando non ci sei più?",
-        "url": "https://safe21.io/blog-cosa-succede-ai-tuoi-bitcoin.html",
-        "datePublished": "2026-08-15",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Dadi o software? Una riflessione sul seed generato a mano",
-        "url": "https://safe21.io/blog-dadi-semplicita.html",
-        "datePublished": "2026-08-11",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Il tuo SEED non deve mai toccare internet",
-        "url": "https://safe21.io/blog-seed-mai-online.html",
-        "datePublished": "2026-07-28",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      }
-    ]
+    "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
   }
   </script>
 
@@ -87,17 +71,19 @@
   <style>
     /* ---------- Design tokens (identical to index.html) ---------- */
     :root {
-      --ink:    #0A0F1C;
-      --ink-2:  #0E1525;
-      --panel:  #111B2E;
-      --line:   #1F2B44;
-      --light:  #F5F7FA;
-      --muted:  #95A1B5;
-      --teal:   #2DD4BF;
-      --teal-d: #0D9488;
-      --orange: #F7931A;
+      --ink:    #0A0F1C;   /* base background ("vault") */
+      --ink-2:  #0E1525;   /* alternating section background */
+      --panel:  #111B2E;   /* cards / elevated surfaces */
+      --line:   #1F2B44;   /* hairline borders */
+      --light:  #F5F7FA;   /* primary text */
+      --muted:  #95A1B5;   /* secondary text */
+      --teal:   #2DD4BF;   /* primary accent (security) */
+      --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
+      --orange: #F7931A;   /* Bitcoin accent — used sparingly */
+      --danger: #F26D6D;   /* used ONLY for the "never do this" rules */
 
       --maxw: 1120px;
+      --readw: 720px;      /* narrower measure for long-form reading */
       --radius: 16px;
 
       /* --- Tokens added in [12] so the light theme can override them.
@@ -125,14 +111,9 @@
        background (#0A0F1C), so the two modes mirror each other.
 
        The teal is darkened from #2DD4BF to #0A7568 because the bright
-       teal fails contrast on white (4.31:1 on the alternating section
-       background). #0A7568 clears 4.5:1 everywhere while still reading
-       as the same colour family. The logo keeps the untouched brand teal
-       #0D9488 from logos/safe21-logo-light.svg — it is large display
-       type, held to the 3:1 large-text threshold, which it passes.
-
-       All pairings were checked against WCAG 2.1 AA before being written
-       here; see CHANGELOG entry [12] for the measured ratios. --- */
+       teal fails contrast on white. #0A7568 clears 4.5:1 everywhere while
+       still reading as the same colour family. All pairings were checked
+       against WCAG 2.1 AA; see CHANGELOG entry [12] for the ratios. --- */
     [data-theme="light"] {
       --ink:          #F4F6F9;
       --ink-2:        #E8EDF4;
@@ -186,11 +167,17 @@
     }
 
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    /* Reading column: long-form text is capped narrower than the site grid
+       so lines stay around 70-80 characters, which is easier to read. */
+    .read { max-width: var(--readw); margin: 0 auto; padding: 0 24px; }
 
     .eyebrow {
       font-family: 'Space Mono', monospace;
-      font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--teal); margin: 0 0 14px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin: 0 0 14px;
     }
 
     h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; margin: 0; }
@@ -208,7 +195,7 @@
     .btn-ghost { border-color: var(--line); color: var(--light); background: transparent; }
     .btn-ghost:hover { border-color: var(--teal); transform: translateY(-2px); }
 
-    /* ---------- Header (same as index.html) ---------- */
+    /* ---------- Header (same structure as index.html) ---------- */
     header {
       position: sticky; top: 0; z-index: 50;
       background: var(--header-bg);
@@ -262,53 +249,82 @@
       .nav .logo svg { height: 44px; }
     }
 
-    /* ---------- Blog intro ---------- */
-    .blog-head {
-      padding: 76px 0 56px;
+    /* ---------- Article layout ---------- */
+    .article-head {
+      padding: 64px 0 8px;
       background: var(--ink-2);
       border-bottom: 1px solid var(--line);
     }
-    .blog-head h1 { font-size: 46px; font-weight: 700; letter-spacing: -0.5px; }
-    .blog-head p.lede {
-      font-size: 19px; color: var(--muted);
-      max-width: 640px; margin: 20px 0 0;
-    }
-
-    /* ---------- Article list ----------
-       Cards are full-width rows rather than a grid: with few articles a
-       multi-column grid would leave obvious empty cells, and a single
-       column keeps the newest post visually dominant. */
-    .posts { padding: 56px 0 72px; display: grid; gap: 20px; }
-
-    .post-card {
-      display: block;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 30px 32px;
-      transition: border-color .15s ease, transform .15s ease;
-    }
-    .post-card:hover { border-color: var(--teal); transform: translateY(-2px); }
-    .post-card .meta {
+    .back-link {
       font-family: 'Space Mono', monospace; font-size: 12px;
-      letter-spacing: 1px; color: var(--muted);
-      display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); display: inline-block; margin-bottom: 28px;
+      transition: color .15s ease;
     }
-    .post-card .meta .tag { color: var(--teal); text-transform: uppercase; }
-    .post-card h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.2px; }
-    .post-card p { color: var(--muted); font-size: 16.5px; margin: 12px 0 0; max-width: 720px; }
-    .post-card .more {
-      display: inline-block; margin-top: 18px;
-      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
-      font-size: 15px; color: var(--teal);
-    }
+    .back-link:hover { color: var(--teal); }
 
-    /* Empty-state note shown under the list while the blog is still small. */
-    .list-note {
-      margin-top: 28px; font-size: 14.5px; color: var(--muted);
-      text-align: center;
+    .article-head h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .article-head .standfirst {
+      font-size: 19px; color: var(--muted); margin: 22px 0 0;
     }
-    .list-note a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    /* Byline: mono, because it is metadata rather than prose. */
+    .byline {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      color: var(--muted); letter-spacing: 1px;
+      margin: 30px 0 0; padding: 16px 0 40px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 8px 18px;
+    }
+    .byline .read-time { color: var(--teal); }
+
+    .article-body { padding: 48px 0 24px; }
+    .article-body h2 {
+      font-size: 27px; font-weight: 600;
+      margin: 52px 0 16px; letter-spacing: -0.2px;
+    }
+    .article-body h3 {
+      font-size: 19px; font-weight: 600; margin: 34px 0 10px;
+    }
+    .article-body p { margin: 0 0 20px; font-size: 17px; color: var(--body); }
+    .article-body strong { color: var(--light); font-weight: 600; }
+    .article-body ul { margin: 0 0 22px; padding-left: 22px; }
+    .article-body li { margin-bottom: 14px; font-size: 17px; color: var(--body); }
+    /* Inline links inside prose are underlined so they are obvious in
+       body copy, where colour alone is not a reliable signal. */
+    .article-body a.inline {
+      color: var(--teal); text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-body a.inline:hover { color: var(--accent-hover); }
+
+    /* ---------- Article footer note (source citation) ---------- */
+    .footnote {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      margin: 44px 0 0; padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .footnote a.inline { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Callout (neutral highlight) ---------- */
+    .callout {
+      background: var(--tint-teal-bg);
+      border: 1px solid var(--tint-teal-bd);
+      border-radius: var(--radius);
+      padding: 24px 26px; margin: 34px 0;
+    }
+    .callout ul { margin: 0; padding-left: 20px; }
+    .callout li { font-size: 16.5px; color: var(--body); margin-bottom: 12px; }
+    .callout li:last-child { margin-bottom: 0; }
+    .callout .eyebrow { margin-bottom: 10px; }
+
+    /* ---------- Closing CTA ---------- */
+    .article-cta {
+      background: var(--ink-2); border-top: 1px solid var(--line);
+      margin-top: 56px; padding: 64px 0;
+    }
+    .article-cta h2 { font-size: 30px; margin-bottom: 14px; }
+    .article-cta p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
+    .article-cta .actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
     /* ---------- Footer (same as index.html) ---------- */
     footer { background: var(--ink); border-top: 1px solid var(--line); padding: 56px 0 34px; }
@@ -334,12 +350,12 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 760px) {
-      .blog-head { padding: 48px 0 40px; }
-      .blog-head h1 { font-size: 34px; }
-      .blog-head p.lede { font-size: 17px; }
-      .posts { padding: 36px 0 52px; }
-      .post-card { padding: 24px 22px; }
-      .post-card h2 { font-size: 23px; }
+      .article-head { padding-top: 40px; }
+      .article-head h1 { font-size: 32px; }
+      .article-head .standfirst { font-size: 17px; }
+      .article-body h2 { font-size: 23px; margin-top: 42px; }
+      .article-body p, .article-body li { font-size: 16.5px; }
+      .article-cta h2 { font-size: 25px; }
     }
 
     /* ---------- Theme toggle button ---------- */
@@ -362,12 +378,12 @@
 
     /* Smooth crossfade between themes. Disabled automatically by the
        prefers-reduced-motion block above. */
-    body, header, .post-card, .callout, .checklist, .rule, figure.source {
+    body, header, .callout {
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
 
     /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
-    .post-card, .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
+    .callout { box-shadow: var(--card-shadow); }
 
     @media (max-width: 400px) {
       /* Very narrow phones: tighten the header gap so logo + theme +
@@ -396,6 +412,10 @@
 <body id="top">
 
   <!-- ================= HEADER ================= -->
+  <!-- Copied from index.html. Differences: links point back to index.html
+       sections (this is a separate page, so bare "#anchors" would not work),
+       the labels are written in Italian because the blog is Italian-only,
+       and there is no EN/IT switcher for the same reason. -->
   <header>
     <div class="wrap nav">
       <a class="logo" href="index.html" aria-label="SAFE21 home">
@@ -465,105 +485,242 @@
     </div>
   </header>
 
-  <!-- ================= BLOG INTRO ================= -->
-  <section class="blog-head">
-    <div class="wrap">
-      <p class="eyebrow">Blog SAFE21 · in italiano</p>
-      <h1>Sicurezza Bitcoin,<br/>spiegata semplice.</h1>
-      <p class="lede">
-        Articoli pensati per chi ha da poco iniziato con Bitcoin e ne possiede
-        una parte: cosa fare, cosa non fare mai, e perché. Senza gergo tecnico
-        e senza scorciatoie.
+  <!-- ================= ARTICLE HEADER ================= -->
+  <div class="article-head">
+    <div class="read">
+      <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
+      <p class="eyebrow">Sovranità</p>
+      <h1>Perdere i propri bitcoin non è solo un danno personale</h1>
+      <p class="standfirst">
+        I bitcoin persi sembrano un regalo a chi resta. Ma tra computer
+        quantistici e wallet dormienti, non curare backup ed eredità è un
+        rischio per tutti — non solo per te.
       </p>
+      <p class="byline">
+        <span>SAFE21</span>
+        <span>15 agosto 2026</span>
+        <span class="read-time">6 min di lettura</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE BODY ================= -->
+  <article class="article-body">
+    <div class="read">
+
+      <p>
+        C'è una frase che nel mondo Bitcoin si sente spesso, quasi con un
+        sorriso: <em>"I bitcoin persi sono un regalo a tutti gli altri."</em>
+        Qualcuno dimentica il seed, qualcuno muore senza lasciare istruzioni,
+        un hard disk finisce in discarica — e i coin che c'erano sopra escono
+        per sempre dalla circolazione. Meno offerta, più scarsità, prezzo che
+        sale per chi resta.
+      </p>
+
+      <p>
+        È un ragionamento che regge. Ma solo a metà. Perché quello che oggi
+        sembra un regalo, domani potrebbe trasformarsi nel contrario esatto di
+        ciò per cui Bitcoin è nato. Vediamo perché — e perché curare backup ed
+        eredità dei propri bitcoin non è solo prudenza personale, ma qualcosa
+        di più vicino a un dovere.
+      </p>
+
+      <h2>L'effetto immediato: scarsità</h2>
+
+      <p>
+        Ogni chiave privata persa per sempre funziona come un "burn"
+        involontario. Il protocollo non sa che quei bitcoin sono
+        irraggiungibili: risultano ancora lì, sugli indirizzi, ma nessuno potrà
+        mai più spenderli. Nella pratica l'offerta circolante si riduce, e
+        questo esercita una pressione al rialzo sul valore di tutti gli altri.
+      </p>
+
+      <p>
+        Su questo non c'è discussione. Nel breve periodo i bitcoin persi sono
+        oro digitale sepolto in fondo al mare: nessuno può prenderlo, e la
+        rarità di quello in superficie aumenta.
+      </p>
+
+      <p>
+        Il problema è che "per sempre" è una parola pesante. E in tecnologia
+        raramente è vera.
+      </p>
+
+      <h2>La trappola futura: i wallet dormienti</h2>
+
+      <p>
+        Bitcoin poggia sulla crittografia a curva ellittica. Con i computer di
+        oggi, ricavare una chiave privata dalla chiave pubblica è impossibile —
+        servirebbe più tempo di quanto ne resti all'universo. I computer
+        quantistici, se e quando arriveranno a una scala sufficiente, cambiano
+        questa aritmetica: certi algoritmi quantistici sono progettati proprio
+        per attaccare questo tipo di crittografia.
+      </p>
+
+      <p>
+        Attenzione a un dettaglio che spesso si perde: <strong>non tutti gli
+        indirizzi sono esposti allo stesso modo.</strong> Un indirizzo bitcoin
+        moderno espone al mondo solo un'impronta (hash) della chiave pubblica;
+        la chiave pubblica vera compare in chiaro sulla blockchain solo nel
+        momento in cui si spende. Gli indirizzi più vecchi, in stile legacy, e
+        tutti quelli da cui si è già speso almeno una volta senza mai spostare
+        il resto altrove, hanno invece la chiave pubblica visibile — e sono i
+        primi candidati a un eventuale attacco.
+      </p>
+
+      <p>
+        Ora mettete insieme i pezzi. I bitcoin <em>persi</em> sono, per
+        definizione, quelli che nessuno muoverà mai su indirizzi più recenti e
+        più robusti. Sono i wallet dormienti degli early adopter, i coin dei
+        defunti senza eredità, le chiavi dimenticate. Se un giorno esistesse la
+        capacità di calcolo per recuperarli, chi la avrebbe? Non il singolo
+        risparmiatore. La avrebbero i grandi attori: entità finanziarie di
+        scala globale, Stati, giganti tecnologici. Loro raccoglierebbero quel
+        capitale abbandonato.
+      </p>
+
+      <p>
+        E il risultato sarebbe paradossale: la ricchezza che oggi è dispersa
+        tra milioni di persone che hanno "perso" verrebbe
+        <strong>ri-concentrata</strong> in poche mani potentissime. Esattamente
+        il contrario della promessa di Bitcoin.
+      </p>
+
+      <p>
+        È bene dirlo con onestà: questo è uno scenario di lungo periodo, e non
+        è certo che si realizzi. Ma non serve la certezza per agire. Serve
+        capire che la contromisura è semplice ed è già disponibile: <strong>i
+        bitcoin che restano in mano a persone vive, con backup funzionanti,
+        possono essere spostati su indirizzi e wallet aggiornati man mano che
+        la tecnologia evolve. I bitcoin persi no.</strong> Sono loro il
+        bottino.
+      </p>
+
+      <h2>Il dovere: la sovranità non è solo tua</h2>
+
+      <p>
+        Bitcoin è nato per distribuire il potere d'acquisto tra individui, non
+        per farlo accumulare a pochi. Ogni bitcoin che resta nelle mani di una
+        persona comune — e che <em>può continuare a essere protetto</em> nel
+        tempo — è un mattoncino di quella distribuzione. Ogni bitcoin
+        abbandonato è un mattoncino potenzialmente in vendita al miglior
+        offerente futuro.
+      </p>
+
+      <p>
+        Da questo punto di vista, curare i propri bitcoin non è solo interesse
+        personale. Chi ha capito Bitcoin, chi ci crede davvero, dovrebbe
+        sentirla come una responsabilità verso il progetto stesso:
+      </p>
+
+      <div class="callout">
+        <p class="eyebrow">Tre responsabilità, non una</p>
+        <ul>
+          <li>
+            <strong>Fare backup seri del seed</strong>, verificati, mai online,
+            mai fotografati (ne abbiamo parlato in
+            <a class="inline" href="blog-seed-mai-online.html">Il tuo SEED non deve mai toccare internet</a>).
+          </li>
+          <li>
+            <strong>Pianificare l'eredità</strong>, così che alla propria morte
+            i coin passino a qualcuno che li custodirà, invece di dormire per
+            sempre.
+          </li>
+          <li>
+            <strong>Farlo senza terze parti fiduciarie</strong>, perché
+            consegnare le chiavi a un notaio, a un servizio, a un custode,
+            riporta esattamente il rischio di accentramento che vogliamo
+            evitare.
+          </li>
+        </ul>
+      </div>
+
+      <p>
+        Un piano di eredità mal fatto è un piano che regala i tuoi bitcoin a un
+        attore futuro sconosciuto. Un piano di eredità ben fatto è la garanzia
+        che restino nelle mani di persone.
+      </p>
+
+      <h2>Come si fa, in pratica</h2>
+
+      <p>
+        Per l'eredità decentralizzata esiste una soluzione pensata esattamente
+        per questo: il
+        <a class="inline" href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol (Bitcoin After Life)</a>,
+        un plugin per Electrum. Il principio è elegante nella sua semplicità:
+        prepari oggi una transazione verso l'indirizzo dei tuoi eredi, con una
+        data futura (locktime) prima della quale non è valida, la firmi, e la
+        affidi a uno o più server "Will-Executor" che la trasmetteranno alla
+        rete solo quando quella data arriva. I tuoi bitcoin nel frattempo
+        <strong>non si muovono di un satoshi</strong> e restano sotto il tuo
+        controllo; ogni volta che apri il wallet il plugin ti chiede se vuoi
+        rinviare la scadenza. Se sei vivo, rinvii. Se non ci sei più, la
+        transazione parte da sola.
+      </p>
+
+      <p>
+        Nessun Will-Executor detiene chiavi o fondi: conserva solo una
+        transazione già firmata, che può andare esclusivamente dove hai
+        deciso tu. Il peggio che può fare un server disonesto è non
+        trasmetterla — ed è per questo che se ne usano diversi. Ne basta uno
+        onesto. Lo stesso meccanismo, con una scadenza a te stesso, funziona
+        anche come <strong>backup di emergenza</strong> in caso di perdita del
+        seed.
+      </p>
+
+      <p>
+        SAFE21 sostiene il protocollo anche a livello di infrastruttura:
+        gestiamo un Will-Executor pubblico (<code>we.safe21.io</code>), incluso
+        nella lista aperta del progetto. E aiutiamo chi vuole configurare il
+        proprio piano di eredità o di backup su Electrum, passo per passo,
+        senza mai chiedere di consegnare chiavi.
+      </p>
+
+      <h2>In sintesi</h2>
+
+      <p>
+        I bitcoin persi fanno salire il prezzo nel medio periodo. Ma saranno
+        anche i più esposti un domani, e chi potrà recuperarli non sarà una
+        persona comune.
+        Tenere i propri bitcoin <strong>vivi</strong> — con backup verificati e
+        un'eredità pianificata in modo decentralizzato — significa proteggere
+        se stessi <em>e</em> la ragione stessa per cui Bitcoin esiste: un
+        sistema monetario distribuito che resiste all'accumulazione forzata da
+        parte di pochi.
+      </p>
+
+      <p>
+        Non è un peso in più. È la parte finale del lavoro di chi ha scelto la
+        self-custody.
+      </p>
+
+      <p class="footnote">
+        Fonte del ragionamento: post "The Paradox of Lost Bitcoin" nel
+        <a class="inline" href="https://bitcointalk.org/index.php?topic=5516266.msg66548070#msg66548070" target="_blank" rel="noopener noreferrer">thread ufficiale BAL Protocol su Bitcointalk</a>.
+      </p>
+
+    </div>
+  </article>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta">
+    <div class="read">
+      <p class="eyebrow">Eredità senza custodi</p>
+      <h2>Vuoi che i tuoi bitcoin restino nelle mani di persone umane?</h2>
+      <p>
+        Raccontaci la tua situazione: ti aiutiamo a impostare backup ed
+        eredità con BAL Protocol, mantenendo le chiavi sempre nelle tue mani —
+        oggi e domani. Senza impegno.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="index.html#inheritance">Il servizio Eredità</a>
+      </div>
     </div>
   </section>
 
-  <!-- ================= ARTICLE LIST ================= -->
-  <!-- Newest first. To add an article, copy one .post-card block. -->
-  <main class="wrap">
-    <div class="posts">
-
-      <a class="post-card" href="blog-bitcoin-persi-dovere.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Sovranità</span>
-            <span>15 agosto 2026</span>
-            <span>6 min di lettura</span>
-          </div>
-          <h2>Perdere i propri bitcoin non è solo un danno personale</h2>
-          <p>
-            I bitcoin persi sembrano un regalo a chi resta. Ma tra computer
-            quantistici e wallet dormienti, non curare backup ed eredità è un
-            rischio per tutti — non solo per te.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-      <a class="post-card" href="blog-cosa-succede-ai-tuoi-bitcoin.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Eredità Bitcoin</span>
-            <span>15 agosto 2026</span>
-            <span>6 min di lettura</span>
-          </div>
-          <h2>Cosa succede ai tuoi bitcoin quando non ci sei più?</h2>
-          <p>
-            La self-custody è tutto il senso di Bitcoin, ed è anche la ragione
-            per cui milioni di BTC sono fermi per sempre: nessuno aveva le
-            chiavi. Perché "lasciare istruzioni" non basta — e come Bitcoin
-            stesso, con le transazioni time-lock, permette di risolvere il
-            problema senza custodi.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-      <a class="post-card" href="blog-dadi-semplicita.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Buone pratiche · Seed phrase</span>
-            <span>11 agosto 2026</span>
-            <span>7 min di lettura</span>
-          </div>
-          <h2>Dadi o software? Una riflessione sul seed generato a mano</h2>
-          <p>
-            La moda del seed generato coi dadi: fatto perfettamente può
-            funzionare, ma è più difficile di quanto sembri — e alla fine serve
-            comunque un software fidato. Perché per la maggior parte delle
-            persone la via più semplice è anche la più sicura.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-      <a class="post-card" href="blog-seed-mai-online.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Sicurezza · Seed phrase</span>
-            <span>28 luglio 2026</span>
-            <span>5 min di lettura</span>
-          </div>
-          <h2>Il tuo SEED non deve mai toccare internet</h2>
-          <p>
-            Un malware nascosto in app approvate da App Store e Google Play
-            cercava le seed phrase nelle foto degli utenti. Perché il seed non
-            deve mai diventare uno screenshot, e perché il furto può arrivare
-            anni dopo l'errore.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-    </div>
-
-    <p class="list-note">
-      Nuovi articoli in arrivo. Hai un dubbio o un argomento che vorresti vedere
-      trattato? <a href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
-    </p>
-  </main>
-
   <!-- ================= FOOTER ================= -->
+  <!-- Same structure as index.html, written directly in Italian. -->
   <footer>
     <div class="wrap">
       <div class="foot-top">
@@ -613,8 +770,11 @@
 
   <script>
     /**
-     * Mobile menu toggle — identical behaviour to index.html and the
-     * article page, kept inline so each page stays self-contained.
+     * Mobile menu toggle.
+     *
+     * Same dependency-free behaviour as index.html: the hamburger opens a
+     * slide-down drawer, which closes on link tap, on Escape, and resets
+     * automatically when the viewport grows past the mobile breakpoint.
      */
     (function () {
       var toggle = document.querySelector('.menu-toggle');
@@ -624,6 +784,7 @@
       function setOpen(open) {
         menu.classList.toggle('open', open);
         toggle.setAttribute('aria-expanded', String(open));
+        // The label describes the NEXT action, so it flips with the state.
         toggle.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
       }
 
@@ -631,6 +792,8 @@
         setOpen(toggle.getAttribute('aria-expanded') !== 'true');
       });
 
+      // Close after tapping a link, otherwise the drawer would stay open
+      // over the destination content.
       menu.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () { setOpen(false); });
       });
@@ -639,6 +802,8 @@
         if (e.key === 'Escape') setOpen(false);
       });
 
+      // Reset when rotating/resizing to desktop, where the drawer is hidden
+      // by CSS but would otherwise keep a stale aria-expanded="true".
       window.addEventListener('resize', function () {
         if (window.innerWidth > 760) setOpen(false);
       });

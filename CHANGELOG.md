@@ -3,6 +3,47 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [23] — New blog article: "Perdere i propri bitcoin non è solo un danno personale"
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client supplied a ready Markdown draft with front matter and explicit
+publishing instructions (`Articolo_4/blog-bitcoin-persi-dovere.md`) for a
+fourth blog article, arguing that lost bitcoin — often framed as a harmless
+"gift" to everyone else via scarcity — becomes a long-term risk if quantum
+computing ever catches up with dormant, exposed-pubkey wallets, since only
+coins held by living owners with working backups can be moved to safer
+addresses over time.
+
+- **New `blog-bitcoin-persi-dovere.html`.** Built from the
+  `blog-dadi-semplicita.html` template (header/footer/theme-toggle/tokens
+  identical to the rest of the blog). Sections: the immediate scarcity
+  effect, the quantum/dormant-wallet risk (legacy vs. modern address exposure
+  explained), framed as a "duty" beyond personal interest, the BAL Protocol
+  time-lock mechanism as the practical answer (how a Will-Executor works and
+  what it can/cannot do), a mention that SAFE21 runs a public Will-Executor
+  (`we.safe21.io`), and a closing summary + source footnote (Bitcointalk
+  thread on the "Paradox of Lost Bitcoin"). Per the draft's own instruction
+  ("no more than one callout"), only the three-responsibilities list in the
+  "Il dovere" section is a `.callout` box (one of its bullets links internally
+  to `blog-seed-mai-online.html`); the Bitcoin-orange `.callout.btc` variant
+  is unused here, so its CSS was omitted rather than left dead. No image, so —
+  like article #22 — the click-to-zoom lightbox is intentionally omitted (no
+  dead markup/CSS/JS) and no `og:image`/JSON-LD image is advertised.
+- **`blog.html`** — added a `.post-card` at the very TOP of the list (ahead of
+  the 2026-08-15 article from #22, as the most recently added) and a matching
+  `BlogPosting` entry at the top of the JSON-LD `blogPost[]` array. Eyebrow/tag:
+  "Sovranità"; date 15 agosto 2026; 6 min read.
+- **`sitemap.xml`** — added a `<url>` for the new article (lastmod 2026-08-15).
+- Verified: JSON-LD (index + article) parses as valid JSON, sitemap is
+  well-formed XML, internal link to blog-seed-mai-online.html present, all
+  three external links (bitcoin-after.life, Bitcointalk thread, plus the
+  existing BAL Protocol footer link) match the front matter exactly. Word
+  count ≈ 1,086 words — below the front matter's ~1,200 target, since the
+  article body is exactly what the client's draft contained; no padding was
+  invented to hit the target.
+
 ## [22] — New blog article: "Cosa succede ai tuoi bitcoin quando non ci sei più?"
 
 **Date:** 2026-08-15
