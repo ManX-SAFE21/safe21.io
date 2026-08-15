@@ -3,6 +3,22 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [27] — Replace BAL Easy Heirs infographic with a lighter version
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client swapped the infographic added in [26] for a smaller, lighter version
+of the same artwork: 1600×893 (was 2752×1536), 75 KB (was 138 KB) — same
+file path, so no HTML `src` change needed.
+
+- **`images/infografica-bal-easy-heirs.webp`** — replaced in place.
+- **`blog-bal-easy-heirs.html`** — updated the `<img>` `width`/`height`
+  attributes to match the new intrinsic size (1600×893), so the layout
+  doesn't reserve the wrong aspect ratio before the image loads.
+- Verified in the in-app browser: image loads at the new natural size,
+  lightbox still opens/closes correctly.
+
 ## [26] — Add lead infographic to the BAL Easy Heirs article
 
 **Date:** 2026-08-15
