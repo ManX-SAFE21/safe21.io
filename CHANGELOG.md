@@ -3,6 +3,34 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [25] — New blog article: "BAL Easy Heirs: prepara l'eredità dei tuoi bitcoin senza mai andare online"
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client asked for a ~5-minute article explaining the BAL Easy Heirs Electrum
+plugin (github.com/ManX-SAFE21/BALeasyHeirs, now public): what it does, why it
+is safe, that it works fully offline, and that the sheets must only be printed
+on directly-connected (non-network, non-public) printers. Written as an
+original SAFE21 piece from the plugin's own README/SECURITY.md and design
+decisions; BAL framed as the companion protocol.
+
+- **New file `blog-bal-easy-heirs.html`** — cloned from
+  `blog-bitcoin-persi-dovere.html` (no image → no lightbox). Tag "Eredità
+  Bitcoin", 15 ago 2026, 5 min. Sections: the problem → what it does → security
+  by construction (offline, no PDF of seeds, password-gated, protected paper) →
+  the printer rule → open source / verifiable signed releases → summary. Links
+  to BAL, the GitHub repo, SECURITY.md, and the existing "seed mai online"
+  article.
+- **`blog.html`** — new `.post-card` at the TOP of the list, and matching
+  `blogPost[]` entry prepended to the JSON-LD.
+- **`sitemap.xml`** — new `<url>` block for the article.
+- **`.claude/launch.json`** — added a local static-server config for previewing
+  the site (dev-only; not deployed content).
+- Verified in the in-app browser: article renders with no console errors, all
+  links correct, light/dark toggle works (--ink #0A0F1C ↔ #F4F6F9), JSON-LD
+  parses on both files, and the new card is first on the index.
+
 ## [24] — Publish SAFE21 OpenPGP public key (footer + security.txt)
 
 **Date:** 2026-08-15
