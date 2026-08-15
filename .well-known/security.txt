@@ -1,0 +1,12 @@
+# SAFE21 — security.txt (RFC 9116)
+# How to reach SAFE21 about security matters, and the OpenPGP public key
+# used by info@safe21.io for signed / encrypted communication.
+
+Contact: mailto:info@safe21.io
+Encryption: https://safe21.io/safe21-pgp.asc
+Preferred-Languages: it, en
+Canonical: https://safe21.io/.well-known/security.txt
+Expires: 2027-08-15T00:00:00.000Z
+
+# OpenPGP key fingerprint (SAFE21dev <info@safe21.io>):
+# 33E3 393D FB10 F4C4 5AE6  F1E8 206C 2011 4CA9 6172

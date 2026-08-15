@@ -3,6 +3,40 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [24] — Publish SAFE21 OpenPGP public key (footer + security.txt)
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client asked whether SAFE21's newly generated GPG key should be published on
+the site. Decision: publish the **public** key as a trust/transparency signal
+(consistent with the "dice vs software" article, which teaches readers to
+verify GPG signatures). It is not used to sign email or files yet — purely a
+credibility signal — so it is placed discreetly, not in the hero.
+
+Key verified before publishing: OpenPGP ed25519, created 2026-08-15, UID
+`SAFE21dev <info@safe21.io>`, fingerprint
+`33E3 393D FB10 F4C4 5AE6 F1E8 206C 2011 4CA9 6172`. Confirmed the copied file
+is a PUBLIC key block and byte-identical to the owner's exported public key.
+The matching SECRET key stays offline with the owner and is never touched.
+
+- **New `safe21-pgp.asc`** at the site root — the armored public key. Linked,
+  not embedded; browsers show it as text/plain.
+- **New `.well-known/security.txt`** (RFC 9116): `Contact` (info@safe21.io),
+  `Encryption` (the .asc URL), `Preferred-Languages: it, en`, `Canonical`,
+  `Expires` (2027-08-15), and the key fingerprint as a comment. This is the
+  standard, auto-discovered location security researchers/tools look for.
+- **Footer "Contatti/Contact" column** — added a "Chiave PGP" / "PGP key" link
+  on every page: `index.html` (with a new `footer.pgp` i18n entry so it reads
+  "PGP key" in EN and "Chiave PGP" in IT) and all five blog pages
+  (`blog.html` + the four articles, Italian static). Footer stays consistent
+  site-wide.
+- Not added to `sitemap.xml`: the key file and security.txt are utility
+  resources, not indexable content pages.
+- Verified: security.txt has the required RFC 9116 `Contact` + `Expires`
+  fields; the .asc link resolves to the public key; the footer link appears
+  once per page; homepage i18n still switches EN/IT including the new label.
+
 ## [23] — New blog article: "Perdere i propri bitcoin non è solo un danno personale"
 
 **Date:** 2026-08-15
