@@ -5,22 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ============================================================
-       SAFE21 — Blog index (article list)
+       SAFE21 — Blog article: "Cosa succede ai tuoi bitcoin quando non
+       ci sei più?"
        Single self-contained file (HTML + CSS + minimal JS).
 
        LANGUAGE NOTE (project rule R1):
-       The blog is ITALIAN ONLY by client decision, so this page carries
-       no EN/IT switcher and no i18n dictionary — the Italian copy is
-       written straight into the markup. Code comments stay in English.
+       The homepage (index.html) ships in English with a runtime EN/IT
+       switcher. The blog, by client decision, is ITALIAN ONLY — so this
+       page has no language switcher and no i18n dictionary: the Italian
+       copy is written directly in the markup. All code comments and
+       identifiers remain in English, as required by R1.
 
-       ADDING A NEW ARTICLE:
-       duplicate one <article class="post-card"> block below, update the
-       href, eyebrow, title, summary and date, and put the new article at
-       the TOP of the list (newest first).
+       SOURCE NOTE:
+       The Italian copy is adapted for SAFE21 from an internal draft tied
+       to the partner project "Bitcoin After Life" (BAL). On the SAFE21
+       blog it is published as a SAFE21 piece that presents BAL as a
+       partner tool, not as BAL's own blog. The product name "Bitcoin
+       After Life" and the term "Will-Executor" are kept untranslated by
+       the source's own convention.
+
+       Design tokens, header and footer are copied from index.html so the
+       blog is visually indistinguishable from the rest of the site. This
+       article carries no image, so the click-to-zoom lightbox present on
+       image-bearing articles is intentionally omitted here.
        ============================================================ -->
 
-  <title>Blog — SAFE21</title>
-  <meta name="description" content="Articoli in italiano su sicurezza Bitcoin, self-custody, protezione del seed ed eredità. Spiegati in modo semplice, senza gergo tecnico." />
+  <title>Cosa succede ai tuoi bitcoin quando non ci sei più? — SAFE21</title>
+  <meta name="description" content="Una parte consistente dei bitcoin è ferma per sempre perché chi li deteneva non c'è più e nessuno aveva le chiavi. Perché 'lasciare istruzioni' non basta — e come Bitcoin stesso risolve il problema con le transazioni time-lock." />
   <meta name="theme-color" content="#0A0F1C" />
 
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -28,48 +39,30 @@
   <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
 
-  <meta property="og:title" content="Blog — SAFE21" />
-  <meta property="og:description" content="Sicurezza Bitcoin spiegata in modo semplice, in italiano." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://safe21.io/blog" />
+  <!-- Open Graph (social preview). No og:image: this article has no
+       artwork, so no image is advertised rather than a broken reference. -->
+  <meta property="og:title" content="Cosa succede ai tuoi bitcoin quando non ci sei più?" />
+  <meta property="og:description" content="Milioni di BTC sono fermi per sempre perché nessuno aveva le chiavi. Perché 'lasciare istruzioni' non basta, e come Bitcoin stesso risolve il problema." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://safe21.io/blog-cosa-succede-ai-tuoi-bitcoin" />
   <meta property="og:locale" content="it_IT" />
-  <link rel="canonical" href="https://safe21.io/blog.html" />
+  <link rel="canonical" href="https://safe21.io/blog-cosa-succede-ai-tuoi-bitcoin.html" />
 
-  <!-- Structured data (JSON-LD): Blog type listing the current posts, so
-       search engines and AI assistants can see the article list without
-       having to parse the visual page layout. Keep this in sync with the
-       .post-card entries above when a new article is added. -->
+  <!-- Structured data (JSON-LD): Article type with explicit headline, dates
+       and author, so search engines and AI assistants can cite this piece
+       accurately (title, publisher, date) instead of guessing from prose. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "Blog SAFE21",
-    "url": "https://safe21.io/blog.html",
-    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "@type": "Article",
+    "headline": "Cosa succede ai tuoi bitcoin quando non ci sei più?",
+    "description": "Una parte consistente dei bitcoin è ferma per sempre perché chi li deteneva non c'è più e nessuno aveva le chiavi. Perché 'lasciare istruzioni' non basta, e come Bitcoin stesso risolve il problema con le transazioni time-lock.",
+    "url": "https://safe21.io/blog-cosa-succede-ai-tuoi-bitcoin.html",
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-08-15",
     "inLanguage": "it",
-    "blogPost": [
-      {
-        "@type": "BlogPosting",
-        "headline": "Cosa succede ai tuoi bitcoin quando non ci sei più?",
-        "url": "https://safe21.io/blog-cosa-succede-ai-tuoi-bitcoin.html",
-        "datePublished": "2026-08-15",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Dadi o software? Una riflessione sul seed generato a mano",
-        "url": "https://safe21.io/blog-dadi-semplicita.html",
-        "datePublished": "2026-08-11",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Il tuo SEED non deve mai toccare internet",
-        "url": "https://safe21.io/blog-seed-mai-online.html",
-        "datePublished": "2026-07-28",
-        "author": { "@type": "Organization", "name": "SAFE21" }
-      }
-    ]
+    "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
   }
   </script>
 
@@ -80,17 +73,19 @@
   <style>
     /* ---------- Design tokens (identical to index.html) ---------- */
     :root {
-      --ink:    #0A0F1C;
-      --ink-2:  #0E1525;
-      --panel:  #111B2E;
-      --line:   #1F2B44;
-      --light:  #F5F7FA;
-      --muted:  #95A1B5;
-      --teal:   #2DD4BF;
-      --teal-d: #0D9488;
-      --orange: #F7931A;
+      --ink:    #0A0F1C;   /* base background ("vault") */
+      --ink-2:  #0E1525;   /* alternating section background */
+      --panel:  #111B2E;   /* cards / elevated surfaces */
+      --line:   #1F2B44;   /* hairline borders */
+      --light:  #F5F7FA;   /* primary text */
+      --muted:  #95A1B5;   /* secondary text */
+      --teal:   #2DD4BF;   /* primary accent (security) */
+      --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
+      --orange: #F7931A;   /* Bitcoin accent — used sparingly */
+      --danger: #F26D6D;   /* used ONLY for the "never do this" rules */
 
       --maxw: 1120px;
+      --readw: 720px;      /* narrower measure for long-form reading */
       --radius: 16px;
 
       /* --- Tokens added in [12] so the light theme can override them.
@@ -118,14 +113,9 @@
        background (#0A0F1C), so the two modes mirror each other.
 
        The teal is darkened from #2DD4BF to #0A7568 because the bright
-       teal fails contrast on white (4.31:1 on the alternating section
-       background). #0A7568 clears 4.5:1 everywhere while still reading
-       as the same colour family. The logo keeps the untouched brand teal
-       #0D9488 from logos/safe21-logo-light.svg — it is large display
-       type, held to the 3:1 large-text threshold, which it passes.
-
-       All pairings were checked against WCAG 2.1 AA before being written
-       here; see CHANGELOG entry [12] for the measured ratios. --- */
+       teal fails contrast on white. #0A7568 clears 4.5:1 everywhere while
+       still reading as the same colour family. All pairings were checked
+       against WCAG 2.1 AA; see CHANGELOG entry [12] for the ratios. --- */
     [data-theme="light"] {
       --ink:          #F4F6F9;
       --ink-2:        #E8EDF4;
@@ -179,11 +169,17 @@
     }
 
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    /* Reading column: long-form text is capped narrower than the site grid
+       so lines stay around 70-80 characters, which is easier to read. */
+    .read { max-width: var(--readw); margin: 0 auto; padding: 0 24px; }
 
     .eyebrow {
       font-family: 'Space Mono', monospace;
-      font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--teal); margin: 0 0 14px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin: 0 0 14px;
     }
 
     h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; margin: 0; }
@@ -201,7 +197,7 @@
     .btn-ghost { border-color: var(--line); color: var(--light); background: transparent; }
     .btn-ghost:hover { border-color: var(--teal); transform: translateY(-2px); }
 
-    /* ---------- Header (same as index.html) ---------- */
+    /* ---------- Header (same structure as index.html) ---------- */
     header {
       position: sticky; top: 0; z-index: 50;
       background: var(--header-bg);
@@ -255,53 +251,94 @@
       .nav .logo svg { height: 44px; }
     }
 
-    /* ---------- Blog intro ---------- */
-    .blog-head {
-      padding: 76px 0 56px;
+    /* ---------- Article layout ---------- */
+    .article-head {
+      padding: 64px 0 8px;
       background: var(--ink-2);
       border-bottom: 1px solid var(--line);
     }
-    .blog-head h1 { font-size: 46px; font-weight: 700; letter-spacing: -0.5px; }
-    .blog-head p.lede {
-      font-size: 19px; color: var(--muted);
-      max-width: 640px; margin: 20px 0 0;
-    }
-
-    /* ---------- Article list ----------
-       Cards are full-width rows rather than a grid: with few articles a
-       multi-column grid would leave obvious empty cells, and a single
-       column keeps the newest post visually dominant. */
-    .posts { padding: 56px 0 72px; display: grid; gap: 20px; }
-
-    .post-card {
-      display: block;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 30px 32px;
-      transition: border-color .15s ease, transform .15s ease;
-    }
-    .post-card:hover { border-color: var(--teal); transform: translateY(-2px); }
-    .post-card .meta {
+    .back-link {
       font-family: 'Space Mono', monospace; font-size: 12px;
-      letter-spacing: 1px; color: var(--muted);
-      display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); display: inline-block; margin-bottom: 28px;
+      transition: color .15s ease;
     }
-    .post-card .meta .tag { color: var(--teal); text-transform: uppercase; }
-    .post-card h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.2px; }
-    .post-card p { color: var(--muted); font-size: 16.5px; margin: 12px 0 0; max-width: 720px; }
-    .post-card .more {
-      display: inline-block; margin-top: 18px;
-      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
-      font-size: 15px; color: var(--teal);
+    .back-link:hover { color: var(--teal); }
+
+    .article-head h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .article-head .standfirst {
+      font-size: 19px; color: var(--muted); margin: 22px 0 0;
+    }
+    /* Byline: mono, because it is metadata rather than prose. */
+    .byline {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      color: var(--muted); letter-spacing: 1px;
+      margin: 30px 0 0; padding: 16px 0 40px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 8px 18px;
+    }
+    .byline .read-time { color: var(--teal); }
+
+    .article-body { padding: 48px 0 24px; }
+    .article-body h2 {
+      font-size: 27px; font-weight: 600;
+      margin: 52px 0 16px; letter-spacing: -0.2px;
+    }
+    .article-body h3 {
+      font-size: 19px; font-weight: 600; margin: 34px 0 10px;
+    }
+    .article-body p { margin: 0 0 20px; font-size: 17px; color: var(--body); }
+    .article-body strong { color: var(--light); font-weight: 600; }
+    .article-body ul { margin: 0 0 22px; padding-left: 22px; }
+    .article-body li { margin-bottom: 14px; font-size: 17px; color: var(--body); }
+    /* Inline links inside prose are underlined so they are obvious in
+       body copy, where colour alone is not a reliable signal. */
+    .article-body a.inline {
+      color: var(--teal); text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-body a.inline:hover { color: var(--accent-hover); }
+
+    /* ---------- Footnote reference + note ----------
+       The article cites a source once (the "lost BTC" range). A small
+       superscript links down to a muted note at the foot of the body. */
+    a.fn-ref { color: var(--teal); text-decoration: none; font-weight: 600; }
+    a.fn-ref sup { font-size: 0.72em; }
+    .footnote {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      margin: 44px 0 0; padding-top: 22px;
+      border-top: 1px solid var(--line);
     }
 
-    /* Empty-state note shown under the list while the blog is still small. */
-    .list-note {
-      margin-top: 28px; font-size: 14.5px; color: var(--muted);
-      text-align: center;
+    /* ---------- Callout (neutral highlight) ---------- */
+    .callout {
+      background: var(--tint-teal-bg);
+      border: 1px solid var(--tint-teal-bd);
+      border-radius: var(--radius);
+      padding: 24px 26px; margin: 34px 0;
     }
-    .list-note a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+    .callout p { font-size: 17px; color: var(--body); }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout .eyebrow { margin-bottom: 10px; }
+    .callout a.inline { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Bitcoin-orange variant, reserved for the one Bitcoin-native idea in
+       the piece (the time-lock mechanism), consistently with how orange is
+       used site-wide. */
+    .callout.btc {
+      background: var(--tint-btc-bg);
+      border-color: var(--tint-btc-bd);
+    }
+    .callout.btc .eyebrow { color: var(--orange); }
+
+    /* ---------- Closing CTA ---------- */
+    .article-cta {
+      background: var(--ink-2); border-top: 1px solid var(--line);
+      margin-top: 56px; padding: 64px 0;
+    }
+    .article-cta h2 { font-size: 30px; margin-bottom: 14px; }
+    .article-cta p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
+    .article-cta .actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
     /* ---------- Footer (same as index.html) ---------- */
     footer { background: var(--ink); border-top: 1px solid var(--line); padding: 56px 0 34px; }
@@ -327,12 +364,12 @@
 
     /* ---------- Responsive ---------- */
     @media (max-width: 760px) {
-      .blog-head { padding: 48px 0 40px; }
-      .blog-head h1 { font-size: 34px; }
-      .blog-head p.lede { font-size: 17px; }
-      .posts { padding: 36px 0 52px; }
-      .post-card { padding: 24px 22px; }
-      .post-card h2 { font-size: 23px; }
+      .article-head { padding-top: 40px; }
+      .article-head h1 { font-size: 32px; }
+      .article-head .standfirst { font-size: 17px; }
+      .article-body h2 { font-size: 23px; margin-top: 42px; }
+      .article-body p, .article-body li { font-size: 16.5px; }
+      .article-cta h2 { font-size: 25px; }
     }
 
     /* ---------- Theme toggle button ---------- */
@@ -355,12 +392,12 @@
 
     /* Smooth crossfade between themes. Disabled automatically by the
        prefers-reduced-motion block above. */
-    body, header, .post-card, .callout, .checklist, .rule, figure.source {
+    body, header, .callout {
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
 
     /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
-    .post-card, .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
+    .callout { box-shadow: var(--card-shadow); }
 
     @media (max-width: 400px) {
       /* Very narrow phones: tighten the header gap so logo + theme +
@@ -389,6 +426,10 @@
 <body id="top">
 
   <!-- ================= HEADER ================= -->
+  <!-- Copied from index.html. Differences: links point back to index.html
+       sections (this is a separate page, so bare "#anchors" would not work),
+       the labels are written in Italian because the blog is Italian-only,
+       and there is no EN/IT switcher for the same reason. -->
   <header>
     <div class="wrap nav">
       <a class="logo" href="index.html" aria-label="SAFE21 home">
@@ -458,88 +499,228 @@
     </div>
   </header>
 
-  <!-- ================= BLOG INTRO ================= -->
-  <section class="blog-head">
-    <div class="wrap">
-      <p class="eyebrow">Blog SAFE21 · in italiano</p>
-      <h1>Sicurezza Bitcoin,<br/>spiegata semplice.</h1>
-      <p class="lede">
-        Articoli pensati per chi ha da poco iniziato con Bitcoin e ne possiede
-        una parte: cosa fare, cosa non fare mai, e perché. Senza gergo tecnico
-        e senza scorciatoie.
+  <!-- ================= ARTICLE HEADER ================= -->
+  <div class="article-head">
+    <div class="read">
+      <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
+      <p class="eyebrow">Eredità Bitcoin</p>
+      <h1>Cosa succede ai tuoi bitcoin quando non ci sei più?</h1>
+      <p class="standfirst">
+        La self-custody è tutto il senso di Bitcoin. Ed è anche,
+        silenziosamente, la ragione per cui una parte consistente di esso
+        non si muoverà mai più.
       </p>
+      <p class="byline">
+        <span>SAFE21</span>
+        <span>15 agosto 2026</span>
+        <span class="read-time">6 min di lettura</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE BODY ================= -->
+  <article class="article-body">
+    <div class="read">
+
+      <p>
+        Detieni le tue chiavi. Nessuno può congelare i tuoi bitcoin,
+        sequestrarli o spenderli senza il tuo permesso. Ma la stessa garanzia
+        vale in entrambi i sensi: se domani sparisci — un incidente, una
+        malattia, o semplicemente un hard disk che si rompe nel momento
+        sbagliato — nessuno può aiutare nemmeno la tua famiglia. Non una banca.
+        Non un tribunale. Non chi ha sviluppato il tuo wallet. Bitcoin fa
+        esattamente ciò che ha promesso: <strong>obbedisce alle chiavi, e solo
+        alle chiavi.</strong>
+      </p>
+
+      <p>
+        La maggior parte di chi possiede bitcoin lo sa, in astratto.
+        Pochissimi hanno fatto qualcosa al riguardo.
+      </p>
+
+      <h2>La dimensione del problema</h2>
+
+      <p>
+        Nessuno può contare con precisione i bitcoin persi — la blockchain non
+        li segnala — ma le stime convergono su un intervallo impressionante.
+        Le analisi di Chainalysis e altri collocano i bitcoin permanentemente
+        inaccessibili tra <strong>2,3 e 4 milioni di BTC</strong>, circa
+        l'11-18% del tetto massimo di 21 milioni.<a class="fn-ref" href="#nota-1" aria-label="nota 1"><sup>1</sup></a>
+        Una parte sono ricompense di mining dei primi anni che nessuno ha mai
+        reclamato. Un'altra parte è un laptop buttato via, una password
+        dimenticata, un paper wallet finito in lavatrice.
+      </p>
+
+      <p>
+        E una parte significativa è una storia più semplice: qualcuno è morto,
+        e nessun altro sapeva dove fossero le chiavi, o come usarle.
+      </p>
+
+      <p>
+        Ognuna di quelle monete è ancora visibile on-chain. Puoi cercarle.
+        Resteranno lì per sempre, senza fare nulla, perché una chiave privata
+        che nessuno detiene è indistinguibile da una chiave privata mai
+        esistita.
+      </p>
+
+      <h2>Perché "basta lasciare istruzioni" non funziona</h2>
+
+      <p>
+        La reazione naturale è: <em>lo scrivo da qualche parte.</em> Metti la
+        seed phrase in una busta, di' al tuo partner dove si trova, aggiungi
+        una riga al testamento. Problema risolto.
+      </p>
+
+      <p>Non lo è, ed è utile capire perché.</p>
+
+      <ul>
+        <li>
+          <strong>Dai la tua seed phrase a un familiare.</strong> Ora due
+          persone possono muovere i tuoi bitcoin — <em>oggi</em>, non dopo che
+          te ne sei andato. Non hai creato un backup: hai creato un
+          co-proprietario, e magari uno che non capisce cosa sta gestendo.
+        </li>
+        <li>
+          <strong>Affidi i bitcoin a un custode.</strong> Una terza parte
+          fidata li custodirà e li rilascerà ai tuoi eredi. È una scelta
+          perfettamente legittima — ma non è più self-custody. Sei tornato a
+          fidarti di un'istituzione che continui a esistere, essere solvibile
+          ed essere disponibile quando serve.
+        </li>
+        <li>
+          <strong>Lo scrivi in un testamento legale.</strong> Esecutori
+          testamentari e avvocati sono ottimi nel trasferire case e conti
+          bancari. Quasi nessuno di loro ha mai ripristinato un wallet da una
+          seed phrase, e un testamento è un documento che finirà per indicare
+          esattamente dove si trovano i fondi.
+        </li>
+        <li>
+          <strong>Non fai nulla e speri.</strong> Statisticamente l'opzione più
+          comune — ed è da lì che vengono quei 2,3-4 milioni di bitcoin.
+        </li>
+      </ul>
+
+      <p>
+        Ognuna di queste soluzioni scambia un rischio con un altro. Nessuna ti
+        permette di mantenere il pieno controllo oggi garantendo allo stesso
+        tempo che i tuoi eredi ricevano i bitcoin domani.
+      </p>
+
+      <h2>Ciò che Bitcoin stesso permette</h2>
+
+      <p>
+        Ecco la parte facile da non notare: il protocollo Bitcoin contiene già
+        lo strumento per questo. Si chiama <strong>transazione con
+        time-lock</strong>.
+      </p>
+
+      <p>
+        Puoi firmare <em>adesso</em> una transazione che Bitcoin rifiuterà di
+        accettare fino a una data che scegli tu. Fino a quella data, le regole
+        di consenso della rete stessa la rifiutano — nessuno può trasmetterla
+        prima, nemmeno tu. Dopo quella data, chiunque detenga la transazione
+        firmata può inviarla alla rete, e verrà confermata.
+      </p>
+
+      <div class="callout btc">
+        <p class="eyebrow">Il meccanismo che quasi nessuno nota</p>
+        <p>
+          Questo singolo meccanismo cambia la forma del problema. Non devi più
+          dare a nessuno le tue chiavi: devi dare a qualcuno una transazione
+          <strong>già firmata che diventa valida solo in futuro</strong> — e
+          assicurarti che almeno uno di loro sia ancora presente per
+          trasmetterla quando arriva il momento.
+        </p>
+      </div>
+
+      <p>Il che porta alla domanda ovvia: <em>chi?</em></p>
+
+      <h2>Dove entra in gioco Bitcoin After Life</h2>
+
+      <p>
+        Bitcoin After Life (BAL) è un plugin open source per Electrum che
+        trasforma questo meccanismo in qualcosa che una persona normale può
+        effettivamente usare. Scegli i tuoi eredi e una data di consegna. Il
+        plugin costruisce la transazione con time-lock, Electrum la firma
+        localmente — <strong>le tue chiavi non lasciano mai il tuo
+        dispositivo</strong> — e la transazione firmata viene affidata a una
+        rete di server indipendenti chiamati <strong>Will-Executor</strong>, il
+        cui unico compito è trasmetterla alla data che hai scelto.
+      </p>
+
+      <p>
+        Non possono spenderla. Non possono alterarla. Non possono trasmetterla
+        in anticipo, perché Bitcoin non lo permette. E poiché la stessa
+        transazione è detenuta da più server contemporaneamente, non serve che
+        ne sopravviva uno specifico perché il tuo piano funzioni — basta che ne
+        resti attivo uno solo.
+      </p>
+
+      <p>
+        Se sei ancora presente quando la data si avvicina, semplicemente
+        rinnovi. Se non lo sei, i tuoi bitcoin vanno dove hai deciso — senza
+        notaio, senza custode, e senza che nessuno abbia mai detenuto le tue
+        chiavi tranne te.
+      </p>
+
+      <div class="callout">
+        <p class="eyebrow">Il punto</p>
+        <p>
+          <strong>La self-custody non è mai stata pensata per finire con te.
+          Bitcoin ha già gli strumenti per assicurarsi che non sia così.</strong>
+          Puoi approfondire come funziona il protocollo — e cosa può e non può
+          vedere un Will-Executor — nel
+          <a class="inline" href="https://bitcoin-after.life/docs/" target="_blank" rel="noopener noreferrer">manuale di Bitcoin After Life &nearr;</a>
+        </p>
+      </div>
+
+      <h2>Come ti aiuta SAFE21</h2>
+
+      <p>
+        Impostare una transazione time-lock, scegliere gli eredi e assicurarsi
+        che il piano funzioni davvero richiede attenzione ai dettagli.
+        <strong>SAFE21</strong> ti affianca lungo tutto il percorso: dalla
+        messa in sicurezza del wallet fino alla configurazione dell'eredità con
+        Bitcoin After Life, di persona o online, in italiano e senza gergo
+        tecnico.
+      </p>
+
+      <p>
+        <strong>Le tue chiavi restano sempre e solo tue.</strong> SAFE21 non
+        prende mai in custodia i tuoi fondi e non ti chiederà mai il seed: il
+        piano di eredità si costruisce senza consegnare a nessuno il controllo
+        dei tuoi bitcoin.
+      </p>
+
+      <p class="footnote" id="nota-1">
+        1. Le stime variano per metodologia e anno; il dato di 2,3-4 milioni di
+        BTC riflette le stime citate da Chainalysis, Ledger e River Financial.
+        Il numero esatto è per natura inconoscibile, e quell'incertezza fa
+        parte del punto.
+      </p>
+
+    </div>
+  </article>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta">
+    <div class="read">
+      <p class="eyebrow">Eredità senza custodi</p>
+      <h2>Vuoi che i tuoi bitcoin arrivino a chi resta?</h2>
+      <p>
+        Raccontaci la tua situazione: ti aiutiamo a impostare l'eredità con
+        BAL Protocol, mantenendo le chiavi sempre nelle tue mani — oggi e
+        domani. Senza impegno.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="index.html#inheritance">Il servizio Eredità</a>
+      </div>
     </div>
   </section>
 
-  <!-- ================= ARTICLE LIST ================= -->
-  <!-- Newest first. To add an article, copy one .post-card block. -->
-  <main class="wrap">
-    <div class="posts">
-
-      <a class="post-card" href="blog-cosa-succede-ai-tuoi-bitcoin.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Eredità Bitcoin</span>
-            <span>15 agosto 2026</span>
-            <span>6 min di lettura</span>
-          </div>
-          <h2>Cosa succede ai tuoi bitcoin quando non ci sei più?</h2>
-          <p>
-            La self-custody è tutto il senso di Bitcoin, ed è anche la ragione
-            per cui milioni di BTC sono fermi per sempre: nessuno aveva le
-            chiavi. Perché "lasciare istruzioni" non basta — e come Bitcoin
-            stesso, con le transazioni time-lock, permette di risolvere il
-            problema senza custodi.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-      <a class="post-card" href="blog-dadi-semplicita.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Buone pratiche · Seed phrase</span>
-            <span>11 agosto 2026</span>
-            <span>7 min di lettura</span>
-          </div>
-          <h2>Dadi o software? Una riflessione sul seed generato a mano</h2>
-          <p>
-            La moda del seed generato coi dadi: fatto perfettamente può
-            funzionare, ma è più difficile di quanto sembri — e alla fine serve
-            comunque un software fidato. Perché per la maggior parte delle
-            persone la via più semplice è anche la più sicura.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-      <a class="post-card" href="blog-seed-mai-online.html">
-        <article>
-          <div class="meta">
-            <span class="tag">Sicurezza · Seed phrase</span>
-            <span>28 luglio 2026</span>
-            <span>5 min di lettura</span>
-          </div>
-          <h2>Il tuo SEED non deve mai toccare internet</h2>
-          <p>
-            Un malware nascosto in app approvate da App Store e Google Play
-            cercava le seed phrase nelle foto degli utenti. Perché il seed non
-            deve mai diventare uno screenshot, e perché il furto può arrivare
-            anni dopo l'errore.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
-        </article>
-      </a>
-
-    </div>
-
-    <p class="list-note">
-      Nuovi articoli in arrivo. Hai un dubbio o un argomento che vorresti vedere
-      trattato? <a href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
-    </p>
-  </main>
-
   <!-- ================= FOOTER ================= -->
+  <!-- Same structure as index.html, written directly in Italian. -->
   <footer>
     <div class="wrap">
       <div class="foot-top">
@@ -589,8 +770,11 @@
 
   <script>
     /**
-     * Mobile menu toggle — identical behaviour to index.html and the
-     * article page, kept inline so each page stays self-contained.
+     * Mobile menu toggle.
+     *
+     * Same dependency-free behaviour as index.html: the hamburger opens a
+     * slide-down drawer, which closes on link tap, on Escape, and resets
+     * automatically when the viewport grows past the mobile breakpoint.
      */
     (function () {
       var toggle = document.querySelector('.menu-toggle');
@@ -600,6 +784,7 @@
       function setOpen(open) {
         menu.classList.toggle('open', open);
         toggle.setAttribute('aria-expanded', String(open));
+        // The label describes the NEXT action, so it flips with the state.
         toggle.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
       }
 
@@ -607,6 +792,8 @@
         setOpen(toggle.getAttribute('aria-expanded') !== 'true');
       });
 
+      // Close after tapping a link, otherwise the drawer would stay open
+      // over the destination content.
       menu.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () { setOpen(false); });
       });
@@ -615,6 +802,8 @@
         if (e.key === 'Escape') setOpen(false);
       });
 
+      // Reset when rotating/resizing to desktop, where the drawer is hidden
+      // by CSS but would otherwise keep a stale aria-expanded="true".
       window.addEventListener('resize', function () {
         if (window.innerWidth > 760) setOpen(false);
       });

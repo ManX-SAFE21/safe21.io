@@ -3,6 +3,48 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [22] — New blog article: "Cosa succede ai tuoi bitcoin quando non ci sei più?"
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client asked to publish a third blog article, adapted for SAFE21 from an
+internal Italian draft tied to the partner project **Bitcoin After Life (BAL)**.
+The draft originated for BAL's own (English) blog and its internal note said not
+to publish it there; the client explicitly repurposes it for the SAFE21
+Italian-only blog instead, where BAL is presented as a partner tool. Only the
+article body was used — the draft's internal HTML note and its "week-1 social
+calendar" section were discarded as internal planning, not article content. The
+names "Bitcoin After Life" and "Will-Executor" are kept untranslated per the
+source's convention.
+
+- **New `blog-cosa-succede-ai-tuoi-bitcoin.html`.** Built from the
+  `blog-seed-mai-online.html` template so header, footer, theme toggle, fonts
+  and tokens match the rest of the blog exactly. Sections: the lost-coins
+  problem (with one sourced statistic and a footnote), why "just leave
+  instructions" fails (four flawed approaches as a list), Bitcoin's own
+  time-lock mechanism (highlighted in the Bitcoin-orange callout — the one
+  Bitcoin-native idea), how BAL turns it into something usable, and a
+  SAFE21-specific "Come ti aiuta SAFE21" section framing SAFE21's inheritance
+  service (in partnership with BAL, non-custodial, keys stay with the user).
+  Closing CTA links to the contact email and the homepage Eredità section; an
+  inline link points to the BAL manual (bitcoin-after.life/docs).
+  This article has **no image**, so the click-to-zoom lightbox present on
+  image-bearing articles is intentionally omitted (no dead markup/CSS/JS), and
+  no `og:image`/JSON-LD image is advertised.
+- **`blog.html`** — added a `.post-card` at the TOP of the list (newest first)
+  and a matching `BlogPosting` entry at the top of the JSON-LD `blogPost[]`
+  array. Eyebrow/tag: "Eredità Bitcoin"; date 15 agosto 2026; 6 min read.
+- **`sitemap.xml`** — added a `<url>` for the new article (lastmod 2026-08-15)
+  and bumped `blog.html` lastmod to 2026-08-15.
+- Verified in the in-app browser (dark + light theme): the article renders,
+  the index card links correctly, both JSON-LD blocks parse as valid JSON, and
+  the sitemap is well-formed XML with the new URL. No console errors.
+- **Revision:** in the closing CTA, "impostare l'eredità con BAL" reworded to
+  "impostare l'eredità con **BAL Protocol**" — the client noted bare "BAL"
+  means nothing to a reader who hasn't seen the footer link, where the partner
+  is already named "BAL Protocol". Now consistent across the page.
+
 ## [21] — SEO / AI-readiness baseline (sitemap, robots, canonical, JSON-LD)
 
 Client asked whether the site is discoverable by Google and by AI assistants.
