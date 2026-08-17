@@ -3,6 +3,27 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [28] — Footer link to SAFE21 open-source code (GitHub)
+
+**Date:** 2026-08-15
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client asked for a footer link pointing to SAFE21's GitHub
+(https://github.com/ManX-SAFE21), where the open-source code lives. Chosen
+label communicates the purpose rather than just naming the platform.
+
+- Added an external link in the footer "Contatti/Contact" column (between the
+  Blog and PGP-key links) on **all six** pages: `index.html` and the five blog
+  pages that existed plus `blog-bal-easy-heirs.html` (added in [25] while this
+  task was in progress). `target="_blank"` + `rel="noopener noreferrer"`, with
+  a `&nearr;` arrow to mark it as leaving the site (same convention as the
+  Partner links).
+- Label "Codice open source" (IT) / "Open-source code" (EN). On `index.html`
+  this uses a new `footer.github` i18n entry; the homepage i18n applies via
+  `innerHTML`, so the arrow entity is included in the Italian value too. Blog
+  pages are Italian-static, so the label is written directly.
+- No new files; footer stays consistent site-wide.
+
 ## [27] — Replace BAL Easy Heirs infographic with a lighter version
 
 **Date:** 2026-08-15
