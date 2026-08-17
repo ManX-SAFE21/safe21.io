@@ -5,8 +5,8 @@ One numbered entry per task.
 
 ## [28] — Footer link to SAFE21 open-source code (GitHub)
 
-**Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Date:** 2026-08-17
+**Status:** Delivered and live (commit `9395f18`, pushed to `main`)
 
 Client asked for a footer link pointing to SAFE21's GitHub
 (https://github.com/ManX-SAFE21), where the open-source code lives. Chosen
@@ -27,7 +27,7 @@ label communicates the purpose rather than just naming the platform.
 ## [27] — Replace BAL Easy Heirs infographic with a lighter version
 
 **Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `04bb14b`, pushed to `main`)
 
 Client swapped the infographic added in [26] for a smaller, lighter version
 of the same artwork: 1600×893 (was 2752×1536), 75 KB (was 138 KB) — same
@@ -43,7 +43,7 @@ file path, so no HTML `src` change needed.
 ## [26] — Add lead infographic to the BAL Easy Heirs article
 
 **Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `5063df8`, pushed to `main`)
 
 Client supplied an infographic ("BAL Easy Heirs: l'eredità Bitcoin offline e
 sicura") already cleaned of its generator watermark and converted to WebP, to
@@ -62,7 +62,7 @@ open the article. Wired it in reusing the existing lightbox pattern.
 ## [25] — New blog article: "BAL Easy Heirs: prepara l'eredità dei tuoi bitcoin senza mai andare online"
 
 **Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `3fafd30`, pushed to `main`)
 
 Client asked for a ~5-minute article explaining the BAL Easy Heirs Electrum
 plugin (github.com/ManX-SAFE21/BALeasyHeirs, now public): what it does, why it
@@ -90,7 +90,7 @@ decisions; BAL framed as the companion protocol.
 ## [24] — Publish SAFE21 OpenPGP public key (footer + security.txt)
 
 **Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `538fbea`, pushed to `main`)
 
 Client asked whether SAFE21's newly generated GPG key should be published on
 the site. Decision: publish the **public** key as a trust/transparency signal
@@ -124,7 +124,7 @@ The matching SECRET key stays offline with the owner and is never touched.
 ## [23] — New blog article: "Perdere i propri bitcoin non è solo un danno personale"
 
 **Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `dc56694`, pushed to `main`)
 
 Client supplied a ready Markdown draft with front matter and explicit
 publishing instructions (`Articolo_4/blog-bitcoin-persi-dovere.md`) for a
@@ -165,7 +165,7 @@ addresses over time.
 ## [22] — New blog article: "Cosa succede ai tuoi bitcoin quando non ci sei più?"
 
 **Date:** 2026-08-15
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `c2810af`, pushed to `main`)
 
 Client asked to publish a third blog article, adapted for SAFE21 from an
 internal Italian draft tied to the partner project **Bitcoin After Life (BAL)**.
