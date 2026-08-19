@@ -307,26 +307,11 @@
     }
     figure.source figcaption a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
 
-    /* ---------- Rule cards: the "never do this" list ----------
-       Numbered deliberately: these are not decorative markers, the list is
-       a fixed set of rules the reader is meant to be able to refer back to
-       ("regola 2"), so the numbering carries real information. */
-    .rules { margin: 30px 0 36px; display: grid; gap: 14px; }
-    .rule {
-      display: flex; gap: 16px; align-items: flex-start;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-left: 3px solid var(--danger);
-      border-radius: 12px; padding: 18px 20px;
-    }
-    .rule .num {
-      font-family: 'Space Mono', monospace; font-size: 13px;
-      color: var(--danger); flex: none; padding-top: 2px;
-    }
-    .rule h3 { font-size: 17px; margin: 0 0 6px; }
-    .rule p { margin: 0; font-size: 15px; color: var(--muted); }
-
     /* ---------- Callout (neutral highlight) ---------- */
+    /* This article uses one neutral callout ("Detto in una riga"). The
+       Bitcoin-orange .callout.btc variant, the numbered .rule cards and the
+       .checklist block belong to other articles' templates and are not
+       rendered here, so their CSS is intentionally absent. */
     .callout {
       background: var(--tint-teal-bg);
       border: 1px solid var(--tint-teal-bd);
@@ -335,30 +320,6 @@
     }
     .callout p:last-child { margin-bottom: 0; }
     .callout .eyebrow { margin-bottom: 10px; }
-
-    /* Bitcoin-orange variant, reserved for the "sovereignty" passage —
-       it is the one Bitcoin-native idea in the article, so it gets the
-       Bitcoin accent, consistently with how orange is used site-wide. */
-    .callout.btc {
-      background: var(--tint-btc-bg);
-      border-color: var(--tint-btc-bd);
-    }
-    .callout.btc .eyebrow { color: var(--orange); }
-
-    /* ---------- Checklist ---------- */
-    .checklist {
-      background: var(--panel); border: 1px solid var(--line);
-      border-radius: var(--radius); padding: 28px 30px; margin: 40px 0;
-    }
-    .checklist h2 { margin: 0 0 6px; font-size: 22px; }
-    .checklist ul { list-style: none; margin: 18px 0 0; padding: 0; }
-    .checklist li {
-      display: flex; gap: 12px; align-items: flex-start;
-      padding: 11px 0; border-bottom: 1px solid var(--line);
-      font-size: 16px; color: var(--body);
-    }
-    .checklist li:last-child { border-bottom: none; }
-    .checklist li svg { flex: none; width: 20px; height: 20px; margin-top: 3px; color: var(--teal); }
 
     /* ---------- Closing CTA ---------- */
     .article-cta {
@@ -398,7 +359,6 @@
       .article-head .standfirst { font-size: 17px; }
       .article-body h2 { font-size: 23px; margin-top: 42px; }
       .article-body p, .article-body li { font-size: 16.5px; }
-      .checklist { padding: 22px 20px; }
       .article-cta h2 { font-size: 25px; }
     }
 
@@ -421,13 +381,16 @@
     [data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
     /* Smooth crossfade between themes. Disabled automatically by the
-       prefers-reduced-motion block above. */
-    body, header, .post-card, .callout, .checklist, .rule, figure.source {
+       prefers-reduced-motion block above. Lists only what this page renders
+       (.post-card belongs to the blog index, not to an article). */
+    body, header, .callout, figure.source {
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
 
-    /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
-    .post-card, .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
+    /* Cards gain a soft shadow on white; the token is `none` in dark mode.
+       The callout is deliberately NOT in this list: it is a tinted panel,
+       not a card, and never carried a shadow. */
+    figure.source { box-shadow: var(--card-shadow); }
 
     @media (max-width: 400px) {
       /* Very narrow phones: tighten the header gap so logo + theme +
@@ -645,7 +608,7 @@
 
       <figure class="source">
         <img src="images/infografica-dadi-vs-software.png"
-             width="1440" height="804" loading="lazy" decoding="async"
+             width="1440" height="725" loading="lazy" decoding="async"
              alt="Infografica di confronto tra generazione del seed coi dadi e con software open source: i dadi richiedono 50-100 lanci senza errori, dadi perfettamente bilanciati e comunque un computer per il checksum BIP39; il software open source offre velocità con CSPRNG, trasparenza con firme GPG e rischio di errore minimo." />
       </figure>
 

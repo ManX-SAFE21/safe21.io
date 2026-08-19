@@ -217,10 +217,10 @@
       border: 1px solid transparent; cursor: pointer;
       transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
     }
+    /* Only .btn-primary is used on this page (the header "Contattaci"); the
+       .btn-ghost variant lives on the article pages, which have a CTA. */
     .btn-primary { background: var(--teal); color: var(--btn-text); }
     .btn-primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
-    .btn-ghost { border-color: var(--line); color: var(--light); background: transparent; }
-    .btn-ghost:hover { border-color: var(--teal); transform: translateY(-2px); }
 
     /* ---------- Header (same as index.html) ---------- */
     header {
@@ -375,13 +375,15 @@
     [data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
     /* Smooth crossfade between themes. Disabled automatically by the
-       prefers-reduced-motion block above. */
-    body, header, .post-card, .callout, .checklist, .rule, figure.source {
+       prefers-reduced-motion block above. Only the elements this page
+       actually renders are listed; the article pages carry their own
+       (longer) version of this rule for .callout/.rule/figure.source. */
+    body, header, .post-card {
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
 
     /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
-    .post-card, .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
+    .post-card { box-shadow: var(--card-shadow); }
 
     @media (max-width: 400px) {
       /* Very narrow phones: tighten the header gap so logo + theme +

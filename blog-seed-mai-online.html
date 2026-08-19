@@ -286,13 +286,10 @@
     .article-body strong { color: var(--light); font-weight: 600; }
     .article-body ul { margin: 0 0 22px; padding-left: 22px; }
     .article-body li { margin-bottom: 10px; font-size: 17px; color: var(--body); }
-    /* Inline links inside prose are underlined so they are obvious in
-       body copy, where colour alone is not a reliable signal. */
-    .article-body a.inline {
-      color: var(--teal); text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-    .article-body a.inline:hover { color: var(--accent-hover); }
+    /* NOTE: this article's prose carries no inline links, so the shared
+       `.article-body a.inline` rule (underlined teal links) is not needed
+       here. If a link is ever added to the body copy, copy that rule over
+       from one of the other article pages. */
 
     /* ---------- Source figure (the X / Twitter screenshot) ---------- */
     figure.source {
@@ -423,13 +420,14 @@
     [data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
     /* Smooth crossfade between themes. Disabled automatically by the
-       prefers-reduced-motion block above. */
-    body, header, .post-card, .callout, .checklist, .rule, figure.source {
+       prefers-reduced-motion block above. Lists only what this page renders
+       (.post-card belongs to the blog index, not to an article). */
+    body, header, .callout, .checklist, .rule, figure.source {
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
 
     /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
-    .post-card, .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
+    .checklist, .rule, figure.source { box-shadow: var(--card-shadow); }
 
     @media (max-width: 400px) {
       /* Very narrow phones: tighten the header gap so logo + theme +

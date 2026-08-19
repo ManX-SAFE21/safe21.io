@@ -3,6 +3,80 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [30] — Site-wide audit: fix wrong image dimensions, remove dead CSS
+
+**Date:** 2026-08-19
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client asked for a general check of the whole site/code for errors. Ran a
+custom read-only audit script against all 8 HTML pages, covering: HTML tag
+nesting, JSON-LD validity (+ headline/canonical/og:image cross-checks),
+canonical/og:url vs actual filename, every internal href/src resolving to a
+real file, every `<img>` having alt text and its declared width/height
+matching the real file, footer link consistency across all pages,
+sitemap.xml vs actual pages (both directions), blog.html post-cards vs
+JSON-LD `blogPost[]` vs actual article files, CHANGELOG entry numbering,
+security.txt/robots.txt required fields, and a check that `safe21-pgp.asc`
+contains no private-key material. Also grepped for leftover TODO/FIXME/merge
+markers/placeholder text (none found) and diffed post-card counts between
+the local repo and the live site (matched).
+
+**One real bug found, pre-dating this project's AI-assisted work (task
+[18]/[19], June–July 2026):** `blog-dadi-semplicita.html`'s infographic
+`<img>` declared `height="804"`, but the actual PNG on disk is 1440×725, not
+1440×804 — a ~79px mismatch. Browsers reserve layout space from the declared
+height before the image loads, so this caused a visible reflow (layout
+shift) once the real image rendered. Fixed the declared `height` to match
+the real file exactly; the image itself was not touched.
+
+**Three audit-script false positives, no site issue:** the homepage's
+canonical/og:url legitimately point to the bare root `https://safe21.io/`
+(no path segment), and `index.html`'s `<html lang="en">` is correct because
+the homepage ships in English and its i18n script rewrites `lang` at runtime
+when the reader switches to Italian. Both confirmed correct by inspection.
+
+**Dead CSS removed** (second pass, at the client's request). All of it was
+leftover from copying the shared per-article `<style>` block wholesale:
+- `blog.html` — the theme-crossfade and box-shadow rules listed `.callout`,
+  `.checklist`, `.rule`, `figure.source`, none of which the index renders;
+  trimmed to `.post-card`. Also dropped the unused `.btn-ghost` pair (the
+  index has only the header's `.btn-primary`).
+- `blog-dadi-semplicita.html` — removed the unused `.rules`/`.rule`/
+  `.checklist` blocks, the unused `.callout.btc` variant, and the
+  `.checklist` line in the mobile media query; trimmed `.post-card` out of
+  the crossfade/box-shadow rules.
+- `blog-seed-mai-online.html` — removed the unused `.article-body a.inline`
+  rule (this article's prose carries no inline links) and trimmed
+  `.post-card` out of the crossfade/box-shadow rules.
+
+**Verification that the cleanup changed nothing.** Each edited page was
+fingerprinted before and after: ~40 computed CSS properties plus the
+bounding box of every element in the document, hashed into one digest per
+page (confirmed deterministic by re-running on an unchanged page). All three
+digests matched exactly — `blog.html` 86362845 (149 elements), the dice
+article 344786962 (174), the seed article 3030340794 (230). Because
+`--card-shadow` is `none` in dark mode, the shadow changes could only show
+in **light** mode, so the original files were additionally extracted from
+git into a second local server and the two versions compared side by side
+in light theme: identical `box-shadow`/`transition`/link-decoration
+inventories on all three pages.
+
+That comparison caught a genuine mistake mid-edit: while trimming the dice
+article's box-shadow rule, `.callout` was briefly added to a list it had
+never been in, which would have given the callout panel a shadow it never
+had (visible only in light mode). Reverted before the check — the callout
+is a tinted panel, not a card, and is correctly in the *transition* list but
+not the *box-shadow* one.
+
+Everything else checked out clean: no broken internal links, no missing alt
+text, all JSON-LD blocks valid and consistent with their page's headline/
+canonical, sitemap.xml lists exactly the 8 real pages both ways, all 6 blog
+articles have a post-card + matching JSON-LD entry in `blog.html` (order
+consistent), footer links (Contatti: email, Blog, GitHub, Chiave PGP)
+identical across all 8 pages, CHANGELOG numbering sequential with no gaps
+(#1-#30), `security.txt`/`robots.txt` have their required fields, and
+`safe21-pgp.asc` contains only a public key.
+
 ## [29] — New blog article: "SAFE21 diventa Will-Executor"
 
 **Date:** 2026-08-19
