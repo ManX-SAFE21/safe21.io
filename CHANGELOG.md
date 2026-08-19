@@ -3,6 +3,45 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [29] — New blog article: "SAFE21 diventa Will-Executor"
+
+**Date:** 2026-08-19
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client supplied a ready Markdown draft (`Articolo_5/articolo-safe21-will-executor.md`)
+announcing that SAFE21 now runs its own BAL Protocol Will-Executor
+(we.safe21.io) and contributed an Umbrel OS packaging of it, plus a hero
+infographic (PNG) to accompany it. Client also asked, mid-task, for a
+closing note clarifying that the Umbrel install is currently manual, not yet
+a one-click App Store install — added at the very end of the article body,
+deliberately left unreconciled with the earlier "pochi clic" / "installi
+l'app" phrasing per the client's explicit choice.
+
+- **Image conversion**: the supplied PNG (2752×1536, 6.9 MB) was resized to
+  2200×1228 and re-encoded as WebP (quality 81) to hit the client's ~60 KB
+  target — landed at 60.6 KB, a 99% size reduction. Saved as
+  `images/infografica-safe21-will-executor.webp`.
+- **New `blog-safe21-will-executor.html`.** Built from
+  `blog-bal-easy-heirs.html` (image + click-to-zoom lightbox pattern). Tag
+  "Eredità Bitcoin", 19 agosto 2026, 7 min. Sections: how BAL's time-lock
+  inheritance works (recap, numbered list) → what a Will-Executor is (callout
+  box: what it can/cannot do) → why SAFE21 runs one (three H3 subsections:
+  belief in decentralization, favorable risk/benefit with the on-chain fee
+  incentive, and the Umbrel OS packaging) → how a reader can start (prepare
+  an inheritance, or become a Will-Executor) → the client's honesty note on
+  Umbrel's current manual install → closing links + non-custodial disclaimer
+  (reused `.footnote` styling with a `<ul>` of three links, consistent with
+  existing CSS — no new classes needed). `og:image` set (this article has
+  real artwork, unlike #22/#23/#25).
+- **`blog.html`** — new `.post-card` at the TOP of the list, and matching
+  `BlogPosting` entry prepended to the JSON-LD `blogPost[]` array.
+- **`sitemap.xml`** — new `<url>` block; bumped `blog.html` lastmod to
+  2026-08-19.
+- Verified: JSON-LD (index + article) parses as valid JSON, sitemap is
+  well-formed XML, image resolves at its real 2200×1228 size in the figure
+  and lightbox, both external CTA links (we.safe21.io, bitcoin-after.life)
+  correct, no console errors.
+
 ## [28] — Footer link to SAFE21 open-source code (GitHub)
 
 **Date:** 2026-08-17

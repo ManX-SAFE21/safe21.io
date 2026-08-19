@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SAFE21 — Blog article: "SAFE21 diventa Will-Executor: perché
+       abbiamo acceso un server per il protocollo BAL"
+       Single self-contained file (HTML + CSS + minimal JS).
+
+       LANGUAGE NOTE (project rule R1):
+       The homepage (index.html) ships in English with a runtime EN/IT
+       switcher. The blog, by client decision, is ITALIAN ONLY — so this
+       page has no language switcher and no i18n dictionary: the Italian
+       copy is written directly in the markup. All code comments and
+       identifiers remain in English, as required by R1.
+
+       SOURCE NOTE:
+       Content supplied by the client as a ready Markdown draft
+       (Articolo_5/articolo-safe21-will-executor.md), including a client-
+       requested closing note ("Una precisazione tecnica, per onestà")
+       clarifying that Will-Executor-on-Umbrel is currently a manual
+       install, not yet a one-click Umbrel App Store install — left
+       deliberately alongside the earlier "pochi clic" / "installi l'app"
+       phrasing per the client's explicit choice not to reconcile them.
+       Structure cloned from blog-bal-easy-heirs.html (image + lightbox).
+
+       Design tokens, header and footer are copied from index.html so the
+       blog is visually indistinguishable from the rest of the site.
+       ============================================================ -->
+
+  <title>SAFE21 diventa Will-Executor: perché abbiamo acceso un server per il protocollo BAL — SAFE21</title>
+  <meta name="description" content="Crediamo così tanto in Bitcoin After Life da aver acceso il nostro Will-Executor e da averlo portato su Umbrel OS. Perché lo abbiamo fatto, perché ogni server in più conta — e perché potresti volerlo fare anche tu." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="logos/safe21-favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
+
+  <!-- Open Graph (social preview) -->
+  <meta property="og:title" content="SAFE21 diventa Will-Executor: perché abbiamo acceso un server per il protocollo BAL" />
+  <meta property="og:description" content="Crediamo così tanto in Bitcoin After Life da aver acceso il nostro Will-Executor e da averlo portato su Umbrel OS. Perché lo abbiamo fatto, e perché potresti volerlo fare anche tu." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://safe21.io/blog-safe21-will-executor" />
+  <meta property="og:image" content="https://safe21.io/images/infografica-safe21-will-executor.webp" />
+  <meta property="og:locale" content="it_IT" />
+  <link rel="canonical" href="https://safe21.io/blog-safe21-will-executor.html" />
+
+  <!-- Structured data (JSON-LD): Article type with explicit headline, dates
+       and author, so search engines and AI assistants can cite this piece
+       accurately (title, publisher, date) instead of guessing from prose. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "SAFE21 diventa Will-Executor: perché abbiamo acceso un server per il protocollo BAL",
+    "description": "Crediamo così tanto in Bitcoin After Life da aver acceso il nostro Will-Executor e da averlo portato su Umbrel OS. Perché lo abbiamo fatto, perché ogni server in più conta — e perché potresti volerlo fare anche tu.",
+    "url": "https://safe21.io/blog-safe21-will-executor.html",
+    "image": "https://safe21.io/images/infografica-safe21-will-executor.webp",
+    "datePublished": "2026-08-19",
+    "dateModified": "2026-08-19",
+    "inLanguage": "it",
+    "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- Design tokens (identical to index.html) ---------- */
+    :root {
+      --ink:    #0A0F1C;   /* base background ("vault") */
+      --ink-2:  #0E1525;   /* alternating section background */
+      --panel:  #111B2E;   /* cards / elevated surfaces */
+      --line:   #1F2B44;   /* hairline borders */
+      --light:  #F5F7FA;   /* primary text */
+      --muted:  #95A1B5;   /* secondary text */
+      --teal:   #2DD4BF;   /* primary accent (security) */
+      --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
+      --orange: #F7931A;   /* Bitcoin accent — used sparingly */
+      --danger: #F26D6D;   /* used ONLY for the "never do this" rules */
+
+      --maxw: 1120px;
+      --readw: 720px;      /* narrower measure for long-form reading */
+      --radius: 16px;
+
+      /* --- Tokens added in [12] so the light theme can override them.
+             These values are exactly what the stylesheet used to hardcode,
+             so the dark rendering is byte-for-byte unchanged. --- */
+      --body:         #DDE4EE;                    /* long-form body copy */
+      --header-bg:    rgba(10, 15, 28, 0.72);     /* sticky header (blurred) */
+      --drawer-bg:    rgba(10, 15, 28, 0.96);     /* mobile drawer */
+      --accent-hover: #45e0cd;                    /* button + link hover */
+      --btn-text:     #04201C;                    /* text on the teal button */
+      --tint-teal-bg: rgba(45, 212, 191, 0.07);   /* callout fill */
+      --tint-teal-bd: rgba(45, 212, 191, 0.28);   /* callout border */
+      --tint-btc-bg:  rgba(247, 147, 26, 0.07);   /* Bitcoin callout fill */
+      --tint-btc-bd:  rgba(247, 147, 26, 0.30);   /* Bitcoin callout border */
+      --logo-word:    #F5F7FA;                    /* "SAFE" in the wordmark */
+      --logo-21:      #2DD4BF;                    /* "21" in the wordmark */
+      --card-shadow:  none;
+    }
+
+    /* ---------- Light theme (blog only) ----------
+       Applied by setting data-theme="light" on <html>. Every value is a
+       deliberate counterpart of the dark token, not a generic light
+       palette: the page background is a cool white tinted toward the
+       brand's navy, and the primary text colour IS the dark theme's
+       background (#0A0F1C), so the two modes mirror each other.
+
+       The teal is darkened from #2DD4BF to #0A7568 because the bright
+       teal fails contrast on white. #0A7568 clears 4.5:1 everywhere while
+       still reading as the same colour family. All pairings were checked
+       against WCAG 2.1 AA; see CHANGELOG entry [12] for the ratios. --- */
+    [data-theme="light"] {
+      --ink:          #F4F6F9;
+      --ink-2:        #E8EDF4;
+      --panel:        #FFFFFF;
+      --line:         #D3DBE6;
+      --light:        #0A0F1C;
+      --body:         #1E2735;
+      --muted:        #54637A;
+      --teal:         #0A7568;
+      --teal-d:       #0D9488;
+      --orange:       #9A5B00;
+      --danger:       #B3261E;
+      --header-bg:    rgba(244, 246, 249, 0.82);
+      --drawer-bg:    rgba(244, 246, 249, 0.97);
+      --accent-hover: #0D9488;
+      --btn-text:     #FFFFFF;
+      --tint-teal-bg: rgba(10, 117, 104, 0.06);
+      --tint-teal-bd: rgba(10, 117, 104, 0.30);
+      --tint-btc-bg:  rgba(154, 91, 0, 0.06);
+      --tint-btc-bd:  rgba(154, 91, 0, 0.28);
+      --logo-word:    #0A0F1C;
+      --logo-21:      #0D9488;
+      /* On white, cards need a shadow to separate from the page; on the
+         dark theme the border alone is enough. */
+      --card-shadow:  0 1px 3px rgba(10, 15, 28, 0.06);
+    }
+
+    /* ---------- Reset / base ---------- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--light);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    /* Reading column: long-form text is capped narrower than the site grid
+       so lines stay around 70-80 characters, which is easier to read. */
+    .read { max-width: var(--readw); margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin: 0 0 14px;
+    }
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; margin: 0; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      font-size: 15px; padding: 13px 22px; border-radius: 10px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+    }
+    .btn-primary { background: var(--teal); color: var(--btn-text); }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
+    .btn-ghost { border-color: var(--line); color: var(--light); background: transparent; }
+    .btn-ghost:hover { border-color: var(--teal); transform: translateY(-2px); }
+
+    /* ---------- Header (same structure as index.html) ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+    .nav .logo svg { height: 60px; width: auto; }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-links a { font-size: 14px; color: var(--muted); font-weight: 500; transition: color .15s ease; }
+    .nav-links a:hover { color: var(--light); }
+    .nav-links a.current { color: var(--teal); }
+    .nav .cta { display: flex; align-items: center; gap: 16px; }
+
+    .menu-toggle {
+      display: none;
+      flex: none; width: 42px; height: 42px;
+      align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+    }
+    .menu-toggle svg { width: 22px; height: 22px; }
+    .menu-toggle .icon-close { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: var(--drawer-bg);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu nav { display: flex; flex-direction: column; padding: 8px 24px 18px; }
+    .mobile-menu nav a {
+      padding: 14px 0; font-size: 16px; color: var(--light);
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu nav a:last-child { border-bottom: none; color: var(--teal); }
+
+    /* Header collapses to the hamburger at 1024px, not 760px: between
+       those widths the full link row + Contact button no longer fits and
+       "Blog" wrapped under "Contattaci". Below 1024px the tidy drawer takes
+       over; the theme switch and hamburger stay visible at every width. */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .nav .cta > a.btn-primary { display: none; }
+    }
+    @media (max-width: 760px) {
+      .nav { height: 72px; }
+      .nav .logo svg { height: 44px; }
+    }
+
+    /* ---------- Article layout ---------- */
+    .article-head {
+      padding: 64px 0 8px;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .back-link {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); display: inline-block; margin-bottom: 28px;
+      transition: color .15s ease;
+    }
+    .back-link:hover { color: var(--teal); }
+
+    .article-head h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .article-head .standfirst {
+      font-size: 19px; color: var(--muted); margin: 22px 0 0;
+    }
+    /* Byline: mono, because it is metadata rather than prose. */
+    .byline {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      color: var(--muted); letter-spacing: 1px;
+      margin: 30px 0 0; padding: 16px 0 40px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 8px 18px;
+    }
+    .byline .read-time { color: var(--teal); }
+
+    .article-body { padding: 48px 0 24px; }
+    .article-body h2 {
+      font-size: 27px; font-weight: 600;
+      margin: 52px 0 16px; letter-spacing: -0.2px;
+    }
+    .article-body h3 {
+      font-size: 19px; font-weight: 600; margin: 34px 0 10px;
+    }
+    .article-body p { margin: 0 0 20px; font-size: 17px; color: var(--body); }
+    .article-body strong { color: var(--light); font-weight: 600; }
+    .article-body em { color: var(--body); }
+    .article-body ul, .article-body ol { margin: 0 0 22px; padding-left: 22px; }
+    .article-body li { margin-bottom: 14px; font-size: 17px; color: var(--body); }
+    /* Inline links inside prose are underlined so they are obvious in
+       body copy, where colour alone is not a reliable signal. */
+    .article-body a.inline {
+      color: var(--teal); text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-body a.inline:hover { color: var(--accent-hover); }
+
+    /* ---------- Figure (the infographic) ---------- */
+    figure.source {
+      margin: 8px 0 40px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+    figure.source img { width: 100%; height: auto; cursor: zoom-in; }
+    figure.source figcaption {
+      font-size: 13px; color: var(--muted);
+      padding: 14px 18px; border-top: 1px solid var(--line);
+    }
+
+    /* ---------- Image lightbox (click to zoom, 1:1) ----------
+       The figure image advertises itself as clickable; the overlay shows the
+       image at natural size and scrolls if it overflows the viewport. */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 200; display: none;
+      background: rgba(4, 8, 16, 0.85);
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      overflow: auto; cursor: zoom-out; padding: 24px; text-align: center;
+    }
+    .lightbox-overlay.open { display: block; }
+    .lightbox-overlay img {
+      /* Natural pixel size (1:1); max-width:none defeats responsive shrink. */
+      display: inline-block; width: auto; height: auto; max-width: none;
+      margin: 0 auto; cursor: default; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed; top: 16px; right: 20px; z-index: 210;
+      width: 44px; height: 44px; display: inline-flex;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); color: #fff;
+      border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; cursor: pointer;
+    }
+    .lightbox-close:hover { background: rgba(0,0,0,0.75); }
+    .lightbox-close svg { width: 22px; height: 22px; }
+
+    /* ---------- Article footer note (closing links + disclaimer) ---------- */
+    .footnote {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      margin: 44px 0 0; padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .footnote p { font-size: 14px; color: var(--muted); }
+    .footnote ul { margin: 10px 0 20px; }
+    .footnote li { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+    .footnote a.inline { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Callout (neutral highlight) ---------- */
+    .callout {
+      background: var(--tint-teal-bg);
+      border: 1px solid var(--tint-teal-bd);
+      border-radius: var(--radius);
+      padding: 24px 26px; margin: 34px 0;
+    }
+    .callout ul { margin: 0; padding-left: 20px; }
+    .callout li { font-size: 16.5px; color: var(--body); margin-bottom: 12px; }
+    .callout li:last-child { margin-bottom: 0; }
+    .callout .eyebrow { margin-bottom: 10px; }
+
+    /* ---------- Closing CTA ---------- */
+    .article-cta {
+      background: var(--ink-2); border-top: 1px solid var(--line);
+      margin-top: 56px; padding: 64px 0;
+    }
+    .article-cta h2 { font-size: 30px; margin-bottom: 14px; }
+    .article-cta p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
+    .article-cta .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    /* ---------- Footer (same as index.html) ---------- */
+    footer { background: var(--ink); border-top: 1px solid var(--line); padding: 56px 0 34px; }
+    .foot-top { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+    .foot-brand { max-width: 320px; }
+    .foot-brand .logo svg { height: 54px; width: auto; margin-bottom: 14px; }
+    .foot-brand p { color: var(--muted); font-size: 14px; margin: 0; }
+    .foot-cols { display: flex; flex-wrap: wrap; gap: 48px; }
+    .foot-col { display: flex; flex-direction: column; gap: 10px; }
+    .foot-col h4 {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--light); margin: 0 0 4px;
+    }
+    .foot-col a { font-size: 14px; color: var(--muted); transition: color .15s ease; }
+    .foot-col a:hover { color: var(--teal); }
+    .disclaimer {
+      margin: 44px 0 18px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 12.5px; color: var(--muted); line-height: 1.7;
+    }
+    .copyright { font-size: 12.5px; color: var(--muted); margin: 0; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 760px) {
+      .article-head { padding-top: 40px; }
+      .article-head h1 { font-size: 32px; }
+      .article-head .standfirst { font-size: 17px; }
+      .article-body h2 { font-size: 23px; margin-top: 42px; }
+      .article-body p, .article-body li { font-size: 16.5px; }
+      .article-cta h2 { font-size: 25px; }
+    }
+
+    /* ---------- Theme toggle button ---------- */
+    /* Unlike the "Contattaci" button, this control stays visible at every
+       width: on a phone the light theme is exactly where it matters most,
+       so hiding the switch on mobile would defeat the purpose. */
+    .theme-toggle {
+      flex: none; width: 42px; height: 42px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
+    .theme-toggle svg { width: 20px; height: 20px; }
+    /* Show the icon of the theme the click will switch TO. */
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* Smooth crossfade between themes. Disabled automatically by the
+       prefers-reduced-motion block above. */
+    body, header, .callout, figure.source {
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
+    .callout, figure.source { box-shadow: var(--card-shadow); }
+
+    @media (max-width: 400px) {
+      /* Very narrow phones: tighten the header gap so logo + theme +
+         hamburger never collide. */
+      .nav .cta { gap: 10px; }
+      .theme-toggle, .menu-toggle { width: 38px; height: 38px; }
+    }
+  </style>
+
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between blog pages doesn't flash. sessionStorage (not
+       localStorage) is deliberate: it is cleared when the tab/browser
+       closes, so every fresh visit starts dark (client's "Variante A"),
+       while a choice still carries across pages within the same visit. -->
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('safe21-blog-theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) { /* private browsing: fall back to the dark default */ }
+    })();
+  </script>
+</head>
+
+<body id="top">
+
+  <!-- Image lightbox overlay. Hidden until a figure image is clicked; then
+       shows that image at natural 1:1 size. Same pattern as the other
+       image-bearing articles. -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="lightbox-close" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+    <img src="" alt="" />
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <!-- Copied from index.html. Differences: links point back to index.html
+       sections (this is a separate page, so bare "#anchors" would not work),
+       the labels are written in Italian because the blog is Italian-only,
+       and there is no EN/IT switcher for the same reason. -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="index.html" aria-label="SAFE21 home">
+        <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+          <defs>
+            <mask id="kh-head">
+              <rect width="34" height="34" rx="8" fill="#fff"/>
+              <circle cx="17" cy="14" r="5" fill="#000"/>
+              <path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-head)"/></g>
+          <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4">
+            <tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan>
+          </text>
+        </svg>
+      </a>
+
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html" class="current">Blog</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
+        <!-- Light/dark switch. Blog-only feature: the homepage stays dark.
+             Deliberately NOT hidden on mobile (see .theme-toggle CSS). -->
+        <button type="button" class="theme-toggle" aria-pressed="false"
+                aria-label="Passa al tema chiaro" title="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+          </svg>
+        </button>
+
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Apri menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html">Blog</a>
+        <a href="mailto:info@safe21.io">Contattaci</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= ARTICLE HEADER ================= -->
+  <div class="article-head">
+    <div class="read">
+      <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
+      <p class="eyebrow">Eredità Bitcoin</p>
+      <h1>SAFE21 diventa Will-Executor: perché abbiamo acceso un server per il protocollo BAL</h1>
+      <p class="standfirst">
+        Crediamo così tanto in Bitcoin After Life da aver acceso il nostro
+        Will-Executor e da averlo portato su Umbrel OS. In questo articolo ti
+        raccontiamo perché lo abbiamo fatto, perché anche un solo server in
+        più conta — e perché potresti volerlo fare anche tu.
+      </p>
+      <p class="byline">
+        <span>SAFE21</span>
+        <span>19 agosto 2026</span>
+        <span class="read-time">7 min di lettura</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE BODY ================= -->
+  <article class="article-body">
+    <div class="read">
+
+      <figure class="source">
+        <img src="images/infografica-safe21-will-executor.webp"
+             width="2200" height="1228" loading="eager" decoding="async"
+             alt="Infografica SAFE21 × BAL Protocol — un server Will-Executor custodisce la transazione di eredità con time-lock e la trasmette alla rete Bitcoin alla data stabilita. Altri server sullo sfondo rappresentano la ridondanza della rete di esecutori indipendenti." />
+      </figure>
+
+      <p>
+        C'è una domanda che prima o poi ogni bitcoiner si fa, di solito la
+        sera tardi: <em>"E se domani non ci fossi più, i miei bitcoin che
+        fine fanno?"</em>
+      </p>
+
+      <p>
+        La risposta onesta, per la maggior parte delle persone, è scomoda:
+        <strong>spariscono</strong>. Non perché qualcuno li rubi, ma perché
+        nessuno sa come recuperarli. Le chiavi le conosci solo tu — è proprio
+        questo il bello della self-custody, ed è anche il suo lato più
+        delicato.
+      </p>
+
+      <p>
+        Da tempo, in SAFE21, la soluzione che consigliamo a questa domanda si
+        chiama <strong>BAL — Bitcoin After Life</strong>: un protocollo
+        aperto e un plugin gratuito per Electrum che permette di preparare
+        un'eredità in bitcoin <strong>senza notaio, senza avvocato e senza
+        consegnare le chiavi a nessuno</strong>.
+      </p>
+
+      <p>
+        Oggi vogliamo raccontarti perché abbiamo deciso di fare un passo in
+        più: non solo consigliarlo, ma <strong>contribuire direttamente al
+        protocollo con un nostro server Will-Executor</strong>, e aiutare a
+        portarlo su Umbrel OS perché chiunque possa fare lo stesso.
+      </p>
+
+      <h2>Un ripasso veloce: come funziona BAL</h2>
+
+      <p>
+        Se non hai mai sentito parlare di Bitcoin After Life, ecco l'idea in
+        un minuto.
+      </p>
+
+      <p>Con il plugin BAL installato su Electrum, tu:</p>
+
+      <ol>
+        <li><strong>Scegli i tuoi eredi</strong> e come dividere i fondi tra loro;</li>
+        <li><strong>Scegli una data di consegna</strong> nel futuro (per esempio tra qualche anno);</li>
+        <li>Il plugin costruisce una <strong>transazione con time-lock</strong>: una normale transazione Bitcoin, già firmata da te, che però la rete rifiuta di accettare prima della data che hai stabilito.</li>
+      </ol>
+
+      <p>
+        Finché sei in vita, rinnovi periodicamente il testamento spostando la
+        data più avanti. Se un giorno smetti di farlo — perché non ci sei più
+        — la data arriva, la transazione diventa valida e i bitcoin
+        raggiungono i tuoi eredi. Automaticamente.
+      </p>
+
+      <p>
+        Le tue chiavi <strong>non lasciano mai il tuo dispositivo</strong>.
+        Nessuno può eseguire la transazione in anticipo, nessuno può
+        modificarla, nessuno può rubarla: la matematica di Bitcoin lo
+        impedisce.
+      </p>
+
+      <p>
+        Ma c'è un tassello che rende possibile tutto questo. Qualcuno, quel
+        giorno nel futuro, deve <em>ricordarsi</em> di trasmettere la
+        transazione alla rete. Ed è qui che entrano in scena i
+        <strong>Will-Executor</strong>.
+      </p>
+
+      <h2>I Will-Executor: i postini pazienti di Bitcoin</h2>
+
+      <p>
+        Un Will-Executor è un server indipendente che fa un lavoro
+        semplicissimo e prezioso: <strong>custodisce la tua transazione
+        firmata e la trasmette alla rete Bitcoin nel giorno giusto</strong>.
+        Niente di più.
+      </p>
+
+      <p>Vale la pena ripeterlo, perché è il cuore della sicurezza del protocollo:</p>
+
+      <div class="callout">
+        <p class="eyebrow">Cosa può e non può fare un Will-Executor</p>
+        <ul>
+          <li>
+            Un Will-Executor <strong>non può rubare</strong> i tuoi fondi:
+            riceve solo una transazione già firmata, non le tue chiavi.
+          </li>
+          <li>
+            <strong>Non può modificarla</strong>: cambiarne anche una
+            virgola la renderebbe invalida.
+          </li>
+          <li>
+            <strong>Non può trasmetterla in anticipo</strong>: i nodi
+            Bitcoin la rifiutano fino alla data del time-lock.
+          </li>
+        </ul>
+      </div>
+
+      <p>
+        L'unica cosa che un Will-Executor può fare di sbagliato è...
+        sparire. Spegnersi, andare offline, non esserci più quando serve. E
+        il protocollo risolve anche questo, nel modo più bitcoin possibile:
+        <strong>la ridondanza</strong>. Il plugin non si affida a un solo
+        server — crea una copia della transazione per ogni Will-Executor che
+        scegli. Ne basta <strong>uno solo ancora attivo</strong> alla data di
+        consegna perché l'eredità arrivi a destinazione.
+      </p>
+
+      <p>
+        Capito questo, la conclusione arriva da sola: più Will-Executor
+        indipendenti esistono nel mondo, più il protocollo è robusto.
+        <strong>Ogni singolo server in più rende più sicura l'eredità di
+        tutti.</strong>
+      </p>
+
+      <h2>Perché SAFE21 ha acceso il suo server</h2>
+
+      <p>
+        Ed eccoci al punto. Da oggi SAFE21 gestisce il proprio Will-Executor,
+        raggiungibile su
+        <strong><a class="inline" href="https://we.safe21.io/" target="_blank" rel="noopener noreferrer">we.safe21.io</a></strong>
+        (anche via Tor, per chi tiene alla privacy).
+      </p>
+
+      <p>Lo abbiamo fatto per tre ragioni, e vogliamo essere trasparenti su tutte.</p>
+
+      <h3>1. Crediamo nel progetto — e nella sua decentralizzazione</h3>
+
+      <p>
+        BAL è tutto ciò che secondo noi uno strumento Bitcoin dovrebbe
+        essere: <strong>open source</strong>, verificabile riga per riga,
+        <strong>non-custodial</strong> per costruzione, senza un'azienda al
+        centro che possa fallire, farsi comprare o cambiare le regole. È la
+        stessa filosofia su cui abbiamo costruito SAFE21.
+      </p>
+
+      <p>
+        Ma un protocollo decentralizzato è decentralizzato solo se qualcuno,
+        concretamente, accende i server. Non basta fare il tifo dal divano.
+        Siamo consapevoli che <strong>anche un solo server in più può fare la
+        differenza</strong> — per la ridondanza di un'eredità, per la
+        resilienza dell'intera rete, per il segnale che manda: questo
+        progetto ha una comunità che ci mette le macchine, non solo le
+        parole.
+      </p>
+
+      <h3>2. Il rapporto rischio/beneficio è altamente favorevole</h3>
+
+      <p>
+        Guardiamola anche dal lato pratico, perché un Will-Executor non è
+        beneficenza: è un piccolo <strong>investimento di medio-lungo
+        periodo</strong>.
+      </p>
+
+      <p>
+        Ogni transazione di eredità custodita da un Will-Executor include un
+        output che paga una <strong>commissione al server stesso</strong> —
+        ma solo quando, alla data stabilita, quel server trasmette davvero la
+        transazione e questa viene confermata sulla blockchain. L'incentivo è
+        scritto direttamente on-chain: niente abbonamenti, niente fatture,
+        niente fiducia richiesta. Fai il tuo lavoro, vieni pagato. Non lo
+        fai, non incassi nulla.
+      </p>
+
+      <p>
+        Dal lato dei costi? Un server modesto, un po' di spazio disco, una
+        connessione. Il software è gratuito e open source. Il rischio
+        operativo è minimo — il server non custodisce fondi né chiavi, quindi
+        <strong>non c'è niente da rubare</strong> — mentre il potenziale
+        ritorno cresce nel tempo, man mano che più persone preparano la
+        propria eredità con BAL e le transazioni in custodia si accumulano.
+        Non è un modo per arricchirsi domattina: è un seme piantato oggi che
+        matura negli anni, esattamente il tipo di orizzonte temporale che
+        ogni bitcoiner conosce bene.
+      </p>
+
+      <p>
+        Rischio quasi nullo, costi contenuti, incentivo on-chain, beneficio
+        per l'intera rete: per noi il conto è stato facile.
+      </p>
+
+      <h3>3. Volevamo renderlo facile per tutti: il Will-Executor su Umbrel OS</h3>
+
+      <p>
+        C'è una terza cosa che abbiamo fatto, e forse è quella di cui siamo
+        più orgogliosi: <strong>abbiamo contribuito a creare una versione del
+        Will-Executor per Umbrel OS</strong>.
+      </p>
+
+      <p>
+        Se non lo conosci, Umbrel è il sistema operativo che ha reso famoso
+        il "nodo Bitcoin in salotto": un piccolo computer a casa tua, un app
+        store, e installi servizi Bitcoin con un clic — senza terminale,
+        senza righe di comando, senza essere un sistemista.
+      </p>
+
+      <p>
+        Ora, tra quelle app, c'è anche il Will-Executor di BAL. Questo
+        significa che <strong>chiunque abbia già un nodo Umbrel può
+        diventare Will-Executor in pochi minuti</strong>: installi l'app,
+        imposti l'indirizzo Bitcoin su cui ricevere le commissioni, scegli la
+        tua commissione minima, e il tuo server entra a far parte della
+        rete. Il tuo nodo, che già custodisce la tua sovranità, inizia anche
+        a custodire — senza alcun rischio — le eredità di altre persone. E a
+        farsi pagare per farlo.
+      </p>
+
+      <p>
+        Abbassare la barriera d'ingresso era il modo migliore che avevamo per
+        aiutare il protocollo a restare quello che è:
+        <strong>decentralizzato, distribuito, di nessuno e di tutti</strong>.
+      </p>
+
+      <h2>E tu, da dove puoi iniziare?</h2>
+
+      <p>
+        Se sei arrivato fin qui, probabilmente ti stai facendo una delle due
+        domande giuste. O tutte e due.
+      </p>
+
+      <p>
+        <strong>"Voglio preparare l'eredità dei miei bitcoin."</strong>
+        Ottimo istinto. Ti serve Electrum e il plugin BAL: la
+        <a class="inline" href="https://bitcoin-after.life/docs/" target="_blank" rel="noopener noreferrer">documentazione ufficiale</a>
+        ti guida passo per passo, dall'installazione alla creazione del
+        primo testamento. Il nostro consiglio di sempre: <strong>prova prima
+        su testnet o con un piccolo importo</strong>, prendi confidenza,
+        guarda le transazioni che il plugin genera. Poi fai sul serio. E se
+        preferisci essere accompagnato da una persona in carne e ossa, è
+        letteralmente il nostro mestiere: scrivici.
+      </p>
+
+      <p>
+        <strong>"Voglio diventare Will-Executor anch'io."</strong> Bellissima
+        idea — e adesso sai perché. Se hai un nodo Umbrel, sei a pochi clic
+        dal traguardo. Se preferisci un server tradizionale, il
+        <a class="inline" href="https://bitcoin-after.life/docs/" target="_blank" rel="noopener noreferrer">codice sorgente</a>
+        e la guida per installarlo sono pubblici, come tutto il resto del
+        progetto. Non serve essere un'azienda: serve un po' di cura, una
+        macchina accesa e la voglia di far parte di qualcosa che funziona
+        senza chiedere permesso a nessuno.
+      </p>
+
+      <p>
+        Bitcoin ci ha insegnato che non serve fidarsi: si può verificare. BAL
+        applica lo stesso principio a una delle cose più umane che esistano —
+        prendersi cura di chi resta. Noi abbiamo scelto di esserci, con un
+        server acceso e con il codice. <strong>Un server in più. Poi un
+        altro. Poi il tuo.</strong> È così che le cose decentralizzate
+        diventano indistruttibili.
+      </p>
+
+      <h2>Una precisazione tecnica, per onestà</h2>
+
+      <p>
+        Al momento il Will-Executor si può installare su un nodo Umbrel, ma
+        <strong>non ancora in modo automatico dal repository App Store di
+        Umbrel</strong> — non è quindi, per ora, un'installazione a un clic
+        dall'interfaccia di Umbrel. Si installa <strong>direttamente</strong>,
+        non tramite l'App Store. Se non hai dimestichezza con la riga di
+        comando, farsi guidare passo passo da una delle moderne intelligenze
+        artificiali oggi disponibili è un ottimo modo per portarlo a termine
+        senza doversi improvvisare sistemisti.
+      </p>
+
+      <div class="footnote">
+        <p><strong>Link utili:</strong></p>
+        <ul>
+          <li>Il Will-Executor di SAFE21: <a class="inline" href="https://we.safe21.io/" target="_blank" rel="noopener noreferrer">we.safe21.io</a></li>
+          <li>Sito ufficiale del protocollo: <a class="inline" href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">bitcoin-after.life</a></li>
+          <li>Documentazione del plugin e dei Will-Executor: <a class="inline" href="https://bitcoin-after.life/docs/" target="_blank" rel="noopener noreferrer">bitcoin-after.life/docs</a></li>
+        </ul>
+        <p>
+          SAFE21 non prende mai in custodia i tuoi fondi. Il Will-Executor
+          custodisce esclusivamente transazioni già firmate: non può
+          spendere, modificare o anticipare nulla. Le transazioni Bitcoin
+          sono irreversibili: prova sempre con piccoli importi prima di
+          configurare un'eredità reale.
+        </p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta">
+    <div class="read">
+      <p class="eyebrow">Eredità senza custodi</p>
+      <h2>Vuoi preparare l'eredità dei tuoi bitcoin — o diventare Will-Executor?</h2>
+      <p>
+        Ti aiutiamo a configurare BAL sul tuo Electrum, o a mettere online il
+        tuo server Will-Executor, passo per passo — con le chiavi sempre e
+        solo nelle tue mani. Senza impegno.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="index.html#inheritance">Il servizio Eredità</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <!-- Same structure as index.html, written directly in Italian. -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="index.html" aria-label="SAFE21 home">
+            <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+              <defs><mask id="kh-foot"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="14" r="5" fill="#000"/><path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/></mask></defs>
+              <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-foot)"/></g>
+              <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan></text>
+            </svg>
+          </a>
+          <p>Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.</p>
+        </div>
+
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Servizi</h4>
+            <a href="index.html#services">Assistenza Bitcoin</a>
+            <a href="index.html#services">Corsi Bitcoin</a>
+            <a href="index.html#services">Sicurezza Electrum</a>
+            <a href="index.html#inheritance">Eredità</a>
+            <a href="index.html#payments">Pagamenti</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
+            <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contatti</h4>
+            <a href="mailto:info@safe21.io">info@safe21.io</a>
+            <a href="blog.html">Blog</a>
+            <!-- SAFE21 open-source code (GitHub). External link. -->
+            <a href="https://github.com/ManX-SAFE21" target="_blank" rel="noopener noreferrer">Codice open source &nearr;</a>
+            <!-- OpenPGP public key for info@safe21.io (served as text/plain). -->
+            <a href="safe21-pgp.asc">Chiave PGP</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si
+        tratta di consulenza legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia
+        i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni
+        e tassazione variano da paese a paese: per la tua situazione specifica rivolgiti a un
+        professionista qualificato. Le transazioni Bitcoin sono irreversibili.
+      </p>
+      <p class="copyright">© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * Mobile menu toggle.
+     *
+     * Same dependency-free behaviour as index.html: the hamburger opens a
+     * slide-down drawer, which closes on link tap, on Escape, and resets
+     * automatically when the viewport grows past the mobile breakpoint.
+     */
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        menu.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        // The label describes the NEXT action, so it flips with the state.
+        toggle.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      // Close after tapping a link, otherwise the drawer would stay open
+      // over the destination content.
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      // Reset when rotating/resizing to desktop, where the drawer is hidden
+      // by CSS but would otherwise keep a stale aria-expanded="true".
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 760) setOpen(false);
+      });
+    })();
+
+    /**
+     * Light/dark theme switch — blog pages only.
+     *
+     * The whole theme lives in CSS custom properties, so switching means
+     * toggling one attribute on <html>. The choice is stored under
+     * "safe21-blog-theme" in sessionStorage, a key of its own (the homepage
+     * uses "safe21-lang" for the language, and the two must not collide).
+     * sessionStorage means the choice lasts only for the current visit;
+     * every new visit starts dark.
+     *
+     * The <meta name="theme-color"> tag is updated too, so the browser
+     * chrome on mobile matches the page instead of staying navy.
+     */
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (!btn) return;
+
+      var COLORS = { dark: '#0A0F1C', light: '#F4F6F9' };
+
+      function apply(theme) {
+        var isLight = theme === 'light';
+        if (isLight) {
+          root.setAttribute('data-theme', 'light');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        // aria-pressed reports the *state*; the label describes the
+        // *next* action, which is what a screen-reader user needs.
+        btn.setAttribute('aria-pressed', String(isLight));
+        btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
+        if (meta) meta.setAttribute('content', COLORS[isLight ? 'light' : 'dark']);
+        // sessionStorage, not localStorage: the choice is forgotten when the
+        // browser/tab closes, so the next visit starts dark again.
+        try { sessionStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}
+      }
+
+      // Sync the button with whatever the pre-paint script already set.
+      apply(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+      btn.addEventListener('click', function () {
+        apply(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+      });
+    })();
+
+    /**
+     * Image lightbox. Clicking the figure image opens it in a full-screen
+     * overlay at natural pixel size (1:1); the overlay scrolls if the image is
+     * larger than the viewport. Closes on backdrop click, the X button, or
+     * Escape. No external library.
+     */
+    (function () {
+      var overlay = document.getElementById('lightbox');
+      if (!overlay) return;
+      var big = overlay.querySelector('img');
+      var closeBtn = overlay.querySelector('.lightbox-close');
+      var lastFocus = null;
+
+      function open(src, alt) {
+        big.src = src; big.alt = alt || '';
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';   // lock background scroll
+        lastFocus = document.activeElement;
+        closeBtn.focus();
+      }
+      function close() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        big.src = '';                              // free the large image
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      document.querySelectorAll('figure.source img').forEach(function (img) {
+        img.addEventListener('click', function () {
+          open(img.currentSrc || img.src, img.alt);
+        });
+      });
+      // Backdrop click closes; clicking the image itself does not.
+      overlay.addEventListener('click', function (e) { if (e.target !== big) close(); });
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+      });
+    })();
+  </script>
+</body>
+</html>
