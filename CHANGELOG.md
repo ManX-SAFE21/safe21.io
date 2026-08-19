@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [29] — New blog article: "SAFE21 diventa Will-Executor"
 
 **Date:** 2026-08-19
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `d2bb21d`, pushed to `main`)
 
 Client supplied a ready Markdown draft (`Articolo_5/articolo-safe21-will-executor.md`)
 announcing that SAFE21 now runs its own BAL Protocol Will-Executor
