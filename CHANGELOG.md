@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [30] — Site-wide audit: fix wrong image dimensions, remove dead CSS
 
 **Date:** 2026-08-19
-**Status:** Delivered locally (pending review — not yet committed/pushed)
+**Status:** Delivered and live (commit `724595a`, pushed to `main`)
 
 Client asked for a general check of the whole site/code for errors. Ran a
 custom read-only audit script against all 8 HTML pages, covering: HTML tag
