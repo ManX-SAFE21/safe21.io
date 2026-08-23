@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [32] — CONTRIBUTING.md: how to build and publish a blog article
 
 **Date:** 2026-08-23
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `83d778a`, pushed to `main`)
 
 Client asked whether the repo already documented how to create blog pages. It
 did not: the only prose in the repo was `CHANGELOG.md`, which records *what*
