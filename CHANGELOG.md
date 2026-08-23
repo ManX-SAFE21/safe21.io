@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [31] — New blog article: "La password di Electrum: perché 8 caratteri non bastano"
 
 **Date:** 2026-08-23
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `7c9c954`, pushed to `main`)
 
 Client supplied a ZIP (`safe21-password-article`) with a ready Markdown draft
 (`password-electrum-security.md`) and two PNG images: an illustrated cover and
