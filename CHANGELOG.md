@@ -3,6 +3,85 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [31] — New blog article: "La password di Electrum: perché 8 caratteri non bastano"
+
+**Date:** 2026-08-23
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client supplied a ZIP (`safe21-password-article`) with a ready Markdown draft
+(`password-electrum-security.md`) and two PNG images: an illustrated cover and
+a two-panel chart on password length vs. brute-force time. Client asked to
+publish it on the blog, to convert the images to WebP, and to add a closing
+note stating that the figures are estimates rather than precise measurements.
+
+- **Image conversion.** Cover: 1376×768 PNG (150 KB) → WebP quality 95,
+  **48.8 KB**. Chart: 2086×980 PNG (200 KB) → **lossless** WebP, **60.4 KB**.
+  Lossless beat every lossy setting here (q95 was 144 KB) because the chart is
+  flat-colour vector-style content, so the text stays pixel-perfect when a
+  reader zooms it in the lightbox. Saved as
+  `images/copertina-password-electrum.webp` and
+  `images/grafico-password-lunghezza.webp`.
+- **Two corrections to the supplied material**, both reported to the client:
+  1. *Chart annotation was wrong.* The label read "16 caratteri ≈ 10 milioni
+     di anni", but the curve it points at plots ≈1.26×10⁹ years — the label
+     contradicted its own data by a factor of ~126. Under the chart's stated
+     model (36 symbols, 100M attempts/s, average = half the keyspace),
+     36¹⁶ / 2 / 10⁸ / 31 557 600 = 1.26 billion years. The label was redrawn
+     in the image as "≈ 1,3 miliardi di anni", matching the plotted point and
+     both panels. The example table's 16-character row was changed from
+     "milioni di anni" to "miliardi di anni" for internal consistency.
+  2. *Italian large-number names were wrong on both scales.* The draft called
+     36¹² (4.7×10¹⁸) "quadrilioni" and 36¹⁶ (8×10²⁴) "quintilioni"; on the
+     Italian long scale those words mean 10²⁴ and 10³⁰, and on the English
+     short scale they mean 10¹⁵ and 10¹⁸ — wrong either way. Replaced with
+     plain, unambiguous wording ("4,7 miliardi di miliardi", "8 milioni di
+     miliardi di miliardi"), which also reads better for the article's stated
+     audience of Bitcoin beginners.
+- **New `blog-password-electrum.html`.** Built from
+  `blog-safe21-will-executor.html` (figure + click-to-zoom lightbox pattern).
+  Tag "Sicurezza · Password", 23 agosto 2026, 7 min. Sections: short answer →
+  what the password actually protects → what happens if the file is copied →
+  why length grows exponentially (+ the chart) → concrete examples (table) →
+  random vs. human passwords → how long to go → SAFE21 checklist (callout) →
+  the client's requested note on the figures being estimates → sources +
+  non-custodial disclaimer.
+- **Client cut during review.** The draft's section "E un Intel Core i9 a 10
+  core e circa 5 GHz?" (heading, three paragraphs and a six-item list on why
+  clock speed is not attempts/s) was removed at the client's request and
+  replaced with a three-line concrete example placed under the table: with the
+  same 100M attempts/s model, `k7m2v9pa` ≈ 4 hours, `t4v8m2q9k7x3` ≈ 750
+  years, a random 16-character password ≈ 1.3 billion years — all three
+  consistent with the chart and the table. The now-uncited Intel spec sheet
+  was dropped from the sources list, and the reading time went 8 → 7 min
+  (1,432 words) in both the byline and the blog.html card.
+- **First data table on the blog.** No page had one before, so the shared
+  stylesheet gained `.table-wrap` (a horizontally scrollable panel, so a wide
+  table never makes the page itself scroll sideways on a phone) plus
+  `table/th/td` rules and a monospace `code` chip for the password samples.
+  `.table-wrap` was added to the two existing theme rules (the crossfade
+  transition list and the `--card-shadow` list) so it behaves like the other
+  panels in light mode. Table padding/size tighten inside the 760px query.
+- **`blog.html`** — new `.post-card` at the TOP of the list, and matching
+  `BlogPosting` entry prepended to the JSON-LD `blogPost[]` array (verified:
+  card order and JSON-LD order match exactly).
+- **`sitemap.xml`** — new `<url>` for the article; `blog.html` lastmod bumped
+  to 2026-08-23.
+
+- **Bug caught during verification.** The mobile table override was first
+  injected into the existing `@media (max-width: 760px)` block, which sits
+  *above* the appended base table rules — equal specificity, so the base
+  padding won on source order and the override was dead (only the font-size
+  appeared to work, because the base sets that on `table`, not on `th/td`).
+  Moved the media query below the base rules; mobile padding now resolves to
+  11px 13px as intended.
+
+**Verified:** both audit scripts clean on the new page (HTML nesting, JSON-LD
+validity, canonical/og:url, internal links, image alt text, declared image
+dimensions vs. real files, footer link consistency across all 9 pages, sitemap
+bidirectional check, heading hierarchy, reading time vs. word count). Rendered
+in dark and light themes; lightbox, theme toggle and mobile drawer all work;
+no console errors.
+
 ## [30] — Site-wide audit: fix wrong image dimensions, remove dead CSS
 
 **Date:** 2026-08-19
