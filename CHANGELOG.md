@@ -3,6 +3,55 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [33] — tools/audit.py: automated pre-push checks, and one CSS inconsistency closed
+
+**Date:** 2026-08-23
+**Status:** Delivered locally — awaiting review before commit/push
+
+Follow-up to #32. The guide told a reader what to check by hand; this makes the
+machine do it, so the same mistakes cannot come back and cost time.
+
+- **`tools/audit.py`** — read-only, no arguments, `python tools/audit.py`.
+  Covers the failure modes that produce no visible error on their own: HTML
+  nesting, JSON-LD validity and `headline` vs `<h1>`, canonical/`og:url`,
+  unresolved links and assets, missing `alt`, declared `width`/`height` vs the
+  real file, footer parity across every page, the card ↔ JSON-LD ↔ sitemap ↔
+  file cross-check, card metadata vs the article's own byline and eyebrow,
+  duplicate ids, `target="_blank"` without `rel="noopener"`, heading-level
+  skips, CHANGELOG numbering, robots/security.txt fields, and a guard that
+  `safe21-pgp.asc` never contains a PRIVATE KEY block.
+- **Two output levels.** ERRORE fails the run (exit 1, so it can be wired into
+  CI); AVVISO is advisory and never fails. Currently: 0 errors, 9 advisories,
+  all of them genuine over-length meta descriptions/titles on older pages.
+- **No false positives, by design.** The known-correct exceptions —
+  `index.html`'s `lang="en"` and its root canonical/`og:url` — are declared in
+  an `EXPECTED` constant with the reason, rather than being reported every run.
+  A checker that always shows the same three harmless errors stops being read.
+- **`--css-matrix`** regenerates the per-page CSS table in `CONTRIBUTING.md`
+  (sorted by completeness, so the fullest page is named as the recommended
+  template) instead of leaving it to drift by hand.
+- **Verified by injecting failures, not just by passing.** Ten broken states
+  were introduced into a throwaway copy — wrong image height, headline/`<h1>`
+  mismatch, dead link, missing `alt`, card date out of sync, a footer link
+  removed, `target="_blank"` without `noopener`, duplicate id, a sitemap entry
+  renamed, malformed JSON-LD — and all ten were caught, exit code 1. (The
+  `alt` case looked like a miss at first; the test had stripped the attribute
+  from the lightbox placeholder `<img src="">`, which the script skips on
+  purpose. Removing it from a real image was reported correctly.)
+
+- **CSS inconsistency from #32 closed.** `.callout` carried the light-theme
+  shadow on 5 of the 7 article pages; `blog-dadi-semplicita.html` and
+  `blog-seed-mai-online.html` were missing it. Added there, so every panel
+  (`.callout`, `figure.source`, `.table-wrap`, plus page-specific `.checklist`
+  / `.rule`) is now in both theme rules everywhere. Verified in light theme on
+  both pages: the callout's computed shadow is now byte-identical to
+  `figure.source` (`rgba(10, 15, 28, 0.06) 0px 1px 3px 0px`) and nothing else
+  gained or lost a shadow; dark theme still resolves to `none`.
+- **`CONTRIBUTING.md`** updated: the shadow rule is now stated as a rule rather
+  than an exception, the CSS table is the script's own output, and the
+  checklist marks with 🤖 the items the script already covers so only the
+  visual checks are left to a human.
+
 ## [32] — CONTRIBUTING.md: how to build and publish a blog article
 
 **Date:** 2026-08-23

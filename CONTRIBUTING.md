@@ -112,8 +112,13 @@ modello, il blocco che ti serve potrebbe non esserci.
 | `blog-bal-easy-heirs` | ✅ | ✅ | — | ✅ | ✅ | ✅ | — |
 | `blog-dadi-semplicita` | ✅ | ✅ | — | ✅ | — | ✅ | — |
 | `blog-seed-mai-online` | ✅ | ✅ | — | — | — | ✅ | — |
-| `blog-bitcoin-persi-dovere` | ✅ | — | — | ✅ | ✅ | — | — |
 | `blog-cosa-succede-ai-tuoi-bitcoin` | ✅ | — | — | ✅ | ✅ | — | — |
+| `blog-bitcoin-persi-dovere` | ✅ | — | — | ✅ | ✅ | — | — |
+
+> Non aggiornarla a mano: rigenerala e incolla l'output.
+> ```bash
+> python tools/audit.py --css-matrix
+> ```
 
 A cosa servono:
 
@@ -205,19 +210,22 @@ non dà nessun errore.
 `--card-shadow` vale `none`, quindi un'ombra sbagliata è invisibile. **Controlla
 sempre anche il tema chiaro** prima di pubblicare.
 
-**Non toccare a cuor leggero le due righe finali del `<style>`.** Sono le regole
-che elencano quali elementi hanno la transizione di tema e quali l'ombra:
+**Attenzione alle due righe finali del `<style>`.** Sono le regole che elencano
+quali elementi hanno la transizione di tema e quali l'ombra:
 
 ```css
 body, header, .callout, figure.source, .table-wrap { transition: ... }
 .callout, figure.source, .table-wrap { box-shadow: var(--card-shadow); }
 ```
 
-Gli elenchi **non sono uguali su tutte le pagine**, per ragioni storiche: oggi
-il `.callout` ha l'ombra su 5 pagine su 7 (non su `blog-dadi-semplicita` né su
-`blog-seed-mai-online`). Aggiungere o togliere un selettore qui cambia la resa
-in tema chiaro senza che si veda nulla in tema scuro. Se ci metti mano,
-confronta prima e dopo **in tema chiaro**.
+**Regola:** ogni pannello — `.callout`, `figure.source`, `.table-wrap` e le
+classi specifiche di una pagina come `.checklist` o `.rule` — va in *entrambi*
+gli elenchi. È stato uniformato così su tutte le pagine (CHANGELOG #33); prima
+il `.callout` aveva l'ombra solo su 5 pagine su 7.
+
+Aggiungere o togliere un selettore qui cambia la resa in tema chiaro **senza
+che si veda nulla in tema scuro**, perché lì `--card-shadow` vale `none`. Se ci
+metti mano, confronta prima e dopo in tema chiaro.
 
 **La homepage fa scattare falsi allarmi.** `index.html` ha `<html lang="en">` e
 canonical/`og:url` che puntano alla radice `https://safe21.io/`. **È corretto:**
@@ -256,17 +264,71 @@ Due comportamenti di Cloudflare che sembrano bug ma non lo sono:
 
 ---
 
-## 7. Checklist prima del push
+## 7. Il controllo automatico
 
-- [ ] `headline` del JSON-LD **identico** all'`<h1>`
-- [ ] `canonical` con `.html`, `og:url` senza
-- [ ] `<title>` ≤ 70 caratteri, `description` ≤ 160
-- [ ] Card in `blog.html` aggiunta **in cima**
-- [ ] Voce JSON-LD in `blog.html`, **nello stesso ordine** delle card
-- [ ] Data, categoria e minuti di lettura **uguali** tra card e articolo
-- [ ] Blocco in `sitemap.xml` + `lastmod` di `blog.html` aggiornato
-- [ ] Immagini in WebP, `width`/`height` = pixel reali, `alt` descrittivo
-- [ ] Footer identico alle altre pagine (4 link in Contatti)
+Prima di ogni push:
+
+```bash
+python tools/audit.py
+```
+
+Controlla in un colpo solo tutte le cose che è facile sbagliare e che **non
+danno errore da sole**: annidamento HTML, JSON-LD valido e coerente con
+l'`<h1>`, canonical e `og:url`, link e immagini che non esistono, `alt`
+mancanti, `width`/`height` diversi dai pixel reali, footer allineato su tutte le
+pagine, card ↔ JSON-LD ↔ sitemap ↔ file coerenti fra loro, data e minuti di
+lettura uguali fra card e articolo, `id` duplicati, `target="_blank"` senza
+`rel="noopener"`, numerazione del CHANGELOG, e che `safe21-pgp.asc` non
+contenga per sbaglio una chiave privata.
+
+Distingue due livelli:
+
+- **ERRORE** — è rotto, va corretto prima di pushare. Lo script esce con codice
+  `1`, quindi si può collegare a una CI.
+- **AVVISO** — da valutare, non blocca (per esempio una meta description più
+  lunga di 160 caratteri).
+
+Output quando è tutto a posto:
+
+```
+✓ Nessun errore. Si può pushare. (9 avvisi da valutare.)
+```
+
+**Non segnala falsi allarmi.** Le eccezioni corrette e volute — come
+`index.html` che ha `lang="en"` e il canonical sulla radice — sono elencate
+nella costante `EXPECTED` in cima allo script, con il motivo. Se aggiungi una
+nuova eccezione legittima, mettila lì invece di ignorare l'output: uno script
+che segnala sempre gli stessi tre errori innocui smette di essere letto, e a
+quel punto non serve più a niente.
+
+Il controllo sulle dimensioni delle immagini richiede Pillow (`pip install
+Pillow`); senza, il resto gira lo stesso e quel singolo controllo viene
+dichiarato saltato.
+
+---
+
+## 8. Checklist prima del push
+
+Prima di tutto:
+
+```bash
+python tools/audit.py
+```
+
+Lo script copre da solo i punti contrassegnati con 🤖. Restano da verificare a
+mano quelli visivi:
+
+- [ ] 🤖 `headline` del JSON-LD **identico** all'`<h1>`
+- [ ] 🤖 `canonical` con `.html`, `og:url` senza
+- [ ] 🤖 `<title>` ≤ 70 caratteri, `description` ≤ 160
+- [ ] 🤖 Voce JSON-LD in `blog.html`, **nello stesso ordine** delle card
+- [ ] 🤖 Data, categoria e minuti di lettura **uguali** tra card e articolo
+- [ ] 🤖 Blocco in `sitemap.xml` presente
+- [ ] 🤖 `width`/`height` delle immagini = pixel reali, `alt` presente
+- [ ] 🤖 Footer identico alle altre pagine (4 link in Contatti)
+- [ ] Card in `blog.html` aggiunta **in cima** (l'ordine cronologico non è verificabile in automatico)
+- [ ] `lastmod` di `blog.html` aggiornato nella sitemap
+- [ ] Immagini convertite in **WebP**, con l'`alt` che *descrive* davvero l'immagine
 - [ ] Provato in tema **chiaro e scuro**
 - [ ] Provato a **375 px** di larghezza (la pagina non deve scorrere di lato)
 - [ ] Lightbox: apre e chiude (click sullo sfondo, X, Esc)

@@ -390,7 +390,7 @@
     /* Cards gain a soft shadow on white; the token is `none` in dark mode.
        The callout is deliberately NOT in this list: it is a tinted panel,
        not a card, and never carried a shadow. */
-    figure.source { box-shadow: var(--card-shadow); }
+    .callout, figure.source { box-shadow: var(--card-shadow); }
 
     @media (max-width: 400px) {
       /* Very narrow phones: tighten the header gap so logo + theme +
