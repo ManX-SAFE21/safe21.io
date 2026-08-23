@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [33] — tools/audit.py: automated pre-push checks, and one CSS inconsistency closed
 
 **Date:** 2026-08-23
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `77b3caf`, pushed to `main`)
 
 Follow-up to #32. The guide told a reader what to check by hand; this makes the
 machine do it, so the same mistakes cannot come back and cost time.
