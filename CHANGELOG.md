@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [34] — "Dadi o software?": added a hero cover image
 
 **Date:** 2026-08-23
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `a18dbd4`, pushed to `main`)
 
 Client supplied a cover illustration (dice + phone/seed-phrase graphic, PNG
 1200×675) and asked for it to be converted to WebP and placed at the top of
