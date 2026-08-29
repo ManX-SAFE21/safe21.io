@@ -3,6 +3,36 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [34] — "Dadi o software?": added a hero cover image
+
+**Date:** 2026-08-23
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client supplied a cover illustration (dice + phone/seed-phrase graphic, PNG
+1200×675) and asked for it to be converted to WebP and placed at the top of
+`blog-dadi-semplicita.html`, above the existing text.
+
+- **Image conversion.** Tried lossless first (this image has soft glows/
+  gradients, unlike the flat-colour chart in #31) — it came out at 387 KB,
+  worse than every lossy setting. Lossy quality 90 won: 1200×675 PNG (642 KB)
+  → **29.5 KB** WebP. Checked the title text at actual size after compression;
+  no visible artifacts. Saved as `images/copertina-dadi-o-software.webp`.
+- **New `<figure class="source">`** inserted as the first element inside
+  `.article-body`, before the opening paragraph — same pattern as the hero
+  figures in #29/#31. `loading="eager"` (it's above the fold), `alt` describes
+  the illustration's content. The article's original mid-body infographic
+  (`infografica-dadi-vs-software.png`, unchanged) still sits where it was.
+- **`og:image` and JSON-LD `image`** added — this page had neither before,
+  since it previously had no hero image. `dateModified` bumped to 2026-08-23.
+  `sitemap.xml` `lastmod` bumped to match.
+
+**Verified:** `tools/audit.py` clean (0 errors, same 9 pre-existing
+advisories). Both figures render; lightbox opens the new cover at natural
+1200×675 and closes on Escape. Checked in light and dark theme (the
+illustration's own background is dark navy, so it does not visually clash with
+the light theme). Checked at 375px — layout unaffected, no sideways scroll.
+No console errors.
+
 ## [33] — tools/audit.py: automated pre-push checks, and one CSS inconsistency closed
 
 **Date:** 2026-08-23
