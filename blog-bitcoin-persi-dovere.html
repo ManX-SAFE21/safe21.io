@@ -397,12 +397,26 @@
        so navigating between blog pages doesn't flash. sessionStorage (not
        localStorage) is deliberate: it is cleared when the tab/browser
        closes, so every fresh visit starts dark (client's "Variante A"),
-       while a choice still carries across pages within the same visit. -->
+       while a choice still carries across pages within the same visit.
+
+       A `?theme=light` or `?theme=dark` in the URL — stamped in by the
+       toggle below when it's clicked — takes priority over sessionStorage,
+       so a link copied from an open page carries its theme to whoever
+       opens it next, with no session state of their own. -->
   <script>
     (function () {
       try {
-        if (sessionStorage.getItem('safe21-blog-theme') === 'light') {
+        var urlTheme = new URLSearchParams(location.search).get('theme');
+        var theme = (urlTheme === 'light' || urlTheme === 'dark')
+          ? urlTheme
+          : sessionStorage.getItem('safe21-blog-theme');
+        if (theme === 'light') {
           document.documentElement.setAttribute('data-theme', 'light');
+        }
+        // Also remember an explicit link choice, so it survives navigating
+        // to another page within the same visit, same as a manual toggle.
+        if (urlTheme === 'light' || urlTheme === 'dark') {
+          sessionStorage.setItem('safe21-blog-theme', urlTheme);
         }
       } catch (e) { /* private browsing: fall back to the dark default */ }
     })();
@@ -855,7 +869,17 @@
       apply(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
 
       btn.addEventListener('click', function () {
-        apply(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+        var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        apply(next);
+        // Stamp the choice into the address bar (no reload), so copying the
+        // link right now shares the page in this exact theme. Deliberately
+        // NOT done on the initial sync above: only an explicit click should
+        // rewrite the link, not every ordinary page load.
+        try {
+          var url = new URL(location.href);
+          url.searchParams.set('theme', next);
+          history.replaceState(null, '', url);
+        } catch (e) {}
       });
     })();
   </script>

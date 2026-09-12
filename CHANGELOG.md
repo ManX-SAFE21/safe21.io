@@ -3,6 +3,49 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [39] — Shared links now carry the theme they were copied in
+
+**Date:** 2026-09-12
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client asked: when sharing an article link in light or dark mode, could the
+person opening it see the same mode automatically?
+
+- **Clicking the toggle now stamps the choice into the address bar** via
+  `history.replaceState` (no reload): `...html` &rarr; `...html?theme=light`
+  (or `?theme=dark`). Copying the link at that moment carries the theme.
+- **The pre-paint script now reads `?theme=` first**, before falling back to
+  `sessionStorage`. A link opened with no session state of its own (a fresh
+  visitor, a different browser) renders in the linked theme immediately, no
+  flash. An explicit link choice is also written into `sessionStorage`, so it
+  survives navigating to another page within the same visit exactly like a
+  manual toggle would.
+- **Only an explicit click rewrites the URL** — the pre-paint sync on
+  ordinary page load never does, so a plain link keeps working exactly as
+  before (opens dark, the default).
+- **`canonical` and `og:url` are untouched**, deliberately: they are static
+  tags with no query string, so `?theme=` never creates a second indexable
+  URL for the same page.
+
+Applied identically to **all 9 article pages** — both the pre-paint script
+and the click-handler block were byte-identical across every one of them,
+hashed before editing.
+
+**Known limitation, not addressed:** the theme in the URL does not propagate
+to internal links (e.g. "&larr; Tutti gli articoli") — clicking through loses
+it, since sessionStorage from the current visit is the only thing carrying a
+choice between pages. Flagged to the client; left as-is since it wasn't
+asked for and would need every internal link on every page changed.
+
+**Verified**, each in a fresh browser tab (avoiding the stale-screenshot
+harness quirk from #38): clicking the toggle twice on
+`blog-comprare-bitcoin-kyc-p2p` updated the URL to `?theme=light` then
+`?theme=dark`; opening `?theme=light` cold (never clicked, no session state)
+rendered light immediately (`bodyBg` correct, screenshot confirmed);
+opening `?theme=dark` cold rendered dark; `canonical`/`og:url` unchanged in
+both cases; no console errors. `tools/audit.py` clean, 0 errors, no new
+advisories.
+
 ## [38] — "Comprare Bitcoin nel 2026": article expanded with client's revised draft
 
 **Date:** 2026-09-12
