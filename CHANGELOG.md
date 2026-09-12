@@ -3,6 +3,23 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [40] — Small wording revision in "Il tema di fondo"
+
+**Date:** 2026-09-12
+**Status:** Delivered and live (commit `1b59cf6`, pushed to `main`)
+
+Client sent another small revision of the same draft, changing a few words
+in the closing "Il tema di fondo: dati contro comodità" section:
+
+- "paghi poco *oggi* in commissioni" &rarr; "paghi poco in fatica e
+  commissioni adesso"
+- "paghi potenzialmente tanto *domani*" &rarr; "paghi potenzialmente tanto in
+  futuro"
+- "quel \"domani\"" &rarr; "quel futuro"
+
+Compared the new draft against the one used for #38 word-by-word; this was
+the only change. Single-paragraph edit, no structural change.
+
 ## [39] — Shared links now carry the theme they were copied in
 
 **Date:** 2026-09-12
