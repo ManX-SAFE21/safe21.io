@@ -3,6 +3,68 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [35] — New blog article: "Il caso Liquid: perché per l'eredità consigliamo BAL Protocol"
+
+**Date:** 2026-09-12
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client asked to adapt the Bitcoin After Life article "Liquid Network's $320M
+Lesson: Why BAL Only Builds on Bedrock" (bitcoin-after.life, 12 September 2026)
+for the SAFE21 blog: in Italian, as simple as the other articles, with the
+angle that this incident is exactly why SAFE21 recommends Bitcoin After Life as
+its inheritance service, and why SAFE21 chose to build its own Will-Executor
+server. Cover image to follow the blog's visual style (reference given:
+`blog-password-electrum`).
+
+- **New `blog-caso-liquid.html`.** Tag "Eredità Bitcoin", 12 settembre 2026,
+  6 min (1,230 words). Sections: what happened on Liquid (6 Sept 2026, ~4,000
+  BTC / ~$320M, most returned, ~$47M still held at the time of writing) → what
+  broke, explained for beginners (a sidechain's cached crypto checks let
+  unbacked L-BTC be minted and swapped for real BTC; Bitcoin itself held) →
+  why this matters more for an inheritance, which must work for decades →
+  **"Ecco perché consigliamo Bitcoin After Life"** (the single callout: BAL
+  Protocol's four rules — no sidechains, no Layer 2, no experimental scripts,
+  no new wallet — then its two pillars, Electrum and nLockTime) →
+  **"Ed è per questo che abbiamo costruito un Will-Executor"** (what an
+  attacker cannot do to an executor; on-chain fee paid only on confirmation;
+  links to we.safe21.io and to the #29 article) → four practical takeaways →
+  sources + disclaimer.
+- **Editorial choices.** Title kept to exactly 70 characters with the
+  "— SAFE21" suffix (the audit's limit) and uses "BAL Protocol" rather than
+  bare "BAL", per the client's earlier instruction (#22). "Bitcoin After
+  Life" and "Will-Executor" left untranslated. The source's "atomic bombs /
+  AI" section is condensed into the fourth takeaway ("Verifica"). A sentence
+  crediting Blockstream's response was kept, as in the source, so the piece
+  is not read as an attack on them. Incident figures are **attributed to
+  public reporting** (BAL article + Chainalysis analysis in the footnote), not
+  independently verified; the footnote says the figures reflect reporting at
+  the time of writing.
+- **Cover image (`images/copertina-caso-liquid.webp`), drawn for this
+  article.** Metaphor taken from the source's title: Bitcoin's base layer as
+  bedrock that holds, with the Bitcoin coin resting on it, while a newer
+  deck built on top of the same bedrock has snapped and is shedding
+  fragments. Same language as the other covers: navy ground, teal line-art
+  with a soft glow, one orange Bitcoin accent, teal corner glow, no text
+  baked in. Built as SVG, rendered with headless Chrome at 2x (3200×1800) and
+  downscaled to 1600×900 for clean edges; checked at 672 px, the real column
+  width, for legibility. WebP quality 95 = **28 KB** (lossless was 115 KB —
+  soft glows favour lossy here).
+- **Template: `blog-safe21-will-executor.html`**, not the password article:
+  it carries exactly the CSS blocks this page uses (figure + lightbox, one
+  callout, footnote, inline links) and none it does not, so no dead CSS was
+  introduced.
+- **`blog.html`** — new `.post-card` at the top + matching `BlogPosting`
+  prepended to the JSON-LD list. **`sitemap.xml`** — new `<url>`; `blog.html`
+  lastmod bumped to 2026-09-12.
+
+**Verified:** `tools/audit.py` — 0 errors across 10 pages; the new page raises
+no advisories. In the browser: `<h1>` = JSON-LD headline; cover loads at
+1600×900; exactly one callout; footer carries the 4 Contatti links; lightbox
+opens the cover at 1:1 and closes on Escape with scroll unlocked; light theme
+gives the callout and figure the same `--card-shadow`; at 375 px no sideways
+scroll; no console errors. On `blog.html` the new card is first and its date,
+category and reading time match the article.
+
 ## [34] — "Dadi o software?": added a hero cover image
 
 **Date:** 2026-08-23
