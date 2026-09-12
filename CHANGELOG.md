@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [35] — New blog article: "Il caso Liquid: perché per l'eredità consigliamo BAL Protocol"
 
 **Date:** 2026-09-12
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `0825b83`, pushed to `main`)
 
 Client asked to adapt the Bitcoin After Life article "Liquid Network's $320M
 Lesson: Why BAL Only Builds on Bedrock" (bitcoin-after.life, 12 September 2026)
