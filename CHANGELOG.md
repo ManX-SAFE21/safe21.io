@@ -3,6 +3,39 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [37] — Lightbox: images now fit the screen instead of overflowing it
+
+**Date:** 2026-09-12
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client noticed that clicking the mid-article infographic on the new KYC/P2P
+article (2391&times;1341 px) opened it larger than the screen, forcing a
+scroll to see the whole thing.
+
+The lightbox showed every image at its exact natural pixel size
+(`max-width: none`), a deliberate choice from earlier in the project. That is
+fine for an image smaller than the viewport, but breaks down for a large one
+on a small screen.
+
+**Fix:** `.lightbox-overlay img` now caps at `calc(100vw - 48px)` /
+`calc(100vh - 48px)` (the -48px matches the overlay's own 24px padding on
+each side) instead of `max-width: none`, with `width/height: auto` still in
+place so the aspect ratio is preserved. Net effect: an image smaller than the
+screen still renders 1:1 exactly as before; one larger than the screen now
+scales down to fit, never up.
+
+Applied identically to **all 7 pages that have a lightbox** — this CSS block
+was byte-identical across every one of them, checked before editing:
+`blog-password-electrum`, `blog-safe21-will-executor`, `blog-bal-easy-heirs`,
+`blog-dadi-semplicita`, `blog-seed-mai-online`, `blog-caso-liquid`,
+`blog-comprare-bitcoin-kyc-p2p`.
+
+**Verified:** the 2391&times;1341 infographic on a 1000&times;700 viewport now
+renders at 952&times;534 with no scroll needed; the same image on a
+375&times;812 mobile viewport fits at 327&times;183. A smaller image
+(1376&times;768) on a 1600&times;1000 viewport still renders at its exact
+natural size (1:1 unchanged). `tools/audit.py` clean; no console errors.
+
 ## [36] — New blog article: "Comprare Bitcoin nel 2026: KYC o peer-to-peer?"
 
 **Date:** 2026-09-12

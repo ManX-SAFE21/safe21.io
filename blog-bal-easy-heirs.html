@@ -323,8 +323,12 @@
     }
     .lightbox-overlay.open { display: block; }
     .lightbox-overlay img {
-      /* Natural pixel size (1:1); max-width:none defeats responsive shrink. */
-      display: inline-block; width: auto; height: auto; max-width: none;
+      /* Natural pixel size (1:1), but capped to fit the viewport: width/
+         height:auto preserve the aspect ratio, max-width/max-height scale
+         the image down (never up) so it never exceeds the screen. The
+         -48px accounts for the overlay's own 24px padding on each side. */
+      display: inline-block; width: auto; height: auto;
+      max-width: calc(100vw - 48px); max-height: calc(100vh - 48px);
       margin: 0 auto; cursor: default; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
     .lightbox-close {
