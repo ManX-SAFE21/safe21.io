@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [36] — New blog article: "Comprare Bitcoin nel 2026: KYC o peer-to-peer?"
 
 **Date:** 2026-09-12
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `7a9e422`, pushed to `main`)
 
 Client supplied a finished draft (comprare-bitcoin-kyc-vs-p2p.md) plus a cover
 illustration and a 16:9 comparison infographic, asking to publish it with the
