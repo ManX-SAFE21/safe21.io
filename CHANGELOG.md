@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [39] — Shared links now carry the theme they were copied in
 
 **Date:** 2026-09-12
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `458d5a4`, pushed to `main`)
 
 Client asked: when sharing an article link in light or dark mode, could the
 person opening it see the same mode automatically?
