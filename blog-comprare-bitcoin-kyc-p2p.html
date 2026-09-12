@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SAFE21 — Blog article: "Comprare Bitcoin nel 2026: KYC o peer-to-peer?"
+       Single self-contained file (HTML + CSS + minimal JS).
+
+       LANGUAGE NOTE (project rule R1):
+       The homepage (index.html) ships in English with a runtime EN/IT
+       switcher. The blog, by client decision, is ITALIAN ONLY — so this
+       page has no language switcher and no i18n dictionary: the Italian
+       copy is written directly in the markup. All code comments and
+       identifiers remain in English, as required by R1.
+
+       SOURCE NOTE:
+       Adapted, with only light copy-editing, from the client-supplied
+       draft "Comprare Bitcoin nel 2026: KYC o peer-to-peer? Un confronto
+       onesto" (comprare-bitcoin-kyc-vs-p2p.md). The draft's comparison
+       table ("Vantaggi e svantaggi a confronto") is represented here by
+       the client-supplied infographic image instead of a second, duplicate
+       table, since the image already covers the same content visually.
+       Cover and mid-article infographic were both supplied by the client.
+
+       Structure cloned from blog-safe21-will-executor.html: it carries
+       exactly the CSS blocks this page uses (figure + lightbox, one
+       callout, footnote, inline links) and none it does not.
+       ============================================================ -->
+
+  <title>Comprare Bitcoin nel 2026: KYC o peer-to-peer? — SAFE21</title>
+  <meta name="description" content="Confronto onesto tra i due modi legali di comprare Bitcoin oggi: exchange centralizzato con KYC o scambio diretto peer-to-peer." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="logos/safe21-favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
+
+  <!-- Open Graph (social preview) -->
+  <meta property="og:title" content="Comprare Bitcoin nel 2026: KYC o peer-to-peer?" />
+  <meta property="og:description" content="Confronto onesto tra i due modi legali di comprare Bitcoin oggi: exchange centralizzato con KYC o scambio diretto peer-to-peer." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://safe21.io/blog-comprare-bitcoin-kyc-p2p" />
+  <meta property="og:image" content="https://safe21.io/images/copertina-comprare-bitcoin-kyc-p2p.webp" />
+  <meta property="og:locale" content="it_IT" />
+  <link rel="canonical" href="https://safe21.io/blog-comprare-bitcoin-kyc-p2p.html" />
+
+  <!-- Structured data (JSON-LD): Article type with explicit headline, dates
+       and author, so search engines and AI assistants can cite this piece
+       accurately (title, publisher, date) instead of guessing from prose. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Comprare Bitcoin nel 2026: KYC o peer-to-peer?",
+    "description": "Confronto onesto tra i due modi legali di comprare Bitcoin oggi: exchange centralizzato con KYC o scambio diretto peer-to-peer.",
+    "url": "https://safe21.io/blog-comprare-bitcoin-kyc-p2p.html",
+    "image": "https://safe21.io/images/copertina-comprare-bitcoin-kyc-p2p.webp",
+    "datePublished": "2026-09-12",
+    "dateModified": "2026-09-12",
+    "inLanguage": "it",
+    "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- Design tokens (identical to index.html) ---------- */
+    :root {
+      --ink:    #0A0F1C;   /* base background ("vault") */
+      --ink-2:  #0E1525;   /* alternating section background */
+      --panel:  #111B2E;   /* cards / elevated surfaces */
+      --line:   #1F2B44;   /* hairline borders */
+      --light:  #F5F7FA;   /* primary text */
+      --muted:  #95A1B5;   /* secondary text */
+      --teal:   #2DD4BF;   /* primary accent (security) */
+      --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
+      --orange: #F7931A;   /* Bitcoin accent — used sparingly */
+      --danger: #F26D6D;   /* used ONLY for the "never do this" rules */
+
+      --maxw: 1120px;
+      --readw: 720px;      /* narrower measure for long-form reading */
+      --radius: 16px;
+
+      /* --- Tokens added in [12] so the light theme can override them.
+             These values are exactly what the stylesheet used to hardcode,
+             so the dark rendering is byte-for-byte unchanged. --- */
+      --body:         #DDE4EE;                    /* long-form body copy */
+      --header-bg:    rgba(10, 15, 28, 0.72);     /* sticky header (blurred) */
+      --drawer-bg:    rgba(10, 15, 28, 0.96);     /* mobile drawer */
+      --accent-hover: #45e0cd;                    /* button + link hover */
+      --btn-text:     #04201C;                    /* text on the teal button */
+      --tint-teal-bg: rgba(45, 212, 191, 0.07);   /* callout fill */
+      --tint-teal-bd: rgba(45, 212, 191, 0.28);   /* callout border */
+      --tint-btc-bg:  rgba(247, 147, 26, 0.07);   /* Bitcoin callout fill */
+      --tint-btc-bd:  rgba(247, 147, 26, 0.30);   /* Bitcoin callout border */
+      --logo-word:    #F5F7FA;                    /* "SAFE" in the wordmark */
+      --logo-21:      #2DD4BF;                    /* "21" in the wordmark */
+      --card-shadow:  none;
+    }
+
+    /* ---------- Light theme (blog only) ----------
+       Applied by setting data-theme="light" on <html>. Every value is a
+       deliberate counterpart of the dark token, not a generic light
+       palette: the page background is a cool white tinted toward the
+       brand's navy, and the primary text colour IS the dark theme's
+       background (#0A0F1C), so the two modes mirror each other.
+
+       The teal is darkened from #2DD4BF to #0A7568 because the bright
+       teal fails contrast on white. #0A7568 clears 4.5:1 everywhere while
+       still reading as the same colour family. All pairings were checked
+       against WCAG 2.1 AA; see CHANGELOG entry [12] for the ratios. --- */
+    [data-theme="light"] {
+      --ink:          #F4F6F9;
+      --ink-2:        #E8EDF4;
+      --panel:        #FFFFFF;
+      --line:         #D3DBE6;
+      --light:        #0A0F1C;
+      --body:         #1E2735;
+      --muted:        #54637A;
+      --teal:         #0A7568;
+      --teal-d:       #0D9488;
+      --orange:       #9A5B00;
+      --danger:       #B3261E;
+      --header-bg:    rgba(244, 246, 249, 0.82);
+      --drawer-bg:    rgba(244, 246, 249, 0.97);
+      --accent-hover: #0D9488;
+      --btn-text:     #FFFFFF;
+      --tint-teal-bg: rgba(10, 117, 104, 0.06);
+      --tint-teal-bd: rgba(10, 117, 104, 0.30);
+      --tint-btc-bg:  rgba(154, 91, 0, 0.06);
+      --tint-btc-bd:  rgba(154, 91, 0, 0.28);
+      --logo-word:    #0A0F1C;
+      --logo-21:      #0D9488;
+      /* On white, cards need a shadow to separate from the page; on the
+         dark theme the border alone is enough. */
+      --card-shadow:  0 1px 3px rgba(10, 15, 28, 0.06);
+    }
+
+    /* ---------- Reset / base ---------- */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--light);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    /* Reading column: long-form text is capped narrower than the site grid
+       so lines stay around 70-80 characters, which is easier to read. */
+    .read { max-width: var(--readw); margin: 0 auto; padding: 0 24px; }
+
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin: 0 0 14px;
+    }
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; margin: 0; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      font-size: 15px; padding: 13px 22px; border-radius: 10px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+    }
+    .btn-primary { background: var(--teal); color: var(--btn-text); }
+    .btn-primary:hover { transform: translateY(-2px); background: var(--accent-hover); }
+    .btn-ghost { border-color: var(--line); color: var(--light); background: transparent; }
+    .btn-ghost:hover { border-color: var(--teal); transform: translateY(-2px); }
+
+    /* ---------- Header (same structure as index.html) ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+    .nav .logo svg { height: 60px; width: auto; }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-links a { font-size: 14px; color: var(--muted); font-weight: 500; transition: color .15s ease; }
+    .nav-links a:hover { color: var(--light); }
+    .nav-links a.current { color: var(--teal); }
+    .nav .cta { display: flex; align-items: center; gap: 16px; }
+
+    .menu-toggle {
+      display: none;
+      flex: none; width: 42px; height: 42px;
+      align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+    }
+    .menu-toggle svg { width: 22px; height: 22px; }
+    .menu-toggle .icon-close { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
+    .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid var(--line);
+      background: var(--drawer-bg);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu nav { display: flex; flex-direction: column; padding: 8px 24px 18px; }
+    .mobile-menu nav a {
+      padding: 14px 0; font-size: 16px; color: var(--light);
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu nav a:last-child { border-bottom: none; color: var(--teal); }
+
+    /* Header collapses to the hamburger at 1024px, not 760px: between
+       those widths the full link row + Contact button no longer fits and
+       "Blog" wrapped under "Contattaci". Below 1024px the tidy drawer takes
+       over; the theme switch and hamburger stay visible at every width. */
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .nav .cta > a.btn-primary { display: none; }
+    }
+    @media (max-width: 760px) {
+      .nav { height: 72px; }
+      .nav .logo svg { height: 44px; }
+    }
+
+    /* ---------- Article layout ---------- */
+    .article-head {
+      padding: 64px 0 8px;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .back-link {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); display: inline-block; margin-bottom: 28px;
+      transition: color .15s ease;
+    }
+    .back-link:hover { color: var(--teal); }
+
+    .article-head h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .article-head .standfirst {
+      font-size: 19px; color: var(--muted); margin: 22px 0 0;
+    }
+    /* Byline: mono, because it is metadata rather than prose. */
+    .byline {
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      color: var(--muted); letter-spacing: 1px;
+      margin: 30px 0 0; padding: 16px 0 40px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 8px 18px;
+    }
+    .byline .read-time { color: var(--teal); }
+
+    .article-body { padding: 48px 0 24px; }
+    .article-body h2 {
+      font-size: 27px; font-weight: 600;
+      margin: 52px 0 16px; letter-spacing: -0.2px;
+    }
+    .article-body h3 {
+      font-size: 19px; font-weight: 600; margin: 34px 0 10px;
+    }
+    .article-body p { margin: 0 0 20px; font-size: 17px; color: var(--body); }
+    .article-body strong { color: var(--light); font-weight: 600; }
+    .article-body em { color: var(--body); }
+    .article-body ul, .article-body ol { margin: 0 0 22px; padding-left: 22px; }
+    .article-body li { margin-bottom: 14px; font-size: 17px; color: var(--body); }
+    /* Inline links inside prose are underlined so they are obvious in
+       body copy, where colour alone is not a reliable signal. */
+    .article-body a.inline {
+      color: var(--teal); text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .article-body a.inline:hover { color: var(--accent-hover); }
+
+    /* ---------- Figure (the infographic) ---------- */
+    figure.source {
+      margin: 8px 0 40px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+    figure.source img { width: 100%; height: auto; cursor: zoom-in; }
+    figure.source figcaption {
+      font-size: 13px; color: var(--muted);
+      padding: 14px 18px; border-top: 1px solid var(--line);
+    }
+
+    /* ---------- Image lightbox (click to zoom, 1:1) ----------
+       The figure image advertises itself as clickable; the overlay shows the
+       image at natural size and scrolls if it overflows the viewport. */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 200; display: none;
+      background: rgba(4, 8, 16, 0.85);
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      overflow: auto; cursor: zoom-out; padding: 24px; text-align: center;
+    }
+    .lightbox-overlay.open { display: block; }
+    .lightbox-overlay img {
+      /* Natural pixel size (1:1); max-width:none defeats responsive shrink. */
+      display: inline-block; width: auto; height: auto; max-width: none;
+      margin: 0 auto; cursor: default; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed; top: 16px; right: 20px; z-index: 210;
+      width: 44px; height: 44px; display: inline-flex;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); color: #fff;
+      border: 1px solid rgba(255,255,255,0.4); border-radius: 10px; cursor: pointer;
+    }
+    .lightbox-close:hover { background: rgba(0,0,0,0.75); }
+    .lightbox-close svg { width: 22px; height: 22px; }
+
+    /* ---------- Article footer note (closing links + disclaimer) ---------- */
+    .footnote {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      margin: 44px 0 0; padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .footnote p { font-size: 14px; color: var(--muted); }
+    .footnote ul { margin: 10px 0 20px; }
+    .footnote li { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+    .footnote a.inline { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Callout (neutral highlight) ---------- */
+    .callout {
+      background: var(--tint-teal-bg);
+      border: 1px solid var(--tint-teal-bd);
+      border-radius: var(--radius);
+      padding: 24px 26px; margin: 34px 0;
+    }
+    .callout ul { margin: 0; padding-left: 20px; }
+    .callout li { font-size: 16.5px; color: var(--body); margin-bottom: 12px; }
+    .callout li:last-child { margin-bottom: 0; }
+    .callout .eyebrow { margin-bottom: 10px; }
+
+    /* ---------- Closing CTA ---------- */
+    .article-cta {
+      background: var(--ink-2); border-top: 1px solid var(--line);
+      margin-top: 56px; padding: 64px 0;
+    }
+    .article-cta h2 { font-size: 30px; margin-bottom: 14px; }
+    .article-cta p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
+    .article-cta .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    /* ---------- Footer (same as index.html) ---------- */
+    footer { background: var(--ink); border-top: 1px solid var(--line); padding: 56px 0 34px; }
+    .foot-top { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+    .foot-brand { max-width: 320px; }
+    .foot-brand .logo svg { height: 54px; width: auto; margin-bottom: 14px; }
+    .foot-brand p { color: var(--muted); font-size: 14px; margin: 0; }
+    .foot-cols { display: flex; flex-wrap: wrap; gap: 48px; }
+    .foot-col { display: flex; flex-direction: column; gap: 10px; }
+    .foot-col h4 {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--light); margin: 0 0 4px;
+    }
+    .foot-col a { font-size: 14px; color: var(--muted); transition: color .15s ease; }
+    .foot-col a:hover { color: var(--teal); }
+    .disclaimer {
+      margin: 44px 0 18px; padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-size: 12.5px; color: var(--muted); line-height: 1.7;
+    }
+    .copyright { font-size: 12.5px; color: var(--muted); margin: 0; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 760px) {
+      .article-head { padding-top: 40px; }
+      .article-head h1 { font-size: 32px; }
+      .article-head .standfirst { font-size: 17px; }
+      .article-body h2 { font-size: 23px; margin-top: 42px; }
+      .article-body p, .article-body li { font-size: 16.5px; }
+      .article-cta h2 { font-size: 25px; }
+    }
+
+    /* ---------- Theme toggle button ---------- */
+    /* Unlike the "Contattaci" button, this control stays visible at every
+       width: on a phone the light theme is exactly where it matters most,
+       so hiding the switch on mobile would defeat the purpose. */
+    .theme-toggle {
+      flex: none; width: 42px; height: 42px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; border: 1px solid var(--line);
+      border-radius: 10px; color: var(--light); cursor: pointer;
+      transition: border-color .15s ease, color .15s ease;
+    }
+    .theme-toggle:hover { border-color: var(--teal); color: var(--teal); }
+    .theme-toggle svg { width: 20px; height: 20px; }
+    /* Show the icon of the theme the click will switch TO. */
+    .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* Smooth crossfade between themes. Disabled automatically by the
+       prefers-reduced-motion block above. */
+    body, header, .callout, figure.source {
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    /* Cards gain a soft shadow on white; the token is `none` in dark mode. */
+    .callout, figure.source { box-shadow: var(--card-shadow); }
+
+    @media (max-width: 400px) {
+      /* Very narrow phones: tighten the header gap so logo + theme +
+         hamburger never collide. */
+      .nav .cta { gap: 10px; }
+      .theme-toggle, .menu-toggle { width: 38px; height: 38px; }
+    }
+  </style>
+
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between blog pages doesn't flash. sessionStorage (not
+       localStorage) is deliberate: it is cleared when the tab/browser
+       closes, so every fresh visit starts dark (client's "Variante A"),
+       while a choice still carries across pages within the same visit. -->
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('safe21-blog-theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) { /* private browsing: fall back to the dark default */ }
+    })();
+  </script>
+</head>
+
+<body id="top">
+
+  <!-- Image lightbox overlay. Hidden until a figure image is clicked; then
+       shows that image at natural 1:1 size. Same pattern as the other
+       image-bearing articles. -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="lightbox-close" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+    <img src="" alt="" />
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <!-- Copied from index.html. Differences: links point back to index.html
+       sections (this is a separate page, so bare "#anchors" would not work),
+       the labels are written in Italian because the blog is Italian-only,
+       and there is no EN/IT switcher for the same reason. -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="index.html" aria-label="SAFE21 home">
+        <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+          <defs>
+            <mask id="kh-head">
+              <rect width="34" height="34" rx="8" fill="#fff"/>
+              <circle cx="17" cy="14" r="5" fill="#000"/>
+              <path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-head)"/></g>
+          <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4">
+            <tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan>
+          </text>
+        </svg>
+      </a>
+
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html" class="current">Blog</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
+        <!-- Light/dark switch. Blog-only feature: the homepage stays dark.
+             Deliberately NOT hidden on mobile (see .theme-toggle CSS). -->
+        <button type="button" class="theme-toggle" aria-pressed="false"
+                aria-label="Passa al tema chiaro" title="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+          </svg>
+        </button>
+
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Apri menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html">Blog</a>
+        <a href="mailto:info@safe21.io">Contattaci</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ================= ARTICLE HEADER ================= -->
+  <div class="article-head">
+    <div class="read">
+      <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
+      <p class="eyebrow">Guide &middot; Comprare Bitcoin</p>
+      <h1>Comprare Bitcoin nel 2026: KYC o peer-to-peer?</h1>
+      <p class="standfirst">
+        Oggi restano sostanzialmente due strade per comprare Bitcoin: un
+        exchange centralizzato con documento e selfie, oppure uno scambio
+        diretto tra privati. Sono entrambe legali. La vera differenza non è
+        "chi nasconde cosa", ma quali dati lasci in giro e quali rischi accetti.
+      </p>
+      <p class="byline">
+        <span>SAFE21</span>
+        <span>12 settembre 2026</span>
+        <span class="read-time">7 min di lettura</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE BODY ================= -->
+  <article class="article-body">
+    <div class="read">
+
+      <figure class="source">
+        <img src="images/copertina-comprare-bitcoin-kyc-p2p.webp"
+             width="1376" height="768" loading="eager" decoding="async"
+             alt="Illustrazione SAFE21: una strada si divide in due. A sinistra una persona porta un documento d'identità e un'impronta digitale verso un edificio con vetrate, il canale centralizzato con KYC. A destra un cerchio con una stretta di mano e un fulmine rappresenta lo scambio diretto peer-to-peer. Al centro del bivio, una moneta Bitcoin arancione." />
+      </figure>
+
+      <div class="callout">
+        <p class="eyebrow">Nota importante</p>
+        <p>
+          Questo articolo è <strong>puramente descrittivo e informativo</strong>.
+          Non è un invito a evitare tasse, a non dichiarare le criptovalute o
+          ad aggirare le regole del proprio paese. È solo un'analisi tecnica
+          dei due modi in cui, oggi, una persona può acquistare Bitcoin. Ogni
+          scelta deve rispettare le leggi fiscali e finanziarie in vigore nel
+          proprio stato di residenza. In caso di dubbi, consulta un
+          commercialista o un avvocato.
+        </p>
+      </div>
+
+      <h2>Perché parliamo di questo tema adesso</h2>
+
+      <p>
+        Fino a qualche anno fa, comprare piccole quantità di Bitcoin senza
+        fornire un documento era relativamente semplice: molti servizi
+        consentivano scambi anonimi entro certe soglie mensili. Quel periodo è
+        finito.
+      </p>
+
+      <p>
+        In Europa il regolamento <strong>MiCA</strong> è pienamente applicabile
+        dal 30 dicembre 2024, con periodo transitorio che si conclude entro il
+        1&deg; luglio 2026 nei vari stati membri. In pratica, qualsiasi impresa
+        che offra il servizio di scambio Bitcoin all'interno dell'Unione
+        Europea deve oggi essere autorizzata come <strong>CASP</strong>
+        (Crypto-Asset Service Provider) e richiedere l'identificazione del
+        cliente — il cosiddetto <strong>KYC</strong>, <em>Know Your
+        Customer</em>.
+      </p>
+
+      <p>Restano quindi, oggi, sostanzialmente due strade:</p>
+
+      <ol>
+        <li><strong>Il canale centralizzato con KYC</strong> (exchange e imprese autorizzate).</li>
+        <li><strong>Il canale peer-to-peer</strong> (scambi tra privati, con o senza un servizio di garanzia).</li>
+      </ol>
+
+      <p>
+        Entrambe sono legali di per sé: il punto non è "una nasconde e l'altra
+        no", ma <strong>quali dati lasciamo in giro e quali rischi
+        accettiamo</strong>. Vediamoli con onestà.
+      </p>
+
+      <h2>Il canale centralizzato con KYC</h2>
+
+      <p>
+        Un exchange centralizzato ti chiede documento, selfie, indirizzo, a
+        volte una prova di residenza. In cambio, tutto diventa molto semplice:
+        accedi, invii un bonifico, compri, vendi.
+      </p>
+
+      <p>
+        <strong>Cosa succede ai tuoi dati.</strong> L'exchange li conserva,
+        insieme allo storico dei tuoi acquisti e vendite. Sa quanti Bitcoin
+        hai comprato, quando, e verso quale indirizzo li hai eventualmente
+        trasferiti.
+      </p>
+
+      <p><strong>Vantaggi pratici:</strong></p>
+      <ul>
+        <li>Esperienza d'uso semplice, adatta ai principianti.</li>
+        <li>Commissioni contenute, spesso intorno all'1% del prezzo di mercato.</li>
+        <li>Grandi volumi disponibili senza attese.</li>
+        <li>Fatture e documenti pronti per la dichiarazione dei redditi.</li>
+      </ul>
+
+      <p><strong>Punti da tenere presenti:</strong></p>
+      <ul>
+        <li>Ogni tua operazione è tracciata e conservata.</li>
+        <li>
+          Se il servizio subisce una fuga di dati — cosa purtroppo non rara —
+          il tuo nome, la tua email, il tuo documento e la stima dei tuoi
+          Bitcoin potrebbero finire in liste circolanti. Non è un rischio
+          teorico: negli ultimi anni ci sono stati diversi episodi di questo
+          tipo, e l'intelligenza artificiale rende più facile incrociare dati
+          provenienti da fonti diverse.
+        </li>
+        <li>
+          Il rischio non è solo digitale. Un elenco che associa un nome a una
+          quantità significativa di Bitcoin può diventare interessante per
+          criminali comuni: <strong>furti mirati, estorsioni, "rapimenti da
+          chiave inglese"</strong> sono situazioni che, ovunque nel mondo, sono
+          state segnalate quando l'informazione è uscita dai canali riservati.
+        </li>
+      </ul>
+
+      <h2>Il canale peer-to-peer</h2>
+
+      <p>
+        Comprare peer-to-peer significa scambiare Bitcoin direttamente con
+        un'altra persona, senza un'azienda che faccia da intermediario
+        obbligatorio. La transazione è protetta da un servizio di
+        <strong>escrow multi-firma</strong>: i Bitcoin del venditore vengono
+        bloccati in un contratto che li rilascia solo quando entrambe le parti
+        confermano lo scambio, o quando un terzo garante interviene in caso di
+        disputa.
+      </p>
+
+      <p>
+        Esistono servizi P2P che funzionano da anni: alcuni gestiscono importi
+        piccoli su Lightning Network — anche tramite protocolli aperti,
+        non-custodial e senza KYC — altri consentono anche cifre grandi. Si
+        tratta di software e protocolli reali, in uso quotidianamente.
+      </p>
+
+      <p><strong>Vantaggi pratici:</strong></p>
+      <ul>
+        <li>Non lasci un documento e un selfie in un database aziendale.</li>
+        <li>Ogni singola controparte vede solo quella singola transazione, non l'intero storico dei tuoi acquisti.</li>
+        <li>Se un venditore vende i tuoi dati o li perde in un data breach, in genere si tratta al massimo di un IBAN e un nome — non foto documento, indirizzo di casa, quantità totali.</li>
+        <li>Coerente con la filosofia originaria di Bitcoin (autonomia, minima fiducia in terze parti).</li>
+      </ul>
+
+      <p><strong>Punti da tenere presenti:</strong></p>
+      <ul>
+        <li>
+          <strong>Costo del "premio privacy".</strong> Il prezzo P2P è di
+          solito circa il 5% più alto del prezzo di mercato in acquisto, e
+          circa il 5% più basso in vendita. Su cifre importanti, non è poco.
+        </li>
+        <li>
+          <strong>Curva di apprendimento.</strong> Serve capire come funziona
+          l'escrow, come si aprono le dispute, come si legge la reputazione di
+          una controparte.
+        </li>
+        <li>
+          <strong>Tempi più lenti.</strong> Trovare la controparte giusta può
+          richiedere ore o giorni, soprattutto per importi grandi.
+        </li>
+        <li>
+          <strong>Rischio di truffe "indirette".</strong> Se dai in giro il tuo
+          IBAN, qualcuno potrebbe usare il tuo nome per truffare altre persone
+          (ad esempio: mette un annuncio di vendita di un oggetto, si fa
+          pagare sul tuo IBAN, poi sparisce; la vittima denuncia — e denuncia
+          te). Su questo torniamo tra poco.
+        </li>
+      </ul>
+
+      <h2>Vantaggi e svantaggi a confronto</h2>
+
+      <figure class="source">
+        <img src="images/infografica-kyc-vs-p2p.webp"
+             width="2391" height="1341" loading="lazy" decoding="async"
+             alt="Infografica di confronto tra KYC ed exchange centralizzato e peer-to-peer. KYC: vantaggi — semplice per principianti, prima operazione in pochi minuti, commissioni basse circa 1%, grandi volumi immediati, documenti pronti per il fisco; svantaggi — documento e selfie obbligatori, storico completo conservato, alto rischio da data breach, nome e quantità BTC esposti, rischio furti ed estorsioni mirati, poco coerente con la filosofia Bitcoin. Peer-to-peer: vantaggi — niente documenti in database, ogni controparte vede una sola operazione, un data leak espone solo IBAN e nome, coerente con la filosofia Bitcoin, l'escrow multi-firma protegge; svantaggi — curva di apprendimento più ripida, prima operazione da ore a giorni, premio privacy di circa il 5%, rischio di truffe indirette legate all'IBAN, documenti fiscali da ricostruire, meno adatto ai principianti." />
+      </figure>
+
+      <h2>Buone abitudini quando si usa il peer-to-peer</h2>
+
+      <p>Se decidi di usare il P2P, alcune regole pratiche riducono molto il rischio:</p>
+
+      <ul>
+        <li><strong>Usa sempre un servizio con escrow multi-firma serio e con storia alle spalle.</strong> I Bitcoin devono essere bloccati nel contratto prima di qualsiasi pagamento.</li>
+        <li><strong>Non pubblicare dati sensibili negli annunci.</strong> Nessun IBAN, nessun numero di telefono, nessuna informazione personale a chi sta solo guardando.</li>
+        <li><strong>Comunica solo dentro la chat del servizio</strong>, mai su canali privati esterni. Serve come prova in caso di disputa.</li>
+        <li><strong>Fornisci l'IBAN solo alla controparte confermata</strong>, non prima. Alcuni servizi permettono di scambiarlo solo dopo l'apertura formale del contratto.</li>
+        <li><strong>Verifica sempre importo e mittente.</strong> Il pagamento deve arrivare per l'esatto importo pattuito e da un IBAN intestato al nome della controparte. Se ricevi due bonifici parziali, o da nomi diversi, <strong>fermati e segnala al servizio prima di rilasciare i Bitcoin.</strong></li>
+        <li><strong>Preferisci controparti con storico e reputazione</strong>, anche pagando qualcosa in più.</li>
+      </ul>
+
+      <h2>Se qualcosa va storto — cosa fare</h2>
+
+      <p>
+        Il rischio più insidioso nel P2P non è la truffa diretta (con un buon
+        escrow è molto difficile), ma quello <strong>indiretto</strong>:
+        qualcuno usa il tuo IBAN per farsi mandare soldi da una terza vittima
+        ignara, che poi denuncia. Se ti arriva un bonifico da una persona
+        sconosciuta:
+      </p>
+
+      <ol>
+        <li><strong>Non spendere quei soldi.</strong> Lasciali fermi sul conto.</li>
+        <li><strong>Contatta subito la tua banca</strong>, dichiarando di non riconoscere il bonifico e chiedendo istruzioni per la restituzione tramite canale bancario (non con un tuo bonifico di ritorno "fai da te").</li>
+        <li><strong>Valuta una denuncia contro ignoti</strong> presso le autorità competenti del tuo paese (in Italia, per esempio, polizia postale o carabinieri), per documentare che il tuo nome è stato usato senza autorizzazione.</li>
+        <li><strong>Conserva ogni prova</strong>: chat dentro il servizio di escrow, movimenti bancari, screenshot degli annunci.</li>
+      </ol>
+
+      <p>
+        Non è una procedura piacevole, ma è la differenza fra un problema che
+        si risolve e un problema che si trascina.
+      </p>
+
+      <h2>Fisco e regole: la parte che dipende da te</h2>
+
+      <p>Ogni paese ha regole diverse su:</p>
+
+      <ul>
+        <li>se e come dichiarare il possesso di criptovalute;</li>
+        <li>come tassare le plusvalenze;</li>
+        <li>quali soglie fanno scattare eventuali imposte di bollo o comunicazioni.</li>
+      </ul>
+
+      <p>
+        <strong>Queste regole cambiano anche nel tempo.</strong> Per questo
+        qui non riportiamo aliquote o soglie specifiche: sarebbero informazioni
+        con data di scadenza, e ognuno vive in un contesto normativo diverso.
+        La regola sana è semplice: <strong>il canale con cui compri Bitcoin
+        non modifica i tuoi obblighi di dichiarazione</strong>. Chi acquista in
+        P2P può tranquillamente dichiarare i propri Bitcoin nel modo previsto
+        dal proprio paese, esattamente come chi acquista su un exchange. Il
+        P2P non è un modo per "sparire dal fisco": è un modo per non lasciare
+        dati sensibili in database aziendali.
+      </p>
+
+      <p>
+        Per capire cosa devi effettivamente dichiarare, rivolgiti a un
+        commercialista aggiornato sulle criptovalute del tuo paese, o alle
+        fonti ufficiali del ministero delle finanze o dell'agenzia delle
+        entrate locale.
+      </p>
+
+      <h2>In sintesi</h2>
+
+      <ul>
+        <li><strong>Il canale centralizzato con KYC</strong> è semplice, veloce, economico in commissioni — ma centralizza dati che, se rubati, ti espongono anche fuori dal mondo digitale.</li>
+        <li><strong>Il canale peer-to-peer</strong> è più impegnativo, un po' più caro, richiede attenzione a truffe indirette — ma riduce drasticamente la quantità di informazioni sensibili collegabili al tuo nome.</li>
+        <li>Non esiste una risposta giusta per tutti. Dipende da quanto compri, con quale frequenza, in quale paese vivi, e quanto tempo sei disposto a dedicare all'apprendimento.</li>
+      </ul>
+
+      <div class="footnote">
+        <p>
+          <strong>In ogni caso, gli obblighi fiscali del tuo paese vanno
+          rispettati.</strong> Il modo in cui compri non è un modo per
+          aggirarli. Questo articolo ha finalità informative e non costituisce
+          consulenza legale, fiscale o di sicurezza: le regole su dichiarazione
+          e tassazione delle criptovalute variano per paese e nel tempo —
+          consulta un commercialista o un avvocato aggiornato sulla materia
+          prima di agire. SAFE21 non prende mai in custodia i tuoi fondi.
+        </p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta">
+    <div class="read">
+      <p class="eyebrow">Vuoi valutare la strada più adatta a te?</p>
+      <h2>Ti aiutiamo a scegliere, non a scegliere al posto tuo</h2>
+      <p>
+        SAFE21 non gestisce i tuoi Bitcoin e non prende in custodia i tuoi
+        fondi: ti aiutiamo a scegliere e configurare la soluzione più adatta al
+        tuo caso, in modo non-custodial. Se vuoi discutere in privato il tuo
+        scenario — quantità, obiettivi, tolleranza al rischio, contesto
+        normativo — scrivici. Ti risponderà una persona reale, non un modulo.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="index.html">Scopri SAFE21</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <!-- Same structure as index.html, written directly in Italian. -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="index.html" aria-label="SAFE21 home">
+            <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+              <defs><mask id="kh-foot"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="14" r="5" fill="#000"/><path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/></mask></defs>
+              <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-foot)"/></g>
+              <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan></text>
+            </svg>
+          </a>
+          <p>Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.</p>
+        </div>
+
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Servizi</h4>
+            <a href="index.html#services">Assistenza Bitcoin</a>
+            <a href="index.html#services">Corsi Bitcoin</a>
+            <a href="index.html#services">Sicurezza Electrum</a>
+            <a href="index.html#inheritance">Eredità</a>
+            <a href="index.html#payments">Pagamenti</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
+            <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contatti</h4>
+            <a href="mailto:info@safe21.io">info@safe21.io</a>
+            <a href="blog.html">Blog</a>
+            <!-- SAFE21 open-source code (GitHub). External link. -->
+            <a href="https://github.com/ManX-SAFE21" target="_blank" rel="noopener noreferrer">Codice open source &nearr;</a>
+            <!-- OpenPGP public key for info@safe21.io (served as text/plain). -->
+            <a href="safe21-pgp.asc">Chiave PGP</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si
+        tratta di consulenza legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia
+        i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni
+        e tassazione variano da paese a paese: per la tua situazione specifica rivolgiti a un
+        professionista qualificato. Le transazioni Bitcoin sono irreversibili.
+      </p>
+      <p class="copyright">© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * Mobile menu toggle.
+     *
+     * Same dependency-free behaviour as index.html: the hamburger opens a
+     * slide-down drawer, which closes on link tap, on Escape, and resets
+     * automatically when the viewport grows past the mobile breakpoint.
+     */
+    (function () {
+      var toggle = document.querySelector('.menu-toggle');
+      var menu = document.getElementById('mobile-menu');
+      if (!toggle || !menu) return;
+
+      function setOpen(open) {
+        menu.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        // The label describes the NEXT action, so it flips with the state.
+        toggle.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      // Close after tapping a link, otherwise the drawer would stay open
+      // over the destination content.
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      // Reset when rotating/resizing to desktop, where the drawer is hidden
+      // by CSS but would otherwise keep a stale aria-expanded="true".
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 760) setOpen(false);
+      });
+    })();
+
+    /**
+     * Light/dark theme switch — blog pages only.
+     *
+     * The whole theme lives in CSS custom properties, so switching means
+     * toggling one attribute on <html>. The choice is stored under
+     * "safe21-blog-theme" in sessionStorage, a key of its own (the homepage
+     * uses "safe21-lang" for the language, and the two must not collide).
+     * sessionStorage means the choice lasts only for the current visit;
+     * every new visit starts dark.
+     *
+     * The <meta name="theme-color"> tag is updated too, so the browser
+     * chrome on mobile matches the page instead of staying navy.
+     */
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (!btn) return;
+
+      var COLORS = { dark: '#0A0F1C', light: '#F4F6F9' };
+
+      function apply(theme) {
+        var isLight = theme === 'light';
+        if (isLight) {
+          root.setAttribute('data-theme', 'light');
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        // aria-pressed reports the *state*; the label describes the
+        // *next* action, which is what a screen-reader user needs.
+        btn.setAttribute('aria-pressed', String(isLight));
+        btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
+        if (meta) meta.setAttribute('content', COLORS[isLight ? 'light' : 'dark']);
+        // sessionStorage, not localStorage: the choice is forgotten when the
+        // browser/tab closes, so the next visit starts dark again.
+        try { sessionStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}
+      }
+
+      // Sync the button with whatever the pre-paint script already set.
+      apply(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+      btn.addEventListener('click', function () {
+        apply(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+      });
+    })();
+
+    /**
+     * Image lightbox. Clicking the figure image opens it in a full-screen
+     * overlay at natural pixel size (1:1); the overlay scrolls if the image is
+     * larger than the viewport. Closes on backdrop click, the X button, or
+     * Escape. No external library.
+     */
+    (function () {
+      var overlay = document.getElementById('lightbox');
+      if (!overlay) return;
+      var big = overlay.querySelector('img');
+      var closeBtn = overlay.querySelector('.lightbox-close');
+      var lastFocus = null;
+
+      function open(src, alt) {
+        big.src = src; big.alt = alt || '';
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';   // lock background scroll
+        lastFocus = document.activeElement;
+        closeBtn.focus();
+      }
+      function close() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        big.src = '';                              // free the large image
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      document.querySelectorAll('figure.source img').forEach(function (img) {
+        img.addEventListener('click', function () {
+          open(img.currentSrc || img.src, img.alt);
+        });
+      });
+      // Backdrop click closes; clicking the image itself does not.
+      overlay.addEventListener('click', function (e) { if (e.target !== big) close(); });
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+      });
+    })();
+  </script>
+</body>
+</html>

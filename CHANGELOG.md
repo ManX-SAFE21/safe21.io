@@ -3,6 +3,50 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [36] — New blog article: "Comprare Bitcoin nel 2026: KYC o peer-to-peer?"
+
+**Date:** 2026-09-12
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client supplied a finished draft (comprare-bitcoin-kyc-vs-p2p.md) plus a cover
+illustration and a 16:9 comparison infographic, asking to publish it with the
+cover at the top and the infographic "a metà articolo".
+
+- **New `blog-comprare-bitcoin-kyc-p2p.html`.** Tag "Guide · Comprare
+  Bitcoin", 12 settembre 2026, 7 min (1,375 words). Sections: why this matters
+  now (MiCA/CASP licensing) → the KYC channel (pros/cons) → the P2P channel
+  (pros/cons) → **comparison infographic** → good P2P habits → what to do if
+  something goes wrong → tax obligations → summary.
+- **The draft's disclaimer blockquote became the article's one `.callout`**
+  ("Nota importante" — descriptive only, not tax/legal advice), placed right
+  after the cover, and its closing tax-obligations paragraph became the
+  `.footnote`.
+- **The draft's own "Vantaggi e svantaggi a confronto" Markdown table was
+  dropped in favour of the supplied infographic image**, placed at exactly
+  that point in the article (the literal midpoint of its section list) —
+  showing the same comparison twice, once as prose-table and once as image,
+  would have been redundant. The infographic's `alt` text spells out every
+  row for accessibility and search, since the data itself only exists as
+  pixels.
+- **Both images converted to WebP** with the size-appropriate method per
+  `CONTRIBUTING.md` §4: the cover (soft-gradient illustration) as lossy
+  quality 95 → 44 KB; the infographic (flat colour + text) as **lossless** →
+  71 KB, chosen because it was smaller than every lossy setting tried and
+  keeps the on-image text pixel-perfect.
+- **Template: `blog-safe21-will-executor.html`** (figure + lightbox, one
+  callout, footnote, inline links — no dead CSS introduced).
+- **`blog.html`** — new `.post-card` at the top + matching `BlogPosting`
+  prepended to the JSON-LD list. **`sitemap.xml`** — new `<url>`; `blog.html`
+  lastmod bumped to 2026-09-12.
+
+**Verified:** `tools/audit.py` — 0 errors across 11 pages, no new advisories.
+In the browser: `<h1>` = JSON-LD headline; both images load at their real
+pixel size; exactly one callout and one footnote; lightbox opens the
+infographic at 2391×1341 and closes on Escape; light theme gives the callout
+and figure the same `--card-shadow`; at 375 px no sideways scroll; no console
+errors. On `blog.html` the new card is first and its date, category and
+reading time match the article.
+
 ## [35] — New blog article: "Il caso Liquid: perché per l'eredità consigliamo BAL Protocol"
 
 **Date:** 2026-09-12
