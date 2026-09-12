@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [37] — Lightbox: images now fit the screen instead of overflowing it
 
 **Date:** 2026-09-12
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `95ebc99`, pushed to `main`)
 
 Client noticed that clicking the mid-article infographic on the new KYC/P2P
 article (2391&times;1341 px) opened it larger than the screen, forcing a
