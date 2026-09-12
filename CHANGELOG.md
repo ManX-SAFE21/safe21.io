@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [38] — "Comprare Bitcoin nel 2026": article expanded with client's revised draft
 
 **Date:** 2026-09-12
-**Status:** Delivered locally — awaiting review before commit/push
+**Status:** Delivered and live (commit `4751252`, pushed to `main`)
 
 Client sent a more detailed revision of the same article
 (comprare-bitcoin-kyc-vs-p2p.md, updated), asking to publish it. Same cover
