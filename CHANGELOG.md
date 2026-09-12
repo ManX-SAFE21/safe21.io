@@ -3,6 +3,51 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [38] — "Comprare Bitcoin nel 2026": article expanded with client's revised draft
+
+**Date:** 2026-09-12
+**Status:** Delivered locally — awaiting review before commit/push
+
+Client sent a more detailed revision of the same article
+(comprare-bitcoin-kyc-vs-p2p.md, updated), asking to publish it. Same cover
+and infographic as #36 (confirmed byte-identical against the originals
+before reusing them — no reconversion needed).
+
+Content roughly doubled (1,375 &rarr; 2,748 words; 7 &rarr; 14 min):
+
+- New material folded into the existing sections: EU KYC-exemption threshold
+  context, data-retention/authority-sharing detail, and a closing line that
+  P2P is "the original way" Bitcoin was built for.
+- New subsections: **"Un inciso sul rapimento da chiave inglese"** (the xkcd
+  $5-wrench-attack origin and real-world pattern), **"Come funziona uno
+  scambio P2P, in breve"** (7-step walkthrough + dispute handling), **"Le
+  varianti del P2P"** (on-chain / Lightning / in-person), **"Perché il P2P
+  costa di più (e a volte di meno)"** (the 5% premium flips in the seller's
+  favour).
+- New sections: **"Un esempio di truffa indiretta"** (a worked Mario/Luigi
+  story), **"Un consiglio pratico importante"** inside the "cosa fare"
+  section (never self-return a mistaken transfer — use the bank's formal
+  chargeback channel instead), **"Scenari d'uso"** (5 reader profiles),
+  **"Obiezioni comuni"** (3 myths addressed), **"Il tema di fondo: dati
+  contro comodità"**, and a closing **glossary** of 11 terms.
+- The comparison table stays represented by the infographic (unchanged from
+  #36); the extra "In sintesi" bullet about combining both channels was
+  folded in.
+
+**Structure and both images unchanged** from #36 — only the article body was
+rebuilt; `<head>`, site header, footer and the two images were preserved
+byte-for-byte. `blog.html` card reading time bumped 7&rarr;14 min to match.
+
+**Verified:** `tools/audit.py` clean (0 errors, 11 pages, no new advisories).
+`<h1>` = JSON-LD headline; 13 `<h2>` + 5 new `<h3>`; still exactly one
+`.callout` and one `.footnote`; both images still load at their real pixel
+size; lightbox still opens/closes correctly; 375px no sideways scroll; no
+console errors. Light/dark theme re-verified in a clean tab (an earlier
+check in a heavily-reused test tab showed a stale, dark screenshot with
+correct-looking light-theme computed styles underneath — closing that tab
+and opening a fresh one confirmed the page itself was always correct; the
+staleness was the test harness, not the site).
+
 ## [37] — Lightbox: images now fit the screen instead of overflowing it
 
 **Date:** 2026-09-12

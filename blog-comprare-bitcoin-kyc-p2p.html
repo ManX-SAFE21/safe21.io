@@ -548,6 +548,7 @@
   </header>
 
 
+
   <!-- ================= ARTICLE HEADER ================= -->
   <div class="article-head">
     <div class="read">
@@ -563,7 +564,7 @@
       <p class="byline">
         <span>SAFE21</span>
         <span>12 settembre 2026</span>
-        <span class="read-time">7 min di lettura</span>
+        <span class="read-time">14 min di lettura</span>
       </p>
     </div>
   </div>
@@ -596,22 +597,21 @@
       <p>
         Fino a qualche anno fa, comprare piccole quantità di Bitcoin senza
         fornire un documento era relativamente semplice: molti servizi
-        consentivano scambi anonimi entro certe soglie mensili. Quel periodo è
-        finito.
+        consentivano scambi anonimi entro certe soglie mensili — spesso
+        intorno a mille euro al mese. Quel periodo è finito.
       </p>
 
       <p>
-        In Europa il regolamento <strong>MiCA</strong> è pienamente applicabile
-        dal 30 dicembre 2024, con periodo transitorio che si conclude entro il
-        1&deg; luglio 2026 nei vari stati membri. In pratica, qualsiasi impresa
-        che offra il servizio di scambio Bitcoin all'interno dell'Unione
-        Europea deve oggi essere autorizzata come <strong>CASP</strong>
-        (Crypto-Asset Service Provider) e richiedere l'identificazione del
-        cliente — il cosiddetto <strong>KYC</strong>, <em>Know Your
-        Customer</em>.
+        Oggi in Europa il regolamento <strong>MiCA</strong> è pienamente
+        applicabile dal 30 dicembre 2024, con periodo transitorio che si
+        conclude entro il 1&deg; luglio 2026 nei vari stati membri. In
+        pratica, qualsiasi impresa che offra scambio Bitcoin nell'Unione
+        Europea deve essere autorizzata come <strong>CASP</strong> e
+        richiedere l'identificazione del cliente — il cosiddetto
+        <strong>KYC</strong>, <em>Know Your Customer</em>.
       </p>
 
-      <p>Restano quindi, oggi, sostanzialmente due strade:</p>
+      <p>Restano oggi due strade:</p>
 
       <ol>
         <li><strong>Il canale centralizzato con KYC</strong> (exchange e imprese autorizzate).</li>
@@ -624,19 +624,28 @@
         accettiamo</strong>. Vediamoli con onestà.
       </p>
 
+      <p>
+        La strada P2P, va detto, non è "nuova": è <strong>la strada
+        originaria</strong>, quella che Bitcoin è stato progettato per rendere
+        possibile fin dal primo giorno. È l'ambiente attorno a essa che è
+        cambiato.
+      </p>
+
       <h2>Il canale centralizzato con KYC</h2>
 
       <p>
         Un exchange centralizzato ti chiede documento, selfie, indirizzo, a
-        volte una prova di residenza. In cambio, tutto diventa molto semplice:
-        accedi, invii un bonifico, compri, vendi.
+        volte una prova di residenza. In cambio, tutto è molto semplice:
+        accedi con email e password, colleghi il conto bancario, invii un
+        bonifico, compri e vendi con pochi click.
       </p>
 
       <p>
-        <strong>Cosa succede ai tuoi dati.</strong> L'exchange li conserva,
-        insieme allo storico dei tuoi acquisti e vendite. Sa quanti Bitcoin
-        hai comprato, quando, e verso quale indirizzo li hai eventualmente
-        trasferiti.
+        <strong>Cosa succede ai tuoi dati.</strong> L'exchange li conserva
+        insieme allo storico completo: quanti Bitcoin hai comprato, quando, a
+        quale prezzo, verso quale indirizzo li hai trasferiti. Questi dati,
+        per legge, vengono conservati per anni e possono essere condivisi con
+        autorità fiscali e forze dell'ordine su richiesta motivata.
       </p>
 
       <p><strong>Vantaggi pratici:</strong></p>
@@ -667,6 +676,33 @@
         </li>
       </ul>
 
+      <h3>Un inciso sul "rapimento da chiave inglese"</h3>
+
+      <p>
+        L'espressione — dall'inglese <em>"$5 wrench attack"</em> — nasce da
+        una vignetta del fumettista xkcd. L'idea: la crittografia di Bitcoin
+        è inespugnabile, ma la <strong>persona</strong> che detiene le chiavi
+        no. Nella vignetta, un aggressore rinuncia a violare la cifratura e
+        usa direttamente una chiave inglese sul proprietario finché non
+        consegna il seed.
+      </p>
+
+      <p>
+        Tradotto in casi reali: aggressioni in casa, rapine mirate, sequestri
+        di familiari come leva. La cronaca degli ultimi anni ne riporta
+        episodi in vari paesi. Quasi sempre condividono un elemento: la
+        vittima era <strong>pubblicamente identificabile</strong> come
+        detentrice di grandi somme — a volte per proprie dichiarazioni sui
+        social, altre perché i suoi dati erano finiti in liste dopo un data
+        breach.
+      </p>
+
+      <p>
+        Non è allarmismo, è un rischio da tenere in proporzione a quanto si
+        possiede. Ma dimostra che <strong>la sicurezza di Bitcoin non è solo
+        un tema tecnico</strong>.
+      </p>
+
       <h2>Il canale peer-to-peer</h2>
 
       <p>
@@ -684,6 +720,24 @@
         piccoli su Lightning Network — anche tramite protocolli aperti,
         non-custodial e senza KYC — altri consentono anche cifre grandi. Si
         tratta di software e protocolli reali, in uso quotidianamente.
+      </p>
+
+      <h3>Come funziona uno scambio P2P, in breve</h3>
+
+      <ol>
+        <li>Il venditore pubblica un annuncio con importo, prezzo e metodo di pagamento.</li>
+        <li>Il compratore apre la trattativa dentro il sistema (chat tracciata).</li>
+        <li>Il servizio <strong>blocca in escrow multi-firma</strong> i Bitcoin del venditore: nessuno dei due può muoverli da solo.</li>
+        <li>Il compratore invia il pagamento all'IBAN indicato.</li>
+        <li>Il venditore verifica e conferma nel sistema.</li>
+        <li>L'escrow rilascia i Bitcoin al compratore.</li>
+        <li>Le parti si valutano a vicenda: la reputazione conta per gli scambi futuri.</li>
+      </ol>
+
+      <p>
+        Se qualcosa non torna, chiunque può <strong>aprire una disputa</strong>:
+        un moderatore esamina chat e movimenti e decide come sbloccare i
+        fondi. Con un servizio serio, il rischio di truffe dirette è basso.
       </p>
 
       <p><strong>Vantaggi pratici:</strong></p>
@@ -719,6 +773,32 @@
         </li>
       </ul>
 
+      <h3>Le varianti del P2P</h3>
+
+      <p>Ne esistono tre "sapori":</p>
+
+      <ul>
+        <li><strong>P2P on-chain classico</strong> — Bitcoin sulla blockchain principale, adatto a importi medi e grandi, escrow multi-firma 2-di-3.</li>
+        <li><strong>P2P su Lightning Network</strong> — importi piccoli o medi, scambio quasi istantaneo, commissioni di rete trascurabili.</li>
+        <li><strong>P2P di persona (in contanti)</strong> — la forma più antica e privata: incontro fisico, contante e transazione dallo smartphone. Adatto solo a piccoli importi e in luogo pubblico.</li>
+      </ul>
+
+      <p>
+        Un dettaglio importante: una piattaforma che fa solo da
+        <strong>garante tecnico non-custodial</strong> non è un CASP soggetto
+        a KYC. La differenza chiave è chi tiene i fondi.
+      </p>
+
+      <h3>Perché il P2P costa di più (e a volte di meno)</h3>
+
+      <p>
+        Il "premio privacy" del 5% circa è il prezzo naturale di un mercato
+        più piccolo e meno liquido. Ma attenzione al rovescio: se tu sei
+        <strong>il venditore</strong>, quel 5% lavora a tuo favore. Chi vende
+        in P2P spesso spunta un prezzo <em>superiore</em> al mercato, mentre
+        su un exchange di solito perde qualcosa in commissioni e spread.
+      </p>
+
       <h2>Vantaggi e svantaggi a confronto</h2>
 
       <figure class="source">
@@ -740,6 +820,28 @@
         <li><strong>Preferisci controparti con storico e reputazione</strong>, anche pagando qualcosa in più.</li>
       </ul>
 
+      <h2>Un esempio di truffa indiretta</h2>
+
+      <p>
+        Mario vende 500 euro di BTC in P2P. Luigi paga regolarmente. Mario
+        rilascia i Bitcoin. Tutto ok.
+      </p>
+
+      <p>
+        Il giorno dopo, però, sul conto di Mario arrivano <strong>altri 500
+        euro</strong> da uno sconosciuto — "Andrea" — con causale "Acconto
+        Vespa Piaggio". Passano tre giorni e Andrea, che non vede arrivare
+        nessuna Vespa, denuncia il proprietario dell'IBAN: Mario.
+      </p>
+
+      <p>
+        Cos'è successo? Luigi (o chi era dietro quel nome) ha usato l'IBAN di
+        Mario come cassetta postale: ha pubblicato un finto annuncio di Vespa
+        indicando l'IBAN di Mario. Il profitto della truffa è finito sul conto
+        di Mario, che si trova con soldi non richiesti e una denuncia in
+        arrivo. Ecco perché sapere cosa fare è fondamentale.
+      </p>
+
       <h2>Se qualcosa va storto — cosa fare</h2>
 
       <p>
@@ -760,6 +862,50 @@
       <p>
         Non è una procedura piacevole, ma è la differenza fra un problema che
         si risolve e un problema che si trascina.
+      </p>
+
+      <h3>Un consiglio pratico importante</h3>
+
+      <p>
+        Se ricevi soldi che non riconosci, <strong>non restituirli con un tuo
+        bonifico "spontaneo"</strong>. Sembra gentile, ma dal punto di vista
+        della banca è esattamente ciò che farebbe un truffatore per ripulire i
+        movimenti. Il canale corretto è lo <strong>storno bancario</strong> su
+        richiesta formale: la tua banca contatta quella dell'ordinante, e i
+        soldi tornano indietro dai canali ufficiali. Se il conto viene
+        bloccato durante l'accertamento, si sblocca quando la documentazione
+        dimostra che sei parte lesa.
+      </p>
+
+      <h2>Scenari d'uso: qual è più adatto a te?</h2>
+
+      <ul>
+        <li><strong>Il curioso alle prime armi.</strong> Cento o duecento euro per imparare come funziona un wallet: il KYC è la scelta più sensata, e l'esposizione dei dati resta minima perché le somme sono piccole.</li>
+        <li><strong>L'accumulatore da piano mensile (DCA).</strong> La comodità del KYC ha un peso enorme. Molti scelgono un ibrido: DCA su exchange KYC per la routine, P2P per le somme più consistenti.</li>
+        <li><strong>Il possessore di somme significative.</strong> Qui il tema privacy cambia natura. Molti tengono una parte del portafoglio via KYC (documentata al fisco) e una parte via P2P (comunque dichiarata).</li>
+        <li><strong>Chi vuole vendere.</strong> Il P2P può <em>farti guadagnare</em> qualcosa in più rispetto al mercato.</li>
+        <li><strong>Chi vive o si sposta all'estero.</strong> Le regole cambiano da paese a paese; discutine con un commercialista <em>prima</em>, non dopo.</li>
+      </ul>
+
+      <h2>Obiezioni comuni</h2>
+
+      <p>
+        <strong>"Il P2P è illegale."</strong> Falso. Vendere e comprare
+        Bitcoin tra privati non è vietato. È regolamentata la <strong>fornitura
+        commerciale</strong> di servizi di scambio (i CASP).
+      </p>
+
+      <p>
+        <strong>"Se compro in P2P non devo dichiarare niente."</strong> Falso,
+        e pericoloso. Il canale d'acquisto non modifica gli obblighi verso il
+        fisco. È come acquistare oro fisico da un privato: non ti solleva
+        dalla dichiarazione.
+      </p>
+
+      <p>
+        <strong>"Come dimostro di averli comprati onestamente?"</strong> Nel
+        P2P conserva sempre: chat dentro il servizio, estratti conto,
+        screenshot degli annunci, ricevute di escrow.
       </p>
 
       <h2>Fisco e regole: la parte che dipende da te</h2>
@@ -791,12 +937,58 @@
         entrate locale.
       </p>
 
+      <h2>Il tema di fondo: dati contro comodità</h2>
+
+      <p>
+        Riassumendo tutto in una frase: <strong>la scelta fra KYC e P2P è,
+        sotto la superficie tecnica, una scelta fra comodità immediata e
+        controllo dei propri dati nel lungo periodo.</strong>
+      </p>
+
+      <p>
+        Con il KYC paghi poco <em>oggi</em> in commissioni, e paghi
+        potenzialmente tanto <em>domani</em> in esposizione dei tuoi dati. Per
+        molti quel "domani" non arriverà mai. Per altri sì, e non lo scoprono
+        finché non accade.
+      </p>
+
+      <p>
+        Con il P2P il costo è visibile oggi (tempo, commissioni,
+        apprendimento), ma la tua identità non finisce in nessun database
+        aziendale. Nessuna delle due scelte è "giusta" in assoluto: chi capisce
+        entrambe le strade prende decisioni migliori di chi ne conosce solo
+        una.
+      </p>
+
       <h2>In sintesi</h2>
 
       <ul>
         <li><strong>Il canale centralizzato con KYC</strong> è semplice, veloce, economico in commissioni — ma centralizza dati che, se rubati, ti espongono anche fuori dal mondo digitale.</li>
         <li><strong>Il canale peer-to-peer</strong> è più impegnativo, un po' più caro, richiede attenzione a truffe indirette — ma riduce drasticamente la quantità di informazioni sensibili collegabili al tuo nome.</li>
         <li>Non esiste una risposta giusta per tutti. Dipende da quanto compri, con quale frequenza, in quale paese vivi, e quanto tempo sei disposto a dedicare all'apprendimento.</li>
+        <li><strong>In ogni caso, gli obblighi fiscali del tuo paese vanno rispettati.</strong> Il modo in cui compri non è un modo per aggirarli.</li>
+        <li>Molti utenti esperti usano <strong>entrambi i canali insieme</strong>, dosandoli in base all'importo, alla frequenza e alle proprie priorità. È una scelta lecita e sensata.</li>
+      </ul>
+
+      <h2>Glossario — i termini tecnici usati in questo articolo</h2>
+
+      <p>
+        <em>Piccolo dizionario per chi incontra questi termini per la prima
+        volta. Ogni voce è spiegata in modo essenziale, senza gergo.</em>
+      </p>
+
+      <ul>
+        <li><strong>KYC</strong> — <em>Know Your Customer</em>. L'obbligo, per una piattaforma autorizzata, di identificare chi la usa (documento, selfie, indirizzo). Tutti i tuoi dati vengono conservati dalla piattaforma.</li>
+        <li><strong>Peer-to-peer (P2P)</strong> — scambio direttamente fra due persone, senza intermediario obbligatorio. Spesso avviene tramite un servizio che fa solo da garante tecnico.</li>
+        <li><strong>Escrow (multi-firma)</strong> — un "deposito di garanzia": i Bitcoin del venditore sono bloccati in un contratto che li rilascia solo quando entrambe le parti confermano, o interviene un garante in caso di disputa. Multi-firma = servono più firme per muovere quei fondi.</li>
+        <li><strong>CASP</strong> — <em>Crypto-Asset Service Provider</em>. Nel regolamento MiCA, l'impresa autorizzata a offrire servizi crypto. Soggetta a licenza e obbligata al KYC.</li>
+        <li><strong>MiCA</strong> — <em>Markets in Crypto-Assets Regulation</em>. Il regolamento europeo sulle criptovalute, pienamente applicabile dal 30 dicembre 2024 (transitorio fino al 1&deg; luglio 2026 nei singoli stati).</li>
+        <li><strong>Data breach</strong> — violazione di dati: informazioni custodite da un'azienda finiscono online o in mano a criminali.</li>
+        <li><strong>Rapimento da chiave inglese</strong> (<em>$5 wrench attack</em>) — espressione da una vignetta di xkcd. Attacco fisico al possessore per fargli consegnare le chiavi: la crittografia è inespugnabile, la persona no. Chi è pubblicamente associato a grandi quantità di Bitcoin diventa un bersaglio identificabile.</li>
+        <li><strong>Seed</strong> — la sequenza di 12 o 24 parole del wallet: chi la conosce controlla i Bitcoin. Va tenuta offline e mai fotografata.</li>
+        <li><strong>IBAN</strong> — il codice del tuo conto. Nel P2P va dato solo dopo l'apertura del contratto di escrow, mai negli annunci.</li>
+        <li><strong>Lightning Network</strong> — "seconda corsia" sopra Bitcoin: pagamenti quasi istantanei e commissioni minime.</li>
+        <li><strong>Denuncia contro ignoti</strong> — denuncia formale quando non si conosce il responsabile. Serve a documentare ufficialmente il fatto e a proteggersi da contestazioni successive.</li>
       </ul>
 
       <div class="footnote">
@@ -832,6 +1024,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- ================= FOOTER ================= -->
   <!-- Same structure as index.html, written directly in Italian. -->
