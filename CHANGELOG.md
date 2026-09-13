@@ -3,6 +3,53 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [41] — Blog index: cover thumbnails on each article card
+
+**Date:** 2026-09-13
+**Status:** Delivered and live (commit `c4a2606`, pushed to `main`)
+
+Client asked to show each article's own image on the right side of its card
+in the blog list (`blog.html`).
+
+- Each `.post-card article` is now a flex row: the existing text wrapped in a
+  new `.post-text` div on the left, and a `.post-thumb` `<img>` on the right
+  showing the article's own cover.
+- **7 of 9 articles have a cover; the 2 without an image were left as
+  full-width text on the client's explicit choice** (`blog-bitcoin-persi-dovere`
+  and `blog-cosa-succede-ai-tuoi-bitcoin`) — the layout degrades gracefully.
+- Thumbnail is a fixed **16:9 box** (`clamp(200px, 30%, 300px)` wide),
+  `object-fit: cover`, vertically centred. All covers are ~16:9 except
+  `articolo-x-sparkkitty.jpg` (portrait) which crops cleanly.
+- On mobile (≤760px) the row becomes `column-reverse`: cover on top at 16:9,
+  text below.
+- `.post-thumb` added to the theme-transition list (it has a themed border);
+  not to the box-shadow list (it sits inside the card that already carries the
+  shadow).
+
+**Two flexbox/grid min-size gotchas hit and fixed during build** (both caught
+in the browser, computed styles not screenshots):
+1. `min-width: 0` on `.post-thumb` — without it the flex default
+   `min-width:auto` = the image's intrinsic width (~1376px) ignored
+   `flex-basis` and blew the thumbnail up to full size.
+2. `min-width: 0` on `.post-card` — as a grid item its default
+   `min-width:auto` held it open at the flex row's min-content width (~2400px),
+   overflowing the page with a horizontal scrollbar.
+   Also: `aspect-ratio` + `height:auto` on the img override the presentational
+   `height` attribute (which otherwise forced a 768px-tall card).
+
+The `width`/`height` attributes on each thumbnail document the source ratio
+for the audit; CSS controls the rendered box.
+
+**alt="" on all 7 thumbnails is deliberate** and correct: each thumbnail sits
+inside a card that is one link whose `<h2>` already names the destination, so
+a non-empty alt would double-announce for screen-reader users. `tools/audit.py`
+flags these as 7 "alt vuoto" advisories — expected, non-blocking.
+
+**Verified** at 1200px and 375px in a fresh browser tab: no horizontal
+scroll; thumbnails render at 300×169 (desktop) / full-width 16:9 (mobile);
+the 2 image-less cards render as clean full-width text; light theme borders
+and card shadow correct; no console errors; audit clean (0 errors).
+
 ## [40] — Small wording revision in "Il tema di fondo"
 
 **Date:** 2026-09-12
