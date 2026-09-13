@@ -321,9 +321,37 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 30px 32px;
+      /* min-width:0 lets this grid item shrink to its track instead of being
+         held open at its min-content width by the flex row inside. */
+      min-width: 0;
       transition: border-color .15s ease, transform .15s ease;
     }
     .post-card:hover { border-color: var(--teal); transform: translateY(-2px); }
+    /* Each card is a flex row: text on the left, a cover thumbnail on the
+       right. The thumbnail is optional — cards without an image (a couple of
+       older articles) simply let .post-text span the full width. */
+    .post-card article { display: flex; gap: 30px; align-items: stretch; }
+    .post-text { flex: 1 1 auto; min-width: 0; }
+    /* Fills the card's full height as a panel on the right; object-fit: cover
+       crops each cover (all ~16:9 except one portrait) into the same box. */
+    .post-thumb {
+      flex: 0 0 clamp(200px, 30%, 300px);
+      /* min-width:0 defeats the flex default (min-width:auto = the image's
+         intrinsic width), which would otherwise blow the thumbnail up to full
+         size and ignore flex-basis. */
+      min-width: 0;
+      align-self: center;
+      /* Fixed 16:9 box, centred beside the text. aspect-ratio + height:auto
+         override the width/height HTML attributes (there only to document the
+         source ratio for the audit); object-fit:cover crops each cover — all
+         ~16:9 except one portrait — into the same shape. */
+      aspect-ratio: 16 / 9;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--ink-2);
+    }
     .post-card .meta {
       font-family: 'Space Mono', monospace; font-size: 12px;
       letter-spacing: 1px; color: var(--muted);
@@ -373,8 +401,14 @@
       .blog-head h1 { font-size: 34px; }
       .blog-head p.lede { font-size: 17px; }
       .posts { padding: 36px 0 52px; }
-      .post-card { padding: 24px 22px; }
+      .post-card { padding: 22px 20px; }
       .post-card h2 { font-size: 23px; }
+      /* Stack on narrow screens: cover on top (16:9), text below. */
+      .post-card article { flex-direction: column-reverse; gap: 18px; }
+      .post-thumb {
+        flex: none; width: 100%; align-self: auto;
+        aspect-ratio: 16 / 9; min-height: 0;
+      }
     }
 
     /* ---------- Theme toggle button ---------- */
@@ -399,7 +433,7 @@
        prefers-reduced-motion block above. Only the elements this page
        actually renders are listed; the article pages carry their own
        (longer) version of this rule for .callout/.rule/figure.source. */
-    body, header, .post-card {
+    body, header, .post-card, .post-thumb {
       transition: background-color .2s ease, color .2s ease, border-color .2s ease;
     }
 
@@ -522,161 +556,186 @@
 
       <a class="post-card" href="blog-comprare-bitcoin-kyc-p2p.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Guide &middot; Comprare Bitcoin</span>
             <span>12 settembre 2026</span>
             <span>14 min di lettura</span>
-          </div>
-          <h2>Comprare Bitcoin nel 2026: KYC o peer-to-peer?</h2>
-          <p>
+            </div>
+            <h2>Comprare Bitcoin nel 2026: KYC o peer-to-peer?</h2>
+            <p>
             Oggi restano sostanzialmente due strade per comprare Bitcoin: un
             exchange centralizzato con documento e selfie, o uno scambio
             diretto tra privati. Sono entrambe legali — la differenza vera è
             quali dati lasci in giro e quali rischi accetti.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/copertina-comprare-bitcoin-kyc-p2p.webp" width="1376" height="768" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
       <a class="post-card" href="blog-caso-liquid.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Eredità Bitcoin</span>
             <span>12 settembre 2026</span>
             <span>6 min di lettura</span>
-          </div>
-          <h2>Il caso Liquid: perché per l'eredità consigliamo BAL Protocol</h2>
-          <p>
+            </div>
+            <h2>Il caso Liquid: perché per l'eredità consigliamo BAL Protocol</h2>
+            <p>
             Dalla Liquid Network sono spariti circa 320 milioni di dollari in
             bitcoin, ma Bitcoin ha retto: si è rotto uno strato costruito sopra.
             Ecco perché per l'eredità consigliamo BAL Protocol — e perché
             abbiamo acceso il nostro Will-Executor.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/copertina-caso-liquid.webp" width="1600" height="900" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
       <a class="post-card" href="blog-password-electrum.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Sicurezza · Password</span>
             <span>23 agosto 2026</span>
             <span>7 min di lettura</span>
-          </div>
-          <h2>La password di Electrum: perché 8 caratteri non bastano</h2>
-          <p>
+            </div>
+            <h2>La password di Electrum: perché 8 caratteri non bastano</h2>
+            <p>
             Se qualcuno copia il file del tuo wallet, la password diventa una
             parte importante della tua sicurezza. Perché otto caratteri sono
             una soglia minima e non un buon obiettivo — con un grafico e
             qualche esempio per capirlo davvero.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/copertina-password-electrum.webp" width="1376" height="768" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
       <a class="post-card" href="blog-safe21-will-executor.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Eredità Bitcoin</span>
             <span>19 agosto 2026</span>
             <span>7 min di lettura</span>
-          </div>
-          <h2>SAFE21 diventa Will-Executor: perché abbiamo acceso un server per il protocollo BAL</h2>
-          <p>
+            </div>
+            <h2>SAFE21 diventa Will-Executor: perché abbiamo acceso un server per il protocollo BAL</h2>
+            <p>
             Crediamo così tanto in Bitcoin After Life da aver acceso il
             nostro Will-Executor e da averlo portato su Umbrel OS. Perché lo
             abbiamo fatto, perché ogni server in più conta — e perché
             potresti volerlo fare anche tu.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/infografica-safe21-will-executor.webp" width="2200" height="1228" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
 
       <a class="post-card" href="blog-bal-easy-heirs.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Eredità Bitcoin</span>
             <span>15 agosto 2026</span>
             <span>5 min di lettura</span>
-          </div>
-          <h2>BAL Easy Heirs: prepara l'eredità dei tuoi bitcoin senza mai andare online</h2>
-          <p>
+            </div>
+            <h2>BAL Easy Heirs: prepara l'eredità dei tuoi bitcoin senza mai andare online</h2>
+            <p>
             Hai deciso di lasciare i tuoi bitcoin in eredità, ma i tuoi eredi
             non hanno un wallet. Un plugin gratuito per Electrum crea i loro
             wallet e li mette su carta in modo sicuro — tutto offline, con i
             seed che non diventano mai un file — ed esporta la lista pronta
             per BAL.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/infografica-bal-easy-heirs.webp" width="1600" height="893" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
 
       <a class="post-card" href="blog-bitcoin-persi-dovere.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Sovranità</span>
             <span>15 agosto 2026</span>
             <span>6 min di lettura</span>
-          </div>
-          <h2>Perdere i propri bitcoin non è solo un danno personale</h2>
-          <p>
+            </div>
+            <h2>Perdere i propri bitcoin non è solo un danno personale</h2>
+            <p>
             I bitcoin persi sembrano un regalo a chi resta. Ma tra computer
             quantistici e wallet dormienti, non curare backup ed eredità è un
             rischio per tutti — non solo per te.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
         </article>
       </a>
 
       <a class="post-card" href="blog-cosa-succede-ai-tuoi-bitcoin.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Eredità Bitcoin</span>
             <span>15 agosto 2026</span>
             <span>6 min di lettura</span>
-          </div>
-          <h2>Cosa succede ai tuoi bitcoin quando non ci sei più?</h2>
-          <p>
+            </div>
+            <h2>Cosa succede ai tuoi bitcoin quando non ci sei più?</h2>
+            <p>
             La self-custody è tutto il senso di Bitcoin, ed è anche la ragione
             per cui milioni di BTC sono fermi per sempre: nessuno aveva le
             chiavi. Perché "lasciare istruzioni" non basta — e come Bitcoin
             stesso, con le transazioni time-lock, permette di risolvere il
             problema senza custodi.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
         </article>
       </a>
 
       <a class="post-card" href="blog-dadi-semplicita.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Buone pratiche · Seed phrase</span>
             <span>11 agosto 2026</span>
             <span>7 min di lettura</span>
-          </div>
-          <h2>Dadi o software? Una riflessione sul seed generato a mano</h2>
-          <p>
+            </div>
+            <h2>Dadi o software? Una riflessione sul seed generato a mano</h2>
+            <p>
             La moda del seed generato coi dadi: fatto perfettamente può
             funzionare, ma è più difficile di quanto sembri — e alla fine serve
             comunque un software fidato. Perché per la maggior parte delle
             persone la via più semplice è anche la più sicura.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/copertina-dadi-o-software.webp" width="1200" height="675" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
 
       <a class="post-card" href="blog-seed-mai-online.html">
         <article>
-          <div class="meta">
+          <div class="post-text">
+            <div class="meta">
             <span class="tag">Sicurezza · Seed phrase</span>
             <span>28 luglio 2026</span>
             <span>5 min di lettura</span>
-          </div>
-          <h2>Il tuo SEED non deve mai toccare internet</h2>
-          <p>
+            </div>
+            <h2>Il tuo SEED non deve mai toccare internet</h2>
+            <p>
             Un malware nascosto in app approvate da App Store e Google Play
             cercava le seed phrase nelle foto degli utenti. Perché il seed non
             deve mai diventare uno screenshot, e perché il furto può arrivare
             anni dopo l'errore.
-          </p>
-          <span class="more">Leggi l'articolo &rarr;</span>
+            </p>
+            <span class="more">Leggi l'articolo &rarr;</span>
+          </div>
+          <img class="post-thumb" src="images/articolo-x-sparkkitty.jpg" width="970" height="1285" alt="" loading="lazy" decoding="async" />
         </article>
       </a>
 
