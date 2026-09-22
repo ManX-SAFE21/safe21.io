@@ -3,6 +3,38 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [43] — Product renamed from "BAL Easy Heirs" to "Easy Heirs"
+
+**Date:** 2026-09-22
+**Status:** Delivered and live (commit `f767f31`, pushed to `main`)
+
+Client asked for the plugin to be called simply **Easy Heirs** everywhere, on
+the site and in the plugin's own repository. Only the product name changed:
+every reference to **BAL** as the partner protocol ("la lista eredi per BAL",
+"BAL — Bitcoin After Life") was left untouched — 7 of them survive in the
+article, as intended.
+
+- **`blog-bal-easy-heirs.html`** (11 replacements) — `<title>`, `<h1>`,
+  `og:title`, JSON-LD `headline`, the body copy, the image `alt` and the file
+  header comments.
+- **`blog.html`** (2) — the card heading and the matching JSON-LD entry.
+
+Three things deliberately NOT renamed, agreed with the client beforehand:
+
+- **The article URL** stays `blog-bal-easy-heirs.html`. It is already
+  published and indexed; renaming it would break the live link, the canonical
+  and the sitemap entry for no reader-visible gain.
+- **The plugin's package folder** stays `bal_easy_heirs/`. It is the
+  identifier Electrum keys the plugin by: renaming it would force everyone
+  who already installed it to remove and re-add the plugin.
+- **The infographic itself** still reads "BAL Easy Heirs" — the client chose
+  to keep the image as it is. Its `alt` was updated anyway, so the article
+  text stays consistent for screen readers.
+
+Verified: `<title>`, `<h1>`, `og:title` and JSON-LD headline all match; the
+index card and its JSON-LD entry match each other; zero "BAL Easy" left on
+either page; audit clean.
+
 ## [42] — Extract the blog's shared CSS and JS into two files
 
 **Date:** 2026-09-22
