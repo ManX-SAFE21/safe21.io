@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [43] — Product renamed from "BAL Easy Heirs" to "Easy Heirs"
 
 **Date:** 2026-09-22
-**Status:** Delivered and live (commit `f767f31`, pushed to `main`)
+**Status:** Delivered and live (commit `d3b8b4c`, pushed to `main`)
 
 Client asked for the plugin to be called simply **Easy Heirs** everywhere, on
 the site and in the plugin's own repository. Only the product name changed:
