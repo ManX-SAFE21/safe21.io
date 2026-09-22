@@ -84,7 +84,16 @@ def unescape_basic(s):
 
 
 def style_of(src):
-    """The page's <style> block with comments stripped."""
+    """The CSS that applies to a page, with comments stripped.
+
+    Since CHANGELOG #42 the blog pages carry no <style> of their own: they load
+    the shared blog.css. Pages that still inline their CSS (index.html) are read
+    from their <style> block as before.
+    """
+    if re.search(r'<link[^>]+href="blog\.css"', src):
+        shared = ROOT / 'blog.css'
+        if shared.exists():
+            return re.sub(r'/\*.*?\*/', '', shared.read_text(encoding='utf-8'), flags=re.S)
     m = re.search(r'<style>(.*?)</style>', src, re.S)
     return re.sub(r'/\*.*?\*/', '', m.group(1), flags=re.S) if m else ''
 
@@ -253,7 +262,7 @@ def check_structure(page, src):
     if len(h1s) != 1:
         err(page, f'servono esattamente 1 <h1>, trovati {len(h1s)}')
 
-    art = re.search(r'<article class="article-body">(.*?)</article>', src, re.S)
+    art = re.search(r'<article class="article-body[^"]*">(.*?)</article>', src, re.S)
     if art:
         prev = 2
         for m in re.finditer(r'<h([2-6])[^>]*>', art.group(1)):
@@ -304,7 +313,7 @@ def check_meta(page, src):
                           f'diversa da JSON-LD datePublished '
                           f'{meta[0]}/{meta[1]}/{meta[2]}')
 
-    art = re.search(r'<article class="article-body">(.*?)</article>', src, re.S)
+    art = re.search(r'<article class="article-body[^"]*">(.*?)</article>', src, re.S)
     rt = re.search(r'(\d+)\s*min di lettura', src)
     if art and rt:
         words = len(strip_tags(art.group(1)).split())
@@ -464,11 +473,13 @@ def check_site_files(pages):
 
 # --------------------------------------------------------------------------
 def css_matrix():
-    """Regenerate the per-page CSS table used in CONTRIBUTING.md.
+    """Report which style blocks the shared stylesheet provides.
 
-    The <style> blocks diverged when unused CSS was trimmed page by page, so a
-    template picked at random may be missing what a new article needs. Printed
-    as Markdown, ready to paste over the table in the guide.
+    Until CHANGELOG #42 every page inlined its own <style> and they had
+    diverged, so this printed a per-page table to help pick a template. Now all
+    blog pages load the same blog.css, so the question "does my template have
+    this block?" no longer arises: the table is kept only to confirm that
+    blog.css really does provide every block the guide mentions.
     """
     feats = [('.callout', '`.callout`'), ('figure.source', '`figure.source`'),
              ('.table-wrap', '`.table-wrap`'), ('a.inline', '`a.inline`'),

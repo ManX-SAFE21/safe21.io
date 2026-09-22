@@ -10,13 +10,24 @@ Questo file spiega invece *come* si fa.
 
 ## 1. Com'è fatto il sito
 
-Pagine **HTML statiche e autoconsistenti**: HTML, CSS e JavaScript stanno tutti
-dentro ogni singolo file. Non c'è nessun framework, nessun build step, nessun
-bundler, nessuna dipendenza da installare.
+Pagine **HTML statiche**: nessun framework, nessun build step, nessun bundler,
+nessuna dipendenza da installare.
 
-Questo ha una conseguenza pratica importante: **ogni pagina porta la propria
-copia del CSS**. Non esiste un foglio di stile condiviso. Se modifichi lo stile
-di una pagina, le altre non cambiano.
+Dal CHANGELOG #42 le pagine del blog **non sono più autoconsistenti**: caricano
+due file condivisi, **`blog.css`** (tutto lo stile) e **`blog.js`** (menu mobile,
+tema chiaro/scuro, lightbox). Prima ogni pagina ne portava la propria copia:
+erano ~525 righe identiche ripetute dieci volte.
+
+Conseguenza pratica, opposta a quella di prima: **se modifichi `blog.css`
+cambiano tutte le pagine del blog insieme.** Comodo per una modifica voluta,
+pericoloso per una distratta — controlla sempre più di una pagina.
+
+Restano invece copiati in ogni pagina, di proposito: **header e footer**
+(estrarli richiederebbe un build step o l'iniezione via JavaScript, che
+penalizza SEO e lettori senza JS) e il **piccolo script anti-flash** nel
+`<head>`, che deve girare prima del primo rendering.
+
+`index.html` (la homepage) è a parte e resta interamente autoconsistente.
 
 ```
 index.html                     homepage (inglese, con switcher EN/IT a runtime)
@@ -51,9 +62,11 @@ sito non dà errori — semplicemente l'articolo non compare, o non viene indici
 
 ### Passo 1 — Crea la pagina
 
-Duplica **`blog-password-electrum.html`**. È il template migliore perché è
-l'unica pagina che contiene *tutti* i blocchi CSS (vedi la tabella al § 3).
-Partire da lì significa non doverne aggiungere nessuno.
+Duplica una pagina **recente** (per esempio `blog-caso-liquid.html`): collega
+già `blog.css` e `blog.js` invece di incorporarli. Tutti i blocchi di stile sono
+disponibili su ogni pagina, quindi la scelta del modello non è più vincolante
+come prima — conta solo che abbia la struttura che ti serve (con o senza
+immagine).
 
 Poi aggiorna, nel `<head>`:
 
@@ -99,26 +112,22 @@ hai pushato, imposta lo stato a `Delivered and live (commit <hash>, pushed to ma
 
 ---
 
-## 3. Quale CSS c'è in quale pagina
+## 3. I blocchi di stile disponibili
 
-**Dall'audit #30 i `<style>` delle pagine sono volutamente divergenti**: da ogni
-pagina è stato tolto il CSS che non usava. Quindi se copi una pagina come
-modello, il blocco che ti serve potrebbe non esserci.
+Fino al CHANGELOG #41 ogni pagina aveva il proprio `<style>` e i blocchi erano
+stati sfoltiti pagina per pagina: bisognava controllare in una tabella se il
+modello che copiavi conteneva quello che ti serviva.
 
-| Pagina | `.callout` | `figure.source` | `.table-wrap` | `a.inline` | `.footnote` | lightbox | `code` |
-|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| `blog-password-electrum` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `blog-safe21-will-executor` | ✅ | ✅ | — | ✅ | ✅ | ✅ | — |
-| `blog-bal-easy-heirs` | ✅ | ✅ | — | ✅ | ✅ | ✅ | — |
-| `blog-dadi-semplicita` | ✅ | ✅ | — | ✅ | — | ✅ | — |
-| `blog-seed-mai-online` | ✅ | ✅ | — | — | — | ✅ | — |
-| `blog-cosa-succede-ai-tuoi-bitcoin` | ✅ | — | — | ✅ | ✅ | — | — |
-| `blog-bitcoin-persi-dovere` | ✅ | — | — | ✅ | ✅ | — | — |
+**Da #42 non serve più:** lo stile sta tutto in `blog.css`, che ogni pagina
+carica per intero. Tutti i blocchi qui sotto sono quindi sempre disponibili.
+Per verificarlo:
 
-> Non aggiornarla a mano: rigenerala e incolla l'output.
-> ```bash
-> python tools/audit.py --css-matrix
-> ```
+```bash
+python tools/audit.py --css-matrix
+```
+
+Se aggiungi uno stile nuovo, va in `blog.css` — **mai** in un `<style>` dentro
+la pagina, altrimenti riparte la divergenza che abbiamo appena eliminato.
 
 A cosa servono:
 
@@ -193,9 +202,8 @@ L'`alt` è obbligatorio e deve **descrivere** l'immagine, non solo nominarla:
 
 ## 5. Trappole note
 
-**Le media query vanno DOPO le regole base.** Il CSS è tutto in un unico
-`<style>` e molte regole hanno la stessa specificità: a parità di specificità
-vince l'ultima scritta. Una `@media` messa sopra la regola base è CSS morto e
+**Le media query vanno DOPO le regole base.** In `blog.css` molte regole hanno
+la stessa specificità: a parità di specificità vince l'ultima scritta. Una `@media` messa sopra la regola base è CSS morto e
 non dà nessun errore.
 
 ```css
@@ -210,7 +218,7 @@ non dà nessun errore.
 `--card-shadow` vale `none`, quindi un'ombra sbagliata è invisibile. **Controlla
 sempre anche il tema chiaro** prima di pubblicare.
 
-**Attenzione alle due righe finali del `<style>`.** Sono le regole che elencano
+**Attenzione alle due righe in fondo a `blog.css`.** Sono le regole che elencano
 quali elementi hanno la transizione di tema e quali l'ombra:
 
 ```css
@@ -219,9 +227,8 @@ body, header, .callout, figure.source, .table-wrap { transition: ... }
 ```
 
 **Regola:** ogni pannello — `.callout`, `figure.source`, `.table-wrap` e le
-classi specifiche di una pagina come `.checklist` o `.rule` — va in *entrambi*
-gli elenchi. È stato uniformato così su tutte le pagine (CHANGELOG #33); prima
-il `.callout` aveva l'ombra solo su 5 pagine su 7.
+classi specifiche come `.checklist` o `.rule` — va in *entrambi* gli elenchi.
+Uniformato in #33 e ora dichiarato una volta sola in `blog.css` (#42).
 
 Aggiungere o togliere un selettore qui cambia la resa in tema chiaro **senza
 che si veda nulla in tema scuro**, perché lì `--card-shadow` vale `none`. Se ci
