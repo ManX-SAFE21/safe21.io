@@ -639,6 +639,53 @@ label communicates the purpose rather than just naming the platform.
   pages are Italian-static, so the label is written directly.
 - No new files; footer stays consistent site-wide.
 
+## [28] — Extract the blog's shared CSS and JS into two files
+
+**Date:** 2026-09-22
+**Status:** Delivered locally (pending review — not yet committed/pushed)
+
+Client asked whether the code could be simplified and made shorter. Measured
+first: the Electrum plugin had almost no duplication worth removing (~2% of
+3,765 lines), but the blog carried ~525 identical lines in every page — the
+same stylesheet, header, footer and scripts copied ten times over.
+
+Extracted the two parts that can be shared without a build step:
+
+- **New `blog.css`** (599 lines) — the union of every blog page's inline
+  stylesheet. Built by comparing all ten pages rule by rule: 148 distinct
+  selectors, of which only 6 differed. An automated coverage check confirmed
+  no declaration was lost.
+- **New `blog.js`** (150 lines) — mobile menu, theme switch and image
+  lightbox. Each is guarded, so pages without a figure simply skip the
+  lightbox.
+- **All 10 blog pages** now load those two files instead of inlining them.
+  The pre-paint theme script stays inline in every `<head>`: moving it out
+  would reintroduce the theme flash on load.
+- **Header and footer stay duplicated** — deduplicating them would need a
+  build step or client-side injection, and injecting them hurts SEO and
+  no-JS readers. That trade-off is deliberate.
+
+Per-article differences preserved with modifier classes rather than being
+flattened: `figure.source.inline` (mid-article figure margins) and
+`.article-body.dense` (tighter lists), both applied to `blog-dadi-semplicita`
+and `blog-seed-mai-online`.
+
+Three deliberate harmonizations, each verified as an improvement rather than
+a regression: callouts now carry the light-theme card shadow on every page
+(previously 3 of 9); `.callout p:last-child` drops its trailing margin on two
+more pages; and `<code>` renders as a monospace chip on
+`blog-bitcoin-persi-dovere` (the rule previously lived only in the password
+article).
+
+Verified by loading each page's pre-change version from git in an iframe
+beside the new one at identical width and diffing the computed styles of
+every rendered element across 34 properties: 7 of 10 pages matched exactly,
+and the only differences on the other 3 were the three harmonizations above.
+All 10 pages: blog.css applied, no inline `<style>` left, menu/theme/lightbox
+working, zero JS errors.
+
+Net effect: the blog went from 10,303 lines to 6,162 (-4,141).
+
 ## [27] — Replace BAL Easy Heirs infographic with a lighter version
 
 **Date:** 2026-08-15
