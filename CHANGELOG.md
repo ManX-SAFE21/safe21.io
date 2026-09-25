@@ -3,6 +3,29 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [47] — Problem-card scenes keep moving under reduced motion
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `7102e21`, pushed to `main`)
+
+Follow-up to the open item in #46. The client's phone reports the OS
+"reduce motion" preference — confirmed with a private diagnostic page opened
+on the phone ("Causa trovata: il telefono chiede di ridurre il movimento");
+every CSS technique the scenes use ran fine there.
+
+At the client's explicit request, after being told the trade-off (people who
+turn that setting on often do so because motion makes them unwell), the two
+small Problem-card scenes are exempt: their `animation` / `animation-delay`
+declarations are now `!important`, which outranks the global
+`* { animation: none !important }` in the reduced-motion block, because a
+class selector beats `*` among `!important` rules. The exemption is limited
+to those two boxes — hero dial, icon draws, network and contact rings still
+stop under reduced motion. Documented in a comment above the rules.
+
+**Verified** with Chrome's `--force-prefers-reduced-motion` at two moments:
+the only pixels that change are the two scenes' band; hero and the rest stay
+still. Audit clean.
+
 ## [46] — Homepage: Italian title on one line; original keyhole back on mobile
 
 **Date:** 2026-09-25
