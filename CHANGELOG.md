@@ -3,6 +3,44 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [46] — Homepage: Italian title on one line; original keyhole back on mobile
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `95b3190`, pushed to `main`)
+
+Two client requests after reviewing #44/#45 on a phone:
+
+- **"Possiedi i tuoi Bitcoin." on one line.** At 58px the line needed 610px
+  against a 559px text column. Desktop: the hero grid is now 60/40 (was
+  54/46) and the title caps at 56px — applies to both languages, so
+  switching language never shifts the layout. Below 900px an Italian-only
+  rule (`html[lang="it"] .hero h1`, the i18n script already sets `lang`)
+  scales the title at `clamp(25px, 7.6vw, 56px)`; English keeps its original
+  34px mobile size.
+- **Original keyhole watermark back on mobile** ("come nel tema originale"),
+  replacing #45's empty hero: markup and CSS restored byte-for-byte from
+  before #44 (6% opacity, 520px, `right: -60px`), now `display: none` above
+  900px, where the vault dial takes its place.
+
+**Verified** (iframes at each width, both languages): Italian title on one
+line at 1280, 1024, 910, 768, 390, 360 and 320px; English unchanged (3 lines
+down to 360px; 4 at 320px, as before); watermark only below 900px, dial only
+above; audit clean.
+
+**Also checked, not changed:**
+
+- *Problem-card animations on mobile* (client reports them not moving on
+  the phone): at mobile widths they run — the computed keyframe values
+  advance as designed — and no rule in the page depends on viewport width.
+  The one thing that stops them is the OS "reduce motion" preference (iOS
+  "Riduci movimento", Android "Rimuovi animazioni", some battery savers),
+  which the site honours on purpose. Asked the client to check the phone's
+  setting before deciding anything.
+- *Pre-existing header overflow between 761 and ~850px* (iPad portrait):
+  inline nav + EN/IT switch + "Contact" button don't fit, 14-92px of
+  sideways scroll depending on width and language. Present before #44;
+  flagged to the client, not fixed here.
+
 ## [45] — Homepage: vault dial hidden on mobile
 
 **Date:** 2026-09-25
