@@ -3,6 +3,57 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [44] — Homepage: animated inline-SVG graphics
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `997c4ec`, pushed to `main`)
+
+Client asked for better, animated graphics on the homepage — SVG only,
+keeping the current style — first as a preview only. After reviewing the
+preview (built as a separate copy, repo untouched) they approved publishing.
+No copy changed: every visible text and every `data-i18n` key is as before.
+
+- **Hero** is now two columns: the text, plus an animated "vault dial" in
+  place of the old 6%-opacity keyhole watermark (whose CSS was removed as
+  dead). The dial: 84 minor + 21 major ticks, a slowly counter-rotating ring
+  of text (NON-CUSTODIAL · OPEN SOURCE · SELF-CUSTODY — terms used as-is in
+  both languages, so the EN/IT switch needs no dictionary entry), five
+  executor nodes lighting up in turn, an orange Bitcoin on orbit (counter-
+  rotated so the glyph stays upright), a scanner arc, and the logo's keyhole
+  drawing itself on load. Hero text fades in in sequence; a faint masked dot
+  grid sits behind. Below 900px the dial moves under the text at ~300px.
+- **Problem cards** each gain an illustrated, looping header: *Lose the
+  keys* — the 12 seed words go out one by one, the key drops, the coin dims;
+  *If something happens to you* — the coin enters a time-lock hourglass, the
+  sand runs, then it comes out split between two heirs; the hourglass flips
+  at the end, which makes the loop seamless (a flipped hourglass looks like
+  a fresh one).
+- **Service and "Why" icons** sit in tinted tiles (teal; BAL blue; Bitcoin
+  orange) and redraw their strokes on card hover / on scroll-in
+  (`pathLength="1"` added to every icon shape for a uniform dash trick).
+  Service cards gain a soft coloured hover shadow.
+- **"Why SAFE21"** gets a faint network of nodes with pulses behind the
+  heading, masked to the top-right corner so no line runs behind body text;
+  hidden below 900px.
+- **Contact**: signal rings emanate from the "Email SAFE21" button (anchored
+  to the button, not the section centre, which cut through the heading).
+
+**Motion and accessibility.** CSS animations only — no SMIL — so the
+existing `prefers-reduced-motion` rule switches every one of them off; each
+animated element's resting state is its finished state (keyhole drawn, seed
+words shown), so with motion off the artwork is complete and static. All
+graphics are `aria-hidden`. Transforms/opacity/dash offsets only.
+
+Pre-existing, not changed: `.reveal`'s transition rule (later in the
+stylesheet) overrides `.card`'s, so card hover border/shadow changes are
+instant rather than eased — same as before this change.
+
+**Verified** in the browser at 1280px and 375px: no horizontal scroll; 58
+animations running; EN→IT switch translates hero, trust strip and the CTA
+(still inside its ring wrapper); no console errors. `tools/audit.py`: 0
+errors, and the homepage's only advisory (meta description length) is the
+same one as before.
+
 ## [43] — Product renamed from "BAL Easy Heirs" to "Easy Heirs"
 
 **Date:** 2026-09-22
