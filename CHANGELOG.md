@@ -3,6 +3,40 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [50] — Homepage: still first scene, borderless service cards on mobile, new closing copy
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `2e62d82`, pushed to `main`)
+
+Three client requests:
+
+- **"Perse le chiavi, persi i bitcoin" becomes a still image** on desktop
+  and mobile. Its rules (`.seed-words .w`, `.lost-key`, `.lost-coin`),
+  keyframes (`wordLoss`, `keyLoss`, `coinLoss`) and the matching classes /
+  `--i` indices in the markup are removed rather than left dead. Card 2
+  ("Se ti succede qualcosa") keeps its play-once animation from #49.
+- **Service cards without border on mobile** (<=760px, the site's content
+  breakpoint): `#services .card { border: 0; }`. Zeroing the width also
+  neutralises the hover colours and the closing card's inline
+  `border-style: dashed`. The cards keep their panel background, so they
+  still read as separate blocks; the closing card, which has a transparent
+  background, becomes a plain closing paragraph.
+- **Closing card copy rewritten for privacy**: it no longer asks what the
+  visitor holds, it invites them to say what worries them and states they
+  don't need to say how much they hold. About twice the previous length.
+  - IT: "Raccontaci cosa ti preoccupa, dalla paura di perdere l’accesso al
+    futuro della tua famiglia. Non serve dirci quanto possiedi: ti
+    indichiamo noi il servizio giusto." (75 -> 163 characters)
+  - EN: "Tell us what worries you, from losing access to your family’s future.
+    You don’t need to say how much you hold: we’ll point you to the right
+    service." (81 -> 148 characters)
+  Italian uses the typographic apostrophe so the i18n string's single
+  quotes stay intact.
+
+**Verified** at 390, 700 and 1280px: service-card borders 0px on mobile,
+1px on desktop; card 1 has no animations, card 2 still has 5; the new text
+shows in both languages; no JS errors. Audit clean.
+
 ## [49] — Problem-card scenes play once, when scrolled into view
 
 **Date:** 2026-09-25
