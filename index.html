@@ -369,11 +369,11 @@
       -webkit-mask-image: radial-gradient(ellipse 50% 62% at 74% 50%, #000 5%, transparent 72%);
               mask-image: radial-gradient(ellipse 50% 62% at 74% 50%, #000 5%, transparent 72%);
     }
+    /* Below 900px the dial would stack under the hero text; the client
+       preferred it removed there (along with its dot-grid backdrop). */
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 12px; }
-      .hero-art svg { max-width: 320px; margin: 8px auto 0; }
-      .hero-dots { -webkit-mask-image: radial-gradient(ellipse 70% 40% at 50% 80%, #000 5%, transparent 75%);
-                           mask-image: radial-gradient(ellipse 70% 40% at 50% 80%, #000 5%, transparent 75%); }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-art, .hero-dots { display: none; }
     }
 
     /* Vault parts. SVG user units: the dial centre is (240,240). */
