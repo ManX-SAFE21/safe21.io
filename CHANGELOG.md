@@ -3,6 +3,29 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [48] — Homepage header: hamburger up to 860px (iPad portrait fix)
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `7ea0d12`, pushed to `main`)
+
+Pre-existing bug flagged in #46: between 761 and ~850px wide (iPad
+portrait: 768, 810, 820, 834px) the homepage header's inline links, EN/IT
+switch and "Contact" button didn't fit, so the page scrolled sideways by
+14-92px depending on width and language. Client asked to fix it.
+
+- The header now collapses to the hamburger menu up to **860px** (was
+  760px). Changed together so they stay in step: the nav-collapse media
+  query, the `min-width` rule that force-hides the drawer on desktop, the
+  compact-header query (which also moves "Contact" into the drawer), and the
+  script that closes the drawer when the window grows past the breakpoint.
+- Content-layout breakpoints at 760px (`.two-col`, `.why-grid`) unchanged.
+- Blog pages untouched: they already collapse at 1024px.
+
+**Verified** in both languages at 375, 700, 761, 768, 800, 820, 834, 860,
+861, 880, 900, 1024 and 1280px: no sideways scroll anywhere; hamburger up to
+860, inline links from 861. At 820px the drawer opens to its full 340px with
+all 6 links and closes on Escape. Audit clean.
+
 ## [47] — Problem-card scenes keep moving under reduced motion
 
 **Date:** 2026-09-25
