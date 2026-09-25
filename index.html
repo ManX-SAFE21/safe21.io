@@ -230,6 +230,16 @@
 
     /* ---------- Hero ---------- */
     .hero { position: relative; overflow: hidden; padding: 88px 0 84px; }
+    /* Signature: a large, faint keyhole watermark — the same motif as the logo,
+       meaning "the key stays yours". Decorative only, hidden from screen readers.
+       Shown only below 900px (see the hero media query): on wider screens the
+       animated vault dial takes its place. */
+    .hero-keyhole {
+      display: none;
+      position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+      width: 520px; height: 520px; opacity: .06; pointer-events: none;
+      color: var(--teal);
+    }
     .hero-glow {
       position: absolute; left: -10%; top: -20%;
       width: 620px; height: 620px; border-radius: 50%;
@@ -237,7 +247,9 @@
       pointer-events: none;
     }
     .hero-inner { position: relative; max-width: 760px; }
-    .hero h1 { font-size: clamp(34px, 4.8vw, 58px); font-weight: 700; letter-spacing: -0.5px; }
+    /* Sized so the longest line ("Possiedi i tuoi Bitcoin.", ~10.5em) stays on
+       one line: the text column is 60% of the hero grid on desktop. */
+    .hero h1 { font-size: clamp(34px, 4.6vw, 56px); font-weight: 700; letter-spacing: -0.5px; }
     .hero h1 .accent { color: var(--teal); }
     .hero p.lede { color: var(--muted); font-size: clamp(16px, 2.1vw, 19px); margin: 22px 0 32px; max-width: 620px; }
     .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -354,7 +366,7 @@
     /* ---------- Hero: two columns, text + vault illustration ---------- */
     .hero-grid {
       position: relative; display: grid; align-items: center; gap: 36px;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
     }
     .hero-inner > * { animation: heroIn .9s cubic-bezier(.2,.7,.2,1) both; }
     .hero-inner > :nth-child(2) { animation-delay: .08s; }
@@ -370,10 +382,16 @@
               mask-image: radial-gradient(ellipse 50% 62% at 74% 50%, #000 5%, transparent 72%);
     }
     /* Below 900px the dial would stack under the hero text; the client
-       preferred it removed there (along with its dot-grid backdrop). */
+       preferred the original faint keyhole watermark there instead (and no
+       dot-grid backdrop). */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; }
       .hero-art, .hero-dots { display: none; }
+      .hero-keyhole { display: block; }
+      /* Italian's longest line ("Possiedi i tuoi Bitcoin.") is ~10.7em wide:
+         scale it with the viewport so it stays on one line down to ~320px
+         phones. English keeps its original size. */
+      html[lang="it"] .hero h1 { font-size: clamp(25px, 7.6vw, 56px); }
     }
 
     /* Vault parts. SVG user units: the dial centre is (240,240). */
@@ -575,6 +593,11 @@
   <a id="top"></a>
   <section class="hero">
     <div class="hero-glow" aria-hidden="true"></div>
+    <!-- Decorative keyhole watermark (logo motif) — narrow screens only -->
+    <svg class="hero-keyhole" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="40" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M42 52 L58 52 L64 92 L36 92 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
     <svg class="hero-dots" aria-hidden="true">
       <defs><pattern id="hDots" width="26" height="26" patternUnits="userSpaceOnUse">
         <circle cx="1.5" cy="1.5" r="1.1" fill="#2DD4BF" fill-opacity=".22"/></pattern></defs>
