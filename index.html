@@ -150,7 +150,10 @@
        On small screens the inline .nav-links collapse. Previously there was
        no replacement, so mobile visitors lost all in-page navigation. The
        hamburger button below opens a drawer that repeats the same links plus
-       the Contact action. The button is hidden on desktop, shown <=760px. */
+       the Contact action. The button is hidden on desktop, shown <=860px.
+       (Was 760px; between 761 and ~850px the inline links + EN/IT switch
+       + Contact button did not fit and the page scrolled sideways —
+       iPad portrait. CHANGELOG #48.) */
     .menu-toggle {
       display: none;                 /* shown only in the mobile media query */
       flex: none; width: 42px; height: 42px;
@@ -186,13 +189,13 @@
     .mobile-menu a:last-child { border-bottom: 0; }
     .mobile-menu a:hover { color: var(--teal); }
 
-    @media (max-width: 760px) {
+    @media (max-width: 860px) {
       .nav-links { display: none; }  /* inline links hidden on small screens */
       .menu-toggle { display: inline-flex; }
       .mobile-menu { display: block; }
     }
     /* Above the breakpoint the drawer is always hidden, even if left "open". */
-    @media (min-width: 761px) {
+    @media (min-width: 861px) {
       .mobile-menu { display: none !important; }
     }
 
@@ -220,7 +223,7 @@
        button label to wrap onto two lines on narrow phones (~360-390px).
        Hiding the header copy on mobile removes the crowding; the action
        stays reachable via the drawer. */
-    @media (max-width: 760px) {
+    @media (max-width: 860px) {
       .nav { height: 64px; }
       .nav .logo svg { height: 42px; }
       .nav .cta { gap: 10px; }
@@ -1057,7 +1060,7 @@
       });
 
       // If the window is resized to desktop width, reset the state.
-      window.matchMedia('(min-width: 761px)').addEventListener('change', function (e) {
+      window.matchMedia('(min-width: 861px)').addEventListener('change', function (e) {
         if (e.matches) setOpen(false);
       });
     })();
