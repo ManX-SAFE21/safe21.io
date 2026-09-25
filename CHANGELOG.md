@@ -3,6 +3,32 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [49] — Problem-card scenes play once, when scrolled into view
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `0e4bc69`, pushed to `main`)
+
+Client asked for the two Problem-card animations to run only the first time
+the visitor reaches them after loading the page; to see them again, reload.
+
+- Animations changed from `infinite` to a single run with `fill-mode: both`,
+  and paused (`animation-play-state`) until the scene gets `.play`. Before
+  that, each scene shows its first frame.
+- A small IntersectionObserver adds `.play` the first time a scene is at
+  least 60% on screen, then stops watching it — so on a phone each card
+  starts when you reach it; on desktop they sit side by side and start
+  together. No IntersectionObserver: they play at load. Deliberately
+  independent of reduced motion, consistent with #47.
+- Final frames: card 1 ends with words, key and coin back in place; card 2's
+  coin keyframes now end holding the two coins at the heirs (they used to
+  fade out for the loop). The hourglass flip — only there to make the loop
+  seamless — was removed, along with its now-unused class.
+
+**Verified** with headless Chrome: with the scenes below the fold they get
+no `.play` after 8s; on screen they get it, also with reduced motion forced;
+frames at 14s and 20s are identical (the run has ended) and show the
+intended end state. Audit clean.
+
 ## [48] — Homepage header: hamburger up to 860px (iPad portrait fix)
 
 **Date:** 2026-09-25
