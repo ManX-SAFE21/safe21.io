@@ -284,6 +284,10 @@
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
     @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+    /* Mobile: the service cards drop their border (client's request, #50).
+       `border: 0` also zeroes the width, so the hover colours and the dashed
+       inline style of the closing card have nothing left to draw. */
+    @media (max-width: 760px) { #services .card { border: 0; } }
 
     .card {
       position: relative; display: flex; flex-direction: column;
@@ -421,13 +425,14 @@
     @keyframes nodeBlink{ 0%,100% { fill: #0A0F1C; } 50% { fill: #2DD4BF; } }
 
     /* ---------- Problem cards: illustrated, animated headers ----------
-       Client's choice (CHANGELOG #47): these two small scenes keep moving
+       Card 1 is a still image (client's choice, CHANGELOG #50); only card 2
+       is animated. Client's choice (CHANGELOG #47): that scene keeps moving
        even when the visitor's OS asks for reduced motion. Each animation is
        declared !important so it outranks the global
        `* { animation: none !important }` in the reduced-motion block (a class
        beats `*` among !important rules). Everything else on the page still
        stops under reduced motion.
-       Play-once (CHANGELOG #49): each scene waits on its first frame and
+       Play-once (CHANGELOG #49): the scene waits on its first frame and
        runs a single time when it scrolls into view (the script at the
        bottom adds .play); a page reload replays it. */
     .pc-art {
@@ -435,17 +440,6 @@
       background: var(--ink-2); border: 1px solid var(--line);
     }
     .pc-art svg { width: 100%; height: auto; }
-    /* Card 1 — seed words vanish one by one, the key drops, the coin dims. */
-    .seed-words .w { animation: wordLoss 9s ease-in-out 1 both !important; animation-delay: calc(var(--i) * .14s) !important; }
-    .lost-key  { transform-box: fill-box; transform-origin: 20% 50%; animation: keyLoss 9s ease-in-out 1 both !important; }
-    .lost-coin { transform-box: fill-box; transform-origin: center; animation: coinLoss 9s ease-in-out 1 both !important; }
-    @keyframes wordLoss { 0%,30% { opacity: 1; } 38%,82% { opacity: .08; } 92%,100% { opacity: 1; } }
-    @keyframes keyLoss  { 0%,34% { transform: none; opacity: 1; }
-                          50%,82% { transform: translate(6px,20px) rotate(32deg); opacity: .2; }
-                          94%,100% { transform: none; opacity: 1; } }
-    @keyframes coinLoss { 0%,42% { transform: none; opacity: 1; }
-                          56%,82% { transform: scale(.75); opacity: .12; }
-                          94%,100% { transform: none; opacity: 1; } }
     /* Card 2 — the coin enters the time-lock, the sand runs, and the coin
        comes out split between two heirs, where it stays. */
     .sand-top  { transform-box: fill-box; transform-origin: 50% 100%; animation: sandTop 8s linear 1 both !important; }
@@ -453,8 +447,8 @@
     .sand-run  { animation: sandRun 8s linear 1 both !important; }
     .tl-a      { animation: coinA 8s ease-in-out 1 both !important; }
     .tl-b      { animation: coinB 8s ease-in-out 1 both !important; }
-    .pc-art :is(.w, .lost-key, .lost-coin, .sand-top, .sand-bot, .sand-run, .tl-a, .tl-b) { animation-play-state: paused !important; }
-    .pc-art.play :is(.w, .lost-key, .lost-coin, .sand-top, .sand-bot, .sand-run, .tl-a, .tl-b) { animation-play-state: running !important; }
+    .pc-art :is(.sand-top, .sand-bot, .sand-run, .tl-a, .tl-b) { animation-play-state: paused !important; }
+    .pc-art.play :is(.sand-top, .sand-bot, .sand-run, .tl-a, .tl-b) { animation-play-state: running !important; }
     @keyframes sandTop { 0%,30% { transform: scaleY(1); } 58%,100% { transform: scaleY(.04); } }
     @keyframes sandBot { 0%,30% { transform: scaleY(.04); } 58%,100% { transform: scaleY(1); } }
     @keyframes sandRun { 0%,30% { opacity: 0; } 32%,56% { opacity: 1; } 58%,100% { opacity: 0; } }
@@ -725,27 +719,27 @@
           <svg viewBox="0 0 320 128" xmlns="http://www.w3.org/2000/svg">
             <rect x="18" y="16" width="176" height="96" rx="9" fill="#0A0F1C" stroke="#1F2B44"/>
             <text x="32" y="33" font-family="'Space Mono', monospace" font-size="8" letter-spacing="2" fill="#2DD4BF">SEED · 12</text>
-            <g class="seed-words" font-family="'Space Mono', monospace" font-size="7" fill="#95A1B5">
+            <g font-family="'Space Mono', monospace" font-size="7" fill="#95A1B5">
               <g fill="#2DD4BF" fill-opacity=".6">
-            <g class="w" style="--i:0"><text x="32" y="52">01</text><rect x="45" y="47" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:1"><text x="32" y="67">02</text><rect x="45" y="62" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:2"><text x="32" y="82">03</text><rect x="45" y="77" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:3"><text x="32" y="97">04</text><rect x="45" y="92" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:4"><text x="86" y="52">05</text><rect x="99" y="47" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:5"><text x="86" y="67">06</text><rect x="99" y="62" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:6"><text x="86" y="82">07</text><rect x="99" y="77" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:7"><text x="86" y="97">08</text><rect x="99" y="92" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:8"><text x="140" y="52">09</text><rect x="153" y="47" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:9"><text x="140" y="67">10</text><rect x="153" y="62" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:10"><text x="140" y="82">11</text><rect x="153" y="77" width="34" height="4" rx="2"/></g>
-            <g class="w" style="--i:11"><text x="140" y="97">12</text><rect x="153" y="92" width="34" height="4" rx="2"/></g>
+            <g><text x="32" y="52">01</text><rect x="45" y="47" width="34" height="4" rx="2"/></g>
+            <g><text x="32" y="67">02</text><rect x="45" y="62" width="34" height="4" rx="2"/></g>
+            <g><text x="32" y="82">03</text><rect x="45" y="77" width="34" height="4" rx="2"/></g>
+            <g><text x="32" y="97">04</text><rect x="45" y="92" width="34" height="4" rx="2"/></g>
+            <g><text x="86" y="52">05</text><rect x="99" y="47" width="34" height="4" rx="2"/></g>
+            <g><text x="86" y="67">06</text><rect x="99" y="62" width="34" height="4" rx="2"/></g>
+            <g><text x="86" y="82">07</text><rect x="99" y="77" width="34" height="4" rx="2"/></g>
+            <g><text x="86" y="97">08</text><rect x="99" y="92" width="34" height="4" rx="2"/></g>
+            <g><text x="140" y="52">09</text><rect x="153" y="47" width="34" height="4" rx="2"/></g>
+            <g><text x="140" y="67">10</text><rect x="153" y="62" width="34" height="4" rx="2"/></g>
+            <g><text x="140" y="82">11</text><rect x="153" y="77" width="34" height="4" rx="2"/></g>
+            <g><text x="140" y="97">12</text><rect x="153" y="92" width="34" height="4" rx="2"/></g>
               </g>
             </g>
-            <g class="lost-key" stroke="#2DD4BF" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <g stroke="#2DD4BF" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="232" cy="72" r="11"/>
               <path d="M243 72 H282 M270 72 v9 M278 72 v7"/>
             </g>
-            <g class="lost-coin">
+            <g>
               <circle cx="292" cy="38" r="11" fill="#F7931A"/>
               <text x="292" y="42" text-anchor="middle" font-family="'Space Grotesk', Arial, sans-serif" font-size="12" font-weight="700" fill="#0A0F1C">&#8383;</text>
             </g>
@@ -877,7 +871,7 @@
         <!-- Closing card: invitation to ask -->
         <article class="card reveal" style="justify-content:center; background:transparent; border-style:dashed;">
           <h3 style="margin-bottom:8px;" data-i18n="services.more.title">Not sure where to start?</h3>
-          <p data-i18n="services.more.text">Tell us what you hold and what worries you. We'll point you to the right service.</p>
+          <p data-i18n="services.more.text">Tell us what worries you, from losing access to your family&rsquo;s future. You don&rsquo;t need to say how much you hold: we&rsquo;ll point you to the right service.</p>
           <a class="partner-link" href="mailto:info@safe21.io" data-i18n="services.more.link">Email us &rarr;</a>
         </article>
 
@@ -1026,10 +1020,11 @@
     })();
 
     /*
-     * Problem-card scenes: play once, the first time each one is at least
+     * Problem-card scene (card 2 — card 1 is a still image and simply
+     * ignores .play): play once, the first time it is at least
      * 60% on screen. Independent of prefers-reduced-motion on purpose (see
-     * the CSS note, CHANGELOG #47/#49). Without IntersectionObserver they
-     * simply play at load.
+     * the CSS note, CHANGELOG #47/#49). Without IntersectionObserver it
+     * simply plays at load.
      */
     (function () {
       var arts = document.querySelectorAll('.pc-art');
@@ -1151,7 +1146,7 @@
         'services.s5.text': 'Accetta pagamenti in Bitcoin e Lightning nel tuo negozio o online — con configurazione, formazione del personale e supporto continuo per la tua attività.',
         'services.s5.partner': 'con Pago in Bitcoin',
         'services.more.title': 'Non sai da dove iniziare?',
-        'services.more.text': 'Dicci cosa possiedi e cosa ti preoccupa: ti indicheremo il servizio giusto.',
+        'services.more.text': 'Raccontaci cosa ti preoccupa, dalla paura di perdere l’accesso al futuro della tua famiglia. Non serve dirci quanto possiedi: ti indichiamo noi il servizio giusto.',
         'services.more.link': 'Scrivici &rarr;',
 
         'why.eyebrow': 'Perché SAFE21',
