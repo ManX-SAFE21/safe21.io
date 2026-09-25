@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [45] — Homepage: vault dial hidden on mobile
+
+**Date:** 2026-09-25
+**Status:** Delivered and live (commit `a231056`, pushed to `main`)
+
+Client asked to remove the hero's keyhole animation on mobile. Below 900px
+(where #44 stacked the dial under the hero text) `.hero-art` and its
+`.hero-dots` backdrop are now `display: none`; the hero is text-only there,
+as it was before #44 minus the old watermark. Desktop unchanged.
+
+Verified: narrow viewport — both hidden, no horizontal scroll; 1280px — dial
+still rendered; no console errors; audit clean.
+
 ## [44] — Homepage: animated inline-SVG graphics
 
 **Date:** 2026-09-25
