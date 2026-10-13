@@ -3,6 +3,20 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [53] — "Cosa succede ai tuoi bitcoin" article: BAL link points to the homepage
+
+**Date:** 2026-10-13
+**Status:** Delivered and live (commit `7e3c0d7`, pushed to `main`)
+
+Client asked that the Bitcoin After Life link in the callout of
+`blog-cosa-succede-ai-tuoi-bitcoin.html` go to `https://bitcoin-after.life/`
+instead of the docs page. The anchor text changed from "manuale di Bitcoin
+After Life" to "sito di Bitcoin After Life", since it no longer points to
+the manual. The docs links in `blog-safe21-will-executor.html` are
+unchanged (not requested).
+
+**Verified**: audit clean; only that link changed.
+
 ## [52] — Ledger article: purchase advice reworded
 
 **Date:** 2026-10-13
