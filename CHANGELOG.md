@@ -3,6 +3,40 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [51] — New article: tampered hardware wallets (Ledger / CryptoBilis case)
+
+**Date:** 2026-10-13
+**Status:** Delivered and live (commit `f6a0acc`, pushed to `main`)
+
+Client asked for a new article of at most 5 minutes about the Ledger /
+CryptoBilis tampered-wallet case, linked to the previous articles, with the
+message that SAFE21 builds the solution around the client and not the other
+way round, plus an instructive image in the SAFE21 style.
+
+- **New page `blog-chiavette-manomesse-ledger.html`**, "Una chiavetta con la
+  SIM dentro: cosa insegna il caso Ledger" (13 Oct 2026, ~940 words,
+  5 min). Sections: what happened, how the implant worked, the lesson,
+  a 5-point checklist, "why SAFE21 starts from you, not from the product",
+  sources. Cross-links to `blog-seed-mai-online.html`,
+  `blog-dadi-semplicita.html` and `blog-cosa-succede-ai-tuoi-bitcoin.html`.
+  Built from the KYC/P2P article (shared `blog.css` / `blog.js`, so no
+  per-page CSS).
+- **Figures kept honest**: loss estimates are attributed to independent
+  analysts and flagged as not confirmed by Ledger; a callout dates the
+  facts (13 Oct 2026, investigation open). Sources: Atlas21, CoinDesk,
+  BleepingComputer.
+- **Cover/infographic drawn in-house** (`images/copertina-chiavette-manomesse.webp`,
+  1600x900): cutaway of the device with the intact secure element in teal
+  and the added LTE implant in orange, signal path to the attacker.
+  Also used as the thumbnail in the blog index.
+- **Wiring**: new `.post-card` at the top of `blog.html`, new `blogPost[]`
+  entry in its JSON-LD, `<url>` in `sitemap.xml` (and `blog.html` lastmod
+  bumped).
+
+**Verified**: audit clean (no errors); page renders without console
+errors or horizontal overflow; image 1600x900 loads; all internal links
+resolve.
+
 ## [50] — Homepage: still first scene, borderless service cards on mobile, new closing copy
 
 **Date:** 2026-09-25
