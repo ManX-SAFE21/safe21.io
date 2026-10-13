@@ -23,11 +23,17 @@
 
   <url>
     <loc>https://safe21.io/blog.html</loc>
-    <lastmod>2026-09-12</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://safe21.io/blog-chiavette-manomesse-ledger.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://safe21.io/blog-comprare-bitcoin-kyc-p2p.html</loc>
     <lastmod>2026-09-12</lastmod>
