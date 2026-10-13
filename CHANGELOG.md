@@ -3,6 +3,21 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [52] — Ledger article: purchase advice reworded
+
+**Date:** 2026-10-13
+**Status:** Delivered and live (commit `79b7b3a`, pushed to `main`)
+
+Client asked to change the first checklist point of
+`blog-chiavette-manomesse-ledger.html` (#51). It now reads: if you really
+cannot avoid it, buy directly from the manufacturer (never marketplaces or
+auctions), ideally under a different purchase name and shipped to a
+post-office hold (fermoposta) or a parcel locker, so the home address does
+not end up in an order that says "this person owns bitcoin". Consistent
+with the privacy argument of the KYC/P2P article.
+
+**Verified**: audit clean; only that list item changed.
+
 ## [51] — New article: tampered hardware wallets (Ledger / CryptoBilis case)
 
 **Date:** 2026-10-13
