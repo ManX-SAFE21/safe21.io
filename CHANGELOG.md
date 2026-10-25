@@ -3,6 +3,20 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [55] — Àncòra article: animation frame height trimmed
+
+**Date:** 2026-10-25
+**Status:** Delivered and live
+
+Client noticed a large empty band under the animation controls. The iframe
+was taller than needed (safety margin set too generously in #54). Measured
+the real content at several frame widths (690–751 px, steps 1–8) and cut the
+frame to fit.
+
+- `blog.css`: `.anim-frame` height 880 → 780 px on desktop, 800 → 760 px on
+  phones (≤760 px). Still 30–50 px of margin over the tallest step.
+- Verified in preview at desktop and 375 px: no clipping, no horizontal scroll.
+
 ## [54] — New article: Àncòra plugin, with the two BAL Protocol explainer animations
 
 **Date:** 2026-10-25
