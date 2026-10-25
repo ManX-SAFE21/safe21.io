@@ -614,7 +614,4 @@ body, header, .post-card, .post-thumb, .callout, .checklist, .rule, figure.sourc
 .anim-links { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
 .anim-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 6px 0 40px; }
 .anim-meta { font-size: 14px; color: var(--muted); }
-/* A 64-character checksum must wrap on phones: override the nowrap of
-   the password chips above. */
-.article-body code.hash { white-space: normal; word-break: break-all; font-size: 0.82em; }
 @media (max-width: 760px) { .anim-frame { height: 760px; } }

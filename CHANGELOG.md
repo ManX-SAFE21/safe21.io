@@ -3,6 +3,23 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [56] — Àncòra article: install section points to the latest release
+
+**Date:** 2026-10-25
+**Status:** Delivered and live
+
+Client is about to publish a new Àncòra release, so the article should not
+name a fixed version. The "Come si installa" section now links to
+`releases/latest` on GitHub and lets readers download the newest ZIP.
+
+- `blog-ancora-plugin-bal-protocol.html`: removed "prima versione 0.7.0", the
+  file name `ancora_0.7.0.zip`, the fixed SHA-256 and the tag-specific link.
+  Step 1 links to `releases/latest`; step 2 says the SHA-256 is in the release
+  notes (checked: the 0.7.0 notes contain it). Electrum 4.8.2+ step unchanged.
+- `blog.css`: removed the `code.hash` rule, no longer used.
+- Verified in preview: no remaining "0.7.0" on the page, both GitHub links
+  correct.
+
 ## [55] — Àncòra article: animation frame height trimmed
 
 **Date:** 2026-10-25
