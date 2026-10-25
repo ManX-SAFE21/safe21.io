@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SAFE21 — Blog article: "Àncòra: il nostro nuovo plugin per
+       BAL Protocol"
+
+       LANGUAGE NOTE (project rule R1):
+       The homepage (index.html) ships in English with a runtime EN/IT
+       switcher. The blog, by client decision, is ITALIAN ONLY — so this
+       page has no language switcher and no i18n dictionary: the Italian
+       copy is written directly in the markup. All code comments and
+       identifiers remain in English, as required by R1.
+
+       CONTENT NOTE:
+       Presents Àncòra 0.7.0, the Electrum plugin SAFE21 forked from the
+       original Bitcoin After Life code (MIT, by svatantrya). The two
+       explainer animations (simple, 8 steps; full, 15 steps) live in
+       animazioni/ with their audio folders beside them. They are copies
+       of files generated elsewhere: never edit them here, re-copy them.
+       The simple one is embedded in an iframe; the full one opens from a
+       button. The voice starts only after a tap inside the page (browser
+       autoplay rule), so the text tells the reader to tap.
+
+       Structure cloned from blog-chiavette-manomesse-ledger.html (shared
+       blog.css / blog.js; figure + lightbox, callout, checklist, CTA).
+       ============================================================ -->
+
+  <title>Àncòra: il nostro nuovo plugin per BAL Protocol — SAFE21</title>
+  <meta name="description" content="Àncòra è il plugin per Electrum riscritto da SAFE21 per rendere semplice BAL Protocol, l'eredità dei propri bitcoin. Con due animazioni con la voce." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="logos/safe21-favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
+
+  <!-- Open Graph (social preview) -->
+  <meta property="og:title" content="Àncòra: il nostro nuovo plugin per BAL Protocol" />
+  <meta property="og:description" content="Àncòra è il plugin per Electrum riscritto da SAFE21 per rendere semplice BAL Protocol, l'eredità dei propri bitcoin. Con due animazioni con la voce." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://safe21.io/blog-ancora-plugin-bal-protocol" />
+  <meta property="og:image" content="https://safe21.io/images/copertina-ancora-plugin.webp" />
+  <meta property="og:locale" content="it_IT" />
+  <link rel="canonical" href="https://safe21.io/blog-ancora-plugin-bal-protocol.html" />
+
+  <!-- Structured data (JSON-LD): Article type with explicit headline, dates
+       and author, so search engines and AI assistants can cite this piece
+       accurately (title, publisher, date) instead of guessing from prose. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Àncòra: il nostro nuovo plugin per BAL Protocol",
+    "description": "Àncòra è il plugin per Electrum riscritto da SAFE21 per rendere semplice BAL Protocol, l'eredità dei propri bitcoin. Con due animazioni con la voce.",
+    "url": "https://safe21.io/blog-ancora-plugin-bal-protocol.html",
+    "image": "https://safe21.io/images/copertina-ancora-plugin.webp",
+    "datePublished": "2026-10-25",
+    "dateModified": "2026-10-25",
+    "inLanguage": "it",
+    "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="blog.css" />
+
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between blog pages doesn't flash. sessionStorage (not
+       localStorage) is deliberate: it is cleared when the tab/browser
+       closes, so every fresh visit starts dark (client's "Variante A"),
+       while a choice still carries across pages within the same visit.
+
+       A `?theme=light` or `?theme=dark` in the URL — stamped in by the
+       toggle below when it's clicked — takes priority over sessionStorage,
+       so a link copied from an open page carries its theme to whoever
+       opens it next, with no session state of their own. -->
+  <script>
+    (function () {
+      try {
+        var urlTheme = new URLSearchParams(location.search).get('theme');
+        var theme = (urlTheme === 'light' || urlTheme === 'dark')
+          ? urlTheme
+          : sessionStorage.getItem('safe21-blog-theme');
+        if (theme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+        // Also remember an explicit link choice, so it survives navigating
+        // to another page within the same visit, same as a manual toggle.
+        if (urlTheme === 'light' || urlTheme === 'dark') {
+          sessionStorage.setItem('safe21-blog-theme', urlTheme);
+        }
+      } catch (e) { /* private browsing: fall back to the dark default */ }
+    })();
+  </script>
+</head>
+
+<body id="top">
+
+  <!-- Image lightbox overlay. Hidden until a figure image is clicked; then
+       shows that image at natural 1:1 size. Same pattern as the other
+       image-bearing articles. -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button type="button" class="lightbox-close" aria-label="Chiudi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+      </svg>
+    </button>
+    <img src="" alt="" />
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <!-- Copied from index.html. Differences: links point back to index.html
+       sections (this is a separate page, so bare "#anchors" would not work),
+       the labels are written in Italian because the blog is Italian-only,
+       and there is no EN/IT switcher for the same reason. -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="index.html" aria-label="SAFE21 home">
+        <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+          <defs>
+            <mask id="kh-head">
+              <rect width="34" height="34" rx="8" fill="#fff"/>
+              <circle cx="17" cy="14" r="5" fill="#000"/>
+              <path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-head)"/></g>
+          <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4">
+            <tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan>
+          </text>
+        </svg>
+      </a>
+
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html" class="current">Blog</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
+        <!-- Light/dark switch. Blog-only feature: the homepage stays dark.
+             Deliberately NOT hidden on mobile (see .theme-toggle CSS). -->
+        <button type="button" class="theme-toggle" aria-pressed="false"
+                aria-label="Passa al tema chiaro" title="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+          </svg>
+        </button>
+
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Apri menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="blog.html">Blog</a>
+        <a href="mailto:info@safe21.io">Contattaci</a>
+      </nav>
+    </div>
+  </header>
+
+
+
+  <!-- ================= ARTICLE HEADER ================= -->
+  <div class="article-head">
+    <div class="read">
+      <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
+      <p class="eyebrow">Eredità Bitcoin &middot; Àncòra</p>
+      <h1>Àncòra: il nostro nuovo plugin per BAL Protocol</h1>
+      <p class="standfirst">
+        Si chiama Àncòra il plugin per Electrum riscritto da SAFE21 per
+        rendere semplice l'uso di BAL Protocol, il protocollo pensato per
+        l'eredità dei propri bitcoin. Qui ti raccontiamo perché si chiama
+        così, cosa abbiamo cambiato e come si installa. E, prima di tutto,
+        ti facciamo vedere come funziona con due animazioni.
+      </p>
+      <p class="byline">
+        <span>SAFE21</span>
+        <span>25 ottobre 2026</span>
+        <span class="read-time">6 min di lettura</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= ARTICLE BODY ================= -->
+  <article class="article-body">
+    <div class="read">
+
+      <figure class="source">
+        <img src="images/copertina-ancora-plugin.webp"
+             width="1600" height="900" loading="eager" decoding="async"
+             alt="Copertina SAFE21: il logo di Àncòra, un'àncora bianca con le punte verde-acqua e la scritta àncòra, con il motto «Àncora per te, ancòra per loro». A destra un riquadro «Come funziona»: una linea del tempo da Oggi (i bitcoin restano tuoi) alla Data di consegna (agli eredi che hai scelto), tre copie custodite dai will-executor, e la frase: finché ci sei tu non parte niente, rinnovi e la data si sposta avanti, se ti fermi i bitcoin arrivano agli eredi." />
+      </figure>
+
+      <h2>Il problema che Àncòra risolve</h2>
+
+      <p>
+        I tuoi bitcoin sono davvero tuoi perché le chiavi le hai solo tu. È
+        il punto di forza di Bitcoin, ed è anche il suo punto debole quando
+        pensi a chi verrà dopo di te. Se non ci sei più, nessuno può toccarli.
+        Non la banca, non un notaio, non i tuoi figli.
+      </p>
+
+      <p>
+        Ne abbiamo già parlato in <a class="inline"
+        href="blog-cosa-succede-ai-tuoi-bitcoin.html">Cosa succede ai tuoi
+        bitcoin quando non ci sei più?</a>. La risposta che preferiamo si
+        chiama <strong>BAL Protocol</strong> (Bitcoin After Life): un modo per
+        lasciare i bitcoin a chi vuoi tu, alla data che decidi tu, senza
+        consegnare le chiavi a nessuno e senza intermediari.
+      </p>
+
+      <p>
+        Oggi presentiamo lo strumento che usiamo per metterlo in pratica:
+        <strong>Àncòra</strong>, il plugin per Electrum che SAFE21 ha
+        riscritto partendo dal codice originale di Bitcoin After Life.
+      </p>
+
+      <h2>Perché si chiama Àncòra</h2>
+
+      <p>
+        Il nome tiene insieme due parole che in italiano si scrivono quasi
+        uguali.
+      </p>
+
+      <ul>
+        <li><strong>Àncora</strong>, con l'accento sulla prima a: ciò che tiene fermo, che dà sicurezza.</li>
+        <li><strong>Ancòra</strong>, con l'accento sulla seconda: ciò che continua, che non si ferma.</li>
+      </ul>
+
+      <p>
+        Da qui il nostro motto: <em>Àncora per te, ancòra per loro.</em>
+        Finché ci sei tu, i bitcoin restano fermi nel tuo portafoglio.
+        Quando non ci sarai più, continuano, nelle mani delle persone che hai
+        scelto.
+      </p>
+
+      <p>
+        Il logo è un'àncora semplice, con le punte nel verde-acqua di SAFE21.
+        Lo troverai nel plugin, nel report stampabile e nella pagina di
+        download.
+      </p>
+
+      <h2>Prima guarda come funziona</h2>
+
+      <p>
+        Prima di parlare del plugin, guarda il protocollo. Questa animazione
+        di due minuti spiega BAL Protocol con un'idea sola: un assegno
+        post-datato.
+      </p>
+
+      <div class="callout">
+        <p class="eyebrow">Tocca la pagina per sentire la voce</p>
+        <p>
+          I browser fanno partire l'audio solo dopo un tocco. Tocca una volta
+          il riquadro qui sotto: l'animazione parte dall'inizio, con la voce.
+        </p>
+      </div>
+
+      <!-- Simple explainer (8 steps, ~2 min), embedded. The page inside is
+           self-contained and light by default; it follows the visitor's
+           system theme, not the blog toggle. Height chosen from measured
+           page heights (730–830 px) so nothing scrolls inside the frame.
+           Loaded eagerly on purpose: in the phone test a lazy iframe
+           stayed blank; the page is ~90 KB and the audio loads only after
+           the tap. -->
+      <div class="anim-box">
+        <iframe class="anim-frame"
+                src="animazioni/come-funziona-bal-protocol-semplice-voce.html"
+                title="Come funziona BAL Protocol, versione semplice (8 passi, con voce)"
+                allow="autoplay"></iframe>
+        <p class="anim-links">
+          Versione semplice &middot; 8 passi &middot; circa 2 minuti &middot;
+          <a class="inline" href="animazioni/come-funziona-bal-protocol-semplice-voce.html" target="_blank" rel="noopener noreferrer">Apri a schermo intero &nearr;</a>
+        </p>
+      </div>
+
+      <p>In breve, quello che hai visto:</p>
+
+      <ul>
+        <li>Scrivi il testamento nel plugin: scegli gli eredi e la data di consegna.</li>
+        <li>Il plugin prepara una copia per ogni will-executor, valida solo da quella data. Come un assegno post-datato.</li>
+        <li>I will-executor conservano la copia. Non hanno le tue chiavi e non possono fare altro che aspettare.</li>
+        <li>In ogni copia c'è una piccola mancia per il will-executor: è il suo compenso, e il suo motivo per esserci ancora fra anni.</li>
+        <li>Finché ci sei tu, non parte niente. Rinnovi, e la data si sposta avanti.</li>
+        <li>Alla data scelta, i will-executor inviano la copia alla rete. I bitcoin arrivano agli eredi.</li>
+      </ul>
+
+      <h2>Cosa ha cambiato SAFE21</h2>
+
+      <p>
+        Il protocollo è di Bitcoin After Life e non lo abbiamo toccato. Quello
+        che abbiamo riscritto è il modo in cui lo usi. Chi ci segue sa che per
+        noi <a class="inline" href="blog-chiavette-manomesse-ledger.html">la
+        tecnologia deve adattarsi alla persona</a>, non il contrario.
+      </p>
+
+      <div class="checklist">
+        <h2>Le novità di Àncòra</h2>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Una procedura guidata in quattro passi.</strong> Quando, a chi, con quali will-executor, riepilogo. Le date si scelgono nel tuo fuso orario, con la data del testamento mostrata accanto.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Modalità Base e Avanzata.</strong> In Base vedi solo quello che serve per decidere. Le commissioni, i periodi rinnovabili e le opzioni tecniche restano in Avanzata.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>La vista «Futuro».</strong> Una linea del tempo che mostra oggi, la data di consegna, i will-executor che hanno la copia e una frase chiara: «Se il testamento non viene più controllato né rinnovato, il [data] i bitcoin andranno a: …».</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Il controllo che parla chiaro.</strong> Ogni verifica finisce con una frase e, se stai per cambiare qualcosa, con il riquadro «Cosa cambia rispetto al testamento in vigore»: data, eredi, quote, will-executor, commissione.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Un report in PDF</strong> da stampare e conservare: stato, eredi con indirizzi e quote, will-executor, linea del tempo. Niente chiavi, niente segreti.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Avvisi a colori</strong> quando la data di consegna si avvicina: giallo sotto i dodici mesi, rosso sotto i sei.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Nessuna spesa a tua insaputa.</strong> Il plugin prepara da solo le nuove copie quando serve, ma non manda mai una transazione a pagamento senza che tu la confermi.</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><strong>Italiano, inglese e spagnolo</strong>, con l'animazione che hai appena visto anche dentro il plugin, funzionante senza connessione.</span>
+          </li>
+        </ul>
+      </div>
+
+      <p>
+        Àncòra usa <strong>gli stessi will-executor e la stessa lista</strong>
+        di Bitcoin After Life, compreso <a class="inline"
+        href="blog-safe21-will-executor.html">il will-executor di SAFE21</a>.
+        Chi gestisce un will-executor guadagna le mance in ogni caso: più
+        persone usano il protocollo, meglio è per tutti.
+      </p>
+
+      <h2>Per chi vuole tutti i dettagli</h2>
+
+      <p>
+        La versione completa dura quattro minuti e aggiunge i casi veri della
+        vita: cosa succede se cambi l'importo nel portafoglio, se aggiungi un
+        erede, se vuoi spostare la data più avanti, e cosa succede se quasi
+        tutti i will-executor spariscono. Si apre a pagina intera. Anche qui,
+        tocca lo schermo per sentire la voce.
+      </p>
+
+      <p class="anim-actions">
+        <a class="btn btn-primary" href="animazioni/come-funziona-bal-protocol-voce.html" target="_blank" rel="noopener noreferrer">Guarda la versione completa &nearr;</a>
+        <span class="anim-meta">15 passi &middot; circa 4 minuti &middot; con voce</span>
+      </p>
+
+      <h2>Come si installa</h2>
+
+      <p>
+        Àncòra è pubblico, con licenza MIT, su GitHub: <a class="inline"
+        href="https://github.com/ManX-SAFE21/ancora-electrum-plugin" target="_blank" rel="noopener noreferrer">github.com/ManX-SAFE21/ancora-electrum-plugin &nearr;</a>.
+        La prima versione è la <strong>0.7.0</strong>.
+      </p>
+
+      <ol>
+        <li>Scarica <code>ancora_0.7.0.zip</code> dalla <a class="inline" href="https://github.com/ManX-SAFE21/ancora-electrum-plugin/releases/tag/ancora-v0.7.0" target="_blank" rel="noopener noreferrer">pagina della release &nearr;</a>.</li>
+        <li>Controlla il codice SHA-256 del file:<br/><code class="hash">469fd572c9fea0ec288be7ac979692012a18b48afa15c6614c31b39bc1caf6ba</code></li>
+        <li>In Electrum 4.8.2 o successivo: Strumenti &rarr; Plugin &rarr; Aggiungi, scegli il file ZIP, attiva il plugin e riavvia Electrum.</li>
+      </ol>
+
+      <p>
+        Due cose da sapere. Àncòra e il plugin ufficiale di Bitcoin After
+        Life non possono stare insieme nello stesso Electrum: scegline uno.
+        E un testamento fatto con il plugin originale, su Electrum dalla
+        versione 4.8 in poi, si apre in Àncòra senza rifare niente.
+      </p>
+
+      <h2>Cosa non cambia</h2>
+
+      <p>
+        Àncòra nasce dal <strong>codice originale di Bitcoin After Life</strong>,
+        scritto da svatantrya e pubblicato con licenza MIT. Il protocollo, i
+        will-executor, la licenza e il credito all'autore originale restano.
+        Quello che aggiungiamo lo rilasciamo con la stessa licenza: chi vuole
+        può leggere il codice, verificarlo e riportare le correzioni nel
+        progetto originale.
+      </p>
+
+      <p>
+        Se preferisci non fare da solo, in SAFE21 ti accompagniamo: scegliamo
+        insieme la soluzione adatta a te, prepariamo il testamento con Àncòra
+        e ti lasciamo un report da conservare. Come sempre, le chiavi restano
+        tue.
+      </p>
+
+      <div class="footnote">
+        <p><strong>Per approfondire:</strong></p>
+        <ul>
+          <li><a class="inline" href="blog-cosa-succede-ai-tuoi-bitcoin.html">Cosa succede ai tuoi bitcoin quando non ci sei più?</a></li>
+          <li><a class="inline" href="blog-safe21-will-executor.html">SAFE21 diventa Will-Executor</a></li>
+          <li><a class="inline" href="blog-bal-easy-heirs.html">Easy Heirs: prepara l'eredità senza mai andare online</a></li>
+          <li><a class="inline" href="blog-caso-liquid.html">Il caso Liquid: perché per l'eredità consigliamo BAL Protocol</a></li>
+          <li>Il sito di Bitcoin After Life: <a class="inline" href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">bitcoin-after.life &nearr;</a></li>
+        </ul>
+        <p>
+          Questo articolo ha finalità informative e non costituisce consulenza
+          legale, fiscale o di sicurezza. SAFE21 non prende mai in custodia i
+          tuoi fondi. Le transazioni Bitcoin sono irreversibili: prova il
+          plugin con piccoli importi prima di affidargli il tuo testamento.
+        </p>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta">
+    <div class="read">
+      <p class="eyebrow">Vuoi preparare l'eredità dei tuoi bitcoin?</p>
+      <h2>Lo facciamo insieme, con le tue chiavi nelle tue mani</h2>
+      <p>
+        Raccontaci la tua situazione: ti diciamo, senza impegno, se Àncòra fa
+        per te e come lo useremmo. Non serve dirci quanto possiedi. Ti
+        risponderà una persona reale, non un modulo.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="index.html#inheritance">L'eredità con SAFE21</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <!-- Same structure as index.html, written directly in Italian. -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="index.html" aria-label="SAFE21 home">
+            <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+              <defs><mask id="kh-foot"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="14" r="5" fill="#000"/><path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/></mask></defs>
+              <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-foot)"/></g>
+              <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan></text>
+            </svg>
+          </a>
+          <p>Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.</p>
+        </div>
+
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Servizi</h4>
+            <a href="index.html#services">Assistenza Bitcoin</a>
+            <a href="index.html#services">Corsi Bitcoin</a>
+            <a href="index.html#services">Sicurezza Electrum</a>
+            <a href="index.html#inheritance">Eredità</a>
+            <a href="index.html#payments">Pagamenti</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
+            <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contatti</h4>
+            <a href="mailto:info@safe21.io">info@safe21.io</a>
+            <a href="blog.html">Blog</a>
+            <!-- SAFE21 open-source code (GitHub). External link. -->
+            <a href="https://github.com/ManX-SAFE21" target="_blank" rel="noopener noreferrer">Codice open source &nearr;</a>
+            <!-- OpenPGP public key for info@safe21.io (served as text/plain). -->
+            <a href="safe21-pgp.asc">Chiave PGP</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si
+        tratta di consulenza legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia
+        i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni
+        e tassazione variano da paese a paese: per la tua situazione specifica rivolgiti a un
+        professionista qualificato. Le transazioni Bitcoin sono irreversibili.
+      </p>
+      <p class="copyright">© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script src="blog.js" defer></script>
+</body>
+</html>

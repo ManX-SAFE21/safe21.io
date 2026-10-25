@@ -23,11 +23,17 @@
 
   <url>
     <loc>https://safe21.io/blog.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://safe21.io/blog-ancora-plugin-bal-protocol.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://safe21.io/blog-chiavette-manomesse-ledger.html</loc>
     <lastmod>2026-10-13</lastmod>

@@ -597,3 +597,24 @@ body, header, .post-card, .post-thumb, .callout, .checklist, .rule, figure.sourc
 @media (max-width: 760px) {
   .checklist { padding: 22px 20px; }
 }
+
+/* ---------- Embedded explainer animation (Àncòra article) ----------
+   The explainer pages live in animazioni/ (copies of files generated
+   elsewhere, never edited here) and the simple one is embedded in an
+   iframe. The page inside is light by default and follows the visitor's
+   system theme, not the blog toggle, so the frame carries its own border
+   and reads as a window. Height from measured page heights (730–830 px)
+   so nothing has to scroll inside the frame. */
+.anim-box { margin: 10px 0 36px; }
+.anim-frame {
+  display: block; width: 100%; height: 880px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: #F3F6F6; box-shadow: var(--card-shadow);
+}
+.anim-links { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+.anim-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin: 6px 0 40px; }
+.anim-meta { font-size: 14px; color: var(--muted); }
+/* A 64-character checksum must wrap on phones: override the nowrap of
+   the password chips above. */
+.article-body code.hash { white-space: normal; word-break: break-all; font-size: 0.82em; }
+@media (max-width: 760px) { .anim-frame { height: 800px; } }

@@ -3,6 +3,54 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [54] — New article: Àncòra plugin, with the two BAL Protocol explainer animations
+
+**Date:** 2026-10-25
+**Status:** Built locally, preview shown; waiting for the client's OK to push
+
+Client asked for an article presenting Àncòra, the Electrum plugin SAFE21
+forked from the original Bitcoin After Life code (MIT, by svatantrya), with
+the two green (Italian-only) "Come funziona BAL PROTOCOL" animations: the
+simple one first, the full one for who wants more detail. Client decisions:
+old BAL wills "from Electrum 4.8 on"; no personal name for the BAL
+maintainer (credit to the original code by svatantrya); version 0.7.0;
+cover drawn in-house; the full animation behind a button, not embedded.
+
+- **New folder `animazioni/`**: `come-funziona-bal-protocol-semplice-voce.html`
+  (8 steps) and `come-funziona-bal-protocol-voce.html` (15 steps) with their
+  audio folders `voce/` and `voce-det/` beside them (5.6 MB). They are
+  unchanged copies of files generated in another project: never edit them
+  here, re-copy them when they are regenerated. Block numbers inside are
+  extrapolated live from a dated tip, so they need no update.
+- **New `_headers`** (Cloudflare Pages): `X-Robots-Tag: noindex` on
+  `/animazioni/*`, so search engines index the article and not the two
+  standalone pages.
+- **New page `blog-ancora-plugin-bal-protocol.html`**, "Àncòra: il nostro
+  nuovo plugin per BAL Protocol" (25 Oct 2026, ~1060 words, 6 min).
+  Sections: the problem, why the name (àncora / ancòra, motto, logo),
+  "first watch how it works" with a callout "tap the page to hear the
+  voice" and the simple animation in an iframe (880 px, 800 px on phones;
+  loaded eagerly, a lazy one stayed blank in the phone test) plus "open
+  full screen"; what SAFE21 changed (8-point checklist);
+  same will-executors and welist; the full animation behind a primary
+  button (opens in a new tab); install steps for 0.7.0 with the ZIP
+  SHA-256 and the GitHub release link; what does not change (credit to
+  the original code); links to the BAL/Will-Executor/Easy Heirs/Liquid
+  articles; CTA.
+- **Cover drawn in-house** (`images/copertina-ancora-plugin.webp`,
+  1600x900): Àncòra lockup in brand colours on the SAFE21 dark background,
+  motto, and a "Come funziona" card (today -> delivery date timeline,
+  three will-executor copies). Also the thumbnail in the blog index.
+- **`blog.css`**: `.anim-box` / `.anim-frame` / `.anim-links` /
+  `.anim-actions` / `.anim-meta` and `code.hash` (a 64-char checksum must
+  wrap on phones).
+- **Index + SEO**: new `.post-card` at the top of `blog.html` and its
+  `BlogPosting` entry; `sitemap.xml` gains the article and bumps blog.html
+  lastmod to 2026-10-25.
+
+**Verified**: audit clean; preview checked at desktop and phone widths
+(see the session notes); audio clips reachable from the copied pages.
+
 ## [53] — "Cosa succede ai tuoi bitcoin" article: BAL link points to the homepage
 
 **Date:** 2026-10-13
