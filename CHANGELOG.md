@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [54] — New article: Àncòra plugin, with the two BAL Protocol explainer animations
 
 **Date:** 2026-10-25
-**Status:** Built locally, preview shown; waiting for the client's OK to push
+**Status:** Delivered and live (commit `3dd7a6d`, pushed to `main`)
 
 Client asked for an article presenting Àncòra, the Electrum plugin SAFE21
 forked from the original Bitcoin After Life code (MIT, by svatantrya), with
