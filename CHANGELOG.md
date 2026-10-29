@@ -3,6 +3,26 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [57] — Àncòra article: new plugin logo on the cover and in the text
+
+**Date:** 2026-10-29
+**Status:** Delivered and live
+
+The owner changed the Àncòra logo (plugin #199): the word "àncòra" with
+two teal accents and the slogan below it, and the "à" alone as the icon.
+The article still showed and described the old anchor.
+
+- `images/copertina-ancora-plugin.webp`: redrawn (1600×900, same file name).
+  The old anchor lockup and the big slogan are replaced by the brand file
+  `ancora-lockup-dark.svg` from the plugin repo (`assets/brand/svg/`), used
+  as-is; the slogan is part of it. "Come funziona" card and SAFE21 mark
+  unchanged.
+- `blog-ancora-plugin-bal-protocol.html`: cover alt text rewritten; the
+  paragraph on the logo now describes the word with the two accents and the
+  "à" icon, "in the plugin from the next version" (0.7.0 still has the old
+  logo).
+- Verified in preview: cover loads at 1600×900, new text in place.
+
 ## [56] — Àncòra article: install section points to the latest release
 
 **Date:** 2026-10-25
