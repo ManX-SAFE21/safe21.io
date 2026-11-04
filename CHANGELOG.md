@@ -3,6 +3,24 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [60] — Àncòra article: motto, animation and hardware wallet sentences
+
+**Date:** 2026-11-04
+**Status:** Delivered and live
+
+Three text fixes asked by the owner in `blog-ancora-plugin-bal-protocol.html`:
+
+- Motto paragraph: "i bitcoin restano fermi" becomes "restano al sicuro nel
+  tuo portafoglio, protetti dalle tue chiavi private: non su un exchange, non
+  affidati a qualcun altro"; then "arrivano alle persone che hai scelto,
+  senza intermediari".
+- Animations: "con un'idea sola" becomes "con un paragone di tutti i giorni".
+- Hardware wallets: no longer "not yet tested". They were tested but SAFE21
+  does not recommend them (every will transaction must be signed by hand on
+  the device, and recent problems call for caution), with a link to the
+  Ledger article.
+- Verified in preview: new texts in place, link works.
+
 ## [59] — Àncòra article: the Check paragraph explains the two fees
 
 **Date:** 2026-11-04
