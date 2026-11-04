@@ -189,13 +189,17 @@
     .mobile-menu a:last-child { border-bottom: 0; }
     .mobile-menu a:hover { color: var(--teal); }
 
-    @media (max-width: 860px) {
+    /* 1024px, not 860: with the Ancora entry (#64) the six-link row plus
+       the language switch and the Contact button no longer fit between 861
+       and ~1024px ("Perche SAFE21" wrapped onto two lines), so the header
+       collapses to the hamburger at the same width as the blog pages. */
+    @media (max-width: 1024px) {
       .nav-links { display: none; }  /* inline links hidden on small screens */
       .menu-toggle { display: inline-flex; }
       .mobile-menu { display: block; }
     }
     /* Above the breakpoint the drawer is always hidden, even if left "open". */
-    @media (min-width: 861px) {
+    @media (min-width: 1025px) {
       .mobile-menu { display: none !important; }
     }
 
@@ -301,7 +305,9 @@
     .card.bitcoin .ico { color: var(--orange); }
     .card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
     .card p { color: var(--muted); font-size: 14.5px; margin: 0 0 18px; flex: 1; }
-    .card .meta { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+    .card .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12.5px; }
+    /* The Ancora link (#64) sits on its own row under the partner row. */
+    .card .meta .plugin-link { flex-basis: 100%; }
     .tag {
       font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px;
       text-transform: uppercase; padding: 4px 9px; border-radius: 6px;
@@ -546,6 +552,9 @@
         <a href="#inheritance" data-i18n="nav.inheritance">Inheritance</a>
         <a href="#payments" data-i18n="nav.payments">Payments</a>
         <a href="#why" data-i18n="nav.why">Why SAFE21</a>
+        <!-- Àncòra is a brand name, identical in both languages,
+             so the label needs no data-i18n. -->
+        <a href="ancora.html">Àncòra</a>
         <!-- Blog is a separate page (not an in-page anchor) and is published
              in Italian only, so the label is the same in both languages. -->
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
@@ -586,6 +595,7 @@
         <a href="#inheritance" data-i18n="nav.inheritance">Inheritance</a>
         <a href="#payments" data-i18n="nav.payments">Payments</a>
         <a href="#why" data-i18n="nav.why">Why SAFE21</a>
+        <a href="ancora.html">Àncòra</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
         <a href="mailto:info@safe21.io" data-i18n="nav.contact">Contact us</a>
       </nav>
@@ -842,11 +852,7 @@
           <h3 data-i18n="services.s4.title">Bitcoin Inheritance</h3>
           <p data-i18n="services.s4.text">Plan a decentralised inheritance with time-locked transactions, so your coins reach your heirs at the right time — no notary, no custodian.</p>
           <div class="meta">
-            <span class="tag partner">Partner</span>
-            <a class="partner-link" href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="services.s4.partner">with BAL Protocol</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
-            </a>
+            <a class="partner-link plugin-link" href="ancora.html" data-i18n="services.s4.plugin">Àncòra, our free plugin &rarr;</a>
           </div>
         </article>
 
@@ -962,6 +968,7 @@
             <a href="#services" data-i18n="footer.s2">Bitcoin Courses</a>
             <a href="#services" data-i18n="footer.s3">Electrum Security</a>
             <a href="#inheritance" data-i18n="footer.s4">Inheritance</a>
+            <a href="ancora.html" data-i18n="footer.ancora">Àncòra plugin</a>
             <a href="#payments" data-i18n="footer.s5">Payments</a>
           </div>
           <div class="foot-col">
@@ -1141,7 +1148,7 @@
         'services.s3.text': 'Configura e metti in sicurezza Electrum nel modo giusto: wallet standard, 2FA, chiavi hardware e cold storage completamente offline.',
         'services.s4.title': 'Eredità Bitcoin',
         'services.s4.text': 'Pianifica un’eredità decentralizzata con transazioni time-locked, così i tuoi bitcoin raggiungono i tuoi eredi al momento giusto — senza notaio, senza custode.',
-        'services.s4.partner': 'con BAL Protocol',
+        'services.s4.plugin': 'Àncòra, il nostro plugin gratuito &rarr;',
         'services.s5.title': 'Accetta pagamenti Bitcoin',
         'services.s5.text': 'Accetta pagamenti in Bitcoin e Lightning nel tuo negozio o online — con configurazione, formazione del personale e supporto continuo per la tua attività.',
         'services.s5.partner': 'con Pago in Bitcoin',
@@ -1172,6 +1179,7 @@
         'footer.s2': 'Corsi Bitcoin',
         'footer.s3': 'Sicurezza Electrum',
         'footer.s4': 'Eredità',
+        'footer.ancora': 'Plugin Àncòra',
         'footer.s5': 'Pagamenti',
         'footer.partners': 'Partner',
         'footer.contact': 'Contatti',

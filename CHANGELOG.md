@@ -3,6 +3,47 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [64] — The Àncòra page linked from the menu, the footer, the homepage and the article
+
+**Date:** 2026-11-04
+**Status:** Delivered and live (pushed to `main`)
+
+After #63 the page existed but nothing linked to it. The client: make it
+reachable from the Àncòra article, from the menu, and from the homepage
+where it talks about inheritance; then also from the footer; and in the
+inheritance card keep only Àncòra, dropping the BAL Protocol partner link.
+
+- **Menu**, all 14 pages: "Àncòra" between "Perché SAFE21" and "Blog", in
+  the desktop row and in the mobile drawer; marked `class="current"` on
+  ancora.html itself. On index.html the label carries no data-i18n: the
+  brand name is the same in both languages.
+- **Footer**, all 14 pages, "Servizi" column: "Plugin Àncòra" after
+  "Eredità" (on index.html via the new `footer.ancora` key, EN "Àncòra
+  plugin"). The audited "Contatti" column is untouched.
+- **Homepage, "Eredità Bitcoin" card:** the meta row now holds only
+  "Àncòra, il nostro plugin gratuito &rarr;" / EN "Àncòra, our free
+  plugin &rarr;" (new `services.s4.plugin` key), on its own row
+  (`.plugin-link`, flex-basis 100%). The "Partner" tag, the
+  bitcoin-after.life link and the now-unused `services.s4.partner` key
+  were removed on the owner's request.
+- **Homepage header breakpoint 860 → 1024px:** with six links the row no
+  longer fit between 861 and ~1024px ("Perché SAFE21" wrapped onto two
+  lines, the row touched the buttons), so the hamburger now takes over at
+  the same width as the blog pages. The 860px compact-header block
+  (smaller logo, hidden Contact button) is unchanged.
+- **Àncòra article:** "La pagina del plugin: safe21.io/ancora" as the
+  first "Per approfondire" item.
+- `sitemap.xml`: the homepage `lastmod` bumped to 2026-11-04.
+- Incidentally normalised: ancora.html was the only LF≠CRLF outlier — the
+  working-copy HTML here is LF (git normalises on commit), so it was
+  converted to LF like its siblings.
+
+**Verified:** `python tools/audit.py` clean. In the browser preview, on
+ancora.html, the article and the homepage (EN and IT): menu, drawer and
+footer lists checked via the DOM; the card shows only the Àncòra link;
+at 880/960px the homepage shows the hamburger, at 1280px the six links
+sit on one line with 67px of room.
+
 ## [63] — Presentation page of the Àncòra plugin at safe21.io/ancora
 
 **Date:** 2026-11-04
