@@ -427,11 +427,19 @@
         Il pulsante Check è il cuore del plugin: controlla il testamento, lo
         rifà se serve e lo manda ai will-executor. Nella 0.8.0 dice «Ok» solo
         quando ogni will-executor ha davvero ricevuto il testamento; se uno
-        lo ha perso, lo riceve di nuovo nello stesso Check. Ogni copia paga
-        la sua commissione di rete, una commissione sotto i 20 sat/vB fa
-        comparire un avviso, e l'invalidazione spende solo monete che
-        esistono davvero sulla rete. Come sempre, nessuna transazione a
-        pagamento parte senza la tua conferma.
+        lo ha perso, lo riceve di nuovo nello stesso Check.
+      </p>
+
+      <p>
+        Ogni copia porta con sé la commissione decisa dal suo will-executor:
+        è il compenso per custodirla e per inviarla alla rete quando sarà il
+        momento. La commissione per i miner, invece, la scegli tu, e il
+        plugin ti avvisa se scendi sotto i 20 sat/vB: quella transazione
+        verrà trasmessa fra anni, e deve essere abbastanza generosa perché i
+        miner la accettino e la inseriscano nella blockchain. Se un
+        testamento va invalidato, il plugin usa solo monete che esistono
+        davvero sulla rete. Come sempre, nessuna transazione a pagamento
+        parte senza la tua conferma.
       </p>
 
       <h2>Da riga di comando, anche per le intelligenze artificiali</h2>

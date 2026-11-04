@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [59] — Àncòra article: the Check paragraph explains the two fees
+
+**Date:** 2026-11-04
+**Status:** Delivered and live
+
+Owner: the sentence "ogni copia paga la sua commissione di rete" mixed up the
+two fees. Rewritten in two paragraphs: each copy carries the fee decided by
+its will-executor (its pay for keeping the copy and broadcasting it when the
+time comes); the miner fee is the owner's choice, and the 20 sat/vB warning
+exists because the transaction will be broadcast years from now and must be
+generous enough for the miners to accept it. Invalidation and "no paid
+transaction without your confirmation" unchanged.
+
 ## [58] — Àncòra article rewritten as the presentation of release 0.8.0
 
 **Date:** 2026-11-04
