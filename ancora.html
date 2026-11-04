@@ -45,6 +45,12 @@
   <meta property="og:url" content="https://safe21.io/ancora" />
   <meta property="og:image" content="https://safe21.io/images/copertina-ancora-plugin.webp" />
   <meta property="og:locale" content="it_IT" />
+
+  <!-- X (Twitter) preview. Without twitter:card, X shows no preview at all
+       (owner tested, 2026-11-04); with it, X shows the large cover with the
+       domain overlaid. Title and description fall back to the og: tags. -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://safe21.io/images/copertina-ancora-plugin.webp" />
   <link rel="canonical" href="https://safe21.io/ancora.html" />
 
   <!-- Structured data (JSON-LD): SoftwareApplication, not Article — this

@@ -3,6 +3,24 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [65] — Àncòra page: X (Twitter) preview card
+
+**Date:** 2026-11-04
+**Status:** Delivered and live (pushed to `main`)
+
+The owner shared safe21.io/ancora on X and no preview appeared at all:
+unlike Telegram, X ignores plain Open Graph tags.
+
+- `ancora.html`: `twitter:card` (summary_large_image) + `twitter:image`
+  in the head. Title and description fall back to the og: tags; X shows
+  the large cover with the domain overlaid (since 2023 it no longer
+  prints title/description under a large-image card).
+- robots.txt checked: the wildcard already allows Twitterbot.
+
+**Verified:** `python tools/audit.py` clean; the cover URL answers 200
+(image/webp, 69 KB). X caches link previews, so an immediate retest can
+still show nothing for a while.
+
 ## [64] — The Àncòra page linked from the menu, the footer, the homepage and the article
 
 **Date:** 2026-11-04
