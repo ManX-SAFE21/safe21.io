@@ -3,6 +3,22 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [61] — Àncòra article: the small "à" icon beside the logo paragraph
+
+**Date:** 2026-11-04
+**Status:** Delivered and live
+
+The owner asked to show the "à" icon, small, where the article talks about
+the logo.
+
+- New `images/ancora-icon.svg`: copy of the plugin repo brand file
+  `assets/brand/svg/ancora-icon.svg` (the "à" on a white rounded square),
+  used as-is; the white tile keeps it readable on the dark theme too.
+- `blog-ancora-plugin-bal-protocol.html`: the icon at 64 px on the left of
+  the logo paragraph, with alt text. Inline style on purpose (one-off
+  element), so `blog.css` is untouched.
+- Verified in preview on desktop and at 375 px.
+
 ## [60] — Àncòra article: motto, animation and hardware wallet sentences
 
 **Date:** 2026-11-04
