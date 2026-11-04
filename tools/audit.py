@@ -229,6 +229,8 @@ def check_images(page, src):
             continue
         if not HAVE_PIL or src_attr.startswith('http'):
             continue
+        if src_attr.lower().endswith('.svg'):
+            continue                              # vector: no pixel size to compare
         fp = ROOT / src_attr
         if not fp.exists():
             continue                              # already reported by check_links

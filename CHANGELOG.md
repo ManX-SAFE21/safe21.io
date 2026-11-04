@@ -3,6 +3,21 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [62] — Audit: SVG images no longer reported as unreadable
+
+**Date:** 2026-11-04
+**Status:** Delivered
+
+After #61 the audit failed on `images/ancora-icon.svg`: it opens every
+`<img>` with Pillow to compare its pixel size with width/height, and an SVG
+is vector, so Pillow cannot read it (false error; the page was fine live).
+
+- `tools/audit.py`: the size check skips `.svg` images.
+- Also on 2026-11-04: an uncommitted local change to `blog.css` (not part of
+  any task, it dropped the `.anim-cover` rules and made the animation preview
+  image overflow the page) was discarded on the owner's choice; a copy was
+  kept in the session scratchpad.
+
 ## [61] — Àncòra article: the small "à" icon beside the logo paragraph
 
 **Date:** 2026-11-04
