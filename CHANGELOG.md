@@ -3,6 +3,51 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [63] — Presentation page of the Àncòra plugin at safe21.io/ancora
+
+**Date:** 2026-11-04
+**Status:** Delivered and live (pushed to `main`)
+
+The client asked for a presentation page of the Àncòra plugin, in Italian,
+reachable at safe21.io/ancora (chosen over a separate ancora.safe21.io:
+same repo, same deploy, and it strengthens safe21.io instead of splitting
+it). "Crea una pagina di presentazione con il meglio che puoi fare."
+
+- New `ancora.html`: hero with the brand lockup (theme-swapped: white word
+  on dark, ink word on light) and a three-stop timeline card of the
+  protocol; "Cos'è" (the name's two meanings); the two green narrated
+  animations in the same `.anim-card` as the article plus the six steps in
+  brief; an eight-card feature grid; download/install in three steps with a
+  "Da sapere" callout; a five-question FAQ (native `<details>`); the credit
+  to the original Bitcoin After Life code by svatantrya (MIT); the same
+  closing CTA, header and footer as the blog pages.
+- The page names NO plugin version, file name or hash: every download link
+  points to GitHub releases/latest, so a new release never makes it stale
+  (same rule as the article since #56). The only version on the page is the
+  Electrum requirement (4.8.3 or later).
+- New `ancora.css` loaded after the shared `blog.css`: only what is
+  specific to this page (hero, timeline, fact ribbon, feature grid, steps,
+  FAQ). `blog.css` untouched, so the 11 blog pages cannot be affected.
+- `images/ancora-lockup.svg` + `images/ancora-lockup-dark.svg`: copies of
+  the plugin repo brand files `assets/brand/svg/` (used as-is, like the
+  icon in #61).
+- On the owner's request, the "à" icon (`images/ancora-icon.svg`, already
+  in the repo since #61) sits under the motto in "Un nome, due
+  significati", with one line saying it is the plugin's icon — the same
+  icon-beside-text pairing as the article.
+- SEO: JSON-LD `SoftwareApplication` (not Article: it is a product page)
+  with price 0, MIT licence and the releases/latest download URL;
+  canonical `ancora.html`, og:url the clean `/ancora`; new `<url>` in
+  `sitemap.xml` (priority 0.9).
+- `tools/audit.py`: `ancora.html` added to `NON_ARTICLE`, so the audit does
+  not demand a blog card for it.
+
+**Verified:** `python tools/audit.py` clean (the only new notice is the
+deliberately empty alt on the decorative animation cover, as in the
+article). In the browser preview: dark and light theme (lockup swap
+checked via computed styles), FAQ open/close, no console errors, no
+horizontal overflow at 375px.
+
 ## [62] — Audit: SVG images no longer reported as unreadable
 
 **Date:** 2026-11-04

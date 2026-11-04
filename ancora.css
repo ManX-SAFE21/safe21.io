@@ -1,0 +1,255 @@
+/* ==========================================================================
+   SAFE21 — ancora.html (the Àncòra plugin presentation page) stylesheet
+   ==========================================================================
+
+   Loaded AFTER blog.css, which provides everything shared with the rest of
+   the site: the design tokens (dark + light theme), the header, the footer,
+   the buttons, the theme toggle, the .anim-card and the closing CTA. This
+   file adds only what is specific to the landing page: the hero, the
+   timeline card, the fact ribbon, the feature grid, the install steps and
+   the FAQ. Kept separate from blog.css on purpose: the 11 blog pages load
+   blog.css, and none of them needs any of this.
+
+   The site has no build step: plain CSS, loaded with a <link>.
+   ========================================================================== */
+
+/* ---------- Shared section rhythm ---------- */
+.band { padding: 72px 0; }
+/* Alternating background band, same device as the homepage sections. */
+.band-alt {
+  background: var(--ink-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.section-head { max-width: 720px; margin-bottom: 36px; }
+.section-head h2 {
+  font-size: 32px; font-weight: 700; letter-spacing: -0.3px;
+}
+.section-head .lede { font-size: 17px; color: var(--muted); margin: 14px 0 0; }
+
+/* Generous prose defaults for the few free paragraphs on this page. */
+.band p { color: var(--body); }
+.prose { max-width: 820px; }
+.prose p { font-size: 17px; margin: 0 0 20px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--light); font-weight: 600; }
+.band a.inline {
+  color: var(--teal); text-decoration: underline; text-underline-offset: 3px;
+}
+.band a.inline:hover { color: var(--accent-hover); }
+
+/* The "à" icon beside the motto paragraph (same pairing as the blog
+   article): brand file used as-is, a hairline ring around the white tile. */
+.icon-row { display: flex; align-items: center; gap: 18px; margin-top: 26px; }
+.icon-row img {
+  flex: 0 0 64px; width: 64px; height: 64px;
+  border-radius: 14px; box-shadow: 0 0 0 1px var(--line);
+}
+.icon-row p { margin: 0; font-size: 16px; color: var(--muted); }
+
+/* ---------- Hero ---------- */
+.hero-ancora {
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+  padding: 72px 0 64px;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: 56px;
+  align-items: center;
+}
+
+/* The brand lockup ("àncòra" + slogan). Two <img> variants: the dark-
+   background file (white word) shows on the default dark theme, the
+   light-background file (ink word) when data-theme="light" is set. */
+.hero-lockup { margin: 18px 0 26px; }
+.hero-lockup img { width: min(360px, 78%); height: auto; }
+.hero-lockup .lockup-light { display: none; }
+[data-theme="light"] .hero-lockup .lockup-dark { display: none; }
+[data-theme="light"] .hero-lockup .lockup-light { display: block; }
+
+.hero-ancora h1 {
+  font-size: 44px; font-weight: 700; letter-spacing: -0.5px;
+  max-width: 540px;
+}
+.hero-sub {
+  font-size: 19px; color: var(--muted);
+  max-width: 520px; margin: 20px 0 0;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+/* One mono line of hard facts under the buttons. */
+.hero-facts {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  letter-spacing: 1px; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 6px 10px;
+  margin: 26px 0 0;
+}
+.hero-facts span::after { content: "·"; margin-left: 10px; color: var(--line); }
+.hero-facts span:last-child::after { content: ""; }
+
+/* ---------- Hero timeline card ----------
+   The protocol in one glance: today → the delivery date, with the three
+   will-executor copies in between. Plain HTML + CSS (no image), so it
+   follows both themes and reflows on phones. */
+.hero-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  box-shadow: var(--card-shadow);
+}
+.hero-card .eyebrow { margin-bottom: 18px; }
+
+.tl { list-style: none; margin: 0; padding: 0; }
+.tl li { position: relative; padding: 0 0 24px 32px; }
+.tl li:last-child { padding-bottom: 0; }
+/* The dot. */
+.tl li::before {
+  content: ""; position: absolute; left: 4px; top: 5px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 4px var(--tint-teal-bg);
+}
+/* The connecting line between dots. */
+.tl li:not(:last-child)::after {
+  content: ""; position: absolute; left: 9px; top: 24px; bottom: 4px;
+  width: 2px; background: var(--line);
+}
+/* Middle stop (the copies): hollow dot, it is custody rather than an event. */
+.tl li.tl-mid::before { background: var(--panel); border: 2px solid var(--teal); }
+/* Final stop (the delivery): the one Bitcoin-orange accent of the card. */
+.tl li.tl-end::before {
+  background: var(--orange);
+  box-shadow: 0 0 0 4px var(--tint-btc-bg);
+}
+.tl .tl-t {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+  font-size: 16.5px; color: var(--light); display: block;
+}
+.tl p { margin: 3px 0 0; font-size: 14.5px; color: var(--muted); line-height: 1.55; }
+
+/* A gentle pulse on the "today" dot. The global reduced-motion rule in
+   blog.css (animation: none !important) switches it off automatically. */
+@keyframes tl-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--tint-teal-bg); }
+  50%      { box-shadow: 0 0 0 8px var(--tint-teal-bg); }
+}
+.tl li.tl-now::before { animation: tl-pulse 3s ease-in-out infinite; }
+
+.hero-card .tl-note {
+  margin: 22px 0 0; padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 14px; color: var(--muted); line-height: 1.6;
+}
+.hero-card .tl-note strong { color: var(--light); font-weight: 600; }
+
+/* ---------- "In breve" strip under the animations ---------- */
+.brief { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 10px; }
+.brief li {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 16px; color: var(--body); line-height: 1.55;
+}
+.brief .n {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  color: var(--teal); flex: none; padding-top: 4px; min-width: 18px;
+}
+
+/* ---------- Feature grid ---------- */
+.features {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px;
+}
+.feature {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  box-shadow: var(--card-shadow);
+}
+.feature svg {
+  width: 28px; height: 28px; color: var(--teal); margin-bottom: 16px;
+}
+.feature h3 { font-size: 18px; font-weight: 600; margin: 0 0 8px; }
+.feature p { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.6; }
+.feature code {
+  font-family: 'Space Mono', monospace; font-size: 0.88em; color: var(--light);
+  background: var(--tint-teal-bg); border: 1px solid var(--tint-teal-bd);
+  border-radius: 6px; padding: 1px 6px;
+}
+
+/* ---------- Install steps ---------- */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.step {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  box-shadow: var(--card-shadow);
+}
+.step .num {
+  font-family: 'Space Mono', monospace; font-size: 13px;
+  color: var(--teal); display: block; margin-bottom: 10px;
+}
+.step h3 { font-size: 17px; font-weight: 600; margin: 0 0 8px; }
+.step p { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.6; }
+.step a.inline {
+  color: var(--teal); text-decoration: underline; text-underline-offset: 3px;
+}
+.steps-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+
+/* The requirements box reuses .callout from blog.css; only the title row
+   spacing is specific to this page. */
+.band .callout { margin: 32px 0 0; }
+.band .callout ul { margin: 0; padding-left: 20px; }
+.band .callout li { font-size: 15.5px; color: var(--body); margin-bottom: 10px; }
+.band .callout li:last-child { margin-bottom: 0; }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; gap: 12px; max-width: 820px; }
+.faq details {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+}
+.faq summary {
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 22px;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+  font-size: 17px; color: var(--light);
+}
+.faq summary::-webkit-details-marker { display: none; }
+/* +/− indicator drawn with text, so it inherits the theme colours. */
+.faq summary::after {
+  content: "+"; flex: none;
+  font-family: 'Space Mono', monospace; font-size: 18px; color: var(--teal);
+}
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { margin: 0; padding: 0 22px 20px; font-size: 15.5px; color: var(--body); line-height: 1.65; }
+.faq details p + p { padding-top: 0; margin-top: -8px; }
+
+/* ---------- Origin note (credit to the original BAL code) ---------- */
+.origin {
+  margin-top: 44px; padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 14px; color: var(--muted); line-height: 1.7;
+  max-width: 820px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-ancora h1 { max-width: none; }
+  .steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .band { padding: 52px 0; }
+  .hero-ancora { padding: 48px 0 44px; }
+  .hero-ancora h1 { font-size: 32px; }
+  .hero-sub { font-size: 17px; }
+  .section-head h2 { font-size: 26px; }
+  .features { grid-template-columns: 1fr; }
+  .feature, .step, .hero-card { padding: 22px 20px; }
+}

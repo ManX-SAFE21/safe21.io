@@ -48,7 +48,7 @@ EXPECTED = {
 }
 
 # Pages that are not blog articles and so have no byline/eyebrow/article body.
-NON_ARTICLE = {'index.html', 'blog.html'}
+NON_ARTICLE = {'index.html', 'blog.html', 'ancora.html'}
 
 MONTHS = {'gennaio': 1, 'febbraio': 2, 'marzo': 3, 'aprile': 4, 'maggio': 5,
           'giugno': 6, 'luglio': 7, 'agosto': 8, 'settembre': 9, 'ottobre': 10,
