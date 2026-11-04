@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ============================================================
-       SAFE21 — Blog article: "Àncòra: il nostro nuovo plugin per
+       SAFE21 — Blog article: "Àncòra 0.8.0: il nostro plugin per
        BAL Protocol"
 
        LANGUAGE NOTE (project rule R1):
@@ -16,23 +16,22 @@
        identifiers remain in English, as required by R1.
 
        CONTENT NOTE:
-       Presents Àncòra, the Electrum plugin SAFE21 forked from the
-       original Bitcoin After Life code (MIT, by svatantrya). The install
-       section deliberately names no version, file name or hash: it links
-       to releases/latest so it never needs updating. The two
-       explainer animations (simple, 8 steps; full, 15 steps) live in
-       animazioni/ with their audio folders beside them. They are copies
-       of files generated elsewhere: never edit them here, re-copy them.
-       The simple one is embedded in an iframe; the full one opens from a
-       button. The voice starts only after a tap inside the page (browser
-       autoplay rule), so the text tells the reader to tap.
+       Presents Àncòra 0.8.0, the Electrum plugin SAFE21 forked from the
+       original Bitcoin After Life code (MIT, by svatantrya). First
+       published 2026-10-25 for 0.7.0 (never announced); rewritten
+       2026-11-04 as the single presentation of 0.8.0 (several deliveries
+       / Multiverso, command line, offline signing, multisig). The install
+       section names no file name or hash: it links to releases/latest so
+       it never needs updating. The two explainer animations (green,
+       Italian, with voice) live in animazioni/ with their audio folders
+       beside them and open from a small card: nothing is embedded here.
 
        Structure cloned from blog-chiavette-manomesse-ledger.html (shared
        blog.css / blog.js; figure + lightbox, callout, checklist, CTA).
        ============================================================ -->
 
-  <title>Àncòra: il nostro nuovo plugin per BAL Protocol — SAFE21</title>
-  <meta name="description" content="Àncòra è il plugin per Electrum riscritto da SAFE21 per rendere semplice BAL Protocol, l'eredità dei propri bitcoin. Con due animazioni con la voce." />
+  <title>Àncòra 0.8.0: il nostro plugin per BAL Protocol — SAFE21</title>
+  <meta name="description" content="Àncòra 0.8.0 è il plugin per Electrum riscritto da SAFE21 per BAL Protocol: eredità in più consegne, firma su un secondo computer, multifirma e riga di comando." />
   <meta name="theme-color" content="#0A0F1C" />
 
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -41,8 +40,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
 
   <!-- Open Graph (social preview) -->
-  <meta property="og:title" content="Àncòra: il nostro nuovo plugin per BAL Protocol" />
-  <meta property="og:description" content="Àncòra è il plugin per Electrum riscritto da SAFE21 per rendere semplice BAL Protocol, l'eredità dei propri bitcoin. Con due animazioni con la voce." />
+  <meta property="og:title" content="Àncòra 0.8.0: il nostro plugin per BAL Protocol" />
+  <meta property="og:description" content="Àncòra 0.8.0 è il plugin per Electrum riscritto da SAFE21 per BAL Protocol: eredità in più consegne, firma su un secondo computer, multifirma e riga di comando." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://safe21.io/blog-ancora-plugin-bal-protocol" />
   <meta property="og:image" content="https://safe21.io/images/copertina-ancora-plugin.webp" />
@@ -56,12 +55,12 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Àncòra: il nostro nuovo plugin per BAL Protocol",
-    "description": "Àncòra è il plugin per Electrum riscritto da SAFE21 per rendere semplice BAL Protocol, l'eredità dei propri bitcoin. Con due animazioni con la voce.",
+    "headline": "Àncòra 0.8.0: il nostro plugin per BAL Protocol",
+    "description": "Àncòra 0.8.0 è il plugin per Electrum riscritto da SAFE21 per BAL Protocol: eredità in più consegne, firma su un secondo computer, multifirma e riga di comando.",
     "url": "https://safe21.io/blog-ancora-plugin-bal-protocol.html",
     "image": "https://safe21.io/images/copertina-ancora-plugin.webp",
-    "datePublished": "2026-10-25",
-    "dateModified": "2026-10-25",
+    "datePublished": "2026-11-04",
+    "dateModified": "2026-11-04",
     "inLanguage": "it",
     "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
     "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
@@ -199,18 +198,22 @@
     <div class="read">
       <a class="back-link" href="blog.html">&larr; Tutti gli articoli</a>
       <p class="eyebrow">Eredità Bitcoin &middot; Àncòra</p>
-      <h1>Àncòra: il nostro nuovo plugin per BAL Protocol</h1>
+      <h1>Àncòra 0.8.0: il nostro plugin per BAL Protocol</h1>
       <p class="standfirst">
         Si chiama Àncòra il plugin per Electrum riscritto da SAFE21 per
         rendere semplice l'uso di BAL Protocol, il protocollo pensato per
-        l'eredità dei propri bitcoin. Qui ti raccontiamo perché si chiama
-        così, cosa abbiamo cambiato e come si installa. E, prima di tutto,
-        ti facciamo vedere come funziona con due animazioni.
+        l'eredità dei propri bitcoin senza consegnare le chiavi a nessuno.
+        Con la versione 0.8.0 arrivano l'eredità in più consegne (il
+        Multiverso), la firma su un secondo computer, i portafogli
+        multifirma e la riga di comando, usabile anche dagli assistenti di
+        intelligenza artificiale. Qui ti raccontiamo cos'è, cosa sa fare e
+        come si installa. Prima di tutto, come funziona il protocollo, con
+        due animazioni.
       </p>
       <p class="byline">
         <span>SAFE21</span>
-        <span>25 ottobre 2026</span>
-        <span class="read-time">6 min di lettura</span>
+        <span>4 novembre 2026</span>
+        <span class="read-time">8 min di lettura</span>
       </p>
     </div>
   </div>
@@ -245,8 +248,11 @@
 
       <p>
         Oggi presentiamo lo strumento che usiamo per metterlo in pratica:
-        <strong>Àncòra</strong>, il plugin per Electrum che SAFE21 ha
-        riscritto partendo dal codice originale di Bitcoin After Life.
+        <strong>Àncòra 0.8.0</strong>, il plugin per Electrum che SAFE21 ha
+        riscritto partendo dal codice originale di Bitcoin After Life. È la
+        prima versione che consigliamo a tutti: ha l'eredità in più consegne,
+        la firma su un secondo computer, i portafogli multifirma e la riga di
+        comando.
       </p>
 
       <h2>Perché si chiama Àncòra</h2>
@@ -271,45 +277,49 @@
       <p>
         Il logo è la parola <em>àncòra</em> con i due accenti in
         verde-acqua, uno per ciascun significato. Come icona usiamo la sola
-        «à» con i due accenti. Lo troverai nel plugin dalla prossima
-        versione e nel report stampabile.
+        «à» con i due accenti. Li trovi nel plugin e nel report stampabile.
       </p>
 
       <h2>Prima guarda come funziona</h2>
 
       <p>
-        Prima di parlare del plugin, guarda il protocollo. Questa animazione
-        di due minuti spiega BAL Protocol con un'idea sola: un assegno
-        post-datato.
+        Prima di parlare del plugin, guarda il protocollo. Ci sono due
+        animazioni con la voce, in italiano: quella semplice spiega BAL
+        Protocol in due minuti con un'idea sola, un assegno post-datato;
+        quella completa dura quattro minuti e aggiunge i casi veri della vita.
+        Si aprono a pagina intera; tocca lo schermo una volta e partono
+        dall'inizio, con la voce.
       </p>
 
-      <div class="callout">
-        <p class="eyebrow">Tocca la pagina per sentire la voce</p>
-        <p>
-          I browser fanno partire l'audio solo dopo un tocco. Tocca una volta
-          il riquadro qui sotto: l'animazione parte dall'inizio, con la voce.
-        </p>
+      <!-- Small card, laid out like the "Animated guide" card on the
+           bitcoin-after.life home: cover + two links to the GREEN narrated
+           animations in animazioni/ (Italian only, SAFE21 colours; copies of
+           files generated elsewhere, never edited here). Nothing else loads
+           here: no iframe, no audio. Owner (2026-11-04): the embedded frame
+           took too much room; the animations are always the green ones. -->
+      <div class="anim-card">
+        <a class="anim-cover" href="animazioni/come-funziona-bal-protocol-semplice-voce.html" target="_blank" rel="noopener noreferrer" aria-label="Guarda l'animazione semplice di BAL Protocol">
+          <img src="images/anteprima-bal-protocol.jpg" alt="" width="1200" height="630" loading="lazy" decoding="async" />
+          <span class="anim-play" aria-hidden="true">&#9654;</span>
+        </a>
+        <div class="anim-text">
+          <p class="eyebrow">Guida animata, con voce</p>
+          <p>Due animazioni in italiano. Scegli quella che sta nel tuo tempo.</p>
+          <div class="anim-actions">
+            <a class="btn btn-primary" href="animazioni/come-funziona-bal-protocol-semplice-voce.html" target="_blank" rel="noopener noreferrer">&#9654; Semplice &middot; 8 passi, 2 min</a>
+            <a class="btn btn-ghost" href="animazioni/come-funziona-bal-protocol-voce.html" target="_blank" rel="noopener noreferrer">Completa &middot; 15 passi, 4 min</a>
+          </div>
+        </div>
       </div>
 
-      <!-- Simple explainer (8 steps, ~2 min), embedded. The page inside is
-           self-contained and light by default; it follows the visitor's
-           system theme, not the blog toggle. Height chosen from measured
-           page heights (730–830 px) so nothing scrolls inside the frame.
-           Loaded eagerly on purpose: in the phone test a lazy iframe
-           stayed blank; the page is ~90 KB and the audio loads only after
-           the tap. -->
-      <div class="anim-box">
-        <iframe class="anim-frame"
-                src="animazioni/come-funziona-bal-protocol-semplice-voce.html"
-                title="Come funziona BAL Protocol, versione semplice (8 passi, con voce)"
-                allow="autoplay"></iframe>
-        <p class="anim-links">
-          Versione semplice &middot; 8 passi &middot; circa 2 minuti &middot;
-          <a class="inline" href="animazioni/come-funziona-bal-protocol-semplice-voce.html" target="_blank" rel="noopener noreferrer">Apri a schermo intero &nearr;</a>
-        </p>
-      </div>
+      <p>
+        La versione completa aggiunge i casi veri della vita: cosa succede se
+        cambi l'importo nel portafoglio, se aggiungi un erede, se vuoi
+        spostare la data più avanti, e cosa succede se quasi tutti i
+        will-executor spariscono.
+      </p>
 
-      <p>In breve, quello che hai visto:</p>
+      <p>In breve, quello che raccontano:</p>
 
       <ul>
         <li>Scrivi il testamento nel plugin: scegli gli eredi e la data di consegna.</li>
@@ -330,7 +340,7 @@
       </p>
 
       <div class="checklist">
-        <h2>Le novità di Àncòra</h2>
+        <h2>Semplice da usare</h2>
         <ul>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -338,7 +348,7 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            <span><strong>Modalità Base e Avanzata.</strong> In Base vedi solo quello che serve per decidere. Le commissioni, i periodi rinnovabili e le opzioni tecniche restano in Avanzata.</span>
+            <span><strong>Modalità Base e Avanzata.</strong> In Base vedi solo quello che serve per decidere. Le commissioni, i periodi rinnovabili, le consegne multiple e le opzioni tecniche restano in Avanzata.</span>
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
@@ -362,10 +372,99 @@
           </li>
           <li>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            <span><strong>Italiano, inglese e spagnolo</strong>, con l'animazione che hai appena visto anche dentro il plugin, funzionante senza connessione.</span>
+            <span><strong>Italiano, inglese e spagnolo</strong>, con l'animazione qui sopra anche dentro il plugin, funzionante senza connessione.</span>
           </li>
         </ul>
       </div>
+
+      <h2>L'eredità in più consegne: il Multiverso</h2>
+
+      <p>
+        Un testamento classico consegna tutto in una volta, a una data. Con
+        Àncòra 0.8.0, in modalità Avanzata, puoi dividere l'eredità in
+        <strong>due o tre consegne</strong>, a date diverse: per esempio una
+        parte subito, una parte fra tre anni e il resto fra sei. Una sola
+        tabella fissa le date e le quote di ciascun erede.
+      </p>
+
+      <p>
+        Perché farlo? Perché un erede giovane può aver bisogno di tempo prima
+        di gestire tutto. Perché una parte può servire subito alla famiglia e
+        il resto può aspettare. Perché, se le cose cambiano, cambi la tabella
+        e il plugin rifà le copie. Ogni consegna è a tutti gli effetti un
+        testamento BAL, con le sue copie presso i will-executor e la sua
+        commissione: il plugin controlla che il portafoglio possa pagarle
+        tutte e, se non basta, si ferma prima di costruire qualcosa che non
+        starebbe in piedi.
+      </p>
+
+      <p>
+        Per vedere cosa succede nei vari casi c'è la nuova vista
+        <strong>«Grafo»</strong> nella scheda Testamento: mostra il
+        testamento e i suoi possibili futuri. Lo abbiamo chiamato Multiverso
+        proprio per questo: non una sola linea del tempo, ma più strade che
+        partono dalla stessa decisione.
+      </p>
+
+      <h2>Le chiavi su un secondo computer, e la multifirma</h2>
+
+      <p>
+        Molti di noi tengono le chiavi su un computer che non va mai in rete,
+        e su quello collegato a internet solo un portafoglio «di sola
+        lettura», che vede i fondi ma non può firmare. Àncòra 0.8.0 è fatto
+        per questo modo di lavorare.
+      </p>
+
+      <ul>
+        <li><strong>Firma su un secondo computer.</strong> Il computer online prepara il testamento e lo salva in un file su una chiavetta. Sul computer con le chiavi, una procedura guidata in tre passi (Strumenti &rarr; Firma il testamento offline) mostra <strong>le uscite vere</strong> del testamento, eredi, importi e indirizzi, e ti chiede di confrontarle con quello che hai scritto su carta; poi firma e salva il file da riportare indietro. Ogni firma viene verificata: una firma falsa ferma il file.</li>
+        <li><strong>Portafogli multifirma.</strong> Àncòra funziona anche con i portafogli multifirma di Electrum, per esempio 2 di 3: ogni cofirmatario firma dalla sua parte e la commissione viene calcolata sulla dimensione reale della transazione. Lo abbiamo provato fino in fondo sulla rete di test, con la consegna eseguita da un will-executor vero.</li>
+        <li><strong>Anche quando sposti la data.</strong> Spostare più avanti la consegna di un testamento già inviato vuol dire invalidare il vecchio sulla blockchain. Su un portafoglio di sola lettura o multifirma, Àncòra apre la transazione da firmare sull'altro computer e ti elenca i passi, pronti da copiare su carta.</li>
+      </ul>
+
+      <h2>Un Check che non si fida sulla parola</h2>
+
+      <p>
+        Il pulsante Check è il cuore del plugin: controlla il testamento, lo
+        rifà se serve e lo manda ai will-executor. Nella 0.8.0 dice «Ok» solo
+        quando ogni will-executor ha davvero ricevuto il testamento; se uno
+        lo ha perso, lo riceve di nuovo nello stesso Check. Ogni copia paga
+        la sua commissione di rete, una commissione sotto i 20 sat/vB fa
+        comparire un avviso, e l'invalidazione spende solo monete che
+        esistono davvero sulla rete. Come sempre, nessuna transazione a
+        pagamento parte senza la tua conferma.
+      </p>
+
+      <h2>Da riga di comando, anche per le intelligenze artificiali</h2>
+
+      <p>
+        Tutto quello che fai con i pulsanti si può fare anche <strong>senza
+        interfaccia grafica</strong>, con il demone di Electrum e una serie
+        di comandi <code>bal_*</code>: eredi, will-executor, data di
+        consegna, tabella del Multiverso, preparazione, firma, invio,
+        controllo, esportazione e importazione del testamento. Ogni comando
+        spiega i suoi parametri con <code>--help</code> e risponde in modo
+        leggibile da un programma.
+      </p>
+
+      <p class="cli">
+        <code>electrum bal_heirs_add alice bc1q&hellip; 50%</code>
+        <code>electrum bal_will_prepare</code>
+        <code>electrum bal_will_sign --password '&hellip;'</code>
+        <code>electrum bal_will_broadcast</code>
+        <code>electrum bal_will_status</code>
+      </p>
+
+      <p>
+        Serve a chi vuole automatizzare, a chi lavora su un server senza
+        schermo e, sempre di più, a chi si fa aiutare da un <strong>assistente
+        di intelligenza artificiale</strong>: un assistente può leggere lo
+        stato del testamento, preparare le modifiche e farti vedere il
+        risultato prima di firmare. Noi stessi, in SAFE21, usiamo la riga di
+        comando così nei test. Le operazioni che non si possono annullare,
+        per esempio anticipare la data di un testamento già inviato, vengono
+        rifiutate finché non c'è una conferma esplicita, e il messaggio di
+        rifiuto dice chiaramente all'assistente di chiedere prima a te.
+      </p>
 
       <p>
         Àncòra usa <strong>gli stessi will-executor e la stessa lista</strong>
@@ -373,21 +472,6 @@
         href="blog-safe21-will-executor.html">il will-executor di SAFE21</a>.
         Chi gestisce un will-executor guadagna le mance in ogni caso: più
         persone usano il protocollo, meglio è per tutti.
-      </p>
-
-      <h2>Per chi vuole tutti i dettagli</h2>
-
-      <p>
-        La versione completa dura quattro minuti e aggiunge i casi veri della
-        vita: cosa succede se cambi l'importo nel portafoglio, se aggiungi un
-        erede, se vuoi spostare la data più avanti, e cosa succede se quasi
-        tutti i will-executor spariscono. Si apre a pagina intera. Anche qui,
-        tocca lo schermo per sentire la voce.
-      </p>
-
-      <p class="anim-actions">
-        <a class="btn btn-primary" href="animazioni/come-funziona-bal-protocol-voce.html" target="_blank" rel="noopener noreferrer">Guarda la versione completa &nearr;</a>
-        <span class="anim-meta">15 passi &middot; circa 4 minuti &middot; con voce</span>
       </p>
 
       <h2>Come si installa</h2>
@@ -400,15 +484,18 @@
 
       <ol>
         <li>Scarica il file ZIP dell'ultima versione dalla <a class="inline" href="https://github.com/ManX-SAFE21/ancora-electrum-plugin/releases/latest" target="_blank" rel="noopener noreferrer">pagina delle release &nearr;</a>.</li>
-        <li>Controlla il codice SHA-256 del file: lo trovi scritto nelle note della release.</li>
-        <li>In Electrum 4.8.2 o successivo: Strumenti &rarr; Plugin &rarr; Aggiungi, scegli il file ZIP, attiva il plugin e riavvia Electrum.</li>
+        <li>Controlla il codice SHA-256 del file e, se vuoi, la firma PGP: trovi tutto nelle note della release.</li>
+        <li>In Electrum 4.8.3 o successivo: Strumenti &rarr; Plugin &rarr; Aggiungi, scegli il file ZIP, attiva il plugin e riavvia Electrum.</li>
       </ol>
 
       <p>
-        Due cose da sapere. Àncòra e il plugin ufficiale di Bitcoin After
+        Tre cose da sapere. Àncòra e il plugin ufficiale di Bitcoin After
         Life non possono stare insieme nello stesso Electrum: scegline uno.
-        E un testamento fatto con il plugin originale, su Electrum dalla
-        versione 4.8 in poi, si apre in Àncòra senza rifare niente.
+        Un testamento fatto con il plugin originale, su Electrum dalla
+        versione 4.8 in poi, si apre in Àncòra senza rifare niente. E il
+        portafoglio deve avere indirizzi che iniziano con <code>bc1q</code>:
+        con quelli che iniziano con 1 o 3 il plugin dice chiaramente che non
+        è supportato. I portafogli hardware non sono ancora stati provati.
       </p>
 
       <h2>Cosa non cambia</h2>

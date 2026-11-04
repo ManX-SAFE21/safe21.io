@@ -3,6 +3,55 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [58] — Àncòra article rewritten as the presentation of release 0.8.0
+
+**Date:** 2026-11-04
+**Status:** Delivered and live
+
+The owner published Àncòra 0.8.0 (tag `ancora-v0.8.0`). The article of
+2026-10-25 presented 0.7.0, which was never announced, so instead of an
+"update box" the owner asked for one single article about 0.8.0 and what it
+does, keeping the Bitcoin After Life parts. Same URL (indexed), so nothing
+to redirect.
+
+- `blog-ancora-plugin-bal-protocol.html`: title/h1 "Àncòra 0.8.0: il
+  nostro plugin per BAL Protocol", new standfirst, meta/OG/JSON-LD
+  description, `datePublished` 2026-11-04, 8 min. Kept: the problem, the
+  name, the BAL Protocol explanation, "Cosa ha cambiato SAFE21" checklist,
+  shared will-executors, install, "Cosa non cambia" (credit to the original
+  BAL code), footnote, CTA. New sections, written from the release notes,
+  README and CHANGELOG 164-228 of the plugin: "L'eredità in più consegne:
+  il Multiverso" (2-3 deliveries, one table, one fee per copy, refused when
+  the wallet cannot pay every delivery, the "Grafo" view); "Le chiavi su un
+  secondo computer, e la multifirma" (guided offline signing showing the
+  real outputs, every signature verified, multisig fee on real size, tested
+  2-of-3 on testnet4 with a real will-executor, postponing on watch-only /
+  multisig opens the invalidation to sign elsewhere); "Un Check che non si
+  fida sulla parola"; "Da riga di comando, anche per le intelligenze
+  artificiali" (`bal_*` commands, `--help`, example chips, irreversible
+  operations refused until confirmed and the refusal tells the assistant to
+  ask the owner). Install: Electrum **4.8.3** (page said 4.8.2), SHA-256 +
+  PGP signature, `bc1q` addresses only, hardware wallets not tested yet.
+- Animations: the embedded 780 px frame took too much room (owner). It is
+  replaced by a small card laid out like the "Animated guide" card on the
+  bitcoin-after.life home: cover with a play badge and two stacked buttons,
+  "Semplice · 8 passi, 2 min" and "Completa · 15 passi, 4 min", linking to
+  the two GREEN voice pages already in `animazioni/` (owner: the animations
+  are always the green version). Cover `images/anteprima-bal-protocol.jpg`
+  (1200×630): title "Come funziona BAL Protocol", subtitle, and the drawing
+  of step 1 of the green simple page, rendered with headless Chrome from
+  the explainer folder. The "Per chi vuole tutti i dettagli" section is
+  gone: its paragraph sits right under the card.
+- `blog.css`: `.anim-box/.anim-frame/.anim-links/.anim-meta` removed;
+  `.anim-card/.anim-cover/.anim-play/.anim-text` added, `.anim-actions`
+  now a stacked column; `.cli` command chips and inline `code` in article
+  paragraphs; `.callout ul + p` top margin.
+- `blog.html`: card title, date, standfirst, read time; JSON-LD headline
+  and `datePublished` 2026-11-04.
+- `sitemap.xml`: `lastmod` of the article → 2026-11-04.
+- Verified in preview (desktop and 375 px): card, chips, no horizontal
+  overflow; JSON-LD parses; `tools/audit.py` clean.
+
 ## [57] — Àncòra article: new plugin logo on the cover and in the text
 
 **Date:** 2026-10-29
