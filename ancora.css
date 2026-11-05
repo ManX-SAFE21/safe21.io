@@ -55,7 +55,7 @@
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   gap: 56px;
   align-items: center;
 }
@@ -78,6 +78,14 @@
   max-width: 520px; margin: 20px 0 0;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+/* Three buttons (#66: + "Leggi il manuale") on one row on every desktop
+   width: between the one-column breakpoint (980px) and 1200px the hero
+   column is narrow, so the buttons get a little less padding and gap there.
+   Phones keep wrapping, there is no room for three in a row. */
+@media (min-width: 981px) and (max-width: 1200px) {
+  .hero-actions { gap: 10px; }
+  .hero-actions .btn { padding: 12px 15px; font-size: 14.5px; }
+}
 
 /* One mono line of hard facts under the buttons. */
 .hero-facts {
