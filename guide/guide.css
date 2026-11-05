@@ -1,0 +1,157 @@
+/* ==========================================================================
+   SAFE21 — Àncòra manual (safe21.io/guide/) stylesheet
+   ==========================================================================
+
+   Published as guide/guide.css by strumenti/pubblica_sul_sito.py and loaded
+   AFTER ../blog.css, which gives the design tokens (dark + light theme), the
+   header, the footer, the buttons, the theme toggle and the image lightbox.
+   This file styles only the guide content: title area, steps, photos, tips,
+   command blocks and the command table, all from the site tokens so both
+   themes work. (guide/guide.css in the working folder is the standalone
+   draft style; the owner chose the site look for publishing, 2026-11-05.)
+   ========================================================================== */
+
+.gwrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Title area (like .article-head of the blog) ---------- */
+.guide-head {
+  padding: 56px 0 36px;
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+}
+.guide-head .back {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 26px;
+}
+.guide-head .back a { color: var(--muted); transition: color .15s ease; }
+.guide-head .back a:hover { color: var(--teal); }
+.guide-head h1 { font-size: 42px; font-weight: 700; letter-spacing: -0.5px; }
+.guide-head .lede { font-size: 18.5px; color: var(--muted); margin: 18px 0 0; max-width: 760px; }
+
+.toc {
+  margin: 28px 0 0; padding: 18px 22px;
+  background: var(--tint-teal-bg); border: 1px solid var(--tint-teal-bd);
+  border-radius: var(--radius);
+}
+.toc p { margin: 0 0 6px; font-weight: 600; color: var(--light); }
+.toc ol { margin: 0; padding-left: 20px; color: var(--body); }
+.toc li { margin: 3px 0; }
+
+/* ---------- Content ---------- */
+.guide-body { padding: 18px 0 40px; }
+.guide-body h2 {
+  font-size: 27px; font-weight: 600; letter-spacing: -0.2px;
+  margin: 48px 0 10px;
+}
+.guide-body h2 .n {
+  font-family: 'Space Mono', monospace; font-size: 15px; color: var(--teal);
+  margin-right: 10px; vertical-align: 3px;
+}
+.guide-body a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+.step {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px 26px; margin: 20px 0;
+  box-shadow: var(--card-shadow);
+}
+.step h3 { font-size: 18.5px; font-weight: 600; margin: 0 0 10px; }
+.step p { margin: 0 0 12px; color: var(--body); font-size: 16.5px; }
+.step ul { margin: 0 0 12px; padding-left: 20px; color: var(--body); }
+.step li { margin: 6px 0; font-size: 16px; }
+.step b, .step strong { color: var(--light); font-weight: 600; }
+
+/* Photos of Electrum windows: shown at their own size (never enlarged),
+   framed so the light Windows windows also read well on the dark theme.
+   `figure.source` keeps the blog lightbox (click to see it full size). */
+figure.source.shot {
+  margin: 16px 0 6px; background: transparent; border: 0;
+  box-shadow: none; overflow: visible; text-align: center;
+}
+figure.source.shot img {
+  display: inline-block; width: auto; max-width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: 8px;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.28);
+}
+[data-theme="light"] figure.source.shot img { box-shadow: 0 6px 22px rgba(10, 15, 28, 0.10); }
+figure.source.shot.small img { max-width: min(560px, 100%); }
+figure.source.shot figcaption {
+  border: 0; padding: 10px 0 0; font-size: 13px; color: var(--muted);
+}
+
+.tip, .warn {
+  border-radius: 12px; padding: 13px 16px; margin: 14px 0 0;
+  font-size: 15.5px; color: var(--body); line-height: 1.6;
+}
+.tip { background: var(--tint-teal-bg); border: 1px solid var(--tint-teal-bd); }
+.warn { background: var(--tint-btc-bg); border: 1px solid var(--tint-btc-bd); }
+.tip b, .warn b { color: var(--light); }
+
+.note {
+  font-size: 13.5px; color: var(--muted); line-height: 1.7;
+  border-top: 1px solid var(--line); margin-top: 48px; padding-top: 18px;
+}
+
+/* ---------- Commands and their real output (CLI guide) ---------- */
+pre.cmd, pre.out {
+  margin: 10px 0 0; padding: 12px 14px; border-radius: 10px;
+  font-family: 'Space Mono', monospace; font-size: 13.5px; line-height: 1.55;
+  overflow-x: auto; white-space: pre;
+}
+/* The command line stays dark in both themes, like a real terminal. */
+pre.cmd { background: #05080F; color: #E8EEF6; border: 1px solid var(--line); }
+pre.cmd::before { content: "$ "; color: #2DD4BF; }
+pre.out { background: var(--ink); color: var(--body); border: 1px solid var(--line); }
+pre.out .cut { color: var(--muted); font-style: italic; }
+.guide-body code {
+  font-family: 'Space Mono', monospace; font-size: .86em; color: var(--light);
+  background: var(--tint-teal-bg); border: 1px solid var(--tint-teal-bd);
+  border-radius: 6px; padding: 1px 6px;
+}
+.table-wrap { overflow-x: auto; margin: 14px 0 0; }
+table.ref {
+  width: 100%; border-collapse: collapse; font-size: 14.5px;
+  background: var(--panel); border: 1px solid var(--line);
+}
+table.ref th, table.ref td {
+  text-align: left; vertical-align: top; padding: 9px 12px;
+  border-bottom: 1px solid var(--line); color: var(--body);
+}
+table.ref th {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--light); background: var(--ink-2);
+}
+table.ref td:first-child { white-space: nowrap; }
+table.ref tr.group td { background: var(--tint-teal-bg); font-weight: 600; color: var(--light); }
+
+/* ---------- Index of the guides ---------- */
+.guides { display: grid; gap: 16px; margin: 30px 0 0; }
+a.guide-card, div.guide-card {
+  display: block; background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 24px 26px; text-decoration: none;
+  box-shadow: var(--card-shadow);
+  transition: border-color .15s ease, transform .15s ease;
+}
+a.guide-card:hover { border-color: var(--teal); transform: translateY(-2px); }
+.guide-card .n { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 1px;
+                 text-transform: uppercase; color: var(--teal); }
+.guide-card h2 { font-size: 22px; margin: 8px 0 8px; color: var(--light); }
+.guide-card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.guide-card .go { display: inline-block; margin-top: 12px; color: var(--teal);
+                  font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; }
+div.guide-card { opacity: .72; }
+.soon {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--orange);
+  border: 1px solid var(--tint-btc-bd); background: var(--tint-btc-bg);
+  border-radius: 6px; padding: 2px 8px; margin-left: 10px;
+}
+
+@media (max-width: 760px) {
+  .guide-head { padding: 38px 0 28px; }
+  .guide-head h1 { font-size: 30px; }
+  .guide-head .lede { font-size: 16.5px; }
+  .guide-body h2 { font-size: 22px; margin-top: 38px; }
+  .step { padding: 20px 18px; }
+  a.guide-card, div.guide-card { padding: 20px 18px; }
+}

@@ -205,7 +205,8 @@ def check_links(page, src):
         if url.startswith(('http://', 'https://', 'mailto:', '#', 'data:', 'tel:')):
             continue
         target = url.split('#')[0].split('?')[0]
-        if target and not (ROOT / target).exists():
+        # Resolved from the page's own folder: the guide/ pages link with ../
+        if target and not ((ROOT / page).parent / target).exists():
             err(page, f'riferimento locale rotto: "{url}"')
 
 
@@ -231,7 +232,7 @@ def check_images(page, src):
             continue
         if src_attr.lower().endswith('.svg'):
             continue                              # vector: no pixel size to compare
-        fp = ROOT / src_attr
+        fp = (ROOT / page).parent / src_attr
         if not fp.exists():
             continue                              # already reported by check_links
         try:
@@ -338,6 +339,10 @@ def check_footers(pages):
             err(page, 'colonna "Contatti" del footer non trovata')
             continue
         hrefs = re.findall(r'href="([^"]+)"', m.group(1))
+        # A guide/ page links one folder up (../blog.html): compare where the
+        # link really goes, not how it is spelled.
+        if '/' in page:
+            hrefs = [h[3:] if h.startswith('../') else h for h in hrefs]
         if baseline is None:
             baseline, baseline_page = hrefs, page
         elif hrefs != baseline:
@@ -514,7 +519,12 @@ def main():
         print(f'Nessuna pagina HTML trovata in {ROOT}')
         return 1
 
-    for page in pages:
+    # The Àncòra manual (#66) lives in guide/, generated in the site look:
+    # per-page checks, the shared footer and the sitemap, but not the blog
+    # index (the guides are not blog articles).
+    guides = sorted(f'guide/{p.name}' for p in (ROOT / 'guide').glob('*.html'))
+
+    for page in pages + guides:
         src = read(page)
         check_nesting(page, src)
         check_jsonld(page, src)
@@ -524,14 +534,14 @@ def main():
         check_structure(page, src)
         check_meta(page, src)
 
-    check_footers(pages)
+    check_footers(pages + guides)
     check_index(pages)
-    check_site_files(pages)
+    check_site_files(pages + guides)
 
     if not HAVE_PIL:
         skipped.append('dimensioni immagini (manca Pillow: pip install Pillow)')
 
-    print(f'\nSAFE21 — audit di {len(pages)} pagine\n' + '=' * 60)
+    print(f'\nSAFE21 — audit di {len(pages) + len(guides)} pagine\n' + '=' * 60)
 
     if errors:
         print(f'\nERRORI ({len(errors)}) — da correggere prima del push\n')
