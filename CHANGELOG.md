@@ -3,6 +3,46 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [68] — Strumenti page: the four SAFE21 programs, in the menu
+
+**Date:** 2026-11-07
+**Status:** Delivered and live
+
+The owner asked for one page about the software SAFE21 makes, linking to
+each GitHub project and letting people who do not know GitHub download the
+file directly. Name chosen by the owner: "Strumenti" (safe21.io/strumenti).
+
+- New `strumenti.html` (+ `strumenti.css`, `strumenti.js`): one card each
+  for Àncòra, Easy Heirs, Will-Executor per Umbrel OS and PaytoMany.
+  `strumenti.js` reads GitHub live on every visit: latest release version,
+  date and the direct ZIP link ("Scarica il file"), and for the Electrum
+  plugins the minimum Electrum version from that release's `manifest.json`
+  (`min_electrum_version`; Easy Heirs does not have it yet, so its HTML
+  fallback says 4.8.3, as the owner said). The HTML values are the
+  fallback (no JS, or GitHub's 60 calls/hour limit): buttons then open the
+  release page.
+- Will-Executor: installed from the SAFE21 Umbrel Community App Store
+  (`ManX-SAFE21/safe21-umbrel-apps`), not from a ZIP. "Come si installa"
+  opens a dialog with the four steps, the store address with a Copy button,
+  the Raspberry Pi guide and a danger box: uninstalling the app on Umbrel
+  OS deletes all its data (stored wills and the weekly backups), so first
+  BACKUP > Download Backup and keep the file outside the Umbrel. Version
+  and date come from the store's `umbrel-app.yml` and last commit. The
+  testnet4 app is left out (experts only).
+- PaytoMany: web app, "Apri l'app" + code on GitHub, last update date.
+- Menu: "Strumenti" replaces "Àncòra" on every page (the seven-item row
+  did not fit at 1025 px); Àncòra is the first card, with its name and icon
+  linking to `ancora.html`, and stays in every footer. "Strumenti" is
+  marked current on `ancora.html` and in the manual. The three `guide/`
+  pages got the same one-line change their generator will produce from the
+  new `ancora.html` header (not regenerated, to avoid publishing drafts).
+  Home: `data-i18n="nav.tools"` ("Tools" in English) and gaps of 22 px
+  between 1025 and 1100 px wide.
+- `sitemap.xml` lists the page; `tools/audit.py` counts it as non-article.
+- Verified in the browser: live data and manifest reads, dialog open/close,
+  four equal cards on desktop, phone width, both themes, menu on one row at
+  1025 px (23 px free on the home).
+
 ## [67] — Homepage opens in Italian
 
 **Date:** 2026-11-07

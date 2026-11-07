@@ -202,6 +202,12 @@
       .menu-toggle { display: inline-flex; }
       .mobile-menu { display: block; }
     }
+    /* Just above the hamburger width the six links ("Strumenti" since #68)
+       plus the language switch leave only a few pixels free: tighter gaps
+       keep a visible margin around the menu. */
+    @media (min-width: 1025px) and (max-width: 1100px) {
+      .nav-links { gap: 22px; }
+    }
     /* Above the breakpoint the drawer is always hidden, even if left "open". */
     @media (min-width: 1025px) {
       .mobile-menu { display: none !important; }
@@ -556,9 +562,9 @@
         <a href="#inheritance" data-i18n="nav.inheritance">Eredità</a>
         <a href="#payments" data-i18n="nav.payments">Pagamenti</a>
         <a href="#why" data-i18n="nav.why">Perché SAFE21</a>
-        <!-- Àncòra is a brand name, identical in both languages,
-             so the label needs no data-i18n. -->
-        <a href="ancora.html">Àncòra</a>
+        <!-- The tools page (Àncòra, Easy Heirs, Will-Executor, PaytoMany);
+             it replaced the Àncòra link, Àncòra is its first card. -->
+        <a href="strumenti.html" data-i18n="nav.tools">Strumenti</a>
         <!-- Blog is a separate page (not an in-page anchor) and is published
              in Italian only, so the label is the same in both languages. -->
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
@@ -599,7 +605,7 @@
         <a href="#inheritance" data-i18n="nav.inheritance">Eredità</a>
         <a href="#payments" data-i18n="nav.payments">Pagamenti</a>
         <a href="#why" data-i18n="nav.why">Perché SAFE21</a>
-        <a href="ancora.html">Àncòra</a>
+        <a href="strumenti.html" data-i18n="nav.tools">Strumenti</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
         <a href="mailto:info@safe21.io" data-i18n="nav.contact">Contattaci</a>
       </nav>
@@ -1108,6 +1114,7 @@
         'nav.inheritance': 'Inheritance',
         'nav.payments': 'Payments',
         'nav.why': 'Why SAFE21',
+        'nav.tools': 'Tools',
         'nav.blog': 'Blog',
         'nav.contact': 'Contact us',
         'nav.menu': 'Open menu',

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SAFE21 — the tools page (safe21.io/strumenti)
+
+       LANGUAGE NOTE (project rule R1):
+       Italian only, like the blog and the Àncòra page: the copy is in
+       the markup, no switcher. Code comments and identifiers in English.
+
+       CONTENT NOTE:
+       One card per program. Version, date, the direct ZIP link and, for
+       Electrum plugins, the minimum Electrum version are read LIVE from
+       GitHub by strumenti.js, so a new release needs no edit here. The
+       values written below are only the fallback shown without
+       JavaScript or when GitHub does not answer: keep the descriptions
+       and the fallback requirements true when a program changes.
+
+       STRUCTURE:
+       Shares blog.css (tokens, header, footer, buttons, theme toggle) and
+       blog.js (menu + theme); strumenti.css and strumenti.js are this
+       page's own files.
+       ============================================================ -->
+
+  <title>Gli strumenti di SAFE21 — gratuiti, da scaricare | SAFE21</title>
+  <meta name="description" content="Gli strumenti gratuiti di SAFE21: Àncòra ed Easy Heirs per Electrum, il Will-Executor per Umbrel OS e PaytoMany. Sempre l'ultima versione, anche senza GitHub." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="logos/safe21-favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
+
+  <!-- Open Graph. og:url uses the clean /strumenti URL; the canonical keeps
+       the real file name, same convention as every other page. -->
+  <meta property="og:title" content="Gli strumenti di SAFE21" />
+  <meta property="og:description" content="Gli strumenti gratuiti di SAFE21: Àncòra ed Easy Heirs per Electrum, il Will-Executor per Umbrel OS e PaytoMany. Sempre l'ultima versione, anche senza GitHub." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://safe21.io/strumenti" />
+  <meta property="og:locale" content="it_IT" />
+  <link rel="canonical" href="https://safe21.io/strumenti.html" />
+
+  <!-- Structured data: a collection page listing the four programs. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Gli strumenti di SAFE21",
+    "url": "https://safe21.io/strumenti.html",
+    "description": "Gli strumenti gratuiti di SAFE21: Àncòra ed Easy Heirs per Electrum, il Will-Executor per Umbrel OS e PaytoMany. Sempre l'ultima versione, anche senza GitHub.",
+    "inLanguage": "it",
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Àncòra", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows, macOS, Linux", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }, "downloadUrl": "https://github.com/ManX-SAFE21/ancora-electrum-plugin/releases/latest" } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "Easy Heirs", "applicationCategory": "FinanceApplication", "operatingSystem": "Windows, macOS, Linux", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }, "downloadUrl": "https://github.com/ManX-SAFE21/EasyHeirs/releases/latest" } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "Will-Executor per Umbrel OS", "applicationCategory": "FinanceApplication", "operatingSystem": "Umbrel OS", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }, "installUrl": "https://github.com/ManX-SAFE21/safe21-umbrel-apps" } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "WebApplication", "name": "PaytoMany", "applicationCategory": "FinanceApplication", "browserRequirements": "Fotocamera, browser aggiornato", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }, "url": "https://manx-safe21.github.io/PaytoMany-for-Electrum/" } }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="blog.css" />
+  <link rel="stylesheet" href="strumenti.css" />
+
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between pages doesn't flash. Same inline script as the
+       blog pages: sessionStorage key `safe21-blog-theme`, with a
+       `?theme=light|dark` in the URL taking priority (a copied link keeps
+       its theme). Must stay inline or the dark theme flashes first. -->
+  <script>
+    (function () {
+      try {
+        var urlTheme = new URLSearchParams(location.search).get('theme');
+        var theme = (urlTheme === 'light' || urlTheme === 'dark')
+          ? urlTheme
+          : sessionStorage.getItem('safe21-blog-theme');
+        if (theme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+        if (urlTheme === 'light' || urlTheme === 'dark') {
+          sessionStorage.setItem('safe21-blog-theme', urlTheme);
+        }
+      } catch (e) { /* private browsing: fall back to the dark default */ }
+    })();
+  </script>
+</head>
+
+<body id="top">
+
+  <!-- ================= HEADER ================= -->
+  <!-- Same header as the blog pages (Italian labels, theme toggle, no
+       EN/IT switcher). "Strumenti" is marked current: this is the tools page. -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="index.html" aria-label="SAFE21 home">
+        <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+          <defs>
+            <mask id="kh-head">
+              <rect width="34" height="34" rx="8" fill="#fff"/>
+              <circle cx="17" cy="14" r="5" fill="#000"/>
+              <path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-head)"/></g>
+          <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4">
+            <tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan>
+          </text>
+        </svg>
+      </a>
+
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="strumenti.html" class="current">Strumenti</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
+        <button type="button" class="theme-toggle" aria-pressed="false"
+                aria-label="Passa al tema chiaro" title="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+          </svg>
+        </button>
+
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Apri menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="strumenti.html">Strumenti</a>
+        <a href="blog.html">Blog</a>
+        <a href="mailto:info@safe21.io">Contattaci</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="sw-hero">
+      <div class="wrap">
+        <p class="eyebrow">Strumenti &middot; gratuiti, con il codice pubblico</p>
+        <h1>Gli strumenti di SAFE21</h1>
+        <p class="lede">
+          Gli strumenti che abbiamo scritto per usare i bitcoin in sicurezza:
+          l'eredità con BAL Protocol e i pagamenti a molte persone. Il codice
+          è pubblico su GitHub, così chiunque può controllarlo. Se non conosci
+          GitHub, usa il pulsante <strong>Scarica il file</strong>: scarichi
+          sempre l'ultima versione.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= PROGRAMS ================= -->
+    <section aria-label="I programmi">
+      <div class="wrap sw-grid">
+        <article class="sw-card" data-repo="ancora-electrum-plugin" data-manifest="bal/manifest.json">
+          <div class="sw-top">
+            <a class="sw-icon" href="ancora.html" tabindex="-1" aria-hidden="true"><img src="images/ancora-icon.svg" width="56" height="56" alt="L'icona di Àncòra: la lettera à con due accenti verde-acqua."></a>
+            <div>
+              <p class="sw-kind">Plugin per Electrum</p>
+              <h2><a href="ancora.html">Àncòra</a></h2>
+            </div>
+          </div>
+          <p>Prepara il testamento dei tuoi bitcoin con BAL Protocol: restano tuoi finché ci sei, e alla data che scegli arrivano agli eredi. Nessuno riceve le tue chiavi.</p>
+          <ul class="sw-facts">
+            <li><span>Ultima versione</span><span class="sw-ver" data-f="ver">vedi GitHub</span></li>
+            <li><span>Pubblicata il</span><span data-f="date">&mdash;</span></li>
+            <li><span>Serve</span><span data-f="needs">Electrum 4.8.3 o successivo</span></li>
+            <li><span>Licenza</span><span>MIT, gratuito</span></li>
+          </ul>
+          <div class="sw-actions">
+            <a class="btn btn-primary" data-f="dl" href="https://github.com/ManX-SAFE21/ancora-electrum-plugin/releases/latest" target="_blank" rel="noopener noreferrer">Scarica il file</a>
+            <a class="btn btn-ghost" href="https://github.com/ManX-SAFE21/ancora-electrum-plugin/releases/latest" target="_blank" rel="noopener noreferrer">La release su GitHub &nearr;</a>
+            <a class="sw-more" href="ancora.html">Scopri Àncòra &rarr;</a>
+          </div>
+        </article>
+        <article class="sw-card" data-repo="EasyHeirs" data-manifest="bal_easy_heirs/manifest.json">
+          <div class="sw-top">
+            <div class="sw-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 8h5M16 12h5M18 16h3"/></svg></div>
+            <div>
+              <p class="sw-kind">Plugin per Electrum</p>
+              <h2>Easy Heirs</h2>
+            </div>
+          </div>
+          <p>Prepara la lista degli eredi: crea per ciascuno un portafoglio nuovo e un foglio stampabile con le parole di recupero, tutto offline. La lista è pronta per BAL.</p>
+          <ul class="sw-facts">
+            <li><span>Ultima versione</span><span class="sw-ver" data-f="ver">vedi GitHub</span></li>
+            <li><span>Pubblicata il</span><span data-f="date">&mdash;</span></li>
+            <li><span>Serve</span><span data-f="needs">Electrum 4.8.3 o successivo</span></li>
+            <li><span>Licenza</span><span>MIT, gratuito</span></li>
+          </ul>
+          <div class="sw-actions">
+            <a class="btn btn-primary" data-f="dl" href="https://github.com/ManX-SAFE21/EasyHeirs/releases/latest" target="_blank" rel="noopener noreferrer">Scarica il file</a>
+            <a class="btn btn-ghost" href="https://github.com/ManX-SAFE21/EasyHeirs/releases/latest" target="_blank" rel="noopener noreferrer">La release su GitHub &nearr;</a>
+            <a class="sw-more" href="blog-bal-easy-heirs.html">Leggi l'articolo &rarr;</a>
+          </div>
+        </article>
+        <!-- Installed from the SAFE21 Community App Store, not from a ZIP:
+             the four steps and the store address to copy are in the dialog
+             #sw-umbrel-install below the cards.
+             Version and date are read from the store repository. The
+             testnet4 companion app stays off this page (experts only). -->
+        <article class="sw-card" data-repo="safe21-umbrel-apps" data-umbrel="safe21-will-executor">
+          <div class="sw-top">
+            <div class="sw-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/></svg></div>
+            <div>
+              <p class="sw-kind">App per Umbrel OS</p>
+              <h2>Will-Executor per Umbrel OS</h2>
+            </div>
+          </div>
+          <p>Il tuo will-executor sul tuo nodo: custodisce le copie dei testamenti e le invia alla rete alla data
+             giusta, attraverso il tuo nodo Bitcoin. Non tiene mai chiavi. Pannello web e backup automatici ogni
+             settimana.</p>
+          <ul class="sw-facts">
+            <li><span>Ultima versione</span><span class="sw-ver" data-f="ver">vedi GitHub</span></li>
+            <li><span>Aggiornata il</span><span data-f="date">&mdash;</span></li>
+            <li><span>Serve</span><span>Umbrel OS con l'app Bitcoin Node</span></li>
+            <li><span>Prezzo</span><span>gratuito</span></li>
+          </ul>
+          <div class="sw-actions">
+            <!-- Opens the install steps in a dialog (strumenti.js), so the
+                 four cards keep the same size. Without JavaScript the link
+                 goes to the store README, which has the same steps. -->
+            <a class="btn btn-primary" href="https://github.com/ManX-SAFE21/safe21-umbrel-apps#add-the-store-to-your-umbrel" data-dialog="sw-umbrel-install">Come si installa</a>
+            <a class="btn btn-ghost" href="https://github.com/ManX-SAFE21/BAL_Will-Executor_Umbrel" target="_blank" rel="noopener noreferrer">Il codice su GitHub &nearr;</a>
+            <a class="sw-more" href="blog-safe21-will-executor.html">Leggi l'articolo &rarr;</a>
+          </div>
+        </article>
+        <article class="sw-card" data-repo="PaytoMany-for-Electrum" data-web>
+          <div class="sw-top">
+            <div class="sw-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h7v-4"/></svg></div>
+            <div>
+              <p class="sw-kind">App web &middot; per Electrum</p>
+              <h2>PaytoMany</h2>
+            </div>
+          </div>
+          <p>Paga tante persone con una sola transazione: inquadri i QR degli indirizzi con il telefono, metti
+             gli importi in euro e copi la lista nella funzione «Paga a molti» di Electrum. Non tocca mai i tuoi
+             soldi né le tue chiavi.</p>
+          <ul class="sw-facts">
+            <li><span>Ultimo aggiornamento</span><span data-f="date">&mdash;</span></li>
+            <li><span>Si usa</span><span>dal browser, niente da installare</span></li>
+            <li><span>Serve</span><span>telefono con fotocamera ed Electrum</span></li>
+            <li><span>Prezzo</span><span>gratuito</span></li>
+          </ul>
+          <div class="sw-actions">
+            <a class="btn btn-primary" href="https://manx-safe21.github.io/PaytoMany-for-Electrum/" target="_blank" rel="noopener noreferrer">Apri l'app &nearr;</a>
+            <a class="btn btn-ghost" href="https://github.com/ManX-SAFE21/PaytoMany-for-Electrum" target="_blank" rel="noopener noreferrer">Il codice su GitHub &nearr;</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- ================= INSTALL DIALOG (Will-Executor) ================= -->
+    <dialog class="sw-dialog" id="sw-umbrel-install" aria-labelledby="sw-umbrel-title">
+      <button type="button" class="sw-close" data-close aria-label="Chiudi">&times;</button>
+      <p class="sw-kind">Will-Executor per Umbrel OS</p>
+      <h2 id="sw-umbrel-title">Come si installa</h2>
+      <p>Il Will-Executor si aggiunge dall'App Store di Umbrel, in quattro passi:</p>
+      <ol class="sw-steps">
+        <li>Apri l'<strong>App Store</strong> di Umbrel.</li>
+        <li>In alto a destra premi <strong>&#8943;</strong>, poi <strong>Community App Stores</strong>.</li>
+        <li>Incolla questo indirizzo e premi <strong>Add</strong>:
+          <span class="sw-copy">
+            <code>https://github.com/ManX-SAFE21/safe21-umbrel-apps</code>
+            <button type="button" class="btn btn-ghost" data-copy="https://github.com/ManX-SAFE21/safe21-umbrel-apps">Copia</button>
+          </span>
+        </li>
+        <li>Apri lo store <strong>SAFE21</strong> e installa <strong>Will Executor</strong>.</li>
+      </ol>
+      <p>Serve l'app <strong>Bitcoin Node</strong> già installata su Umbrel.</p>
+      <!-- Uninstalling an app on Umbrel OS deletes its container AND its
+           data folder: the stored wills and the weekly automatic backups
+           go with it. The labels below are the dashboard's own (English). -->
+      <div class="sw-warn" role="note">
+        <p class="sw-warn-title"><span aria-hidden="true">&#9888;</span> Prima di disinstallare, salva il backup</p>
+        <p>
+          Se disinstalli l'app, Umbrel OS cancella <strong>tutti i suoi dati</strong>:
+          le transazioni dei testamenti che custodisce e anche i backup automatici
+          settimanali, che stanno nella stessa cartella. Non si possono recuperare.
+        </p>
+        <p>
+          Prima di disinstallare apri il pannello del Will Executor, vai su
+          <strong>BACKUP</strong> e premi <strong>Download Backup</strong>. Salva il
+          file fuori dall'Umbrel, sul computer o su una chiavetta. Dopo una nuova
+          installazione lo ricarichi da <strong>Import Transactions from Backup</strong>.
+        </p>
+      </div>
+      <div class="sw-dialog-actions">
+        <a class="btn btn-ghost" href="https://github.com/ManX-SAFE21/safe21-umbrel-apps/blob/main/guide/raspberry-pi.md" target="_blank" rel="noopener noreferrer">Guida passo passo per Raspberry Pi &nearr;</a>
+        <button type="button" class="btn btn-primary" data-close>Ho capito</button>
+      </div>
+    </dialog>
+
+    <!-- ================= CHECK + HELP ================= -->
+    <section class="sw-help">
+      <div class="wrap">
+        <div class="box">
+          <div>
+            <h2>Come controllare il file</h2>
+            <p>
+              Ogni file da scaricare è firmato con la chiave di sviluppo di
+              SAFE21, allegata alla release. Nella pagina della release su
+              GitHub trovi anche il codice SHA-256: prima di installare,
+              controlla che quello del file scaricato sia lo stesso.
+            </p>
+          </div>
+          <div>
+            <h2>Vuoi una mano?</h2>
+            <p>
+              Installiamo e configuriamo insieme a te, con le tue chiavi sempre
+              nelle tue mani. Scrivici a
+              <a class="inline" href="mailto:info@safe21.io">info@safe21.io</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <!-- Same structure and links as every other page (audit checks this). -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="index.html" aria-label="SAFE21 home">
+            <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+              <defs><mask id="kh-foot"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="14" r="5" fill="#000"/><path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/></mask></defs>
+              <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-foot)"/></g>
+              <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan></text>
+            </svg>
+          </a>
+          <p>Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.</p>
+        </div>
+
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Servizi</h4>
+            <a href="index.html#services">Assistenza Bitcoin</a>
+            <a href="index.html#services">Corsi Bitcoin</a>
+            <a href="index.html#services">Sicurezza Electrum</a>
+            <a href="index.html#inheritance">Eredità</a>
+            <a href="ancora.html">Plugin Àncòra</a>
+            <a href="index.html#payments">Pagamenti</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
+            <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contatti</h4>
+            <a href="mailto:info@safe21.io">info@safe21.io</a>
+            <a href="blog.html">Blog</a>
+            <!-- SAFE21 open-source code (GitHub). External link. -->
+            <a href="https://github.com/ManX-SAFE21" target="_blank" rel="noopener noreferrer">Codice open source &nearr;</a>
+            <!-- OpenPGP public key for info@safe21.io (served as text/plain). -->
+            <a href="safe21-pgp.asc">Chiave PGP</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si
+        tratta di consulenza legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia
+        i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni
+        e tassazione variano da paese a paese: per la tua situazione specifica rivolgiti a un
+        professionista qualificato. Le transazioni Bitcoin sono irreversibili.
+      </p>
+      <p class="copyright">© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script src="blog.js" defer></script>
+  <script src="strumenti.js" defer></script>
+</body>
+</html>

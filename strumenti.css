@@ -1,0 +1,144 @@
+/* ==========================================================================
+   SAFE21 — strumenti.html (the SAFE21 tools page) stylesheet
+   ==========================================================================
+
+   Loaded AFTER blog.css, which provides the design tokens (dark + light
+   theme), the header, the footer, the buttons and the theme toggle. This
+   file adds only the hero, the program cards and the closing help box.
+
+   The site has no build step: plain CSS, loaded with a <link>.
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.sw-hero { padding: 72px 0 28px; }
+.sw-hero h1 {
+  font-size: clamp(34px, 5vw, 52px); line-height: 1.1;
+  margin: 10px 0 16px; max-width: 820px;
+}
+.sw-hero .lede {
+  font-size: 19px; line-height: 1.6; color: var(--muted);
+  max-width: 760px; margin: 0;
+}
+.sw-hero .lede strong { color: var(--light); font-weight: 600; }
+
+/* ---------- Program cards: two per row, one on phones ---------- */
+.sw-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+  /* Equal rows: all four cards get the height of the tallest one. */
+  grid-auto-rows: 1fr;
+  padding-top: 18px; padding-bottom: 40px;
+}
+.sw-card {
+  /* min-width: 0 lets a card shrink below its longest line (the store
+     address, a long button label) instead of widening the page on phones. */
+  min-width: 0;
+  display: flex; flex-direction: column;
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 26px 24px;
+  box-shadow: var(--card-shadow);
+}
+.sw-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+/* Icon tile. Àncòra uses its own brand icon (white tile, from the plugin
+   repository, as-is); the others get a line icon on the deep-teal tile. */
+.sw-icon {
+  flex: 0 0 56px; width: 56px; height: 56px; border-radius: 13px;
+  display: grid; place-items: center; background: var(--teal-d);
+}
+.sw-icon img { display: block; width: 56px; height: 56px; border-radius: 13px; }
+.sw-icon svg { width: 30px; height: 30px; }
+.sw-kind {
+  margin: 0; font-family: 'Space Mono', monospace; font-size: 12px;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
+}
+.sw-card h2 { font-size: 25px; margin: 2px 0 0; line-height: 1.2; }
+/* Àncòra's name and icon open its own page: looks like the others, the
+   name turns teal on hover. */
+.sw-card h2 a { color: inherit; text-decoration: none; }
+.sw-card h2 a:hover { color: var(--teal); }
+a.sw-icon { text-decoration: none; }
+.sw-card > p { color: var(--muted); line-height: 1.6; margin: 0 0 14px; }
+
+/* Facts table: label on the left, value on the right. Values marked with
+   data-f are filled in by software.js from GitHub. */
+.sw-facts { list-style: none; padding: 0; margin: 0 0 18px; font-size: 14.5px; line-height: 1.5; }
+.sw-facts li {
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 7px 0; border-top: 1px solid var(--line);
+}
+.sw-facts li span:first-child { color: var(--muted); }
+.sw-facts li span:last-child { text-align: right; color: var(--light); }
+.sw-ver { font-family: 'Space Mono', monospace; }
+
+/* ---------- Install dialog (Will-Executor) ----------
+   A native <dialog> opened with showModal(): Escape closes it, the
+   backdrop click is handled in software.js. */
+.sw-dialog {
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100vh - 48px);
+  overflow: auto; padding: 28px 26px 24px;
+  background: var(--panel); color: var(--light);
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+.sw-dialog::backdrop { background: rgba(4, 8, 16, 0.72); }
+.sw-dialog h2 { font-size: 24px; margin: 4px 0 10px; }
+.sw-dialog > p { color: var(--muted); line-height: 1.6; margin: 0 0 14px; }
+.sw-dialog > p strong { color: var(--light); font-weight: 600; }
+.sw-close {
+  position: absolute; top: 12px; right: 12px; width: 36px; height: 36px;
+  border: 1px solid var(--line); border-radius: 10px; background: transparent;
+  color: var(--light); font-size: 22px; line-height: 1; cursor: pointer;
+}
+.sw-close:hover { border-color: var(--teal); }
+/* Danger box: uninstalling the app on Umbrel OS deletes all its data. */
+.sw-warn {
+  margin: 4px 0 18px; padding: 14px 16px; border-radius: 12px;
+  border: 1px solid var(--danger);
+  background: color-mix(in srgb, var(--danger) 9%, transparent);
+}
+.sw-warn p { margin: 0 0 8px; font-size: 14.5px; line-height: 1.55; color: var(--body); }
+.sw-warn p:last-child { margin-bottom: 0; }
+.sw-warn strong { color: var(--light); font-weight: 600; }
+.sw-warn .sw-warn-title { color: var(--danger); font-weight: 700; font-size: 15.5px; }
+.sw-dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.sw-dialog-actions .btn { white-space: normal; text-align: center; justify-content: center; }
+
+/* Install steps (inside the dialog). */
+.sw-steps {
+  margin: 0 0 18px; padding-left: 22px;
+  font-size: 14.5px; line-height: 1.55; color: var(--body);
+}
+.sw-steps li { margin-bottom: 6px; }
+.sw-steps strong { color: var(--light); font-weight: 600; }
+/* The store address with its Copy button; the address wraps on phones. */
+.sw-copy {
+  display: flex; align-items: center; gap: 8px; margin-top: 6px;
+  background: var(--tint-teal-bg); border: 1px solid var(--tint-teal-bd);
+  border-radius: 10px; padding: 6px 6px 6px 10px;
+}
+.sw-copy code { flex: 1; font-size: 12.5px; word-break: break-all; color: var(--light); }
+.sw-copy .btn { padding: 6px 12px; font-size: 13px; flex: 0 0 auto; }
+
+/* Buttons stick to the bottom so the cards of a row line up. */
+.sw-actions { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+.sw-actions .btn { justify-content: center; text-align: center; white-space: normal; }
+.sw-more {
+  font-size: 14.5px; text-align: center; color: var(--teal);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.sw-more:hover { color: var(--accent-hover); }
+
+/* ---------- Closing box: checking the file, asking for help ---------- */
+.sw-help { padding: 10px 0 72px; }
+.sw-help .box {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px;
+}
+.sw-help h2 { font-size: 21px; margin: 0 0 8px; }
+.sw-help p { color: var(--muted); line-height: 1.6; margin: 0; }
+.sw-help a.inline { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+.sw-help a.inline:hover { color: var(--accent-hover); }
+
+@media (max-width: 860px) {
+  .sw-grid, .sw-help .box { grid-template-columns: 1fr; }
+  .sw-grid { grid-auto-rows: auto; }   /* stacked on phones: no need to pad */
+  .sw-hero { padding-top: 48px; }
+}
