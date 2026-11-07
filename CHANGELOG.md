@@ -3,6 +3,29 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [67] — Homepage opens in Italian
+
+**Date:** 2026-11-07
+**Status:** Delivered and live
+
+The owner asked that safe21.io open in Italian by default: the homepage
+markup was English and Italian appeared only after a click on IT, so search
+engines indexed the English text (the rest of the site is Italian only).
+
+- `index.html`: Italian is now the source language written in the markup
+  (`<html lang="it">`, title, meta description, og tags with `og:locale`
+  it_IT, JSON-LD description with `inLanguage`), the IT button pressed by
+  default. English moved to the `EN` dictionary of the switcher script and
+  the Italian text is captured from the DOM (mirror of the old logic); a
+  visitor who chose EN keeps it (`localStorage` "safe21-lang").
+- The conversion was done by a one-off script (each `[data-i18n]` element
+  got its IT text, the English originals became the EN dictionary, joined
+  on one line each: a first try with multi-line strings broke the script).
+- Meta description shortened to 157 characters; the hidden labels
+  "Primary" / "Language" became "Principale" / "Lingua / Language".
+- Verified in the browser: Italian on first visit, IT -> EN -> IT switches
+  text, title, description, menu label and footer; script parses cleanly.
+
 ## [66] — The Àncòra manual: safe21.io/guide/ with the first two guides
 
 **Date:** 2026-11-05
