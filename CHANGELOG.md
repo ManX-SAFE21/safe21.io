@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [74] — Schȅi page: lost phone answer and new preview image
+
+**Date:** 2026-11-13
+**Status:** Delivered and live
+
+- FAQ "E se perdo o rompo il telefono?": the money is not in the phone, the
+  12 words are the keys; two ways back: Schȅi Wallet on another phone, or
+  Electrum (Android or computer, electrum.org) with "Ho già un seed" — the
+  words are Electrum-type, no extra words. Owner request.
+- `schei.css`: lists inside FAQ answers styled like the paragraphs.
+- `images/schei-og.jpg` redrawn: "Schȅi" with the double accent and the
+  updated app screenshots.
+
 ## [73] — Schȅi: the name with the double accent
 
 **Date:** 2026-11-13

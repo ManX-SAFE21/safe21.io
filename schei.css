@@ -274,6 +274,9 @@
 }
 .faq details[open] summary::after { content: "\2212"; }
 .faq details p { margin: 0; padding: 0 22px 20px; font-size: 15.5px; color: var(--body); line-height: 1.65; }
+.faq details p + p, .faq details ul + p { margin-top: -8px; }
+.faq details ul { margin: -8px 0 0; padding: 0 22px 20px 44px; font-size: 15.5px; color: var(--body); line-height: 1.65; }
+.faq details li { margin-bottom: 6px; }
 
 /* ---------- Origin note (credit to Electrum) ---------- */
 .origin {
