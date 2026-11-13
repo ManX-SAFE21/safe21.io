@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [72] — Strumenti: Schèi Wallet card
+
+**Date:** 2026-11-13
+**Status:** Delivered and live
+
+- `strumenti.html`: new card "Schèi Wallet" right after Àncòra (icon, short
+  text with the test-version warning, Android 8+ 64 bit, MIT; "Scarica
+  l'app" opens the GitHub releases, "Scopri Schèi Wallet" opens schei.html).
+- `strumenti.js` unchanged: the app has only a pre-release, which GitHub's
+  "latest" does not return, so version/date show the fallback ("vedi
+  GitHub") until a normal release exists.
+- Icon declared 192x192 (the file size; CSS shows it at 56 px).
+
 ## [71] — Schèi Wallet page (safe21.io/schei)
 
 **Date:** 2026-11-13
