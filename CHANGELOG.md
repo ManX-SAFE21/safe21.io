@@ -3,6 +3,16 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [73] — Schȅi: the name with the double accent
+
+**Date:** 2026-11-13
+**Status:** Delivered and live
+
+- The owner asked for the name with two accents, as in the app: "Schȅi"
+  (U+0205) instead of "Schèi" in all visible text, title and meta of
+  `schei.html` and in the Strumenti card (32 places). URL stays /schei.
+- The og cover image still shows "Schèi" (text drawn in the image).
+
 ## [72] — Strumenti: Schèi Wallet card
 
 **Date:** 2026-11-13
