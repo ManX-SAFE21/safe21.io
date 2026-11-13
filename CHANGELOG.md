@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [71] — Schèi Wallet page (safe21.io/schei)
 
 **Date:** 2026-11-13
-**Status:** Delivered and live
+**Status:** Delivered and live (commit `b75179a`, pushed to `main`)
 
 The owner asked for a presentation of the Schèi Wallet Android app on the
 site; preview approved as it was ("Pubblica così").
