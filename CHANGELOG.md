@@ -3,6 +3,44 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [71] — Schèi Wallet page (safe21.io/schei)
+
+**Date:** 2026-11-13
+**Status:** Delivered and live
+
+The owner asked for a presentation of the Schèi Wallet Android app on the
+site; preview approved as it was ("Pubblica così").
+
+- New `schei.html` (+ `schei.css`, loaded after `blog.css`): hero with two
+  phones, who it is for, how it is used (receive / send / check), the three
+  levels, safety, languages (Italian, Venetian, English, link to
+  TRADUZIONI.md), the "crogiuolo" page, download (GitHub releases/latest,
+  test app testnet4, test-version warning), FAQ, Electrum credit.
+- Screenshots are real app captures from the offline demo wallet (euro),
+  `images/schei-*.webp` 540 px wide; `images/schei-og.jpg` 1200x630 for
+  previews; `images/schei-icon.png`.
+- No version number or file name in the page; problems go to GitHub Issues.
+- `sitemap.xml`: new entry; `tools/audit.py`: `schei.html` in `NON_ARTICLE`
+  (landing page, not a blog article). Not linked from the menu or the
+  Strumenti page yet (to decide).
+
+## [70] — Àncòra page: tested up to Electrum 4.8.4
+
+**Date:** 2026-11-09
+**Status:** Delivered and live (commit `f5dd052`)
+
+- `ancora.html` requirements: the plugin was tested up to Electrum 4.8.4.
+- Entry added on 2026-11-13: the commit had no CHANGELOG entry.
+
+## [69] — CLI guide: the Electrum file name changes with newer versions
+
+**Date:** 2026-11-09
+**Status:** Delivered and live (commit `d11d0aa`)
+
+- `guide/cli.html` (Windows): `electrum-4.8.4-debug.exe` as an example for
+  newer Electrum releases.
+- Entry added on 2026-11-13: the commit had no CHANGELOG entry.
+
 ## [68] — Strumenti page: the four SAFE21 programs, in the menu
 
 **Date:** 2026-11-07

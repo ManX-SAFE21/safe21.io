@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       SAFE21 — Schèi Wallet presentation page (safe21.io/schei)
+
+       LANGUAGE NOTE (project rule R1):
+       Like the blog and the Àncòra page, this page is ITALIAN ONLY: the
+       Italian copy is written directly in the markup, no switcher and no
+       i18n dictionary. All code comments and identifiers stay in English.
+
+       CONTENT NOTE:
+       The landing page of Schèi Wallet, the simple Android bitcoin wallet
+       by SAFE21 (a graphical adaptation of Electrum). Written for
+       non-technical readers. The page deliberately names NO version
+       number and NO file name (everything points to GitHub
+       releases/latest), so a new release never makes it stale. The app is
+       still a TEST VERSION: the warning is repeated in the hero, in the
+       download section and in the FAQ, on purpose.
+
+       STRUCTURE:
+       Shares blog.css (tokens, header, footer, buttons, theme toggle,
+       .callout, .article-cta) and blog.js (menu + theme). Everything
+       specific to this page lives in schei.css, loaded after blog.css.
+       Screenshots are real app screens (demo wallet, Italian), shown in
+       plain CSS phone frames. No lightbox.
+       ============================================================ -->
+
+  <title>Schèi Wallet — il portafoglio bitcoin semplice per Android | SAFE21</title>
+  <meta name="description" content="Schèi Wallet è il portafoglio bitcoin per Android pensato per tutti: testo grande, pochi pulsanti, importi in euro. Gratuito e open source, di SAFE21." />
+  <meta name="theme-color" content="#0A0F1C" />
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="logos/safe21-favicon.svg" />
+  <link rel="icon" type="image/png" sizes="64x64" href="logos/safe21-favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="logos/apple-touch-icon.png" />
+
+  <!-- Open Graph (social preview). og:url uses the clean /schei URL; the
+       canonical keeps the real file name, same convention as every other
+       page (tools/audit.py checks both). -->
+  <meta property="og:title" content="Schèi Wallet — il portafoglio bitcoin semplice per Android" />
+  <meta property="og:description" content="Testo grande, pochi pulsanti, importi in euro. Per chi vuole bitcoin senza complicazioni. Gratuito e open source." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://safe21.io/schei" />
+  <meta property="og:image" content="https://safe21.io/images/schei-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="it_IT" />
+
+  <!-- X (Twitter) preview: large cover, title and description fall back
+       to the og: tags. -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://safe21.io/images/schei-og.jpg" />
+  <link rel="canonical" href="https://safe21.io/schei.html" />
+
+  <!-- Structured data (JSON-LD): SoftwareApplication, like the Àncòra
+       page. No softwareVersion on purpose (see CONTENT NOTE). -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Schèi Wallet",
+    "url": "https://safe21.io/schei.html",
+    "image": "https://safe21.io/images/schei-og.jpg",
+    "description": "Schèi Wallet è il portafoglio bitcoin per Android pensato per tutti: testo grande, pochi pulsanti, importi in euro. Gratuito e open source, di SAFE21.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Android",
+    "softwareRequirements": "Android 8 o successivo, telefono a 64 bit",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+    "license": "https://opensource.org/license/mit/",
+    "inLanguage": ["it", "vec", "en"],
+    "isBasedOn": "https://electrum.org/",
+    "downloadUrl": "https://github.com/ManX-SAFE21/schei-wallet/releases/latest",
+    "author": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" },
+    "publisher": { "@type": "Organization", "name": "SAFE21", "url": "https://safe21.io/" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="blog.css" />
+  <link rel="stylesheet" href="schei.css?v=1" />
+
+  <!-- Applies the theme chosen EARLIER IN THIS SESSION before first paint,
+       so navigating between pages doesn't flash. Same inline script as the
+       blog pages: sessionStorage key `safe21-blog-theme`, with a
+       `?theme=light|dark` in the URL taking priority (a copied link keeps
+       its theme). Must stay inline or the dark theme flashes first. -->
+  <script>
+    (function () {
+      try {
+        var urlTheme = new URLSearchParams(location.search).get('theme');
+        var theme = (urlTheme === 'light' || urlTheme === 'dark')
+          ? urlTheme
+          : sessionStorage.getItem('safe21-blog-theme');
+        if (theme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+        if (urlTheme === 'light' || urlTheme === 'dark') {
+          sessionStorage.setItem('safe21-blog-theme', urlTheme);
+        }
+      } catch (e) { /* private browsing: fall back to the dark default */ }
+    })();
+  </script>
+</head>
+
+<body id="top">
+
+  <!-- ================= HEADER ================= -->
+  <!-- Same header as the blog pages (Italian labels, theme toggle, no
+       EN/IT switcher). "Strumenti" is marked current: Schèi Wallet is one
+       of the programs of the tools page. -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="index.html" aria-label="SAFE21 home">
+        <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+          <defs>
+            <mask id="kh-head">
+              <rect width="34" height="34" rx="8" fill="#fff"/>
+              <circle cx="17" cy="14" r="5" fill="#000"/>
+              <path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/>
+            </mask>
+          </defs>
+          <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-head)"/></g>
+          <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4">
+            <tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan>
+          </text>
+        </svg>
+      </a>
+
+      <nav class="nav-links" aria-label="Principale">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="strumenti.html" class="current">Strumenti</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
+        <button type="button" class="theme-toggle" aria-pressed="false"
+                aria-label="Passa al tema chiaro" title="Cambia tema">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/>
+          </svg>
+        </button>
+
+        <button type="button" class="menu-toggle" aria-expanded="false"
+                aria-controls="mobile-menu" aria-label="Apri menu">
+          <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <nav aria-label="Mobile">
+        <a href="index.html#services">Servizi</a>
+        <a href="index.html#inheritance">Eredità</a>
+        <a href="index.html#payments">Pagamenti</a>
+        <a href="index.html#why">Perché SAFE21</a>
+        <a href="strumenti.html">Strumenti</a>
+        <a href="blog.html">Blog</a>
+        <a href="mailto:info@safe21.io">Contattaci</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero-schei">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Il portafoglio bitcoin di SAFE21 &middot; per Android</p>
+
+        <!-- App icon + name: the product signature above the promise. -->
+        <div class="hero-brand">
+          <img src="images/schei-icon.png" width="192" height="192"
+               alt="L'icona di Schèi Wallet: una e chiara con due accenti dorati, su un quadrato color vino con gli angoli arrotondati." />
+          <p class="name">Schèi Wallet
+            <small>&laquo;schèi&raquo; in veneto vuol dire &laquo;soldi&raquo;</small></p>
+        </div>
+
+        <h1>Bitcoin semplice, come i soldi in tasca.</h1>
+        <p class="hero-sub">
+          Testo grande, pochi pulsanti, importi in euro. Schèi Wallet è il
+          portafoglio per chi vuole usare bitcoin senza complicazioni. Anche
+          per chi non è più un ragazzo.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#scarica">Scarica</a>
+          <a class="btn btn-ghost" href="#prova">Prova senza rischi</a>
+        </div>
+
+        <p class="hero-test">
+          <span><strong>È una versione di prova.</strong> Funziona con
+          bitcoin veri, ma la stiamo ancora collaudando: per ora non usarla
+          per cifre importanti.</span>
+        </p>
+
+        <p class="hero-facts">
+          <span>Gratuito</span>
+          <span>Open source (MIT)</span>
+          <span>Android 8+</span>
+          <span>Le chiavi restano tue</span>
+        </p>
+      </div>
+
+      <!-- Two real screens: the home and the banknotes page. -->
+      <div class="hero-phones">
+        <figure class="phone"><img src="images/schei-home.webp" width="540" height="1134"
+               alt="La schermata principale di Schèi Wallet: i movimenti su un foglio di carta, il saldo in euro su un portafoglio di cuoio e, a destra, una moneta bitcoin da spingere su per inviare o tirare giù per ricevere." /></figure>
+        <figure class="phone back"><img src="images/schei-quanto.webp" width="540" height="1134"
+               alt="La pagina Quanto mandi: banconote e monete in euro da toccare per comporre la cifra, con il totale scritto in grande." /></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PER CHI È ================= -->
+  <section class="band" id="per-chi">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Per chi è</p>
+        <h2>Per chi vuole usare bitcoin, non studiarlo</h2>
+        <p class="lede">
+          Tanti portafogli bitcoin sembrano fatti per i tecnici. Schèi Wallet
+          è fatto per le persone: si legge bene, si capisce subito e ha
+          l'aspetto caldo di una bottega, con carta, cuoio e ottone.
+        </p>
+      </div>
+
+      <div class="features three">
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V5h16v2"/><path d="M12 5v14"/><path d="M9 19h6"/></svg>
+          <h3>Si legge bene</h3>
+          <p>Scritte grandi e chiare, e ancora più grandi se lo chiedi.
+             Pochi pulsanti, ognuno con una parola semplice.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 7a6 6 0 1 0 0 10"/><path d="M5 10h9M5 14h9"/></svg>
+          <h3>Parla in euro</h3>
+          <p>Gli importi li vedi in euro, come sei abituato. Se preferisci
+             puoi scegliere un'altra valuta, oppure solo bitcoin.</p>
+        </div>
+        <div class="feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          <h3>I soldi sono tuoi</h3>
+          <p>Nessuna iscrizione, nessuna e-mail, nessuna banca in mezzo. Le
+             chiavi stanno nel tuo telefono e da nessun'altra parte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COME SI USA ================= -->
+  <section class="band band-alt" id="come-si-usa">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Come si usa</p>
+        <h2>Una moneta: tiri giù per ricevere, spingi su per mandare</h2>
+        <p class="lede">
+          Nella schermata principale c'è una moneta bitcoin, dentro una
+          fascia di cuoio. Tutto parte da lì.
+        </p>
+      </div>
+
+      <div class="how">
+        <div class="how-step">
+          <span class="num">Passo 1</span>
+          <h3>Ricevi</h3>
+          <p>Tira la moneta verso il basso: il portafoglio si apre e la
+             moneta ci entra. Compare un codice da far inquadrare a chi ti
+             manda i bitcoin. Fatto.</p>
+          <figure class="phone"><img src="images/schei-ricevi.webp" width="540" height="1134" loading="lazy" decoding="async"
+               alt="La pagina Ricevi: un grande codice QR da far inquadrare e, sotto, il tuo indirizzo bitcoin con i pulsanti Condividi e Copia." /></figure>
+        </div>
+        <div class="how-step">
+          <span class="num">Passo 2</span>
+          <h3>Manda</h3>
+          <p>Spingi la moneta verso l'alto e inquadra il codice di chi devi
+             pagare. Poi componi la cifra toccando banconote e monete, come
+             al mercato. O scrivila con i numeri, se preferisci.</p>
+          <figure class="phone"><img src="images/schei-quanto.webp" width="540" height="1134" loading="lazy" decoding="async"
+               alt="La pagina Quanto mandi: banconote da 100, 50, 20, 10 e 5 euro e monete da toccare; in alto il gruzzoletto con la cifra scelta, 32,50 euro." /></figure>
+        </div>
+        <div class="how-step">
+          <span class="num">Passo 3</span>
+          <h3>Controlla bene</h3>
+          <p>Prima di partire vedi tutto: quanto mandi, quanto costa
+             l'invio, a quale indirizzo. Poi spingi a destra due monete. Hai
+             ancora cinque secondi per premere Annulla.</p>
+          <figure class="phone"><img src="images/schei-controlla.webp" width="540" height="1134" loading="lazy" decoding="async"
+               alt="La pagina Controlla bene: la cifra da mandare, il costo dell'invio, il totale e due monete da spingere a destra per confermare." /></figure>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p class="eyebrow">Fatto apposta per non sbagliare</p>
+        <ul>
+          <li><strong>Due monete da spingere</strong>, insieme con due dita oppure una dopo l'altra: un tocco per sbaglio non manda niente.</li>
+          <li><strong>Un conto alla rovescia da 5 a 0</strong> con il pulsante Annulla, prima che il pagamento parta davvero.</li>
+          <li><strong>L'indirizzo messo in evidenza</strong>, così lo confronti a colpo d'occhio con quello di chi riceve.</li>
+          <li><strong>Il PIN per i pagamenti grossi</strong>: all'inizio sopra i 100&nbsp;&euro;, ma la soglia la decidi tu.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRE LIVELLI ================= -->
+  <section class="band" id="livelli">
+    <div class="wrap split">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Tre livelli</p>
+          <h2>Semplice all'inizio. Completo quando vuoi.</h2>
+          <p class="lede">
+            Parti dal livello Base e vedi solo l'essenziale. Quando ti senti
+            pronto, cambi livello dalle Impostazioni. E puoi sempre tornare
+            indietro.
+          </p>
+        </div>
+
+        <div class="levels">
+          <div class="level">
+            <p class="tag">BASE<small>semplice</small></p>
+            <div>
+              <h3>Solo quello che serve</h3>
+              <p>Ricevere, mandare, vedere i movimenti. Niente parole
+                 difficili, niente scelte da tecnici.</p>
+            </div>
+          </div>
+          <div class="level">
+            <p class="tag">MEDIO<small>più scelte</small></p>
+            <div>
+              <h3>Qualche possibilità in più</h3>
+              <p>Più portafogli, ognuno con il suo colore. Un portafoglio
+                 solo da guardare, che riceve ma non spende. E le tue
+                 &laquo;monete d'oro&raquo; viste una per una.</p>
+            </div>
+          </div>
+          <div class="level">
+            <p class="tag">ESPERTO<small>con PIN</small></p>
+            <div>
+              <h3>Per chi sa cosa sta facendo</h3>
+              <p>Si apre con il PIN. Trovi le opzioni per la privacy,
+                 &laquo;manda tutto&raquo; e la mancia ai minatori scelta a
+                 mano.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="phone"><img src="images/schei-livelli.webp" width="540" height="1134" loading="lazy" decoding="async"
+               alt="Le Impostazioni di Schèi Wallet: in alto i tre livelli Base, Medio ed Esperto; sotto, lingua, valuta, testo più grande e banconote." /></figure>
+    </div>
+  </section>
+
+  <!-- ================= SICUREZZA ================= -->
+  <section class="band band-alt" id="sicurezza">
+    <div class="wrap split">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Sicurezza</p>
+          <h2>Le chiavi in tasca tua, e basta</h2>
+          <p class="lede">
+            Schèi Wallet non è un conto presso qualcuno. È un portafoglio
+            vero: quello che c'è dentro è tuo, e lo controlli solo tu.
+          </p>
+        </div>
+
+        <ul class="ticks">
+          <li><strong>Le chiavi restano sul telefono.</strong> Non passano da noi né da nessun altro.</li>
+          <li><strong>Dodici parole da scrivere su carta.</strong> Sono la copia di riserva dei tuoi soldi. L'app controlla che tu le abbia scritte giuste, prima di cominciare.</li>
+          <li><strong>Un PIN di quattro numeri</strong> per aprire l'app e per i pagamenti grossi.</li>
+          <li><strong>PIN dimenticato? Niente panico.</strong> Con le dodici parole ne scegli uno nuovo.</li>
+          <li><strong>Nessuno può bloccare o congelare i tuoi soldi.</strong> Nemmeno SAFE21.</li>
+          <li><strong>Nessuna iscrizione.</strong> Niente nome, niente e-mail, niente documenti.</li>
+          <li><strong>Sotto c'è Electrum.</strong> Le parti che proteggono i tuoi soldi sono quelle originali di Electrum, in uso dal 2011: noi abbiamo cambiato l'aspetto, non la cassaforte.</li>
+        </ul>
+      </div>
+
+      <figure class="phone"><img src="images/schei-pin.webp" width="540" height="1134" loading="lazy" decoding="async"
+               alt="La pagina del PIN: quattro pallini da riempire, un tastierino con numeri grandi e il collegamento Ho dimenticato il PIN." /></figure>
+    </div>
+  </section>
+
+  <!-- ================= LINGUE ================= -->
+  <section class="band" id="lingue">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Lingue</p>
+        <h2>Parla italiano, inglese. E anche veneto!</h2>
+      </div>
+
+      <p class="langs">
+        <span>Italiano</span>
+        <span class="star">Vèneto</span>
+        <span>English</span>
+      </p>
+
+      <div class="prose">
+        <p>
+          Il nome viene da lì: in veneto <strong>schèi</strong> vuol dire
+          soldi. Così abbiamo tradotto tutta l'app anche in veneto, frase
+          per frase. Per chi i soldi li ha sempre chiamati così.
+        </p>
+      </div>
+
+      <!-- One real sentence of the app (row 37 of TRADUZIONI.md). -->
+      <div class="sample">
+        <div>
+          <p class="lab">Italiano</p>
+          <p>4 numeri facili da ricordare per te. Ti serviranno per aprire Schèi.</p>
+        </div>
+        <div>
+          <p class="lab">Veneto</p>
+          <p lang="vec">4 numari fasili da ricordar par ti. Te serviranno par verzar Schèi.</p>
+        </div>
+      </div>
+
+      <div class="prose prose-after">
+        <p>
+          Hai trovato una frase che dalle tue parti si dice in un altro modo?
+          La tabella con tutte le traduzioni è pubblica:
+          <a class="inline" href="https://github.com/ManX-SAFE21/schei-wallet/blob/HEAD/TRADUZIONI.md" target="_blank" rel="noopener noreferrer">leggila su GitHub &nearr;</a>
+          e proponi la tua correzione.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IMPARA ================= -->
+  <section class="band band-alt" id="impara">
+    <div class="wrap split">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow">Impara come funziona bitcoin</p>
+          <h2>Monete d'oro e un crogiuolo</h2>
+        </div>
+        <div class="prose">
+          <p>
+            Non serve capire bitcoin per usare Schèi Wallet. Ma se sei
+            curioso, dentro l'app c'è una pagina che lo spiega con un
+            disegno.
+          </p>
+          <p>
+            Una moneta da 2&nbsp;&euro; vale sempre 2&nbsp;&euro;. I bitcoin
+            invece sono come <strong>monete d'oro</strong>: ognuna vale
+            quanto oro c'è dentro, ogni volta una cifra diversa.
+          </p>
+          <p>
+            Quando paghi, le monete finiscono in un
+            <strong>crogiuolo</strong>: si fondono, e ne escono di nuove.
+            Una per chi riceve, una di resto per te, e una piccola mancia
+            per il &laquo;minatore&raquo; che registra il pagamento. Tutto
+            qui: è così che funziona davvero.
+          </p>
+        </div>
+      </div>
+
+      <figure class="phone"><img src="images/schei-crogiuolo.webp" width="540" height="1134" loading="lazy" decoding="async"
+               alt="La pagina che spiega le monete bitcoin: un crogiuolo con dentro due monete d'oro, e le frecce verso chi riceve e verso il minatore." /></figure>
+    </div>
+  </section>
+
+  <!-- ================= SCARICA ================= -->
+  <section class="band" id="scarica">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Scarica</p>
+        <h2>Tre passi per cominciare</h2>
+        <p class="lede">
+          Schèi Wallet si scarica da GitHub, il sito dove pubblichiamo il
+          nostro codice. È gratuito.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="num">Passo 1</span>
+          <h3>Scarica l'app</h3>
+          <p>Dal telefono, apri la
+             <a class="inline" href="https://github.com/ManX-SAFE21/schei-wallet/releases/latest" target="_blank" rel="noopener noreferrer">pagina dell'ultima versione</a>
+             e tocca il file che finisce con <strong>.apk</strong>.</p>
+        </div>
+        <div class="step">
+          <span class="num">Passo 2</span>
+          <h3>Installala</h3>
+          <p>Apri il file scaricato. Android ti chiede il permesso di
+             installare un'app che non viene dal Play Store: è normale,
+             conferma.</p>
+        </div>
+        <div class="step">
+          <span class="num">Passo 3</span>
+          <h3>Scrivi le dodici parole</h3>
+          <p>L'app crea il tuo portafoglio e ti mostra dodici parole.
+             Scrivile su carta, con calma, e tienile al sicuro. Poi scegli
+             il PIN.</p>
+        </div>
+      </div>
+
+      <div class="steps-actions">
+        <a class="btn btn-primary" href="https://github.com/ManX-SAFE21/schei-wallet/releases/latest" target="_blank" rel="noopener noreferrer">Scarica l'ultima versione</a>
+        <a class="btn btn-ghost" href="https://github.com/ManX-SAFE21/schei-wallet" target="_blank" rel="noopener noreferrer">Vedi il codice su GitHub &nearr;</a>
+      </div>
+
+      <div class="duo">
+        <!-- Test-version warning: Bitcoin-orange callout (blog.css). -->
+        <div class="callout btc">
+          <p class="eyebrow">Attenzione: versione di prova</p>
+          <p><strong>Schèi Wallet è ancora in collaudo.</strong> Funziona
+             con bitcoin veri, ma può avere difetti che non abbiamo ancora
+             trovato.</p>
+          <ul>
+            <li>Per ora <strong>non usarlo per cifre importanti</strong>: mettici solo quello che terresti in tasca.</li>
+            <li>Scrivi subito le dodici parole su carta. Senza quelle, se perdi il telefono perdi i soldi.</li>
+            <li>I pagamenti in bitcoin non si possono annullare, una volta partiti.</li>
+          </ul>
+        </div>
+
+        <!-- The separate testnet4 app. Anchor of the hero's second button. -->
+        <div class="callout" id="prova">
+          <p class="eyebrow">Prova senza rischi</p>
+          <p><strong>Schèi testnet4</strong> è una seconda app, uguale in
+             tutto, che usa monete di prova senza nessun valore.</p>
+          <ul>
+            <li>Si installa <strong>accanto</strong> a quella vera, senza toccarla.</li>
+            <li>Puoi ricevere, mandare e sbagliare quanto vuoi: non rischi un centesimo.</li>
+            <li>La trovi nella stessa <a class="inline" href="https://github.com/ManX-SAFE21/schei-wallet/releases/latest" target="_blank" rel="noopener noreferrer">pagina di download</a>: è il file con &laquo;testnet4&raquo; nel nome.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p class="eyebrow">Cosa serve</p>
+        <ul>
+          <li>Un telefono <strong>Android 8 o successivo</strong>, a 64 bit: quasi tutti quelli usciti dal 2018 in poi.</li>
+          <li>Un collegamento a internet, per vedere il saldo e per mandare i pagamenti.</li>
+          <li>Un foglio e una penna, per le dodici parole.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DOMANDE ================= -->
+  <section class="band band-alt" id="domande">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Domande frequenti</p>
+        <h2>Le cose che è giusto chiedersi</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Quanto costa?</summary>
+          <p>Niente. Schèi Wallet è gratuito e open source, con licenza MIT.
+             L'unica spesa è la piccola mancia ai &laquo;minatori&raquo; di
+             Bitcoin quando mandi un pagamento: la vedi sempre prima di
+             confermare, e non va a noi.</p>
+        </details>
+        <details>
+          <summary>Chi tiene i miei bitcoin?</summary>
+          <p>Tu. Le chiavi stanno nel tuo telefono. SAFE21 non le vede, non
+             può muovere i tuoi soldi e non può bloccarli. È come un
+             portafoglio di cuoio: quello che c'è dentro è di chi lo ha in
+             tasca.</p>
+        </details>
+        <details>
+          <summary>E se perdo o rompo il telefono?</summary>
+          <p>I soldi non sono persi, se hai le dodici parole. Installi Schèi
+             Wallet su un altro telefono, scrivi le dodici parole e ritrovi
+             tutto. Per questo vanno scritte su carta e tenute al sicuro:
+             chi le legge può prendere i tuoi soldi.</p>
+        </details>
+        <details>
+          <summary>Ho dimenticato il PIN. E adesso?</summary>
+          <p>Nella pagina del PIN tocca &laquo;Ho dimenticato il PIN&raquo;.
+             L'app ti chiede le dodici parole e ti fa scegliere un PIN
+             nuovo.</p>
+        </details>
+        <details>
+          <summary>Devo capire bitcoin per usarlo?</summary>
+          <p>No. Vedi gli importi in euro e paghi toccando banconote e
+             monete. Se poi ti viene la curiosità, la pagina sul crogiuolo
+             te lo spiega con un disegno.</p>
+        </details>
+        <details>
+          <summary>Posso provarlo senza rischiare soldi veri?</summary>
+          <p>Sì. Scarica <a class="inline" href="#prova">Schèi testnet4</a>:
+             è la stessa app, ma con monete di prova che non valgono
+             niente. Si installa accanto a quella vera.</p>
+        </details>
+        <details>
+          <summary>È la stessa cosa di Electrum?</summary>
+          <p>Sotto sì, sopra no. Electrum è un portafoglio bitcoin open
+             source usato in tutto il mondo dal 2011. Schèi Wallet ne è un
+             adattamento grafico: abbiamo ridisegnato le schermate per
+             renderle semplici, e lasciato com'erano le parti che
+             proteggono i soldi. Non è l'app ufficiale di Electrum.</p>
+        </details>
+        <details>
+          <summary>Ho trovato un difetto. A chi lo dico?</summary>
+          <p>Grazie: ci aiuti a migliorarla. Scrivilo nella
+             <a class="inline" href="https://github.com/ManX-SAFE21/schei-wallet/issues" target="_blank" rel="noopener noreferrer">pagina delle segnalazioni su GitHub &nearr;</a>,
+             raccontando cosa stavi facendo e cosa è successo. Non scrivere
+             mai lì le tue dodici parole: non te le chiederemo mai.</p>
+        </details>
+      </div>
+
+      <!-- Credit to the original project: a permanent fact of this page. -->
+      <p class="origin">
+        Schèi Wallet è un adattamento grafico di <strong>Electrum</strong>,
+        il portafoglio bitcoin open source pubblicato con licenza MIT
+        (<a class="inline" href="https://electrum.org/" target="_blank" rel="noopener noreferrer">electrum.org &nearr;</a>).
+        Non è un prodotto di Electrum Technologies e non è collegato a loro.
+        Quello che aggiungiamo lo rilasciamo con la stessa licenza: il
+        codice è <a class="inline" href="https://github.com/ManX-SAFE21/schei-wallet" target="_blank" rel="noopener noreferrer">pubblico su GitHub &nearr;</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING CTA ================= -->
+  <section class="article-cta cta-flush">
+    <div class="read">
+      <p class="eyebrow">Vuoi una mano per cominciare?</p>
+      <h2>Te lo facciamo vedere noi, con calma</h2>
+      <p>
+        In SAFE21 aiutiamo le persone a usare bitcoin in sicurezza, senza
+        fretta e senza paroloni. Se vuoi installare Schèi Wallet insieme a
+        noi, per te o per un tuo familiare, scrivici. Ti risponderà una
+        persona reale.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a class="btn btn-ghost" href="strumenti.html">Tutti gli strumenti di SAFE21</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <!-- Same structure and links as every other page (audit checks this). -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="logo" href="index.html" aria-label="SAFE21 home">
+            <svg viewBox="0 0 360 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SAFE21">
+              <defs><mask id="kh-foot"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="14" r="5" fill="#000"/><path d="M14 17 L20 17 L22 27 L12 27 Z" fill="#000"/></mask></defs>
+              <g transform="translate(14,30)"><rect width="34" height="34" rx="8" fill="#0D9488" mask="url(#kh-foot)"/></g>
+              <text x="62" y="60" font-family="'Space Grotesk',Arial,sans-serif" font-size="40" font-weight="600" letter-spacing="4"><tspan fill="var(--logo-word)">SAFE</tspan><tspan fill="var(--logo-21)">21</tspan></text>
+            </svg>
+          </a>
+          <p>Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.</p>
+        </div>
+
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h4>Servizi</h4>
+            <a href="index.html#services">Assistenza Bitcoin</a>
+            <a href="index.html#services">Corsi Bitcoin</a>
+            <a href="index.html#services">Sicurezza Electrum</a>
+            <a href="index.html#inheritance">Eredità</a>
+            <a href="ancora.html">Plugin Àncòra</a>
+            <a href="index.html#payments">Pagamenti</a>
+          </div>
+          <div class="foot-col">
+            <h4>Partner</h4>
+            <a href="https://bitcoin-after.life/" target="_blank" rel="noopener noreferrer">BAL Protocol &nearr;</a>
+            <a href="https://www.pagoinbitcoin.ch/" target="_blank" rel="noopener noreferrer">Pago in Bitcoin &nearr;</a>
+          </div>
+          <div class="foot-col">
+            <h4>Contatti</h4>
+            <a href="mailto:info@safe21.io">info@safe21.io</a>
+            <a href="blog.html">Blog</a>
+            <!-- SAFE21 open-source code (GitHub). External link. -->
+            <a href="https://github.com/ManX-SAFE21" target="_blank" rel="noopener noreferrer">Codice open source &nearr;</a>
+            <!-- OpenPGP public key for info@safe21.io (served as text/plain). -->
+            <a href="safe21-pgp.asc">Chiave PGP</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si
+        tratta di consulenza legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia
+        i tuoi fondi — le chiavi restano sempre sotto il tuo controllo. Le regole su successioni
+        e tassazione variano da paese a paese: per la tua situazione specifica rivolgiti a un
+        professionista qualificato. Le transazioni Bitcoin sono irreversibili.
+      </p>
+      <p class="copyright">© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script src="blog.js" defer></script>
+</body>
+</html>
