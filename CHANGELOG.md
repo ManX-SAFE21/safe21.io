@@ -3,6 +3,16 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [76] — Help desk link carries the site theme
+
+**Date:** 2026-11-14
+**Status:** Delivered and live
+
+- The "Apri un ticket" links point to `https://ticket.safe21.io/?tema=scuro`;
+  `blog.js` switches them to `?tema=chiaro` when the light theme is chosen.
+  The help desk (0.6.1) opens in the same theme and remembers it.
+  Owner request: before, the desk followed the device and often opened light.
+
 ## [75] — Help desk link: "Apri un ticket"
 
 **Date:** 2026-11-14

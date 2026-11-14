@@ -84,6 +84,12 @@
     btn.setAttribute('aria-pressed', String(isLight));
     btn.setAttribute('aria-label', isLight ? 'Passa al tema scuro' : 'Passa al tema chiaro');
     if (meta) meta.setAttribute('content', COLORS[isLight ? 'light' : 'dark']);
+    // Links to the SAFE21 help desk carry the theme, so the ticket page
+    // opens in the same colours (the desk remembers it in a cookie).
+    var links = document.querySelectorAll('a[href^="https://ticket.safe21.io"]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('href', 'https://ticket.safe21.io/?tema=' + (isLight ? 'chiaro' : 'scuro'));
+    }
     // sessionStorage, not localStorage: the choice is forgotten when the
     // browser/tab closes, so the next visit starts dark again.
     try { sessionStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}
