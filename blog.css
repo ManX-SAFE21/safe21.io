@@ -403,6 +403,8 @@ a.fn-ref sup { font-size: 0.72em; }
 .article-cta h2 { font-size: 30px; margin-bottom: 14px; }
 .article-cta p { color: var(--muted); font-size: 17px; margin: 0 0 26px; }
 .article-cta .actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.article-cta a.inline { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+.article-cta a.inline:hover { color: var(--accent-hover); }
 
 /* ---------- Blog intro ---------- */
 .blog-head {

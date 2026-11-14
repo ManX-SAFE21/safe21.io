@@ -3,6 +3,20 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [75] — Help desk link: "Apri un ticket"
+
+**Date:** 2026-11-14
+**Status:** Delivered and live
+
+- Footer "Contatti" column on all 19 pages: new link "Apri un ticket" to
+  https://ticket.safe21.io (the SAFE21 help desk); `footer.ticket` key on
+  the home page (EN "Open a ticket").
+- Help sentences in `ancora.html` (FAQ), `strumenti.html` ("Vuoi una mano?")
+  and `schei.html` (closing CTA): for a problem with a program, open a
+  ticket. The header "Contattaci" buttons stay email.
+- `blog.css`: inline links in the closing CTA box are teal and underlined
+  (before they looked like plain text).
+
 ## [74] — Schȅi page: lost phone answer and new preview image
 
 **Date:** 2026-11-13
