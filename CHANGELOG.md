@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [77] — Article: why the inheritance pays 50 sat/vB to the miners
 
 **Date:** 2026-11-17
-**Status:** Ready, not yet pushed
+**Status:** Delivered and live (commit `fabcd07`, pushed to `main`)
 
 - New article `blog-commissione-eredita-50-sat.html` (owner request): why the pre-signed inheritance
   transaction uses 50 sat/vB. Figures from mempool.space daily block fee
