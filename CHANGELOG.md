@@ -3,6 +3,22 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [77] — Article: why the inheritance pays 50 sat/vB to the miners
+
+**Date:** 2026-11-17
+**Status:** Ready, not yet pushed
+
+- New article `blog-commissione-eredita-50-sat.html` (owner request): why the pre-signed inheritance
+  transaction uses 50 sat/vB. Figures from mempool.space daily block fee
+  rates 2017-2026 (10th percentile, conservative): within 7 days 98% of the
+  time since 2019, worst wait 32 days (Dec 2023) against 99 days at 20 sat/vB.
+  Two inline SVG bar charts (new `.fee-chart` rules in `blog.css`, they follow
+  the light/dark theme) and a data table. Cover drawn in-house
+  (`images/copertina-commissione-eredita.webp`).
+- `blog.html` card + JSON-LD entry, `sitemap.xml` url; `ancora.html` FAQ
+  "Quale commissione mettere per i miner?" links the article (says
+  "consigliamo": the plugin default is still 20 until its next release).
+
 ## [76] — Help desk link carries the site theme
 
 **Date:** 2026-11-14

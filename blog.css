@@ -638,3 +638,19 @@ body, header, .post-card, .post-thumb, .callout, .checklist, .rule, figure.sourc
 }
 .article-body p > code { font-size: 0.85em; padding: 1px 7px; }
 @media (max-width: 760px) { .cli code { white-space: normal; overflow-wrap: anywhere; min-width: 0; max-width: 100%; } }
+
+/* ---------- Inline SVG bar charts (first used by blog-commissione-eredita-50-sat) ----------
+   The chart is drawn as SVG in the page, so its colors come from the theme tokens and follow
+   the light/dark switch. One bar is highlighted (.hi, teal); the others stay muted. */
+figure.fee-figure svg.fee-chart { display: block; width: 100%; height: auto; padding: 14px 10px 6px; }
+.fee-chart .grid { stroke: var(--line); stroke-width: 1; }
+.fee-chart .base { stroke: var(--muted); stroke-width: 1; opacity: 0.6; }
+.fee-chart .bar { fill: var(--muted); opacity: 0.35; }
+.fee-chart .bar.hi { fill: var(--teal); opacity: 1; }
+.fee-chart text { font-family: 'Space Mono', monospace; text-anchor: middle; fill: var(--muted); }
+.fee-chart .val { font-size: 13px; fill: var(--body); }
+.fee-chart .lab { font-size: 14px; fill: var(--body); }
+.fee-chart .cost { font-size: 11px; }
+.fee-chart .hi { fill: var(--teal); font-weight: 700; }
+.fee-chart .bar.hi { opacity: 1; }
+.fee-chart .axis { font-size: 11px; text-anchor: start; }
