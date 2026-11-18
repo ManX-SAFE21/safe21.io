@@ -230,22 +230,22 @@
         prima.
       </p>
 
-      <h2>La "busta" dell'eredità e la sua commissione</h2>
+      <h2>La transazione dell'eredità e la sua commissione</h2>
 
       <p>
         Con il protocollo BAL la tua eredità è una transazione Bitcoin
         <strong>già firmata</strong> che porta i fondi ai tuoi eredi, ma che la
-        rete accetta solo <strong>da una certa data in poi</strong>. Noi la
-        chiamiamo "busta": la prepari oggi, la consegni sigillata ai custodi (i
-        Will-Executor), e loro la spediscono quando arriva il giorno. Se nel
+        rete accetta solo <strong>da una certa data in poi</strong>. La prepari
+        oggi, la consegni già firmata ai custodi (i Will-Executor), e loro la
+        trasmettono alla rete quando arriva il giorno. Se nel
         frattempo sei ancora qui, la rinnovi e la data si sposta in avanti.
       </p>
 
       <p>
         Ogni transazione Bitcoin paga una piccola commissione ai miner, in
         satoshi per byte virtuale (sat/vB). Di solito la si sceglie al momento
-        dell'invio, guardando quanto è piena la rete. La busta dell'eredità
-        invece è firmata oggi: <strong>la sua commissione è scritta dentro e
+        dell'invio, guardando quanto è piena la rete. La transazione
+        dell'eredità invece è firmata oggi: <strong>la sua commissione è scritta dentro e
         non si può più cambiare</strong>. Non si può alzarla dopo (RBF), e oggi
         i custodi non la accelerano con una seconda transazione (CPFP).
       </p>
@@ -285,7 +285,7 @@
 
       <p>
         Abbiamo preso le commissioni reali dei blocchi, giorno per giorno, dal
-        2017 a oggi. Poi ci siamo chiesti: se la busta partisse in un giorno
+        2017 a oggi. Poi ci siamo chiesti: se la transazione partisse in un giorno
         qualunque, quanto dovrebbe aspettare prima di entrare in un blocco? I
         grafici mostrano il periodo dal 2019 in poi, cioè la rete di oggi.
       </p>
@@ -329,7 +329,7 @@
           <text class="val" x="444.8" y="211.1">10 g</text>
           <text class="lab" x="444.8" y="252">100</text>
           <text class="cost" x="444.8" y="270">13,40 €</text>
-          <text class="axis" x="6" y="296">sat/vB e costo per eredità (busta di circa 200 vB)</text>
+          <text class="axis" x="6" y="296">sat/vB e costo per eredità (transazione di circa 200 vB)</text>
           </svg>
         <figcaption>
           L'attesa più lunga dal 2019 a oggi, in giorni, per ogni commissione.
@@ -382,10 +382,10 @@
           <text class="val" x="444.8" y="37.3">99,7%</text>
           <text class="lab" x="444.8" y="252">100</text>
           <text class="cost" x="444.8" y="270">13,40 €</text>
-          <text class="axis" x="6" y="296">sat/vB e costo per eredità (busta di circa 200 vB)</text>
+          <text class="axis" x="6" y="296">sat/vB e costo per eredità (transazione di circa 200 vB)</text>
           </svg>
         <figcaption>
-          In quanti casi su cento la busta sarebbe entrata in un blocco entro
+          In quanti casi su cento la transazione sarebbe entrata in un blocco entro
           7 giorni, partendo da un giorno qualunque, dal 2019 a oggi.
         </figcaption>
       </figure>
@@ -415,7 +415,7 @@
       </div>
 
       <p>
-        Il costo è calcolato per una busta di circa 200 vB, al prezzo di
+        Il costo è calcolato per una transazione di circa 200 vB, al prezzo di
         novembre 2026 (circa 67.000 € per bitcoin). Prima del 2019 la rete era
         molto più cara: nel 2017, anche con 50 sat/vB, l'attesa più lunga
         sarebbe stata di circa 160 giorni. Oggi la rete è diversa, ma è un buon
@@ -433,10 +433,10 @@
         <li>
           <strong>Il costo resta piccolo.</strong> Circa 6,70 € contro 2,70 €
           con 20 sat/vB, pagati solo il giorno della consegna, una volta sola,
-          anche se la busta è stata data a più custodi: ne parte una.
+          anche se la transazione è stata data a più custodi: ne parte una.
         </li>
         <li>
-          <strong>Dipendi meno dal custode.</strong> Con 20 o 25 sat/vB la busta
+          <strong>Dipendi meno dal custode.</strong> Con 20 o 25 sat/vB la transazione
           passa comunque, prima o poi, ma il custode deve continuare a
           ritrasmetterla per mesi. Con 50 di solito bastano pochi giorni.
         </li>
@@ -447,14 +447,14 @@
         </li>
       </ol>
 
-      <h2>E se la busta resta in attesa?</h2>
+      <h2>E se la transazione resta in attesa?</h2>
 
       <p>
         Non è persa. I nodi della rete tengono in attesa una transazione per
         circa due settimane, e la scartano prima se la rete è molto piena. Il
         custode allora la <strong>ritrasmette</strong>, finché non entra in un
         blocco. Ha tutto l'interesse a farlo: il suo compenso arriva solo
-        quando la busta viene accettata. E poiché la busta è affidata a più
+        quando la transazione viene accettata. E poiché è affidata a più
         custodi, basta che uno di loro la mandi.
       </p>
 
@@ -463,7 +463,7 @@
       <p>
         Per ogni giorno dal 1° gennaio 2017 al 17 novembre 2026 abbiamo preso
         la commissione pagata dal 10% più economico delle transazioni entrate
-        nei blocchi di quel giorno (media giornaliera). Se la commissione della busta è almeno
+        nei blocchi di quel giorno (media giornaliera). Se la commissione della transazione è almeno
         quella cifra, quel giorno entra. È un conto <strong>prudente</strong>:
         dentro lo stesso giorno, di notte e nel fine settimana, la soglia
         scende spesso sotto la media, quindi nella realtà si passa un po' prima.

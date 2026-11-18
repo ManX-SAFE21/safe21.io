@@ -3,6 +3,18 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [78] — Fee article: "busta" becomes "transazione"
+
+**Date:** 2026-11-18
+**Status:** Delivered and live
+
+Owner's correction in `blog-commissione-eredita-50-sat.html`: the article
+called the inheritance transaction a "busta" (envelope). All 13 places now
+say "transazione": both headings, the chart axis labels (text still fits:
+377 of 480 px), the cost note and the body. The sentence that introduced the
+nickname is rewritten. The cover (a sealed envelope) and its alt text stay,
+owner's choice.
+
 ## [77] — Article: why the inheritance pays 50 sat/vB to the miners
 
 **Date:** 2026-11-17
