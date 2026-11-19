@@ -142,7 +142,7 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
-  document.querySelectorAll('figure.source img').forEach(function (img) {
+  document.querySelectorAll('figure.source img, .phones figure img').forEach(function (img) {
     img.addEventListener('click', function () {
       open(img.currentSrc || img.src, img.alt);
     });

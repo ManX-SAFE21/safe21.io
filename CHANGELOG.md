@@ -3,6 +3,15 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [82] — Schȅi manual: photos open full size
+
+**Date:** 2026-11-19
+**Status:** Delivered and live
+
+Owner noticed the Schȅi manual photos could not be zoomed. `blog.js` bound
+the lightbox only to `figure.source img`; it now also covers
+`.phones figure img`, the phone screenshots of the Schȅi guides.
+
 ## [81] — Schȅi manual hub: one manual, three sub-guides
 
 **Date:** 2026-11-19
