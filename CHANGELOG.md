@@ -3,6 +3,21 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [79] — Schȅi manual: two illustrated guides
+
+**Date:** 2026-11-19
+**Status:** Delivered, waiting for push
+
+- New guides `guide/schei-primi-passi.html` ("Primi passi": 12 words, PIN,
+  receive, send) and `guide/schei-eredita.html` ("L'eredità": the four
+  steps). Generated from `easy-heirs-wallet/anteprima/manuale-esempi/gen_manuale_sito.py`.
+- Photos come from the real app on a Samsung phone (17 webp in
+  `guide/img/schei/`); one video per guide (`guide/video/schei/`, still pauses
+  capped at 7 s) with a poster image.
+- `guide/index.html`: new "Schȅi Wallet" group with two cards (intro text
+  now covers both Àncòra and Schȅi); `guide/guide.css`: group title rule;
+  `schei.html`: "Manuale illustrato" button; `sitemap.xml`: two urls.
+
 ## [78] — Fee article: "busta" becomes "transazione"
 
 **Date:** 2026-11-18
