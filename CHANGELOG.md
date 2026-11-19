@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [80] — Schȅi manual: guide 3 "Ricevere"
+
+**Date:** 2026-11-19
+**Status:** Delivered, waiting for push
+
+- New guide `guide/schei-ricevere.html` (receive bitcoin: pull the coin
+  down, QR or address, waiting and arrived). 1 photo
+  (`guide/img/schei/09-ricevuti-in-attesa.webp`) and 1 video
+  (`guide/video/schei/video-ricevi.mp4`) recorded on the Samsung with the
+  screenshot app; still pauses capped at 7 s.
+- The three Schȅi guides are now numbered x/3 and link to each other.
+- `guide/index.html`: third Schȅi card; `sitemap.xml`: new url.
+
 ## [79] — Schȅi manual: two illustrated guides
 
 **Date:** 2026-11-19
