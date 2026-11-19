@@ -3,10 +3,24 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [81] — Schȅi manual hub: one manual, three sub-guides
+
+**Date:** 2026-11-19
+**Status:** Delivered and live (pushed with #80)
+
+- New hub page `guide/schei-manuale.html` ("Manuale Schȅi Wallet"): short
+  intro and three guide cards (Primi passi, Ricevere, L'eredità), in this order.
+- The sub-guides are renumbered 1/3 Primi passi, 2/3 Ricevere, 3/3 L'eredità;
+  each links back to the hub and to the other two, and ends with a
+  "next guide" link (last one: back to the hub). Texts, photos and videos unchanged.
+- `guide/index.html`: the three Schȅi cards become one "Manuale Schȅi Wallet"
+  card; `schei.html`: the "Manuale illustrato" button points to the hub;
+  `sitemap.xml`: new url. Generator `gen_manuale_sito.py` updated.
+
 ## [80] — Schȅi manual: guide 3 "Ricevere"
 
 **Date:** 2026-11-19
-**Status:** Delivered, waiting for push
+**Status:** Delivered and live
 
 - New guide `guide/schei-ricevere.html` (receive bitcoin: pull the coin
   down, QR or address, waiting and arrived). 1 photo
