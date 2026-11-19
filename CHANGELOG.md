@@ -6,7 +6,7 @@ One numbered entry per task.
 ## [79] — Schȅi manual: two illustrated guides
 
 **Date:** 2026-11-19
-**Status:** Delivered, waiting for push
+**Status:** Delivered and live (commit `b188c2f`, pushed to `main`); owner text fix: "Schȅi di default ne usa 3"
 
 - New guides `guide/schei-primi-passi.html` ("Primi passi": 12 words, PIN,
   receive, send) and `guide/schei-eredita.html` ("L'eredità": the four
