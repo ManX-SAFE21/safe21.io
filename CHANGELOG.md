@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [87] — Chi siamo: photo of the bell tower instead of the drawing
+
+**Date:** 2026-11-22
+**Status:** Delivered and live
+
+The hand-made SVG campanile (#86) and the AI attempts did not satisfy the
+owner. He supplied his own photo (owner confirmed it is his).
+- `images/campanile-san-marco.webp`: the photo cropped on the spire and the
+  belfry, toned teal/dark like the site (duotone), 360x360, 14 KB.
+- `chisiamo.html`: the hero circle is now that image (`img.cs-mark`, alt
+  text in Italian); `chisiamo.css`: `.cs-mark` is a round, cover-fit image
+  with the teal ring. No lion (owner: not needed).
+
 ## [86] — Chi siamo: the bell tower of St Mark's replaces the avatar
 
 **Date:** 2026-11-22

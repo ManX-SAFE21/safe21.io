@@ -10,12 +10,10 @@
 
 .cs-hero { padding: 64px 0 36px; }
 .cs-grid { display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: center; }
-/* The bell tower of St Mark's in a teal ring: the page's mark (the owner's
-   avatar until 22/11). The drawing follows the theme colour. */
+/* The bell tower of St Mark's (owner's photo, teal-toned) in a teal ring. */
 .cs-mark {
-  width: 180px; height: 180px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--panel); border: 3px solid var(--teal-d); color: var(--teal);
+  width: 180px; height: 180px; border-radius: 50%; display: block;
+  object-fit: cover; border: 3px solid var(--teal-d);
 }
 .cs-hero h1 { font-size: clamp(32px, 5vw, 50px); line-height: 1.12; margin: 10px 0 14px; }
 .cs-hero .lede { font-size: 19px; line-height: 1.6; color: var(--muted); max-width: 720px; margin: 0; }
@@ -61,7 +59,6 @@
 @media (max-width: 760px) {
   .cs-grid { grid-template-columns: 1fr; gap: 22px; }
   .cs-mark { width: 140px; height: 140px; }
-  .cs-mark svg { width: 60px; height: 120px; }
   .cs-acro { grid-template-columns: repeat(2, 1fr); }
   .cs-21 { flex-direction: column; align-items: flex-start; gap: 10px; }
   .cs-proj { grid-template-columns: 1fr; }
