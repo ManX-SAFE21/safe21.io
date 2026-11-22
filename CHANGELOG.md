@@ -3,6 +3,21 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [86] — Chi siamo: the bell tower of St Mark's replaces the avatar
+
+**Date:** 2026-11-22
+**Status:** Delivered and live
+
+Owner: a symbol of Veneto/Venice on the page, the yin-yang avatar removed.
+- `chisiamo.html`: the hero circle holds an inline SVG of the campanile di
+  San Marco in the site's line style (angel, spire, attic with relief panel,
+  belfry with four arches and balustrade, shaft with three bays between the
+  lesene, the Loggetta del Sansovino at the foot), real proportions (~1:8),
+  `role="img"` with an Italian label. It follows the theme colour.
+- `chisiamo.css`: `.cs-avatar` becomes `.cs-mark` (teal ring, panel fill).
+- `images/avatar-safe21.webp` deleted (no longer used).
+- Checked: dark and light theme, 375 px phone (no overflow), audit clean.
+
 ## [85] — Menu: Chi siamo panel aligned, icon outline on the home
 
 **Date:** 2026-11-22
