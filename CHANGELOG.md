@@ -3,6 +3,17 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [85] — Menu: Chi siamo panel aligned, icon outline on the home
+
+**Date:** 2026-11-22
+**Status:** Delivered and live
+
+- The Chi siamo panel was right-aligned to its button and looked shifted
+  left (owner): it now starts under the button like the other two panels
+  (`.dd-right`, blog.css and index.html). Fits at 1025 px (right edge 869).
+- Home: icons had no teal outline because index.html lacked the
+  `--tint-teal-bg` / `--tint-teal-bd` tokens of blog.css; added.
+
 ## [84] — Menu: one source (tools/menu.py), checked by the audit
 
 **Date:** 2026-11-22

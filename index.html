@@ -69,6 +69,8 @@
       --muted:  #95A1B5;   /* secondary text */
       --teal:   #2DD4BF;   /* primary accent (security) */
       --teal-d: #0D9488;   /* deep teal (logo tile, solid fills) */
+      --tint-teal-bg: rgba(45, 212, 191, 0.07);   /* menu: icon outline, hover (same as blog.css) */
+      --tint-teal-bd: rgba(45, 212, 191, 0.28);
       --orange: #F7931A;   /* Bitcoin accent — used sparingly */
       --bal:   #2d6cdf;    /* BAL Protocol — used on the inheritance card */
 
@@ -218,7 +220,9 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
     }
     .dd-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
-    .dd-right { left: auto; right: -8px; }
+    /* Chi siamo: starts under its button like the other panels (owner 22/11).
+       It fits: at 1025 px wide its right edge stays well inside the screen. */
+    .dd-right { left: -8px; right: auto; }
     .dd.open > .dd-panel { display: block; }
     .dd.open > .dd-wide { display: grid; }
     .dd-wide { min-width: 580px; grid-template-columns: 1fr 1fr; gap: 4px; }
