@@ -15,7 +15,9 @@ easy-heirs-wallet/anteprima/manuale-esempi/gen_manuale_sito.py) call this
 script at the end, so regenerating the manual never leaves an old menu.
 
 index.html is bilingual: its labels carry data-i18n keys, and the English
-texts (the EN columns below) are added to its EN dictionary.
+texts (the EN columns below) are added to its EN dictionary. The same
+English texts (plus FOOTER_EN) go to i18n-common.json for the pages that
+switch language with i18n.js (chisiamo.html, strumenti.html).
 Icons: owner's "proposal D" (22/11/2026), stylised line icons in a light
 teal outline; Àncòra and Schȅi keep their own logos.
 """
@@ -119,6 +121,28 @@ TOP_EN = {"nav.services": ("Servizi", "Services"), "nav.tools": ("Strumenti", "T
           "nav.blog": ("Blog", "Blog"), "nav.about": ("Chi siamo", "About us"),
           "nav.contact": ("Contattaci", "Contact us")}
 
+
+# Footer phrases (IT -> EN) for the pages translated at runtime by i18n.js
+# (chisiamo.html, strumenti.html). index.html has its own EN dictionary.
+FOOTER_EN = [
+    ("Sicurezza Bitcoin, self-custody ed eredità — con le tue chiavi sempre nelle tue mani.",
+     "Bitcoin security, self-custody and inheritance — with your keys always in your hands."),
+    ("Servizi", "Services"), ("Assistenza Bitcoin", "Bitcoin support"), ("Corsi Bitcoin", "Bitcoin courses"),
+    ("Sicurezza Electrum", "Electrum security"), ("Eredità", "Inheritance"), ("Plugin Àncòra", "Àncòra plugin"),
+    ("Pagamenti", "Payments"), ("Partner", "Partners"), ("BAL Protocol ↗", "BAL Protocol ↗"),
+    ("Pago in Bitcoin ↗", "Pago in Bitcoin ↗"), ("Contatti", "Contact"), ("Chi siamo", "About us"),
+    ("Apri un ticket ↗", "Open a ticket ↗"), ("Codice open source ↗", "Open-source code ↗"), ("Chiave PGP", "PGP key"),
+    ("SAFE21 fornisce consulenza tecnica e formazione sulla self-custody di Bitcoin. Non si tratta di consulenza "
+     "legale, fiscale o finanziaria, e SAFE21 non prende mai in custodia i tuoi fondi — le chiavi restano sempre "
+     "sotto il tuo controllo. Le regole su successioni e tassazione variano da paese a paese: per la tua situazione "
+     "specifica rivolgiti a un professionista qualificato. Le transazioni Bitcoin sono irreversibili.",
+     "SAFE21 provides technical guidance and education on Bitcoin self-custody. It is not legal, tax or financial "
+     "advice, and SAFE21 never takes custody of your funds — you always control your own keys. Inheritance and tax "
+     "rules differ from country to country; please consult a qualified professional for your own situation. "
+     "Bitcoin transactions are irreversible."),
+    ("© 2026 SAFE21 — safe21.io. Tutti i diritti riservati.", "© 2026 SAFE21 — safe21.io. All rights reserved."),
+]
+COMMON_FILE = "i18n-common.json"
 
 def url(href, up):
     """Relative link from the page's folder (guide/ is one level down)."""
@@ -303,6 +327,33 @@ def render(rel, text):
     return s
 
 
+def common_json():
+    """i18n-common.json: every menu and footer phrase, Italian -> English,
+    for i18n.js (exact text match on header/footer text nodes)."""
+    import json
+    m = {}
+    for k, (it, en) in TOP_EN.items():
+        m[it] = en
+    for k, (it, en) in GROUP_EN.items():
+        m[it] = en
+    for lst in (SERVIZI, PROGRAMMI, MANUALI, CHI, PARTNER, CONTATTI):
+        for _, _, _, lab, note, en_l, en_n in lst:
+            m[lab] = en_l
+            if note:
+                m[note] = en_n
+    for it, en in FOOTER_EN:
+        m[" ".join(it.split())] = en
+    return json.dumps(m, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
+
+
+def read_common():
+    """Current i18n-common.json (LF line ends), or "" if missing."""
+    path = os.path.join(ROOT, COMMON_FILE)
+    if not os.path.exists(path):
+        return ""
+    return open(path, encoding="utf-8").read().replace("\r\n", "\n")
+
+
 def check():
     """Pages whose menu is not what this script produces: [(page, reason)]."""
     bad = []
@@ -315,6 +366,8 @@ def check():
             continue
         if want != text.replace("\r\n", "\n"):
             bad.append((rel, "menu differs from tools/menu.py (run: python tools/menu.py)"))
+    if read_common() != common_json():
+        bad.append((COMMON_FILE, "out of date (run: python tools/menu.py)"))
     return bad
 
 
@@ -333,6 +386,10 @@ def main():
         if new != raw.replace("\r\n", "\n"):
             open(path, "w", encoding="utf-8", newline="").write(new.replace("\n", nl))
             print("menu updated:", rel)
+    if read_common() != common_json():
+        path = os.path.join(ROOT, COMMON_FILE)
+        open(path, "w", encoding="utf-8", newline="\n").write(common_json())
+        print("updated:", COMMON_FILE)
     print("menu ok")
 
 

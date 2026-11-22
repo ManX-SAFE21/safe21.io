@@ -15,6 +15,9 @@
    app's umbrel-app.yml, the date from the last commit of that folder.
    A [data-copy] button copies its text (the store address).
    A [data-dialog] link opens that <dialog> instead of following its href.
+   Live texts (dates, "Scarica il file (1,0 MB)", "o successivo", "Copia")
+   follow the page language set by i18n.js: the raw values are kept on the
+   elements and painted again on every "safe21:lang" event.
 
    Everything written in the HTML is the fallback: without JavaScript, or
    when GitHub does not answer (it allows 60 calls per hour per visitor),
@@ -30,16 +33,36 @@
     });
   }
 
-  function italianDate(iso) {
-    return new Date(iso).toLocaleDateString('it-IT',
-      { day: 'numeric', month: 'long', year: 'numeric' });
+  function en() { return document.documentElement.lang === 'en'; }
+
+  // Raw values live in data-* attributes; paint() writes them in the
+  // current language.
+  function paint() {
+    document.querySelectorAll('[data-iso]').forEach(function (el) {
+      el.textContent = new Date(el.getAttribute('data-iso')).toLocaleDateString(
+        en() ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+    });
+    document.querySelectorAll('[data-mb]').forEach(function (el) {
+      var mb = Number(el.getAttribute('data-mb'));
+      el.textContent = en()
+        ? 'Download the file (' + mb.toFixed(1) + ' MB)'
+        : 'Scarica il file (' + mb.toFixed(1).replace('.', ',') + ' MB)';
+    });
+    document.querySelectorAll('[data-el]').forEach(function (el) {
+      el.textContent = 'Electrum ' + el.getAttribute('data-el') + (en() ? ' or later' : ' o successivo');
+    });
   }
+  document.addEventListener('safe21:lang', paint);
 
   document.querySelectorAll('.sw-card[data-repo]').forEach(function (card) {
     var repo = card.getAttribute('data-repo');
     function set(field, text) {
       var el = card.querySelector('[data-f="' + field + '"]');
       if (el) el.textContent = text;
+    }
+    function setRaw(field, attr, value) {
+      var el = card.querySelector('[data-f="' + field + '"]');
+      if (el) { el.setAttribute(attr, value); paint(); }
     }
 
     var app = card.getAttribute('data-umbrel');
@@ -53,7 +76,7 @@
         .catch(function () {});
       getJSON(API + repo + '/commits?per_page=1&path=' + encodeURIComponent(app))
         .then(function (list) {
-          if (list[0]) set('date', italianDate(list[0].commit.committer.date));
+          if (list[0]) setRaw('date', 'data-iso', list[0].commit.committer.date);
         })
         .catch(function () {});
       return;
@@ -61,7 +84,7 @@
 
     if (card.hasAttribute('data-web')) {
       getJSON(API + repo)
-        .then(function (d) { set('date', italianDate(d.pushed_at)); })
+        .then(function (d) { setRaw('date', 'data-iso', d.pushed_at); })
         .catch(function () {});
       return;
     }
@@ -70,7 +93,7 @@
       .then(function (rel) {
         // "ancora-v0.8.0" -> "0.8.0", "v1.0.12" -> "1.0.12"
         set('ver', rel.tag_name.replace(/^.*?v(?=\d)/, ''));
-        set('date', italianDate(rel.published_at));
+        setRaw('date', 'data-iso', rel.published_at);
 
         var zip = (rel.assets || []).filter(function (a) {
           return /\.zip$/i.test(a.name);
@@ -79,8 +102,7 @@
           var btn = card.querySelector('[data-f="dl"]');
           btn.href = zip.browser_download_url;
           btn.removeAttribute('target');      // a download, not a new tab
-          btn.textContent = 'Scarica il file (' +
-            (zip.size / 1048576).toFixed(1).replace('.', ',') + ' MB)';
+          setRaw('dl', 'data-mb', String(zip.size / 1048576));
         }
 
         var manifest = card.getAttribute('data-manifest');
@@ -88,7 +110,7 @@
         return getJSON(RAW + repo + '/' + encodeURIComponent(rel.tag_name) + '/' + manifest)
           .then(function (m) {
             if (m.min_electrum_version) {
-              set('needs', 'Electrum ' + m.min_electrum_version + ' o successivo');
+              setRaw('needs', 'data-el', m.min_electrum_version);
             }
           });
       })
@@ -119,8 +141,8 @@
     btn.addEventListener('click', function () {
       if (!navigator.clipboard) return;      // the address stays visible to copy by hand
       navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
-        btn.textContent = 'Copiato';
-        setTimeout(function () { btn.textContent = 'Copia'; }, 2000);
+        btn.textContent = en() ? 'Copied' : 'Copiato';
+        setTimeout(function () { btn.textContent = en() ? 'Copy' : 'Copia'; }, 2000);
       });
     });
   });

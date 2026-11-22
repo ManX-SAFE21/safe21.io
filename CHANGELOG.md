@@ -3,6 +3,31 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [88] — Chi siamo and Strumenti in English (IT/EN switch); the 21 text
+
+**Date:** 2026-11-22
+**Status:** Delivered and live
+
+Owner asked for an English version of only these two pages; the English
+acronym differs (Secure Asset & Family Estate).
+- New `i18n.js`: IT/EN switch for chisiamo.html and strumenti.html, sharing
+  the homepage choice (localStorage "safe21-lang"). The pages stay Italian in
+  the markup (search engines); English comes from each page's
+  `<script id="i18n-en">` (data-i18n elements + short repeated `phrases`) and
+  from `i18n-common.json` (menu and footer phrases).
+- `i18n-common.json` is written by `tools/menu.py` (new FOOTER_EN list) from
+  the same lists as the menu; `--check` and the audit fail if it is stale.
+- Header of both pages: EN/IT buttons (CSS in blog.css, same look as home).
+- `strumenti.js`: dates, "Download the file (x MB)", "or later", Copy/Copied
+  follow the language and repaint on the `safe21:lang` event.
+- Chi siamo, the 21 box: title "Ventuno milioni: tanti bitcoin esisteranno,
+  mai uno di più."; text on the 100 million satoshis and "infinitamente
+  divisibile*" (owner's wording) with a footnote on the protocol limit
+  (checked: Lightning counts millisatoshis inside channels; Ark works in
+  whole sats; no active proposal for sub-satoshi on L1). 21 smaller (56 px).
+- Checked in the browser: IT -> EN -> IT on both pages, choice carried from
+  the home, no Italian left in English, audit clean.
+
 ## [87] — Chi siamo: photo of the bell tower instead of the drawing
 
 **Date:** 2026-11-22

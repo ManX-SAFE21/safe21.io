@@ -196,6 +196,22 @@ header {
   .nav .logo svg { height: 44px; }
 }
 
+/* ---------- IT / EN switch (chisiamo.html, strumenti.html; i18n.js) ----------
+   Same look as the homepage switcher. */
+.lang-switch {
+  display: inline-flex; flex: none;
+  border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+}
+.lang-btn {
+  font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 1px;
+  background: transparent; color: var(--muted); border: 0;
+  padding: 8px 12px; cursor: pointer;
+  transition: color .15s ease, background-color .15s ease;
+}
+.lang-btn:hover { color: var(--light); }
+.lang-btn[aria-pressed="true"] { background: var(--teal); color: var(--btn-text); font-weight: 700; }
+@media (max-width: 760px) { .lang-btn { padding: 7px 10px; } }
+
 /* ---------- Grouped menu: dropdown panels (#79+) ----------
    Four top items (Servizi, Strumenti, Blog, Chi siamo); three open a panel.
    Click/tap toggles (script), and on devices with a real mouse hovering

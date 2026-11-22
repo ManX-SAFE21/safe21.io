@@ -146,6 +146,12 @@
       </nav>
 
       <div class="cta">
+        <!-- EN / IT switcher (i18n.js), shared with the homepage: same
+             "safe21-lang" choice. The page itself is written in Italian. -->
+        <div class="lang-switch" role="group" aria-label="Lingua / Language">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+          <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano">IT</button>
+        </div>
         <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
         <button type="button" class="theme-toggle" aria-pressed="false"
                 aria-label="Passa al tema chiaro" title="Cambia tema">
@@ -205,9 +211,9 @@
         <img class="cs-mark" src="images/campanile-san-marco.webp" width="360" height="360"
              alt="Il campanile di San Marco a Venezia: la cuspide con l'angelo e la cella campanaria, in toni verde acqua." />
         <div>
-          <p class="eyebrow">Chi siamo</p>
-          <h1>Veneti, prima che italiani. Bitcoiner dal 2016.</h1>
-          <p class="lede">
+          <p data-i18n="hero.eyebrow" class="eyebrow">Chi siamo</p>
+          <h1 data-i18n="hero.title">Veneti, prima che italiani. Bitcoiner dal 2016.</h1>
+          <p data-i18n="hero.lede" class="lede">
             SAFE21 nasce in Veneto da una domanda semplice: come si custodisce
             davvero un bene che nessuno può stampare, e come lo si lascia ai
             propri figli?
@@ -218,55 +224,66 @@
 
     <section class="cs-band">
       <div class="wrap">
-        <h2>La nostra storia</h2>
-        <p>
+        <h2 data-i18n="story.title">La nostra storia</h2>
+        <p data-i18n="story.p1">
           Tutto è cominciato cercando alternative monetarie da usare nel
           territorio, per un'economia circolare fatta di persone e botteghe
           vicine. Nel dicembre 2016 è arrivata la vera folgorazione: Bitcoin.
         </p>
-        <p>
+        <p data-i18n="story.p2">
           Da allora aiutiamo le persone a tenere i propri bitcoin al sicuro, con
           le chiavi nelle proprie mani, e a pensare per tempo a chi li erediterà.
         </p>
         <ul class="cs-time">
-          <li><b>dic 2016</b><span>La folgorazione: Bitcoin come moneta per il territorio.</span></li>
-          <li><b>oggi</b><span>Assistenza, corsi, eredità e pagamenti in bitcoin.</span></li>
-          <li><b>i progetti</b><span>Àncòra, per l'eredità su Electrum, e Schȅi Wallet, pensato anche per i Veneti.</span></li>
+          <li data-i18n="story.t1"><b>dic 2016</b><span>La folgorazione: Bitcoin come moneta per il territorio.</span></li>
+          <li data-i18n="story.t2"><b>oggi</b><span>Assistenza, corsi, eredità e pagamenti in bitcoin.</span></li>
+          <li data-i18n="story.t3"><b>i progetti</b><span>Àncòra, per l'eredità su Electrum, e Schȅi Wallet, pensato anche per i Veneti.</span></li>
         </ul>
       </div>
     </section>
 
     <section class="cs-band" id="nome">
       <div class="wrap">
-        <h2>Perché SAFE21</h2>
-        <p>
+        <h2 data-i18n="name.title">Perché SAFE21</h2>
+        <p data-i18n="name.p">
           <strong>Safe</strong>, non <em>save</em>: «al sicuro» è uno stato,
           solido come una roccia, non un'azione da ripetere. È lì che devono
           stare i tuoi bitcoin.
         </p>
         <div class="cs-acro">
-          <div><div class="L">S</div><div class="W">Sicurezza</div><div class="D">Il backup fatto bene</div></div>
-          <div><div class="L">A</div><div class="W">Asset</div><div class="D">I tuoi bitcoin e le tue chiavi</div></div>
-          <div><div class="L">F</div><div class="W">Futuro</div><div class="D">La lungimiranza</div></div>
-          <div><div class="L">E</div><div class="W">Ereditario</div><div class="D">Il passaggio ai tuoi figli</div></div>
+          <div><div class="L">S</div><div data-i18n="name.s" class="W">Sicurezza</div><div data-i18n="name.s.d" class="D">Il backup fatto bene</div></div>
+          <div><div class="L">A</div><div class="W">Asset</div><div data-i18n="name.a.d" class="D">I tuoi bitcoin e le tue chiavi</div></div>
+          <div><div class="L">F</div><div data-i18n="name.f" class="W">Futuro</div><div data-i18n="name.f.d" class="D">La lungimiranza</div></div>
+          <div><div class="L">E</div><div data-i18n="name.e" class="W">Ereditario</div><div data-i18n="name.e.d" class="D">Il passaggio ai tuoi figli</div></div>
         </div>
         <div class="cs-21">
           <div class="n">21</div>
-          <p>
-            Ventuno milioni: tanti bitcoin esisteranno, mai uno di più. È l'unico
-            bene scarso per regola matematica. Custodire un pezzo di matematica,
-            e lasciarlo ai propri figli.
-          </p>
+          <div>
+            <h3 data-i18n="name.21.title">Ventuno milioni: tanti bitcoin esisteranno, mai uno di più.</h3>
+            <p data-i18n="name.21">
+              Ogni bitcoin si divide in 100 milioni di parti, i <strong>satoshi</strong>.
+              È l'unico bene scarso per regola matematica e infinitamente
+              divisibile<sup>*</sup>. Custodire un pezzo di matematica, e lasciarlo
+              ai propri figli.
+            </p>
+            <!-- Owner's wording "infinitamente divisibile", with the footnote that
+                 states the precise fact (22/11). -->
+            <p class="cs-note" data-i18n="name.21.note">
+              * Oggi la regola di Bitcoin si ferma al satoshi, e la rete Lightning
+              usa già frazioni di satoshi: il limite non è fisso, basta aggiornare
+              i protocolli.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="cs-band">
       <div class="wrap">
-        <h2>I nostri progetti</h2>
+        <h2 data-i18n="proj.title">I nostri progetti</h2>
         <div class="cs-proj">
-          <a href="ancora.html"><img src="images/ancora-icon.svg" width="48" height="48" alt=""><span>Àncòra<small>Il plugin per l'eredità dei tuoi bitcoin</small></span></a>
-          <a href="schei.html"><img src="images/schei-icon.png" width="192" height="192" alt=""><span>Schȅi Wallet<small>Il wallet semplice, pensato anche per i Veneti</small></span></a>
+          <a href="ancora.html"><img src="images/ancora-icon.svg" width="48" height="48" alt=""><span>Àncòra<small data-i18n="proj.ancora">Il plugin per l'eredità dei tuoi bitcoin</small></span></a>
+          <a href="schei.html"><img src="images/schei-icon.png" width="192" height="192" alt=""><span>Schȅi Wallet<small data-i18n="proj.schei">Il wallet semplice, pensato anche per i Veneti</small></span></a>
         </div>
       </div>
     </section>
@@ -275,15 +292,15 @@
   <!-- ================= CLOSING CTA ================= -->
   <section class="article-cta">
     <div class="read">
-      <p class="eyebrow">Parliamone</p>
-      <h2>Una persona vera, con le tue chiavi nelle tue mani</h2>
-      <p>
+      <p data-i18n="cta.eyebrow" class="eyebrow">Parliamone</p>
+      <h2 data-i18n="cta.title">Una persona vera, con le tue chiavi nelle tue mani</h2>
+      <p data-i18n="cta.p">
         Raccontaci cosa ti preoccupa: sicurezza, corsi, eredità o pagamenti.
         Non serve dirci quanto possiedi.
       </p>
       <div class="actions">
-        <a class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
-        <a class="btn btn-ghost" href="strumenti.html">I nostri strumenti</a>
+        <a data-i18n="cta.mail" class="btn btn-primary" href="mailto:info@safe21.io">Scrivici a info@safe21.io</a>
+        <a data-i18n="cta.tools" class="btn btn-ghost" href="strumenti.html">I nostri strumenti</a>
       </div>
     </div>
   </section>
@@ -346,5 +363,42 @@
   </footer>
 
   <script src="blog.js" defer></script>
+  <!-- English texts of this page, keyed by data-i18n (i18n.js). -->
+  <script type="application/json" id="i18n-en">
+{
+  "meta.title": "About us and why we are called SAFE21 | SAFE21",
+  "meta.description": "SAFE21 was born in the Veneto: bitcoiners since 2016, we help people keep their bitcoin with their own keys and leave it to their children. Why the name SAFE21.",
+  "hero.eyebrow": "About us",
+  "hero.title": "Venetians before Italians. Bitcoiners since 2016.",
+  "hero.lede": "SAFE21 was born in the Veneto from a simple question: how do you truly safeguard an asset nobody can print, and how do you pass it on to your children?",
+  "story.title": "Our story",
+  "story.p1": "It all started with a search for alternative currencies to use in our own area, for a circular economy of neighbours and local shops. In December 2016 came the real revelation: Bitcoin.",
+  "story.p2": "Since then we have been helping people keep their bitcoin safe, with the keys in their own hands, and plan ahead for who will inherit them.",
+  "story.t1": "<b>Dec 2016</b><span>The revelation: Bitcoin as money for our community.</span>",
+  "story.t2": "<b>today</b><span>Support, courses, inheritance and bitcoin payments.</span>",
+  "story.t3": "<b>projects</b><span>Àncòra, for inheritance in Electrum, and Schȅi Wallet, made with Venetians in mind too.</span>",
+  "name.title": "Why SAFE21",
+  "name.p": "<strong>Safe</strong>, not <em>save</em>: being safe is a state, solid as a rock, not an action you have to repeat. That is where your bitcoin belongs.",
+  "name.s": "Secure",
+  "name.s.d": "A backup done right",
+  "name.a.d": "Your bitcoin and your keys",
+  "name.f": "Family",
+  "name.f.d": "The people you protect",
+  "name.e": "Estate",
+  "name.e.d": "What you hand down to your children",
+  "name.21.title": "Twenty-one million bitcoin will exist, never one more.",
+  "name.21": "Each bitcoin divides into 100 million parts, the <strong>satoshis</strong>. The only asset made scarce by a mathematical rule and infinitely divisible<sup>*</sup>. Safeguarding a piece of mathematics, and leaving it to your children.",
+  "name.21.note": "* Today Bitcoin's rule stops at the satoshi, and the Lightning network already uses fractions of a satoshi: the limit is not fixed, it only takes updating the protocols.",
+  "proj.title": "Our projects",
+  "proj.ancora": "The plugin for your bitcoin inheritance",
+  "proj.schei": "The simple wallet, made with Venetians in mind too",
+  "cta.eyebrow": "Let's talk",
+  "cta.title": "A real person, with your keys in your hands",
+  "cta.p": "Tell us what worries you: security, courses, inheritance or payments. You don't need to tell us how much you own.",
+  "cta.mail": "Email info@safe21.io",
+  "cta.tools": "Our tools"
+}
+  </script>
+  <script src="i18n.js" defer></script>
 </body>
 </html>

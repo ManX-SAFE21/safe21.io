@@ -168,6 +168,12 @@
       </nav>
 
       <div class="cta">
+        <!-- EN / IT switcher (i18n.js), shared with the homepage: same
+             "safe21-lang" choice. The page itself is written in Italian. -->
+        <div class="lang-switch" role="group" aria-label="Lingua / Language">
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+          <button type="button" class="lang-btn" data-lang="it" aria-pressed="true" aria-label="Italiano">IT</button>
+        </div>
         <a class="btn btn-primary" href="mailto:info@safe21.io">Contattaci</a>
         <button type="button" class="theme-toggle" aria-pressed="false"
                 aria-label="Passa al tema chiaro" title="Cambia tema">
@@ -225,7 +231,7 @@
       <div class="wrap">
         <p class="eyebrow">Strumenti &middot; gratuiti, con il codice pubblico</p>
         <h1>Gli strumenti di SAFE21</h1>
-        <p class="lede">
+        <p data-i18n="hero.lede" class="lede">
           Gli strumenti che abbiamo scritto per usare i bitcoin in sicurezza:
           l'eredità con BAL Protocol e i pagamenti a molte persone. Il codice
           è pubblico su GitHub, così chiunque può controllarlo. Se non conosci
@@ -366,28 +372,28 @@
       <h2 id="sw-umbrel-title">Come si installa</h2>
       <p>Il Will-Executor si aggiunge dall'App Store di Umbrel, in quattro passi:</p>
       <ol class="sw-steps">
-        <li>Apri l'<strong>App Store</strong> di Umbrel.</li>
-        <li>In alto a destra premi <strong>&#8943;</strong>, poi <strong>Community App Stores</strong>.</li>
+        <li data-i18n="dlg.s1">Apri l'<strong>App Store</strong> di Umbrel.</li>
+        <li data-i18n="dlg.s2">In alto a destra premi <strong>&#8943;</strong>, poi <strong>Community App Stores</strong>.</li>
         <li>Incolla questo indirizzo e premi <strong>Add</strong>:
           <span class="sw-copy">
             <code>https://github.com/ManX-SAFE21/safe21-umbrel-apps</code>
             <button type="button" class="btn btn-ghost" data-copy="https://github.com/ManX-SAFE21/safe21-umbrel-apps">Copia</button>
           </span>
         </li>
-        <li>Apri lo store <strong>SAFE21</strong> e installa <strong>Will Executor</strong>.</li>
+        <li data-i18n="dlg.s4">Apri lo store <strong>SAFE21</strong> e installa <strong>Will Executor</strong>.</li>
       </ol>
-      <p>Serve l'app <strong>Bitcoin Node</strong> già installata su Umbrel.</p>
+      <p data-i18n="dlg.req">Serve l'app <strong>Bitcoin Node</strong> già installata su Umbrel.</p>
       <!-- Uninstalling an app on Umbrel OS deletes its container AND its
            data folder: the stored wills and the weekly automatic backups
            go with it. The labels below are the dashboard's own (English). -->
       <div class="sw-warn" role="note">
         <p class="sw-warn-title"><span aria-hidden="true">&#9888;</span> Prima di disinstallare, salva il backup</p>
-        <p>
+        <p data-i18n="dlg.w1">
           Se disinstalli l'app, Umbrel OS cancella <strong>tutti i suoi dati</strong>:
           le transazioni dei testamenti che custodisce e anche i backup automatici
           settimanali, che stanno nella stessa cartella. Non si possono recuperare.
         </p>
-        <p>
+        <p data-i18n="dlg.w2">
           Prima di disinstallare apri il pannello del Will Executor, vai su
           <strong>BACKUP</strong> e premi <strong>Download Backup</strong>. Salva il
           file fuori dall'Umbrel, sul computer o su una chiavetta. Dopo una nuova
@@ -415,7 +421,7 @@
           </div>
           <div>
             <h2>Vuoi una mano?</h2>
-            <p>
+            <p data-i18n="help.p">
               Installiamo e configuriamo insieme a te, con le tue chiavi sempre
               nelle tue mani. Scrivici a
               <a class="inline" href="mailto:info@safe21.io">info@safe21.io</a>.
@@ -486,6 +492,70 @@
   </footer>
 
   <script src="blog.js" defer></script>
+  <!-- English texts of this page, keyed by data-i18n (i18n.js). -->
+  <script type="application/json" id="i18n-en">
+{
+  "meta.title": "SAFE21 tools — free, ready to download | SAFE21",
+  "meta.description": "SAFE21's free software: Àncòra, Easy Heirs and Schȅi, the Will-Executor for Umbrel OS and PaytoMany. Always the latest version, even without GitHub.",
+  "phrases": {
+    "Strumenti · gratuiti, con il codice pubblico": "Tools · free, with public source code",
+    "Gli strumenti di SAFE21": "SAFE21 tools",
+    "Plugin per Electrum": "Electrum plugin",
+    "App per Android": "Android app",
+    "App per Umbrel OS": "Umbrel OS app",
+    "App web · per Electrum": "Web app · for Electrum",
+    "Prepara il testamento dei tuoi bitcoin con BAL Protocol: restano tuoi finché ci sei, e alla data che scegli arrivano agli eredi. Nessuno riceve le tue chiavi.": "Prepare the will of your bitcoin with BAL Protocol: they stay yours as long as you are here, and on the date you choose they reach your heirs. Nobody receives your keys.",
+    "Il portafoglio bitcoin semplice: testo grande, pochi pulsanti, importi in euro. Per chi vuole usare bitcoin senza complicazioni. È ancora una versione di prova: non usarla per cifre importanti.": "The simple bitcoin wallet: large text, few buttons, amounts in euro. For people who want to use bitcoin without complications. Still a test version: do not use it for large amounts.",
+    "Prepara la lista degli eredi: crea per ciascuno un portafoglio nuovo e un foglio stampabile con le parole di recupero, tutto offline. La lista è pronta per BAL.": "Prepare the list of heirs: it creates a new wallet and a printable sheet with the recovery words for each of them, all offline. The list is ready for BAL.",
+    "Il tuo will-executor sul tuo nodo: custodisce le copie dei testamenti e le invia alla rete alla data giusta, attraverso il tuo nodo Bitcoin. Non tiene mai chiavi. Pannello web e backup automatici ogni settimana.": "Your own will-executor on your own node: it keeps the copies of the wills and broadcasts them on the right date, through your Bitcoin node. It never holds keys. Web dashboard and automatic weekly backups.",
+    "Paga tante persone con una sola transazione: inquadri i QR degli indirizzi con il telefono, metti gli importi in euro e copi la lista nella funzione «Paga a molti» di Electrum. Non tocca mai i tuoi soldi né le tue chiavi.": "Pay many people with a single transaction: scan the address QR codes with your phone, enter the amounts in euro and paste the list into Electrum's “Pay to many”. It never touches your money or your keys.",
+    "Ultima versione": "Latest version",
+    "vedi GitHub": "see GitHub",
+    "Pubblicata il": "Released on",
+    "Aggiornata il": "Updated on",
+    "Ultimo aggiornamento": "Last update",
+    "Serve": "Requires",
+    "Licenza": "Licence",
+    "Prezzo": "Price",
+    "Si usa": "Runs",
+    "MIT, gratuito": "MIT, free",
+    "gratuito": "free",
+    "Electrum 4.8.3 o successivo": "Electrum 4.8.3 or later",
+    "Android 8 o successivo, 64 bit": "Android 8 or later, 64-bit",
+    "Umbrel OS con l'app Bitcoin Node": "Umbrel OS with the Bitcoin Node app",
+    "dal browser, niente da installare": "in the browser, nothing to install",
+    "telefono con fotocamera ed Electrum": "a phone with a camera, and Electrum",
+    "Scarica il file": "Download the file",
+    "Scarica l'app": "Download the app",
+    "La release su GitHub ↗": "The release on GitHub ↗",
+    "Il codice su GitHub ↗": "The code on GitHub ↗",
+    "Scopri Àncòra →": "Discover Àncòra →",
+    "Scopri Schȅi Wallet →": "Discover Schȅi Wallet →",
+    "Leggi l'articolo →": "Read the article (Italian) →",
+    "Come si installa": "How to install",
+    "Apri l'app ↗": "Open the app ↗",
+    "Will-Executor per Umbrel OS": "Will-Executor for Umbrel OS",
+    "Il Will-Executor si aggiunge dall'App Store di Umbrel, in quattro passi:": "The Will-Executor is added from the Umbrel App Store, in four steps:",
+    "Incolla questo indirizzo e premi": "Paste this address and press",
+    "Copia": "Copy",
+    "Prima di disinstallare, salva il backup": "Before uninstalling, save the backup",
+    "Guida passo passo per Raspberry Pi ↗": "Step-by-step guide for Raspberry Pi (Italian) ↗",
+    "Ho capito": "Got it",
+    "Come controllare il file": "How to check the file",
+    "Ogni file da scaricare è firmato con la chiave di sviluppo di SAFE21, allegata alla release. Nella pagina della release su GitHub trovi anche il codice SHA-256: prima di installare, controlla che quello del file scaricato sia lo stesso.": "Every downloadable file is signed with SAFE21's development key, attached to the release. On the GitHub release page you also find the SHA-256 code: before installing, check that the downloaded file has the same one.",
+    "Vuoi una mano?": "Need a hand?"
+  },
+  "hero.lede": "The tools we wrote to use bitcoin safely: inheritance with BAL Protocol and payments to many people. The code is public on GitHub, so anyone can check it. If you don't know GitHub, use the <strong>Download the file</strong> button: you always get the latest version.",
+  "dlg.s1": "Open the Umbrel <strong>App Store</strong>.",
+  "dlg.s2": "At the top right press <strong>&#8943;</strong>, then <strong>Community App Stores</strong>.",
+  "dlg.s4": "Open the <strong>SAFE21</strong> store and install <strong>Will Executor</strong>.",
+  "dlg.req": "It needs the <strong>Bitcoin Node</strong> app already installed on Umbrel.",
+  "dlg.w1": "If you uninstall the app, Umbrel OS deletes <strong>all its data</strong>: the will transactions it keeps and also the weekly automatic backups, which live in the same folder. They cannot be recovered.",
+  "dlg.w2": "Before uninstalling, open the Will Executor dashboard, go to <strong>BACKUP</strong> and press <strong>Download Backup</strong>. Save the file outside the Umbrel, on a computer or a USB stick. After a new installation you load it back from <strong>Import Transactions from Backup</strong>.",
+  "help.p": "We install and configure it together with you, with your keys always in your hands. Email <a class=\"inline\" href=\"mailto:info@safe21.io\">info@safe21.io</a>. If a program does not work, open a ticket at <a class=\"inline\" href=\"https://ticket.safe21.io/?tema=scuro\" target=\"_blank\" rel=\"noopener noreferrer\">ticket.safe21.io &nearr;</a>."
+}
+  </script>
+  <script src="i18n.js" defer></script>
   <script src="strumenti.js" defer></script>
 </body>
 </html>
