@@ -3,6 +3,29 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [83] — Grouped menu with icons, Chi siamo page
+
+**Date:** 2026-11-22
+**Status:** Delivered and live
+
+- Menu on every page (root pages and `guide/`): four items, Servizi /
+  Strumenti / Blog / Chi siamo, three of them opening a panel (click, tap,
+  keyboard; hover with a mouse). The panels hold what was only in the footer
+  (partners, ticket, open-source code, PGP key). Phone drawer: the same
+  groups. Icons: owner's proposal D, light teal outline with a stylised line
+  icon (Àncòra and Schȅi keep their logos), on desktop and phone.
+  CSS in `blog.css` and inline in `index.html`, JS in `blog.js` and in the
+  index script. `index.html` keeps IT/EN: labels in their own spans with
+  `data-i18n`, 42 EN entries added. The `guide/` pages got the same menu by
+  the same script (their generator copies the header from `ancora.html`).
+- New `chisiamo.html` + `chisiamo.css`: owner's story (Veneti prima che
+  italiani, bitcoin since Dec 2016, local currencies for a circular economy,
+  projects Àncòra and Schȅi), section `#nome` (Safe not save, S.A.F.E. in
+  Italian, 21 = the 21 million bitcoin), avatar `images/avatar-safe21.webp`
+  (owner's image, on a white disc). Footer: "Chi siamo" link everywhere.
+- `strumenti.html`: card ids for the menu links (#easy-heirs, #will-executor,
+  #paytomany). Sitemap and audit updated.
+
 ## [82] — Schȅi manual: photos open full size
 
 **Date:** 2026-11-19

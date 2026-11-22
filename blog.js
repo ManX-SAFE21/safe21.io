@@ -52,6 +52,45 @@
 })();
 
 /**
+ * Grouped menu: dropdown panels (desktop header).
+ *
+ * Each .dd-btn toggles its panel; only one panel is open at a time. A
+ * click outside, Escape, or opening another panel closes it. With a real
+ * mouse, CSS :hover opens the panels too; this script makes them work by
+ * click/tap and keyboard, and keeps aria-expanded truthful.
+ */
+(function () {
+  var dds = Array.prototype.slice.call(document.querySelectorAll('.nav-links .dd'));
+  if (!dds.length) return;
+
+  function closeAll(except) {
+    dds.forEach(function (dd) {
+      if (dd === except) return;
+      dd.classList.remove('open');
+      dd.querySelector('.dd-btn').setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  dds.forEach(function (dd) {
+    var btn = dd.querySelector('.dd-btn');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !dd.classList.contains('open');
+      closeAll(dd);
+      dd.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-links .dd')) closeAll(null);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAll(null);
+  });
+})();
+
+/**
  * Light/dark theme switch — blog pages only.
  *
  * The whole theme lives in CSS custom properties, so switching means

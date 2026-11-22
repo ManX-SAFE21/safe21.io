@@ -1,0 +1,67 @@
+/* ==========================================================================
+   SAFE21 — chisiamo.html (about us + the meaning of the name) stylesheet
+   ==========================================================================
+
+   Loaded AFTER blog.css, which provides the tokens (dark + light theme),
+   header, footer, buttons and theme toggle. This file adds only the hero
+   with the avatar, the story timeline, the S.A.F.E. letters, the "21" box
+   and the project links.
+   ========================================================================== */
+
+.cs-hero { padding: 64px 0 36px; }
+.cs-grid { display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: center; }
+/* The owner's avatar is a black-and-white drawing on white: a white disc
+   keeps it readable on the dark theme too. */
+.cs-avatar {
+  width: 180px; height: 180px; border-radius: 50%; display: block;
+  background: #fff; border: 3px solid var(--teal-d);
+}
+.cs-hero h1 { font-size: clamp(32px, 5vw, 50px); line-height: 1.12; margin: 10px 0 14px; }
+.cs-hero .lede { font-size: 19px; line-height: 1.6; color: var(--muted); max-width: 720px; margin: 0; }
+
+.cs-band { padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+.cs-band h2 { font-size: 30px; margin: 0 0 16px; }
+.cs-band p { color: var(--body); font-size: 17px; line-height: 1.7; max-width: 760px; margin: 0 0 16px; }
+.cs-band strong { color: var(--light); }
+
+.cs-time { list-style: none; padding: 0; margin: 20px 0 0; max-width: 760px; }
+.cs-time li {
+  display: grid; grid-template-columns: 120px 1fr; gap: 18px;
+  padding: 12px 0; border-top: 1px solid var(--line); color: var(--body);
+}
+.cs-time b { font-family: 'Space Mono', monospace; font-weight: 400; color: var(--teal); }
+
+/* S.A.F.E. — one tile per letter. */
+.cs-acro { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0 8px; max-width: 820px; }
+.cs-acro > div { border: 1px solid var(--line); border-radius: 14px; padding: 18px; background: var(--panel); }
+.cs-acro .L { font: 700 42px 'Space Grotesk', sans-serif; color: var(--teal); line-height: 1; }
+.cs-acro .W { font: 600 17px 'Space Grotesk', sans-serif; margin: 8px 0 4px; color: var(--light); }
+.cs-acro .D { font-size: 14px; color: var(--muted); line-height: 1.45; }
+
+/* The 21: Bitcoin-orange box. */
+.cs-21 {
+  display: flex; gap: 28px; align-items: center; max-width: 820px; margin: 26px 0 8px;
+  padding: 22px 26px; border-radius: 16px;
+  border: 1px solid var(--tint-btc-bd); background: var(--tint-btc-bg);
+}
+.cs-21 .n { font: 700 84px 'Space Grotesk', sans-serif; color: var(--orange); line-height: 1; }
+.cs-21 p { margin: 0; }
+
+.cs-proj { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 820px; margin-top: 20px; }
+.cs-proj a {
+  display: flex; gap: 14px; align-items: center; padding: 16px;
+  border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
+  color: var(--light); text-decoration: none;
+}
+.cs-proj a:hover { border-color: var(--teal); }
+.cs-proj img { width: 48px; height: 48px; border-radius: 11px; }
+.cs-proj small { display: block; color: var(--muted); font-size: 13.5px; }
+
+@media (max-width: 760px) {
+  .cs-grid { grid-template-columns: 1fr; gap: 22px; }
+  .cs-avatar { width: 140px; height: 140px; }
+  .cs-acro { grid-template-columns: repeat(2, 1fr); }
+  .cs-21 { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .cs-proj { grid-template-columns: 1fr; }
+  .cs-time li { grid-template-columns: 1fr; gap: 4px; }
+}

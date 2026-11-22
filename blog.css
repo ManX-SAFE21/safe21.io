@@ -174,7 +174,7 @@ header {
   border-top: 1px solid var(--line);
   background: var(--drawer-bg);
 }
-.mobile-menu.open { display: block; }
+.mobile-menu.open { display: block; max-height: calc(100vh - 72px); overflow-y: auto; }
 .mobile-menu nav { display: flex; flex-direction: column; padding: 8px 24px 18px; }
 .mobile-menu nav a {
   padding: 14px 0; font-size: 16px; color: var(--light);
@@ -194,6 +194,69 @@ header {
 @media (max-width: 760px) {
   .nav { height: 72px; }
   .nav .logo svg { height: 44px; }
+}
+
+/* ---------- Grouped menu: dropdown panels (#79+) ----------
+   Four top items (Servizi, Strumenti, Blog, Chi siamo); three open a panel.
+   Click/tap toggles (script), and on devices with a real mouse hovering
+   opens it too. The ::before strip bridges the gap under the button so the
+   panel does not close while the pointer travels down to it. */
+.nav-links { gap: 6px; }
+.nav-links > a, .dd-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 12px; border-radius: 10px;
+  font: 500 14px Inter, system-ui, sans-serif; color: var(--muted);
+  background: none; border: 0; cursor: pointer; transition: color .15s ease, background .15s ease;
+}
+.nav-links > a:hover, .dd-btn:hover { color: var(--light); }
+.nav-links > a.current, .dd-btn.current { color: var(--teal); }
+.dd { position: relative; }
+.dd-chev { width: 12px; height: 12px; transition: transform .15s ease; }
+.dd.open > .dd-btn { color: var(--light); background: var(--panel); }
+.dd.open .dd-chev { transform: rotate(180deg); }
+.dd-panel {
+  display: none; position: absolute; top: calc(100% + 8px); left: -8px; z-index: 60;
+  min-width: 290px; padding: 10px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+}
+.dd-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.dd-right { left: auto; right: -8px; }
+.dd.open > .dd-panel { display: block; }
+.dd.open > .dd-wide { display: grid; }
+.dd-wide { min-width: 580px; grid-template-columns: 1fr 1fr; gap: 4px; }
+@media (hover: hover) and (min-width: 1025px) {
+  .dd:hover > .dd-panel { display: block; }
+  .dd:hover > .dd-wide { display: grid; }
+}
+.dd-panel a {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 9px 10px; border-radius: 10px;
+  font-size: 14px; color: var(--light); text-decoration: none;
+}
+.dd-panel a:hover { background: var(--tint-teal-bg); }
+.dd-panel small { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+/* Proposal D (owner 22/11): light teal outline, stylised line icon inside.
+   Àncòra and Schȅi keep their own logos (img). */
+.dd-ico {
+  flex: 0 0 30px; height: 30px; border-radius: 8px; display: grid; place-items: center;
+  background: transparent; border: 1.5px solid var(--tint-teal-bd);
+  color: var(--teal); font: 700 12px 'Space Grotesk', sans-serif;
+}
+.dd-ico svg { width: 18px; height: 18px; }
+.dd-ico:has(img) { border: 0; }
+/* Phone drawer: icon + label on one line. */
+.mobile-menu nav a { display: flex; align-items: center; gap: 12px; }
+.dd-ico img { width: 30px; height: 30px; border-radius: 8px; display: block; }
+.dd-panel hr { border: 0; border-top: 1px solid var(--line); margin: 8px 4px; }
+.dd-grp {
+  margin: 0; padding: 6px 10px 2px; font: 400 11px 'Space Mono', monospace;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
+}
+/* Drawer group labels (phones). */
+.mobile-menu .mm-grp {
+  margin: 14px 0 2px; font: 400 11px 'Space Mono', monospace;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--teal);
 }
 
 /* ---------- Article layout ---------- */

@@ -142,3 +142,6 @@ a.sw-icon { text-decoration: none; }
   .sw-grid { grid-auto-rows: auto; }   /* stacked on phones: no need to pad */
   .sw-hero { padding-top: 48px; }
 }
+
+/* Menu links jump to a card (#easy-heirs...): keep it below the sticky header. */
+.sw-card { scroll-margin-top: 100px; }
