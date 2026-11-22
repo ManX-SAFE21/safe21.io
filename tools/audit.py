@@ -510,6 +510,21 @@ def css_matrix():
     return 0
 
 
+# --------------------------------------------------------------------------
+# 11. header menu: every page must carry exactly what tools/menu.py makes
+# --------------------------------------------------------------------------
+def check_menu():
+    """The menu is defined only in tools/menu.py; a page with an old, edited
+    or missing menu is an error (fix: python tools/menu.py)."""
+    import importlib.util
+    sys.dont_write_bytecode = True   # no tools/__pycache__ in the repo
+    spec = importlib.util.spec_from_file_location('site_menu', ROOT / 'tools' / 'menu.py')
+    menu = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(menu)
+    for page, why in menu.check():
+        err(page, why)
+
+
 def main():
     if '--css-matrix' in sys.argv:
         return css_matrix()
@@ -535,6 +550,7 @@ def main():
         check_meta(page, src)
 
     check_footers(pages + guides)
+    check_menu()
     check_index(pages)
     check_site_files(pages + guides)
 

@@ -3,6 +3,28 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [84] — Menu: one source (tools/menu.py), checked by the audit
+
+**Date:** 2026-11-22
+**Status:** Delivered and live
+
+Owner asked for the most robust setup after #83, whose menu was written by a
+throwaway script. No page changes look.
+
+- New `tools/menu.py`: the only definition of the header menu, the phone
+  drawer, the icons, the footer "Chi siamo" link and the homepage EN labels.
+  `python tools/menu.py` rewrites every page (root and `guide/`);
+  `--check` only reports differences.
+- `tools/audit.py`: new check, a page whose menu differs from the script is
+  an ERROR (tested by editing one label in blog.html: caught).
+- The two manual generators, outside this repo
+  (`safe21-ancora/manuale/strumenti/pubblica_sul_sito.py`,
+  `easy-heirs-wallet/anteprima/manuale-esempi/gen_manuale_sito.py`), now run
+  `tools/menu.py` at the end, so regenerating the manual cannot leave an old
+  menu. Not run here: they would also overwrite the site-only edits of the
+  guides (known issue, see #83 notes).
+- `CONTRIBUTING.md`: "the menu changes only with tools/menu.py".
+
 ## [83] — Grouped menu with icons, Chi siamo page
 
 **Date:** 2026-11-22

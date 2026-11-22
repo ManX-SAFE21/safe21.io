@@ -27,6 +27,22 @@ Restano invece copiati in ogni pagina, di proposito: **header e footer**
 penalizza SEO e lettori senza JS) e il **piccolo script anti-flash** nel
 `<head>`, che deve girare prima del primo rendering.
 
+### Il menu si cambia solo con `tools/menu.py`
+
+Il menu in alto (Servizi / Strumenti / Blog / Chi siamo, con i riquadri e le
+icone), il menu del telefono e il link «Chi siamo» nel footer sono scritti in
+ogni pagina, ma li genera **`tools/menu.py`**: voci, icone e traduzioni
+inglesi della homepage stanno lì e solo lì. Per cambiare il menu, o dopo aver
+creato una pagina nuova (anche nel manuale `guide/`):
+
+```
+python tools/menu.py
+```
+
+Non modificare mai a mano il `<nav>` di una pagina: l'audit confronta il menu
+di ogni pagina con quello dello script e dà **errore** se è diverso. Anche i
+due generatori del manuale (Àncòra e Schȅi) lanciano `tools/menu.py` alla fine.
+
 `index.html` (la homepage) è a parte e resta interamente autoconsistente.
 
 ```
