@@ -272,7 +272,7 @@
       <p>Ogni portafoglio ha la sua data di consegna e la sua commissione per i miner. Guarda quelle attuali:</p>
       <pre class="cmd">electrum bal_delivery_show</pre>
       <pre class="out">{
-    "baltx_fees": 20,
+    "baltx_fees": 50,
     "date": "2028-11-05",
     "form": "fixed",
     "will_in_force": null,
@@ -282,16 +282,16 @@
         Cambia la data (anno-mese-giorno, alle 00:00 UTC) e la commissione
         (in sat/vB):
       </p>
-      <pre class="cmd">electrum bal_delivery_set --date 2029-03-01 --fee 20</pre>
+      <pre class="cmd">electrum bal_delivery_set --date 2029-03-01 --fee 50</pre>
       <pre class="out">{
-    "baltx_fees": 20,
+    "baltx_fees": 50,
     "date": "2029-03-01",
     "message": "Stored. Run bal_will_prepare to prepare the will with the new settings.",
     <span class="cut">…</span>
 }</pre>
       <div class="tip"><b>La commissione:</b> il testamento verrà trasmesso
         fra anni, quindi deve essere abbastanza generosa perché i miner lo
-        accettino. Àncòra avvisa sotto i 20 sat/vB.</div>
+        accettino. Àncòra avvisa sotto i 50 sat/vB.</div>
     </div>
 
     <h2><span class="n">04</span>Gli eredi</h2>
@@ -482,7 +482,7 @@
 
     <h2><span class="n">09</span>Tutti i comandi</h2>
     <div class="step">
-      <p>I 37 comandi di Àncòra 0.8.0. Per ognuno, <code>--help</code> dà i dettagli.</p>
+      <p>I 37 comandi di Àncòra 0.8.1. Per ognuno, <code>--help</code> dà i dettagli.</p>
       <div class="table-wrap">
       <table class="ref">
         <thead><tr><th>Comando</th><th>A cosa serve</th></tr></thead>
