@@ -371,6 +371,10 @@
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
     .card:hover { transform: translateY(-4px); border-color: var(--teal); }
+    /* A card whose title link covers the whole card. */
+    .card { position: relative; }
+    .card-stretch { color: inherit; text-decoration: none; }
+    .card-stretch::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
     .card .ico { color: var(--teal); margin-bottom: 18px; }
     /* Bitcoin-native (partner) services carry the small orange touch. */
     .card.bitcoin .ico { color: var(--orange); }
@@ -624,7 +628,7 @@
           <button type="button" class="dd-btn" aria-expanded="false" aria-controls="dd-servizi"><span data-i18n="nav.services">Servizi</span><svg class="dd-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
           <div class="dd-panel" id="dd-servizi">
             <a href="index.html#services"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></span><span><span data-i18n="menu.svc1">Assistenza Bitcoin</span><small data-i18n="menu.svc1.n">Aiuto personale su wallet e sicurezza</small></span></a>
-            <a href="index.html#services"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2.5 2 9.5 2 12 0v-5"/></svg></span><span><span data-i18n="menu.svc2">Corsi Bitcoin</span><small data-i18n="menu.svc2.n">Online e di persona</small></span></a>
+            <a href="corsi.html"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2.5 2 9.5 2 12 0v-5"/></svg></span><span><span data-i18n="menu.svc2">Corsi Bitcoin</span><small data-i18n="menu.svc2.n">Online e di persona</small></span></a>
             <a href="index.html#services"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><span data-i18n="menu.svc3">Sicurezza Electrum</span><small data-i18n="menu.svc3.n">Wallet, 2FA, cold storage</small></span></a>
             <a href="index.html#inheritance"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="7" r="2.6"/><circle cx="16.5" cy="10" r="2"/><path d="M3 20c0-3 2.2-5.5 5-5.5s5 2.5 5 5.5"/><path d="M13 20c.3-2.3 1.7-3.8 3.5-3.8S19.7 17.7 20 20"/></svg></span><span><span data-i18n="menu.svc4">Eredità Bitcoin</span><small data-i18n="menu.svc4.n">Il piano per i tuoi eredi</small></span></a>
             <a href="index.html#payments"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span><span><span data-i18n="menu.svc5">Pagamenti in Bitcoin</span><small data-i18n="menu.svc5.n">Con Pago in Bitcoin</small></span></a>
@@ -700,7 +704,7 @@
       <nav aria-label="Mobile">
         <p class="mm-grp" data-i18n="nav.services">Servizi</p>
         <a href="index.html#services"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg></span><span data-i18n="menu.svc1">Assistenza Bitcoin</span></a>
-        <a href="index.html#services"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2.5 2 9.5 2 12 0v-5"/></svg></span><span data-i18n="menu.svc2">Corsi Bitcoin</span></a>
+        <a href="corsi.html"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2.5 2 9.5 2 12 0v-5"/></svg></span><span data-i18n="menu.svc2">Corsi Bitcoin</span></a>
         <a href="index.html#services"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span data-i18n="menu.svc3">Sicurezza Electrum</span></a>
         <a href="index.html#inheritance"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="7" r="2.6"/><circle cx="16.5" cy="10" r="2"/><path d="M3 20c0-3 2.2-5.5 5-5.5s5 2.5 5 5.5"/><path d="M13 20c.3-2.3 1.7-3.8 3.5-3.8S19.7 17.7 20 20"/></svg></span><span data-i18n="menu.svc4">Eredità Bitcoin</span></a>
         <a href="index.html#payments"><span class="dd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span><span data-i18n="menu.svc5">Pagamenti in Bitcoin</span></a>
@@ -934,7 +938,8 @@
               <path pathLength="1" d="M22 10L12 5 2 10l10 5 10-5z"/><path pathLength="1" d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/>
             </svg>
           </div>
-          <h3 data-i18n="services.s2.title">Corsi Bitcoin</h3>
+          <!-- The whole card opens corsi.html (stretched link, #89). -->
+          <h3><a class="card-stretch" href="corsi.html" data-i18n="services.s2.title">Corsi Bitcoin</a></h3>
           <p data-i18n="services.s2.text">Impara Bitcoin come si deve — online o di persona. Dal primo wallet alla self-custody avanzata, al ritmo giusto per te.</p>
           <div class="meta"><span class="tag" data-i18n="services.s2.tag">Online e di persona</span></div>
         </article>
@@ -1078,7 +1083,7 @@
           <div class="foot-col">
             <h4 data-i18n="footer.services">Servizi</h4>
             <a href="#services" data-i18n="footer.s1">Assistenza Bitcoin</a>
-            <a href="#services" data-i18n="footer.s2">Corsi Bitcoin</a>
+            <a href="corsi.html" data-i18n="footer.s2">Corsi Bitcoin</a>
             <a href="#services" data-i18n="footer.s3">Sicurezza Electrum</a>
             <a href="#inheritance" data-i18n="footer.s4">Eredità</a>
             <a href="ancora.html" data-i18n="footer.ancora">Plugin Àncòra</a>

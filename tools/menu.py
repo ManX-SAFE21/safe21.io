@@ -71,7 +71,7 @@ CHEVRON = ('<svg class="dd-chev" viewBox="0 0 12 12" fill="none" stroke="current
 SERVIZI = [
     ("svc1", "index.html#services", "?", "Assistenza Bitcoin", "Aiuto personale su wallet e sicurezza",
      "Bitcoin support", "One-to-one help on wallets and security"),
-    ("svc2", "index.html#services", "C", "Corsi Bitcoin", "Online e di persona",
+    ("svc2", "corsi.html", "C", "Corsi Bitcoin", "Online e di persona",
      "Bitcoin courses", "Online and in person"),
     ("svc3", "index.html#services", "E", "Sicurezza Electrum", "Wallet, 2FA, cold storage",
      "Electrum security", "Wallets, 2FA, cold storage"),
@@ -267,6 +267,8 @@ def current_of(name):
         return "strumenti"
     if base.startswith("blog"):
         return "blog"
+    if base == "corsi.html":
+        return "servizi"
     if base == "chisiamo.html":
         return "chisiamo"
     return ""

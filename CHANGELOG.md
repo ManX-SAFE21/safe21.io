@@ -3,6 +3,36 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [89] — Corsi Bitcoin page (why Bitcoin, the courses, sources), IT/EN
+
+**Date:** 2026-11-26
+**Status:** Delivered and live
+
+Owner asked for a page behind the home card "Corsi Bitcoin": Bitcoin only
+works if you understand it and can use it alone.
+- New `corsi.html` + `corsi.css`: hero with a drawing (six discoveries around
+  the coin); six cards in time order (game theory 1950, ARPANET 1969,
+  public-key cryptography 1976 and the cypherpunks, free software 1983/1991,
+  proof of work 1997, the digital currencies before Bitcoin); birth dates
+  (paper 31/10/2008, first block 3/1/2009, software 8/1/2009); the orange box
+  "La prima moneta trasparente" (50 per block, halving about every four
+  years, zero around 2140); "banca di te stesso"; what you can do; "come la
+  patente"; three courses; sources (#fonti) with the original documents.
+- Facts corrected from the owner's notes: Linux is by Linus Torvalds, free
+  software by Stallman; Hashcash by Adam Back (idea: Dwork and Naor 1992);
+  the Nash link is our reading (said so in the sources); "pseudonymous"
+  rendered as "the ledger is public, the names are not".
+- Source links: checked that they answer and say what we write, except
+  gnu.org and the PNAS article (Nash), unreachable from the work machine.
+- "Date e iscrizioni" opens corsi.safe21.io through its `/tema?t=...&da=/`
+  route, so the courses desk opens light or dark like the site (`blog.js`,
+  same idea as the ticket link).
+- English version in the page's `#i18n-en` (i18n.js), EN/IT buttons.
+- Linked from: the home card (whole card clickable, stretched link), the
+  menu (`tools/menu.py`: svc2 -> corsi.html, "Servizi" marked current), the
+  footer of every page, `sitemap.xml`. `tools/audit.py`: corsi.html added to
+  the non-article pages.
+
 ## [88] — Chi siamo and Strumenti in English (IT/EN switch); the 21 text
 
 **Date:** 2026-11-22

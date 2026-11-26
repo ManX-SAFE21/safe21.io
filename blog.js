@@ -129,6 +129,12 @@
     for (var i = 0; i < links.length; i++) {
       links[i].setAttribute('href', 'https://ticket.safe21.io/?tema=' + (isLight ? 'chiaro' : 'scuro'));
     }
+    // Same for the courses desk (corsi.safe21.io): its /tema route sets the
+    // theme cookie and goes on to the page named in "da".
+    links = document.querySelectorAll('a[href^="https://corsi.safe21.io"]');
+    for (i = 0; i < links.length; i++) {
+      links[i].setAttribute('href', 'https://corsi.safe21.io/tema?t=' + (isLight ? 'chiaro' : 'scuro') + '&da=%2F');
+    }
     // sessionStorage, not localStorage: the choice is forgotten when the
     // browser/tab closes, so the next visit starts dark again.
     try { sessionStorage.setItem('safe21-blog-theme', isLight ? 'light' : 'dark'); } catch (e) {}

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   SAFE21 — corsi.html (why Bitcoin + the courses) stylesheet
+   ==========================================================================
+
+   Loaded AFTER blog.css (tokens, header, footer, buttons). This file adds
+   the hero with the six-discoveries drawing, the cards, the birth dates,
+   the orange "transparent money" box and the small sources list.
+   ========================================================================== */
+.co-hero { padding: 64px 0 44px; }
+.co-grid { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: center; }
+.co-hero h1 { font-size: clamp(34px, 5.2vw, 54px); line-height: 1.1; margin: 10px 0 16px; }
+.co-hero .lede { font-size: 19px; line-height: 1.6; color: var(--muted); max-width: 620px; margin: 0 0 26px; }
+.co-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.co-map { width: 100%; max-width: 340px; height: auto; display: block; margin: 0 auto; }
+
+.co-band { padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+.co-band h2 { font-size: 30px; margin: 6px 0 14px; }
+.co-band p { color: var(--body); font-size: 17px; line-height: 1.7; max-width: 760px; margin: 0 0 16px; }
+
+.co-ico {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 13px; color: var(--teal);
+  background: var(--tint-teal-bg); border: 1px solid var(--tint-teal-bd); flex: none;
+}
+.co-ico svg { width: 26px; height: 26px; }
+
+.co-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+.co-cards article { border: 1px solid var(--line); border-radius: 16px; background: var(--panel); padding: 22px; min-width: 0; }
+.co-cards h3 { font-size: 19px; margin: 14px 0 8px; color: var(--light); }
+.co-cards p { font-size: 15.5px; line-height: 1.6; margin: 0; color: var(--muted); }
+.co-cards .co-year { font: 400 13px 'Space Mono', monospace; color: var(--orange); margin: 14px 0 -8px; letter-spacing: .04em; }
+.co-small article { display: grid; grid-template-columns: 48px 1fr; column-gap: 16px; align-items: start; }
+.co-small .co-ico { grid-row: span 2; }
+.co-small h3 { margin: 2px 0 6px; font-size: 17.5px; }
+.co-courses article { border-color: var(--tint-teal-bd); }
+.co-go { margin-top: 26px; }
+
+.co-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; max-width: 900px; }
+.co-two > div { border-radius: 16px; padding: 22px 24px; }
+.co-two h3 { margin: 0 0 8px; font-size: 20px; color: var(--light); }
+.co-two p { margin: 0; font-size: 16px; }
+.co-pow { border: 1px solid var(--tint-teal-bd); background: var(--tint-teal-bg); }
+.co-resp { border: 1px solid var(--tint-btc-bd); background: var(--tint-btc-bg); }
+
+.co-licence {
+  display: flex; gap: 28px; align-items: center; max-width: 900px;
+  padding: 26px 28px; border-radius: 18px; border: 1px solid var(--line); background: var(--panel);
+}
+.co-licence h2 { margin-top: 0; }
+.co-licence p { margin: 0; }
+.co-big { width: 92px; height: 92px; border-radius: 24px; }
+.co-big svg { width: 52px; height: 52px; }
+
+.co-sub { font-size: 22px; margin: 40px 0 6px; color: var(--light); }
+.co-birth { list-style: none; padding: 0; margin: 14px 0 0; max-width: 900px; }
+.co-birth li {
+  display: grid; grid-template-columns: 170px 1fr; gap: 18px;
+  padding: 14px 0; border-top: 1px solid var(--line); color: var(--body); font-size: 16px; line-height: 1.6;
+}
+.co-birth b { font-family: 'Space Mono', monospace; font-weight: 400; color: var(--orange); }
+.co-birth strong { color: var(--light); }
+
+.co-open {
+  display: flex; gap: 26px; align-items: center; max-width: 900px; margin-top: 30px;
+  padding: 24px 28px; border-radius: 18px;
+  border: 1px solid var(--tint-btc-bd); background: var(--tint-btc-bg);
+}
+.co-open h3 { margin: 0 0 8px; font-size: 22px; color: var(--light); }
+.co-open p { margin: 0; }
+.co-btc { color: var(--orange); background: transparent; border-color: var(--tint-btc-bd); }
+
+.co-src h2 { font-size: 22px; }
+.co-src p, .co-src li { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.co-src ul { margin: 0; padding-left: 20px; max-width: 860px; }
+.co-src li { margin-bottom: 6px; }
+.co-src a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 900px) {
+  .co-grid { grid-template-columns: 1fr; gap: 30px; }
+  .co-map { max-width: 280px; }
+  .co-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) {
+  .co-cards, .co-two { grid-template-columns: 1fr; }
+  .co-licence, .co-open { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .co-birth li { grid-template-columns: 1fr; gap: 4px; }
+  .co-big { width: 64px; height: 64px; border-radius: 18px; }
+  .co-big svg { width: 36px; height: 36px; }
+}
