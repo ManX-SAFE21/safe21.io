@@ -3,6 +3,19 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [90] — Corsi: timeline of the dates, official logo, GNU link
+
+**Date:** 2026-11-26
+**Status:** Delivered and live
+
+- Timeline under "Sei scoperte, unite in una sola" (`.co-line`): seven stops
+  from 1950 to 3 January 2009, teal for the roots, orange for Bitcoin, the
+  official logo on the first block. It ends with the birth of Bitcoin: the
+  owner did not want 8 January there (a duplicate). Vertical on phones. IT/EN.
+- Hero drawing: official Bitcoin logo at the centre (owner's request).
+- Sources: the GNU announcement opens from the Internet Archive copy,
+  gnu.org did not answer (owner and work machine). eCash cited next to e-gold.
+
 ## [89] — Corsi Bitcoin page (why Bitcoin, the courses, sources), IT/EN
 
 **Date:** 2026-11-26
