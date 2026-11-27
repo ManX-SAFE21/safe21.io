@@ -3,6 +3,25 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [91] — "Bitcoin, moneta della libertà" page, IT/EN
+
+**Date:** 2026-11-27
+**Status:** Delivered and live
+
+Owner asked for a page on why Bitcoin is useful to humanity, from a page of
+the Human Rights Foundation guide "Bitcoin for Nonprofits" (May 2026).
+- New `liberta.html` (styles in `corsi.css`, `li-*`): hero with seven symbols
+  around the Bitcoin logo, source box linking the guide, how it works, the
+  seven reasons, the figure quoted by the guide, one short sentence by Ella
+  Hough with her name, "it holds in a free country too" (link to the
+  courses), sources.
+- The text is ours: no licence found to copy or translate the guide. The
+  Cornell figure is reported "according to the guide" (no direct link to the
+  study there); the price is left out (it ages).
+- Menu: "Moneta della libertà" under Chi siamo; link from `corsi.html` after
+  "Diventi la banca di te stesso"; sitemap; home contact title reworded
+  ("Hai una domanda su Bitcoin? Ti risponde una persona.").
+
 ## [90] — Corsi: timeline of the dates, official logo, GNU link
 
 **Date:** 2026-11-26

@@ -46,6 +46,7 @@ ICONS = {
     "m3": '<rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/>',
     # Chi siamo
     "a1": '<circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/>',
+    "a3": '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.7-1.5"/><circle cx="12" cy="15.5" r="1.2"/>',
     "p1": '<path d="M7 3h10M7 21h10M8 3c0 5 8 5 8 9s-8 4-8 9M16 3c0 5-8 5-8 9s8 4 8 9"/>',
     "p2": '<ellipse cx="12" cy="6.5" rx="7" ry="3"/><path d="M5 6.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5M5 11.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/>',
     "c1": '<path d="M3 7h18v3.5a2 2 0 0 0 0 4V18H3v-3.5a2 2 0 0 0 0-4z"/><path d="M15 7v11" stroke-dasharray="1.6 2.2"/>',
@@ -105,6 +106,8 @@ CHI = [
      "About us", "Our story, since 2016"),
     ("a2", "chisiamo.html#nome", "21", "Perché SAFE21", "Il significato del nome",
      "Why SAFE21", "What the name means"),
+    ("a3", "liberta.html", "L", "Moneta della libertà", "Perché Bitcoin serve all'umanità",
+     "Freedom money", "Why Bitcoin matters to humanity"),
 ]
 PARTNER = [
     ("p1", "https://bitcoin-after.life/", "B", "BAL Protocol", "", "BAL Protocol", ""),
@@ -255,6 +258,7 @@ def mobile(up, i18n):
     L.append(g("SAFE21", "grp.safe21"))
     L.append(a("chisiamo.html", "Chi siamo", "menu.a1", "a1"))
     L.append(a("chisiamo.html#nome", "Perché SAFE21", "menu.a2", "a2"))
+    L.append(a("liberta.html", "Moneta della libertà", "menu.a3", "a3"))
     L.append(a("blog.html", "Blog", "nav.blog", "b1"))
     L.append(a("mailto:info@safe21.io", "Contattaci", "nav.contact", "k1"))
     L.append("      </nav>")
@@ -269,7 +273,7 @@ def current_of(name):
         return "blog"
     if base == "corsi.html":
         return "servizi"
-    if base == "chisiamo.html":
+    if base in ("chisiamo.html", "liberta.html"):
         return "chisiamo"
     return ""
 

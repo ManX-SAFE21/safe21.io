@@ -110,3 +110,20 @@
   .co-line li::before { left: 15px; top: 9px; }
   .co-line span { margin-top: 0; font-size: 15px; }
 }
+
+/* ---- liberta.html (this file is loaded there too) ---- */
+/* liberta page: the source box and the short quote. */
+.li-src { display: flex; gap: 20px; align-items: center; max-width: 900px; padding: 20px 24px; border-radius: 16px;
+  border: 1px solid var(--tint-teal-bd); background: var(--tint-teal-bg); text-decoration: none; color: var(--body); }
+.li-src:hover { border-color: var(--teal); }
+.li-src small { display: block; font: 400 12.5px 'Space Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
+.li-src strong { display: block; margin: 6px 0 4px; font: 600 19px 'Space Grotesk', sans-serif; color: var(--light); }
+.li-src em { display: block; font-style: normal; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.li-quote { margin: 40px 0 0; max-width: 860px; padding-left: 24px; border-left: 3px solid var(--orange); }
+.li-quote blockquote { margin: 0; font: 600 clamp(24px, 3.4vw, 34px)/1.25 'Space Grotesk', sans-serif; color: var(--light); }
+.li-quote figcaption { margin-top: 12px; font: 400 13px 'Space Mono', monospace; letter-spacing: .04em; color: var(--orange); }
+/* seven cards: the last one takes the whole row, icon beside the text */
+.li-seven article:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: 48px 1fr; column-gap: 16px; }
+.li-seven article:last-child .co-ico { grid-row: span 2; }
+.li-seven article:last-child h3 { margin: 2px 0 6px; }
+@media (max-width: 620px) { .li-src { flex-direction: column; align-items: flex-start; } }
