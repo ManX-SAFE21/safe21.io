@@ -3,6 +3,26 @@
 All notable changes to the SAFE21 website are documented here.
 One numbered entry per task.
 
+## [92] — SEO: clean addresses, a real 404 page, share image
+
+**Date:** 2026-11-27
+**Status:** Delivered and live
+
+Owner: Google finds the site very little. Three technical errors found on the
+published site and fixed.
+- Canonical, JSON-LD urls and sitemap named the `.html` address, which
+  Cloudflare Pages answers with a 308 redirect (26 pages): now they name the
+  final address (`/corsi`, `/guide/`). `tools/audit.py` enforces it,
+  `CONTRIBUTING.md` updated. Links between pages keep `.html` (local preview).
+- New `404.html` (noindex, `<base href="/">`, IT/EN): before, a wrong address
+  showed the home with status 200 (soft 404).
+- New `images/safe21-og.jpg` (1200x630) as og:image + twitter card on the nine
+  pages that had none (home, blog index, chisiamo, corsi, liberta, strumenti,
+  three articles without a cover).
+- Also: liberta hero drawing is its own (Bitcoin breaking a chain).
+- Still open, owner's side: Google Search Console, www.safe21.io does not
+  answer.
+
 ## [91] — "Bitcoin, moneta della libertà" page, IT/EN
 
 **Date:** 2026-11-27

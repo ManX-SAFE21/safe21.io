@@ -48,7 +48,12 @@ EXPECTED = {
 }
 
 # Pages that are not blog articles and so have no byline/eyebrow/article body.
-NON_ARTICLE = {'index.html', 'blog.html', 'ancora.html', 'strumenti.html', 'schei.html', 'chisiamo.html', 'corsi.html', 'liberta.html'}
+NON_ARTICLE = {'index.html', 'blog.html', 'ancora.html', 'strumenti.html', 'schei.html', 'chisiamo.html', 'corsi.html', 'liberta.html', '404.html'}
+
+# Pages kept out of search engines on purpose (<meta robots noindex>): no
+# canonical, no JSON-LD, no description, not in the sitemap. 404.html is what
+# Cloudflare Pages serves, with status 404, for an address that has no file.
+NOT_INDEXED = {'404.html'}
 
 MONTHS = {'gennaio': 1, 'febbraio': 2, 'marzo': 3, 'aprile': 4, 'maggio': 5,
           'giugno': 6, 'luglio': 7, 'agosto': 8, 'settembre': 9, 'ottobre': 10,
@@ -572,17 +577,25 @@ def main():
     for page in pages + guides:
         src = read(page)
         check_nesting(page, src)
-        check_jsonld(page, src)
-        check_canonical(page, src)
         check_links(page, src)
         check_images(page, src)
         check_structure(page, src)
+        if page in NOT_INDEXED:
+            if '<meta name="robots" content="noindex"' not in src:
+                err(page, 'deve avere <meta name="robots" content="noindex">')
+            if '<base href="/"' not in src:
+                err(page, 'deve avere <base href="/"> (viene mostrata sotto qualsiasi percorso)')
+            if 'rel="canonical"' in src:
+                err(page, 'non deve avere il canonical')
+            continue
+        check_jsonld(page, src)
+        check_canonical(page, src)
         check_meta(page, src)
 
     check_footers(pages + guides)
     check_menu()
     check_index(pages)
-    check_site_files(pages + guides)
+    check_site_files([p for p in pages + guides if p not in NOT_INDEXED])
 
     if not HAVE_PIL:
         skipped.append('dimensioni immagini (manca Pillow: pip install Pillow)')
