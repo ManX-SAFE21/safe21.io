@@ -93,11 +93,15 @@ Poi aggiorna, nel `<head>`:
 | `og:title` / `og:description` | Di solito uguali ai due sopra |
 | `og:url` | `https://safe21.io/<slug>` — **senza** `.html` |
 | `og:image` | URL assoluto dell'immagine, solo se l'articolo ne ha una |
-| `<link rel="canonical">` | `https://safe21.io/<slug>.html` — **con** `.html` |
+| `<link rel="canonical">` | `https://safe21.io/<slug>` — **senza** `.html`, uguale a `og:url` |
 | JSON-LD | `headline` deve corrispondere **esattamente** all'`<h1>`; `url` deve corrispondere al canonical; `datePublished` / `dateModified` |
 
-> `og:url` senza estensione e `canonical` con `.html` è voluto, non un errore:
-> rispecchia come Cloudflare serve le pagine (vedi § 6).
+> Canonical, `og:url`, `url` del JSON-LD e `<loc>` della sitemap vanno tutti
+> **senza** `.html`: è l'indirizzo che Cloudflare serve davvero (vedi § 6).
+> La forma con `.html` risponde con un reindirizzamento, e a Google va dato
+> l'indirizzo finale. `tools/audit.py` lo controlla. I link tra le pagine
+> (`href="corsi.html"`) restano con `.html`, così il sito funziona anche in
+> locale. La pagina indice di una cartella è la cartella: `…/guide/`.
 
 Nel corpo aggiorna `.eyebrow` (la categoria), `<h1>`, `.standfirst` e `.byline`
 (autore, data in italiano, minuti di lettura).
@@ -118,7 +122,7 @@ Nello stesso file, aggiungi una voce `BlogPosting` in cima all'array
 
 ### Passo 4 — `sitemap.xml`
 
-Aggiungi un blocco `<url>` con `<loc>`, `<lastmod>`, `<changefreq>monthly`,
+Aggiungi un blocco `<url>` con `<loc>` (indirizzo **senza** `.html`), `<lastmod>`, `<changefreq>monthly`,
 `<priority>0.7`. Aggiorna anche il `<lastmod>` di `blog.html`, che è cambiato.
 
 ### Passo 5 — `CHANGELOG.md`

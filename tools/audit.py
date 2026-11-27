@@ -181,19 +181,45 @@ def check_jsonld(page, src):
 # --------------------------------------------------------------------------
 # 3. canonical / og:url
 # --------------------------------------------------------------------------
+def clean_url(page):
+    """The address Cloudflare Pages really serves for a file: no ".html",
+    and a folder's index.html is the folder itself. The ".html" form answers
+    308 (a redirect), so it must never be the canonical, the og:url, the
+    JSON-LD url or a sitemap entry: Google wants the final address there."""
+    if page == 'index.html':
+        return ''
+    if page.endswith('/index.html'):
+        return page[:-len('index.html')]
+    return page[:-len('.html')]
+
+
+def file_of(url_path):
+    """Inverse of clean_url(): the file behind a clean address."""
+    if url_path == '':
+        return 'index.html'
+    if url_path.endswith('/'):
+        return url_path + 'index.html'
+    return url_path + '.html'
+
+
 def check_canonical(page, src):
-    if page in EXPECTED['canonical_root']:
-        return
+    want = clean_url(page)
     m = re.search(r'<link rel="canonical" href="https://safe21\.io/([^"]*)"', src)
     if not m:
         err(page, 'manca il <link rel="canonical"> o è malformato')
-    elif m.group(1) != page:
-        err(page, f'canonical punta a "{m.group(1)}" ma il file è "{page}"')
+    elif m.group(1) != want:
+        err(page, f'canonical punta a "{m.group(1)}" ma deve essere "{want}" '
+                  '(senza .html: è l\'indirizzo che Cloudflare serve davvero)')
 
     og = re.search(r'<meta property="og:url" content="https://safe21\.io/([^"]*)"', src)
-    if og and og.group(1) not in (page, page[:-5]):
-        err(page, f'og:url "{og.group(1)}" non corrisponde a "{page}" '
-                  f'né a "{page[:-5]}"')
+    if og and og.group(1) != want:
+        err(page, f'og:url "{og.group(1)}" deve essere "{want}"')
+
+    # No JSON-LD field may name one of our own pages with ".html".
+    for b in re.findall(r'<script type="application/ld\+json">(.*?)</script>', src, re.S):
+        bad = re.findall(r'https://safe21\.io/[^"\s]*\.html', b)
+        if bad:
+            err(page, f'JSON-LD con indirizzi .html (reindirizzano): {sorted(set(bad))[:3]}')
 
 
 # --------------------------------------------------------------------------
@@ -372,7 +398,8 @@ def check_index(pages):
                   src, re.S)
     if m:
         try:
-            urls = [b['url'].replace('https://safe21.io/', '')
+            # JSON-LD names the clean address, the cards link the file.
+            urls = [file_of(b['url'].replace('https://safe21.io/', ''))
                     for b in json.loads(m.group(1)).get('blogPost', [])]
             if set(urls) != set(cards):
                 err('blog.html', 'la lista JSON-LD non corrisponde alle card:\n'
@@ -428,8 +455,11 @@ def check_site_files(pages):
     except Exception as e:                        # noqa: BLE001
         err('sitemap.xml', f'XML non valido: {e}')
 
-    listed = {(u or 'index.html') for u in
-              re.findall(r'<loc>https://safe21\.io/([^<]*)</loc>', sm)}
+    locs = re.findall(r'<loc>https://safe21\.io/([^<]*)</loc>', sm)
+    dotted = sorted(u for u in locs if u.endswith('.html'))
+    if dotted:
+        err('sitemap.xml', f'indirizzi con .html (reindirizzano, vanno senza): {dotted}')
+    listed = {file_of(u) for u in locs if not u.endswith('.html')}
     missing = sorted(set(pages) - listed)
     if missing:
         err('sitemap.xml', f'pagine assenti dalla sitemap: {missing}')
@@ -439,7 +469,7 @@ def check_site_files(pages):
 
     for loc, lastmod in re.findall(
             r'<loc>https://safe21\.io/([^<]*)</loc>\s*<lastmod>([^<]+)</lastmod>', sm):
-        fname = loc or 'index.html'
+        fname = file_of(loc)
         if (ROOT / fname).exists():
             dp = re.search(r'"datePublished":\s*"([\d-]+)"', read(fname))
             if dp and lastmod < dp.group(1):
